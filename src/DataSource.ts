@@ -1,4 +1,4 @@
-import { upperFirst, isArray } from 'lodash';
+import { isArray, upperFirst } from 'lodash';
 import {
   ArrayDataFrame,
   DataFrame,
@@ -32,20 +32,35 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
    */
   async query(options: DataQueryRequest<REQuery>): Promise<DataQueryResponse> {
     const data: DataFrame[] = [];
+
     await Promise.all(
       options.targets.map(async (query) => {
         const getter = `get${upperFirst(query.queryType)}`;
         const apiData = await (this as any)[getter](query);
 
-        if (apiData) {
-          const frame = new ArrayDataFrame(isArray(apiData) ? (apiData as any[]) : [apiData]);
-          const frameData: DataSourceFrameField[] = DATASOURCE_FRAME[query.queryType];
-
-          frameData.forEach((field) => frame.setFieldType(field.name, field.type, field.converter));
-          frame.refId = query.refId;
-
-          data.push(frame);
+        /**
+         * No data returned
+         */
+        if (!apiData) {
+          return;
         }
+
+        /**
+         * Data Frames from JSON
+         */
+        const frame = new ArrayDataFrame(isArray(apiData) ? (apiData as any[]) : [apiData]);
+        const frameData: DataSourceFrameField[] = DATASOURCE_FRAME[query.queryType];
+
+        /**
+         * Set Field Type
+         */
+        frameData.forEach((field) => frame.setFieldType(field.name, field.type, field.converter));
+        frame.refId = query.refId;
+
+        /**
+         * Add Data Frame
+         */
+        data.push(frame);
       })
     );
 
@@ -59,12 +74,18 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
    * @returns {Promise<DataSourceTestResult>} Test result
    */
   async testDatasource(): Promise<DataSourceTestResult> {
+    /**
+     * Get cluster information
+     */
     const cluster = await this.getCluster();
     const isStatusOk = cluster && cluster.name;
 
+    /**
+     * Return Ok if Cluster name defined
+     */
     return {
       status: isStatusOk ? DataSourceTestStatus.SUCCESS : DataSourceTestStatus.ERROR,
-      message: isStatusOk ? 'Success' : 'Error',
+      message: isStatusOk ? `Success. Cluster name is "${cluster.name}"` : "Error. Can't retrive cluster information.",
     };
   }
 

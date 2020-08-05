@@ -1,4 +1,4 @@
-import { dateMath, FieldType, ValueConverter, SelectableValue } from '@grafana/data';
+import { dateMath, FieldType, SelectableValue, ValueConverter } from '@grafana/data';
 
 /**
  * Query Type Values

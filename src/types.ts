@@ -1,11 +1,22 @@
-import { DataQuery, DataSourceJsonData } from '@grafana/data';
 import { QueryTypeValue } from 'api';
+import { DataQuery, DataSourceJsonData } from '@grafana/data';
 
 /**
  * Query interface
  */
 export interface REQuery extends DataQuery {
+  /**
+   * Query Type
+   *
+   * @type {QueryTypeValue}
+   */
   queryType: QueryTypeValue;
+
+  /**
+   * Database
+   *
+   * @type {Record<string, any>}
+   */
   bdb?: Record<string, any>;
 }
 
@@ -16,11 +27,15 @@ export interface REQuery extends DataQuery {
 export interface REDataSourceOptions extends DataSourceJsonData {
   /**
    * Host to access Redis Enterprise API
+   *
+   * @type {string}
    */
   host: string;
 
   /**
    * TLS Skip Verify
+   *
+   * @type {boolean}
    */
   tlsSkipVerify: boolean;
 }
@@ -32,6 +47,8 @@ export interface REDataSourceOptions extends DataSourceJsonData {
 export interface RESecureJsonData {
   /**
    * Password to access Redis Enterprise API
+   *
+   * @type {string}
    */
   basicAuthPassword: string;
 }

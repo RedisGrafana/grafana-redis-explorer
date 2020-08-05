@@ -23,6 +23,8 @@ export class QueryEditor extends PureComponent<Props> {
 
   /**
    * Init component data
+   *
+   * @async
    */
   async componentDidMount() {
     await this.getBdbs();
@@ -69,6 +71,10 @@ export class QueryEditor extends PureComponent<Props> {
    */
   render() {
     const { query } = this.props;
+
+    /**
+     * Return content
+     */
     return (
       <div className="gf-form">
         <InlineFormLabel width={8}>Type</InlineFormLabel>
@@ -96,6 +102,10 @@ export class QueryEditor extends PureComponent<Props> {
    */
   private async getBdbs() {
     const bdbs = await this.props.datasource.getBdbs();
+
+    /**
+     * Return Databases
+     */
     this.bdbs = bdbs.map((bdb) => {
       return {
         label: bdb.name,

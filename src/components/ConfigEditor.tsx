@@ -86,6 +86,9 @@ export class ConfigEditor extends PureComponent<Props, State> {
     const { jsonData, secureJsonFields } = options;
     const secureJsonData = (options.secureJsonData || {}) as RESecureJsonData;
 
+    /**
+     * Return content
+     */
     return (
       <div className="gf-form-group">
         <h3 className="page-heading">Redis Enterprise</h3>

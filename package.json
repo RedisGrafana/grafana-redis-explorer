@@ -1,17 +1,6 @@
 {
-  "name": "redis-enterprise-datasource",
-  "version": "1.0.0",
-  "description": "Grafana Redis Enterprise Datasource",
-  "scripts": {
-    "build": "grafana-toolkit plugin:build",
-    "format": "prettier --write \"**\"",
-    "test": "grafana-toolkit plugin:test",
-    "dev": "grafana-toolkit plugin:dev",
-    "start": "docker-compose up",
-    "watch": "grafana-toolkit plugin:dev --watch"
-  },
   "author": "Redis Labs",
-  "license": "Apache-2.0",
+  "description": "Grafana Redis Enterprise Datasource",
   "devDependencies": {
     "@grafana/data": "7.1.1",
     "@grafana/runtime": "7.1.1",
@@ -23,5 +12,16 @@
   },
   "engines": {
     "node": ">=12"
-  }
+  },
+  "license": "Apache-2.0",
+  "name": "redis-enterprise-datasource",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "dev": "grafana-toolkit plugin:dev",
+    "format": "prettier --write \"**\"",
+    "start": "docker-compose up",
+    "test": "grafana-toolkit plugin:test",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "version": "1.0.0"
 }
