@@ -75,7 +75,7 @@ export class QueryEditor extends PureComponent<Props> {
         <Select
           width={40}
           options={QUERY_TYPE}
-          value={QUERY_TYPE.find(type => type.value === query.queryType)}
+          value={QUERY_TYPE.find((type) => type.value === query.queryType)}
           onChange={this.onQueryTypeChanged}
         />
         <span>&nbsp;</span>
@@ -96,7 +96,7 @@ export class QueryEditor extends PureComponent<Props> {
    */
   private async getBdbs() {
     const bdbs = await this.props.datasource.getBdbs();
-    this.bdbs = bdbs.map(bdb => {
+    this.bdbs = bdbs.map((bdb) => {
       return {
         label: bdb.name,
         value: bdb.uid,

@@ -33,7 +33,7 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
   async query(options: DataQueryRequest<REQuery>): Promise<DataQueryResponse> {
     const data: DataFrame[] = [];
     await Promise.all(
-      options.targets.map(async query => {
+      options.targets.map(async (query) => {
         const getter = `get${upperFirst(query.queryType)}`;
         const apiData = await (this as any)[getter](query);
 
@@ -41,7 +41,7 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
           const frame = new ArrayDataFrame(isArray(apiData) ? (apiData as any[]) : [apiData]);
           const frameData: DataSourceFrameField[] = DATASOURCE_FRAME[query.queryType];
 
-          frameData.forEach(field => frame.setFieldType(field.name, field.type, field.converter));
+          frameData.forEach((field) => frame.setFieldType(field.name, field.type, field.converter));
           frame.refId = query.refId;
 
           data.push(frame);

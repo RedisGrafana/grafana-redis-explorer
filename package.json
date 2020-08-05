@@ -4,6 +4,7 @@
   "description": "Grafana Redis Enterprise Datasource",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
+    "format": "prettier --write \"**\"",
     "test": "grafana-toolkit plugin:test",
     "dev": "grafana-toolkit plugin:dev",
     "start": "docker-compose up",
