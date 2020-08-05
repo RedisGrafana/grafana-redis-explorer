@@ -1,43 +1,25 @@
 {
-  "type": "datasource",
-  "name": "Redis Enterprise",
-  "id": "redis-enterprise-datasource",
-  "metrics": true,
   "alerting": true,
-  "routes": [
+  "dependencies": {
+    "grafanaDependency": ">=7.0.0",
+    "grafanaVersion": "7.x.x",
+    "plugins": []
+  },
+  "id": "redis-enterprise-datasource",
+  "includes": [
     {
-      "path": "cluster",
-      "method": "GET",
-      "url": "https://{{ .JsonData.host }}/v1/cluster"
-    },
-    {
-      "path": "license",
-      "method": "GET",
-      "url": "https://{{ .JsonData.host }}/v1/license"
-    },
-    {
-      "path": "nodes",
-      "method": "GET",
-      "url": "https://{{ .JsonData.host }}/v1/nodes"
-    },
-    {
-      "path": "bdbs",
-      "method": "GET",
-      "url": "https://{{ .JsonData.host }}/v1/bdbs"
+      "name": "Cluster Overview",
+      "path": "dashboards/overview.json",
+      "type": "dashboard"
     }
   ],
-  "includes": [{ "type": "dashboard", "name": "Cluster Overview", "path": "dashboards/overview.json" }],
   "info": {
-    "description": "Redis Enterprise Datasource",
     "author": {
       "name": "Redis Labs",
       "url": "https://oss.redislabs.com"
     },
+    "description": "Redis Enterprise Datasource",
     "keywords": ["redis", "redis-enterprise", "plugin"],
-    "logos": {
-      "small": "img/logo.svg",
-      "large": "img/logo.svg"
-    },
     "links": [
       {
         "name": "Website",
@@ -48,13 +30,37 @@
         "url": "https://github.com/mikhailredis/grafana-redis-datasource/blob/master/LICENSE"
       }
     ],
+    "logos": {
+      "large": "img/logo.svg",
+      "small": "img/logo.svg"
+    },
     "screenshots": [],
-    "version": "%VERSION%",
-    "updated": "%TODAY%"
+    "updated": "%TODAY%",
+    "version": "%VERSION%"
   },
-  "dependencies": {
-    "grafanaVersion": "7.x.x",
-    "grafanaDependency": ">=7.0.0",
-    "plugins": []
-  }
+  "metrics": true,
+  "name": "Redis Enterprise",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "cluster",
+      "url": "https://{{ .JsonData.host }}/v1/cluster"
+    },
+    {
+      "method": "GET",
+      "path": "license",
+      "url": "https://{{ .JsonData.host }}/v1/license"
+    },
+    {
+      "method": "GET",
+      "path": "nodes",
+      "url": "https://{{ .JsonData.host }}/v1/nodes"
+    },
+    {
+      "method": "GET",
+      "path": "bdbs",
+      "url": "https://{{ .JsonData.host }}/v1/bdbs"
+    }
+  ],
+  "type": "datasource"
 }

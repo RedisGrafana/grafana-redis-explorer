@@ -1,7 +1,7 @@
 import React, { ChangeEvent, PureComponent } from 'react';
 import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
 import { LegacyForms } from '@grafana/ui';
-import { REDataSourceOptions, RESecureJsonData } from './types';
+import { REDataSourceOptions, RESecureJsonData } from '../types';
 
 /**
  * Form fields
@@ -23,7 +23,7 @@ interface State {}
  */
 export class ConfigEditor extends PureComponent<Props, State> {
   /**
-   * Redis Enterprise API host change listener.
+   * Redis Enterprise API host change listener
    *
    * @param {ChangeEvent<HTMLInputElement>} event Change event
    */
@@ -39,11 +39,11 @@ export class ConfigEditor extends PureComponent<Props, State> {
   };
 
   /**
-   * Redis Enterprise API user change listener.
+   * Redis Enterprise API user change listener
    *
    * @param {ChangeEvent<HTMLInputElement>} event Change event
    */
-  onUserChange = (event: ChangeEvent<HTMLInputElement>) => {
+  onBasicAuthUserChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     onOptionsChange({
       ...options,
@@ -58,7 +58,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
    *
    * @param {ChangeEvent<HTMLInputElement>} event Change event
    */
-  onPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+  onBasicAuthPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     onOptionsChange({
       ...options,
@@ -67,9 +67,9 @@ export class ConfigEditor extends PureComponent<Props, State> {
   };
 
   /**
-   * Redis Enterprise API password reset listener.
+   * Redis Enterprise API password reset listener
    */
-  onPasswordReset = () => {
+  onBasicAuthPasswordReset = () => {
     const { onOptionsChange, options } = this.props;
     onOptionsChange({
       ...options,
@@ -86,6 +86,9 @@ export class ConfigEditor extends PureComponent<Props, State> {
     const { jsonData, secureJsonFields } = options;
     const secureJsonData = (options.secureJsonData || {}) as RESecureJsonData;
 
+    /**
+     * Return content
+     */
     return (
       <div className="gf-form-group">
         <h3 className="page-heading">Redis Enterprise</h3>
@@ -94,7 +97,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
           <FormField
             label="Host"
             placeholder="redis:9443"
-            tooltip="Accepts schema://host:port address. Example: https://redis:9443"
+            tooltip="Accepts host:port address. Example: redis:9443"
             labelWidth={10}
             inputWidth={20}
             value={jsonData.host || ''}
@@ -109,7 +112,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
             labelWidth={10}
             inputWidth={20}
             value={options.basicAuthUser || ''}
-            onChange={this.onUserChange}
+            onChange={this.onBasicAuthUserChange}
           />
         </div>
 
@@ -120,8 +123,8 @@ export class ConfigEditor extends PureComponent<Props, State> {
             labelWidth={10}
             inputWidth={20}
             value={secureJsonData.basicAuthPassword || ''}
-            onReset={this.onPasswordReset}
-            onChange={this.onPasswordChange}
+            onReset={this.onBasicAuthPasswordReset}
+            onChange={this.onBasicAuthPasswordChange}
           />
         </div>
 
@@ -131,7 +134,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
             labelClass="width-10"
             tooltip="If checked, the server's certificate will not be checked for validity."
             checked={jsonData.tlsSkipVerify || false}
-            onChange={event => {
+            onChange={(event) => {
               const jsonData = { ...options.jsonData, tlsSkipVerify: event.currentTarget.checked };
               onOptionsChange({ ...options, jsonData });
             }}

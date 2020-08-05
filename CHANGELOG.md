@@ -4,4 +4,4 @@
 
 - Initial release based on Grafana 7.1.0.
 - Supports Hosts, Databases and Licenses.
-- Provides Redis Enterprise monitoring dashboard.
+- Provides Redis Enterprise Overview dashboard.

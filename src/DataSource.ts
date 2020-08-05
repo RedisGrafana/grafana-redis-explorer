@@ -1,3 +1,4 @@
+import { isArray, upperFirst } from 'lodash';
 import {
   ArrayDataFrame,
   DataFrame,
@@ -5,11 +6,9 @@ import {
   DataQueryResponse,
   DataSourceApi,
   DataSourceInstanceSettings,
-  dateMath,
-  FieldType,
 } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
-import { QueryTypeValue } from './api';
+import { DATASOURCE_FRAME, DataSourceFrameField, DataSourceTestResult, DataSourceTestStatus } from './api';
 import { REDataSourceOptions, REQuery } from './types';
 
 /**
@@ -26,70 +25,78 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
   }
 
   /**
-   * Query
+   * Query for data
+   *
+   * @async
+   * @returns {Promise<DataQueryResponse>} Response
    */
   async query(options: DataQueryRequest<REQuery>): Promise<DataQueryResponse> {
     const data: DataFrame[] = [];
-    for (const query of options.targets) {
-      if (query.queryType === QueryTypeValue.CLUSTER) {
-        const cluster = await this.getCluster();
+
+    await Promise.all(
+      options.targets.map(async (query) => {
+        const getter = `get${upperFirst(query.queryType)}`;
+        const apiData = await (this as any)[getter](query);
 
         /**
-         * Frame
+         * No data returned
          */
-        const frame = new ArrayDataFrame([cluster]);
-        frame.setFieldType('name', FieldType.string);
-        frame.refId = query.refId;
-        data.push(frame);
-      } else if (query.queryType === QueryTypeValue.LICENSE) {
-        const license = await this.getLicense();
+        if (!apiData) {
+          return;
+        }
 
         /**
-         * Frame
+         * Data Frames from JSON
          */
-        const frame = new ArrayDataFrame([license]);
-        console.log(license);
-
-        frame.setFieldType('name', FieldType.string);
-        frame.setFieldType('expired', FieldType.boolean);
-        frame.setFieldType('shards_limit', FieldType.number);
-        frame.setFieldType('activation_date', FieldType.time, (s: string) => dateMath.parse(s));
-        frame.setFieldType('expiration_date', FieldType.time, (s: string) => dateMath.parse(s));
-        frame.refId = query.refId;
-        data.push(frame);
-      } else if (query.queryType === QueryTypeValue.NODES) {
-        const nodes = await this.getNodes();
+        const frame = new ArrayDataFrame(isArray(apiData) ? (apiData as any[]) : [apiData]);
+        const frameData: DataSourceFrameField[] = DATASOURCE_FRAME[query.queryType];
 
         /**
-         * Frame
+         * Set Field Type
          */
-        const frame = new ArrayDataFrame(nodes);
-        frame.setFieldType('uid', FieldType.number);
-        frame.setFieldType('total_memory', FieldType.number);
+        frameData.forEach((field) => frame.setFieldType(field.name, field.type, field.converter));
         frame.refId = query.refId;
-        data.push(frame);
-      } else if (query.queryType === QueryTypeValue.BDBS) {
-        const bdbs = await this.getBdbs();
 
         /**
-         * Frame
+         * Add Data Frame
          */
-        const frame = new ArrayDataFrame(bdbs);
-        frame.setFieldType('group_uid', FieldType.number);
-        frame.setFieldType('redis_version', FieldType.number);
-        frame.setFieldType('port', FieldType.number);
-        frame.setFieldType('memory_size', FieldType.number);
-        frame.refId = query.refId;
         data.push(frame);
-      }
-    }
+      })
+    );
+
     return { data };
   }
 
   /**
-   * Get Cluster
+   * Test Datasource
+   *
+   * @async
+   * @returns {Promise<DataSourceTestResult>} Test result
    */
-  async getCluster(): Promise<any[]> {
+  async testDatasource(): Promise<DataSourceTestResult> {
+    /**
+     * Get cluster information
+     */
+    const cluster = await this.getCluster();
+    const isStatusOk = cluster && cluster.name;
+
+    /**
+     * Return Ok if Cluster name defined
+     */
+    return {
+      status: isStatusOk ? DataSourceTestStatus.SUCCESS : DataSourceTestStatus.ERROR,
+      message: isStatusOk ? `Success. Cluster name is "${cluster.name}"` : "Error. Can't retrive cluster information.",
+    };
+  }
+
+  /**
+   * Get cluster info
+   *
+   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-cluster
+   * @async
+   * @returns {Promise<Record<string, any>>} Cluster info
+   */
+  async getCluster(): Promise<Record<string, any>> {
     return getBackendSrv()
       .datasourceRequest({
         url: `${this.instanceSettings.url}/cluster`,
@@ -98,9 +105,13 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
   }
 
   /**
-   * Get License
+   * Get the license details, including license string, expiration, and supported features
+   *
+   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-license
+   * @async
+   * @returns {Promise<Record<string, any>>} License details
    */
-  async getLicense(): Promise<any[]> {
+  async getLicense(): Promise<Record<string, any>> {
     return getBackendSrv()
       .datasourceRequest({
         url: `${this.instanceSettings.url}/license`,
@@ -109,9 +120,13 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
   }
 
   /**
-   * Get Nodes
+   * Get all cluster nodes
+   *
+   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-nodes
+   * @async
+   * @returns {Promise<Record<string, any>[]>} Array with all nodes
    */
-  async getNodes(): Promise<any[]> {
+  async getNodes(): Promise<Array<Record<string, any>>> {
     return getBackendSrv()
       .datasourceRequest({
         url: `${this.instanceSettings.url}/nodes`,
@@ -120,9 +135,13 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
   }
 
   /**
-   * Get Nodes
+   * Get all databases in the cluster
+   *
+   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-bdbs
+   * @async
+   * @returns {Promise<Record<string, any>[]>} Array with all databases
    */
-  async getBdbs(): Promise<any[]> {
+  async getBdbs(): Promise<Array<Record<string, any>>> {
     return getBackendSrv()
       .datasourceRequest({
         url: `${this.instanceSettings.url}/bdbs`,
@@ -131,13 +150,18 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
   }
 
   /**
-   * Test Datasource
+   * Get all alert states for bdb
+   *
+   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-bdbs-alerts-(int-uid)
+   * @async
+   * @returns {Promise<Record<string, any>>} Hash of alert objects and their state
    */
-  async testDatasource() {
-    // Implement a health check for your data source.
-    return {
-      status: 'success',
-      message: 'Success',
-    };
+  async getBdbAlerts(query: REQuery): Promise<Record<string, any>> {
+    // TODO: find better solution
+    return getBackendSrv()
+      .datasourceRequest({
+        url: `https://${this.instanceSettings.jsonData.host}/v1/bdbs/${query.bdb}`,
+      })
+      .then((res: any) => res.data);
   }
 }
