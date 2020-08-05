@@ -6,6 +6,7 @@ import { QueryTypeValue } from 'api';
  */
 export interface REQuery extends DataQuery {
   queryType: QueryTypeValue;
+  bdb?: Record<string, any>;
 }
 
 /**

@@ -1,4 +1,4 @@
-import { dateMath, FieldType, ValueConverter } from '@grafana/data';
+import { dateMath, FieldType, ValueConverter, SelectableValue } from '@grafana/data';
 
 /**
  * Query Type Values
@@ -8,6 +8,7 @@ export enum QueryTypeValue {
   LICENSE = 'license',
   NODES = 'nodes',
   BDBS = 'bdbs',
+  BDB_ALERTS = 'bdbAlerts',
 }
 
 /**
@@ -109,7 +110,7 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
 /**
  * Query Type
  */
-export const QUERY_TYPE = [
+export const QUERY_TYPE: SelectableValue[] = [
   {
     label: 'Cluster',
     description: 'Cluster information',
@@ -129,5 +130,10 @@ export const QUERY_TYPE = [
     label: 'Databases',
     description: 'Database information',
     value: QueryTypeValue.BDBS,
+  },
+  {
+    label: 'Database Alerts',
+    description: 'Database alerts',
+    value: QueryTypeValue.BDB_ALERTS,
   },
 ];

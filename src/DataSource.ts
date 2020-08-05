@@ -1,4 +1,4 @@
-import { upperFirst, result, isArray } from 'lodash';
+import { upperFirst, isArray } from 'lodash';
 import {
   ArrayDataFrame,
   DataFrame,
@@ -35,7 +35,7 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
     await Promise.all(
       options.targets.map(async query => {
         const getter = `get${upperFirst(query.queryType)}`;
-        const apiData = await result(this, getter);
+        const apiData = await (this as any)[getter](query);
 
         if (apiData) {
           const frame = new ArrayDataFrame(isArray(apiData) ? (apiData as any[]) : [apiData]);
@@ -75,7 +75,7 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
    * @async
    * @returns {Promise<Record<string, any>>} Cluster info
    */
-  private async getCluster(): Promise<Record<string, any>> {
+  async getCluster(): Promise<Record<string, any>> {
     return getBackendSrv()
       .datasourceRequest({
         url: `${this.instanceSettings.url}/cluster`,
@@ -90,8 +90,7 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
    * @async
    * @returns {Promise<Record<string, any>>} License details
    */
-  // @ts-ignore
-  private async getLicense(): Promise<Record<string, any>> {
+  async getLicense(): Promise<Record<string, any>> {
     return getBackendSrv()
       .datasourceRequest({
         url: `${this.instanceSettings.url}/license`,
@@ -106,8 +105,7 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
    * @async
    * @returns {Promise<Record<string, any>[]>} Array with all nodes
    */
-  // @ts-ignore
-  private async getNodes(): Promise<Array<Record<string, any>>> {
+  async getNodes(): Promise<Array<Record<string, any>>> {
     return getBackendSrv()
       .datasourceRequest({
         url: `${this.instanceSettings.url}/nodes`,
@@ -122,11 +120,26 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
    * @async
    * @returns {Promise<Record<string, any>[]>} Array with all databases
    */
-  // @ts-ignore
-  private async getBdbs(): Promise<Array<Record<string, any>>> {
+  async getBdbs(): Promise<Array<Record<string, any>>> {
     return getBackendSrv()
       .datasourceRequest({
         url: `${this.instanceSettings.url}/bdbs`,
+      })
+      .then((res: any) => res.data);
+  }
+
+  /**
+   * Get all alert states for bdb
+   *
+   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-bdbs-alerts-(int-uid)
+   * @async
+   * @returns {Promise<Record<string, any>>} Hash of alert objects and their state
+   */
+  async getBdbAlerts(query: REQuery): Promise<Record<string, any>> {
+    // TODO: find better solution
+    return getBackendSrv()
+      .datasourceRequest({
+        url: `https://${this.instanceSettings.jsonData.host}/v1/bdbs/${query.bdb}`,
       })
       .then((res: any) => res.data);
   }
