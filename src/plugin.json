@@ -6,6 +6,16 @@
   "alerting": true,
   "routes": [
     {
+      "path": "cluster",
+      "method": "GET",
+      "url": "https://{{ .JsonData.host }}/v1/cluster"
+    },
+    {
+      "path": "license",
+      "method": "GET",
+      "url": "https://{{ .JsonData.host }}/v1/license"
+    },
+    {
       "path": "nodes",
       "method": "GET",
       "url": "https://{{ .JsonData.host }}/v1/nodes"
@@ -16,6 +26,7 @@
       "url": "https://{{ .JsonData.host }}/v1/bdbs"
     }
   ],
+  "includes": [{ "type": "dashboard", "name": "Cluster Overview", "path": "dashboards/overview.json" }],
   "info": {
     "description": "Redis Enterprise Datasource",
     "author": {

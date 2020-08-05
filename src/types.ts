@@ -1,9 +1,12 @@
+import { QueryTypeValue } from 'api';
 import { DataQuery, DataSourceJsonData } from '@grafana/data';
 
 /**
  * Query interface
  */
-export interface REQuery extends DataQuery {}
+export interface REQuery extends DataQuery {
+  queryType: QueryTypeValue;
+}
 
 /**
  * Datasource configuration options.
