@@ -4,6 +4,18 @@
   "id": "redis-enterprise-datasource",
   "metrics": true,
   "alerting": true,
+  "routes": [
+    {
+      "path": "nodes",
+      "method": "GET",
+      "url": "https://{{ .JsonData.host }}/v1/nodes"
+    },
+    {
+      "path": "bdbs",
+      "method": "GET",
+      "url": "https://{{ .JsonData.host }}/v1/bdbs"
+    }
+  ],
   "info": {
     "description": "Redis Enterprise Datasource",
     "author": {
