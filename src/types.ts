@@ -1,5 +1,5 @@
-import { QueryTypeValue } from 'api';
 import { DataQuery, DataSourceJsonData } from '@grafana/data';
+import { QueryTypeValue } from 'api';
 
 /**
  * Query interface

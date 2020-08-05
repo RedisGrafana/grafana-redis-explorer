@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { QueryEditorProps, SelectableValue } from '@grafana/data';
 import { InlineFormLabel, Select } from '@grafana/ui';
-import { QueryType, QueryTypeValue } from './api';
-import { DataSource } from './DataSource';
-import { REDataSourceOptions, REQuery } from './types';
+import { QUERY_TYPE, QueryTypeValue } from '../api';
+import { DataSource } from '../DataSource';
+import { REDataSourceOptions, REQuery } from '../types';
 
 /**
  * Editor Property
@@ -30,16 +30,13 @@ export class QueryEditor extends PureComponent<Props> {
    * Render Editor
    */
   render() {
-    /**
-     * Return
-     */
     return (
       <div className="gf-form">
         <InlineFormLabel width={8}>Type</InlineFormLabel>
         <Select
           width={40}
-          options={QueryType}
-          value={QueryType.find(t => t.value === this.props.query.queryType)}
+          options={QUERY_TYPE}
+          value={QUERY_TYPE.find(t => t.value === this.props.query.queryType)}
           onChange={this.onQueryTypeChanged}
         />
       </div>
