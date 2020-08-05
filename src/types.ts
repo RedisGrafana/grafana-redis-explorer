@@ -6,27 +6,14 @@ import { DataQuery, DataSourceJsonData } from '@grafana/data';
 export interface REQuery extends DataQuery {}
 
 /**
- * Default query
- *
- * @type {Partial<REQuery>}
- */
-export const defaultQuery: Partial<REQuery> = {};
-
-/**
  * Datasource configuration options.
  * These are options configured for each DataSource instance
  */
 export interface REDataSourceOptions extends DataSourceJsonData {
   /**
    * Host to access Redis Enterprise API
-   * Example: https://redis:9443
    */
   host: string;
-
-  /**
-   * User to access Redis Enterprise API
-   */
-  user: string;
 
   /**
    * TLS Skip Verify
@@ -42,5 +29,5 @@ export interface RESecureJsonData {
   /**
    * Password to access Redis Enterprise API
    */
-  password: string;
+  basicAuthPassword: string;
 }

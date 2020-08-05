@@ -54,9 +54,6 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
     return getBackendSrv()
       .datasourceRequest({
         url: `${this.instanceSettings.url}/nodes`,
-        headers: {
-          Authorization: `Basic cmVAbG9jYWxob3N0LmlvOjEyMw==`,
-        },
       })
       .then((res: any) => res.data);
   }

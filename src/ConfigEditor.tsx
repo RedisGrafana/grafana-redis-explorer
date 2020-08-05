@@ -47,7 +47,8 @@ export class ConfigEditor extends PureComponent<Props, State> {
     const { onOptionsChange, options } = this.props;
     onOptionsChange({
       ...options,
-      jsonData: { ...options.jsonData, user: event.target.value },
+      basicAuth: true,
+      basicAuthUser: event.target.value,
     });
   };
 
@@ -61,7 +62,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
     const { onOptionsChange, options } = this.props;
     onOptionsChange({
       ...options,
-      secureJsonData: { ...options.secureJsonData, password: event.target.value },
+      secureJsonData: { ...options.secureJsonData, basicAuthPassword: event.target.value },
     });
   };
 
@@ -72,8 +73,8 @@ export class ConfigEditor extends PureComponent<Props, State> {
     const { onOptionsChange, options } = this.props;
     onOptionsChange({
       ...options,
-      secureJsonFields: { ...options.secureJsonFields, password: false },
-      secureJsonData: { ...options.secureJsonData, password: '' },
+      secureJsonFields: { ...options.secureJsonFields, basicAuthPassword: false },
+      secureJsonData: { ...options.secureJsonData, basicAuthPassword: '' },
     });
   };
 
@@ -107,18 +108,18 @@ export class ConfigEditor extends PureComponent<Props, State> {
             placeholder="user@host.domain"
             labelWidth={10}
             inputWidth={20}
-            value={jsonData.user || ''}
+            value={options.basicAuthUser || ''}
             onChange={this.onUserChange}
           />
         </div>
 
         <div className="gf-form">
           <SecretFormField
-            isConfigured={(secureJsonFields && secureJsonFields.password) as boolean}
+            isConfigured={(secureJsonFields && secureJsonFields.basicAuthPassword) as boolean}
             label="Password"
             labelWidth={10}
             inputWidth={20}
-            value={secureJsonData.password || ''}
+            value={secureJsonData.basicAuthPassword || ''}
             onReset={this.onPasswordReset}
             onChange={this.onPasswordChange}
           />
@@ -130,7 +131,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
             labelClass="width-10"
             tooltip="If checked, the server's certificate will not be checked for validity."
             checked={jsonData.tlsSkipVerify || false}
-            onChange={(event) => {
+            onChange={event => {
               const jsonData = { ...options.jsonData, tlsSkipVerify: event.currentTarget.checked };
               onOptionsChange({ ...options, jsonData });
             }}
