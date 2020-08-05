@@ -30,13 +30,19 @@ Datasource can connect to any Redis Enterprise cluster version 5.4 and later. No
 
 Project provides `docker-compose.yml` to start Redis Enterprise and Grafana 7.0.
 
-**Start Redis and Grafana**
+**Start Redis Enterprise and Grafana**
 
 ```bash
 docker-compose up
 ```
 
-Open Grafana in your browser [http://localhost:3000](http://localhost:3000) and configure datasource. You can add as many datasources as you want to support multiple Redis databases.
+### Configure Redis Enterprise
+
+Open Redis Enterprise UI in your browser [https://localhost:8443](https://localhost:8443) and create new cluster.
+
+### Open Grafana
+
+Open Grafana in your browser [http://localhost:3000](http://localhost:3000) and configure datasource. You can add as many datasources as you want to support multiple Redis clusters.
 
 ## License
 

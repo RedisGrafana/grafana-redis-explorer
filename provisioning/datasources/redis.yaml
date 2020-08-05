@@ -7,5 +7,6 @@ datasources:
     orgId: 1
     isDefault: true
     version: 1
-    url: localhost:9443
+    jsonData:
+      host: host.docker.internal:9443
     editable: true

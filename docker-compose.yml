@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   redis:
-    container_name: re
+    container_name: redis
     image: redislabs/redis:latest
     cap_add:
       - SYS_RESOURCE
