@@ -1,0 +1,11 @@
+apiVersion: 1
+
+datasources:
+  - name: Redis Enterprise
+    type: redis-enterprise-datasource
+    access: proxy
+    orgId: 1
+    isDefault: true
+    version: 1
+    url: localhost:9443
+    editable: true

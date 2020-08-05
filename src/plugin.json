@@ -1,0 +1,37 @@
+{
+  "type": "datasource",
+  "name": "Redis Enterprise",
+  "id": "redis-enterprise-datasource",
+  "metrics": true,
+  "alerting": true,
+  "info": {
+    "description": "Redis Enterprise Datasource",
+    "author": {
+      "name": "Redis Labs",
+      "url": "https://oss.redislabs.com"
+    },
+    "keywords": ["redis", "redis-enterprise", "plugin"],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://github.com/mikhailredis/grafana-redis-enterprise-datasource"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/mikhailredis/grafana-redis-datasource/blob/master/LICENSE"
+      }
+    ],
+    "screenshots": [],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "dependencies": {
+    "grafanaVersion": "7.x.x",
+    "grafanaDependency": ">=7.0.0",
+    "plugins": []
+  }
+}
