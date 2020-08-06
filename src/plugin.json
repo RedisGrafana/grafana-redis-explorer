@@ -38,6 +38,7 @@
     "updated": "%TODAY%",
     "version": "%VERSION%"
   },
+  "logs": true,
   "metrics": true,
   "name": "Redis Enterprise",
   "routes": [
@@ -63,6 +64,12 @@
       "method": "GET",
       "path": "bdbs",
       "url": "https://{{ .JsonData.host }}/v1/bdbs",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
+      "path": "logs",
+      "url": "https://{{ .JsonData.host }}/v1/logs",
       "reqRole": "Viewer"
     }
   ],

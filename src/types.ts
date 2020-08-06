@@ -88,9 +88,17 @@ export interface DataSourceTestResult {
 }
 
 /**
- * Datasource frame field
+ * Datasource frame type
  */
-export interface DataSourceFrameField {
+export enum DataSourceFrameType {
+  ARRAY = 'ArrayDataFrame',
+  MUTABLE = 'MutableDataFrame',
+}
+
+/**
+ * Datasource array frame field
+ */
+export interface DataSourceArrayFrameField {
   /**
    * Field Name
    *
@@ -114,8 +122,30 @@ export interface DataSourceFrameField {
 }
 
 /**
+ * Datasource mutable frame field
+ */
+export interface DataSourceMutableField {
+  /**
+   * Field Name
+   *
+   * @type {string}
+   */
+  name: string;
+
+  /**
+   * Type
+   *
+   * @type {FieldType}
+   */
+  type: FieldType;
+}
+
+/**
  * Datasource frame
  */
 export interface DataSourceFrame {
-  [type: string]: DataSourceFrameField[];
+  [type: string]: {
+    frame: DataSourceFrameType;
+    fields: (DataSourceArrayFrameField | DataSourceMutableField)[];
+  };
 }
