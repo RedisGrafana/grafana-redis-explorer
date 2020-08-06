@@ -1,20 +1,11 @@
 /**
- * Series Size
- */
-type SeriesSize = 'sm' | 'md' | 'lg';
-
-/**
  * Panel Configuration Options
  */
 export interface LicensePanelOptions {
   /**
-   * Text
+   * Allow Update
    *
-   * @type {string}
+   * @type {boolean}
    */
-  text: string;
-
-  showSeriesCount: boolean;
-
-  seriesCountSize: SeriesSize;
+  allowUpdate: boolean;
 }

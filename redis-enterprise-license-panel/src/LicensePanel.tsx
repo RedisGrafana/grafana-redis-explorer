@@ -1,8 +1,9 @@
 import { css, cx } from 'emotion';
+import { first } from 'lodash';
 import React from 'react';
 import { LicensePanelOptions } from 'types';
 import { PanelProps } from '@grafana/data';
-import { stylesFactory, useTheme } from '@grafana/ui';
+import { Button, Container, Field, TextArea } from '@grafana/ui';
 
 /**
  * Panel Property
@@ -13,8 +14,18 @@ interface Props extends PanelProps<LicensePanelOptions> {}
  * Panel
  */
 export const LicensePanel: React.FC<Props> = ({ options, data, width, height }) => {
-  const theme = useTheme();
-  const styles = getStyles();
+  const licenseField = first(data.series)
+    ?.fields.filter(field => field.name == 'license')
+    .map(field => field);
+
+  if (!licenseField) {
+    return <div>No data</div>;
+  }
+
+  /**
+   * Get License
+   */
+  const license = first(first(licenseField)?.values.toArray());
 
   /**
    * Render
@@ -22,57 +33,27 @@ export const LicensePanel: React.FC<Props> = ({ options, data, width, height }) 
   return (
     <div
       className={cx(
-        styles.wrapper,
         css`
           width: ${width}px;
           height: ${height}px;
         `
       )}
     >
-      <svg
-        className={styles.svg}
-        width={width}
-        height={height}
-        xmlns="http://www.w3.org/2000/svg"
-        xmlnsXlink="http://www.w3.org/1999/xlink"
-        viewBox={`-${width / 2} -${height / 2} ${width} ${height}`}
-      >
-        <g>
-          <circle style={{ fill: `${theme.isLight ? theme.palette.greenBase : theme.palette.blue95}` }} r={100} />
-        </g>
-      </svg>
+      <Container>
+        <Field label="Cluster key" description="Determines cluster capabilities for paid subscriptions">
+          <div>
+            <TextArea css="" value={license} rows={10} disabled={!options.allowUpdate} />
+          </div>
+        </Field>
+      </Container>
 
-      <div className={styles.textBox}>
-        {options.showSeriesCount && (
-          <div
-            className={css`
-              font-size: ${theme.typography.size[options.seriesCountSize]};
-            `}
-          >
-            Number of series: {data.series.length}
+      <Container>
+        {options.allowUpdate && (
+          <div>
+            <Button>Update</Button>
           </div>
         )}
-        <div>Text option value: {options.text}</div>
-      </div>
+      </Container>
     </div>
   );
 };
-
-const getStyles = stylesFactory(() => {
-  return {
-    wrapper: css`
-      position: relative;
-    `,
-    svg: css`
-      position: absolute;
-      top: 0;
-      left: 0;
-    `,
-    textBox: css`
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      padding: 10px;
-    `,
-  };
-});

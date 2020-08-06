@@ -30,6 +30,6 @@
     "updated": "%TODAY%",
     "version": "%VERSION%"
   },
-  "name": "Redis Enterprise License Panel",
+  "name": "Redis Enterprise License",
   "type": "panel"
 }
