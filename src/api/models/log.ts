@@ -22,4 +22,11 @@ export interface Log {
    * @type {string}
    */
   time: string;
+
+  /**
+   * Log level
+   *
+   * @type {string}
+   */
+  level?: string;
 }

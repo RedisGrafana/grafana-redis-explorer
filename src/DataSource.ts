@@ -1,4 +1,4 @@
-import { isArray, upperFirst, defaultTo } from 'lodash';
+import { isArray, upperFirst, pick } from 'lodash';
 import {
   ArrayDataFrame,
   DataFrame,
@@ -84,12 +84,8 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
             });
 
             (isArray(apiData) ? apiData : []).forEach((item) => {
-              const time = Date.parse(item.time);
-              mutableFrame.add({
-                time: defaultTo(time, item.time),
-                content: `${item.time} ${item.type}`,
-                level: item.severity,
-              });
+              const keys = frameData.fields.map((field) => field.name);
+              mutableFrame.add(pick(item, keys));
             });
             data.push(mutableFrame);
 

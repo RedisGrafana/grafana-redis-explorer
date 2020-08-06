@@ -107,7 +107,7 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
         type: FieldType.time,
       },
       {
-        name: 'content',
+        name: 'type',
         type: FieldType.string,
       },
       {
