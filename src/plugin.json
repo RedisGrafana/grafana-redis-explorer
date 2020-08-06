@@ -23,11 +23,11 @@
     "links": [
       {
         "name": "Website",
-        "url": "https://github.com/mikhailredis/grafana-redis-enterprise-datasource"
+        "url": "https://github.com/mikhailredis/redis-enterprise-datasource"
       },
       {
         "name": "License",
-        "url": "https://github.com/mikhailredis/grafana-redis-datasource/blob/master/LICENSE"
+        "url": "https://github.com/mikhailredis/redis-enterprise-datasource/blob/master/LICENSE"
       }
     ],
     "logos": {
