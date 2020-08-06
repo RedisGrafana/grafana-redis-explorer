@@ -120,8 +120,10 @@ export class Api {
         method: 'GET',
         url: `${this.instanceSettings.url}/logs`,
       })
-      .then((res: any) => res.data.map((item: Log) => {
-        return { ...item, level: item.severity };
-      }));
+      .then((res: any) =>
+        res.data.map((item: Log) => {
+          return { ...item, level: item.severity };
+        })
+      );
   }
 }
