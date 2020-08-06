@@ -83,7 +83,7 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
               refId: query.refId,
             });
 
-            (isArray(apiData) ? apiData : []).forEach((item) => {
+            (isArray(apiData) ? apiData : [apiData]).forEach((item) => {
               const keys = frameData.fields.map((field) => field.name);
               mutableFrame.add(pick(item, keys));
             });
