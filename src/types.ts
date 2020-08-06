@@ -1,5 +1,5 @@
-import { QueryTypeValue } from 'api';
-import { DataQuery, DataSourceJsonData } from '@grafana/data';
+import { QueryTypeValue } from 'api/types';
+import { DataQuery, DataSourceJsonData, FieldType, ValueConverter } from '@grafana/data';
 
 /**
  * Query interface
@@ -15,9 +15,16 @@ export interface REQuery extends DataQuery {
   /**
    * Database
    *
-   * @type {Record<string, any>}
+   * @type {string}
    */
-  bdb?: Record<string, any>;
+  bdb?: string;
+
+  /**
+   * Node
+   *
+   * @type {string}
+   */
+  node?: string;
 }
 
 /**
@@ -51,4 +58,64 @@ export interface RESecureJsonData {
    * @type {string}
    */
   basicAuthPassword: string;
+}
+
+/**
+ * Datasource test status
+ */
+export enum DataSourceTestStatus {
+  SUCCESS = 'success',
+  ERROR = 'error',
+}
+
+/**
+ * Datasource test result
+ */
+export interface DataSourceTestResult {
+  /**
+   * Status
+   *
+   * @type {DataSourceTestStatus}
+   */
+  status: DataSourceTestStatus;
+
+  /**
+   * Message
+   *
+   * @type {string}
+   */
+  message: string;
+}
+
+/**
+ * Datasource frame field
+ */
+export interface DataSourceFrameField {
+  /**
+   * Field Name
+   *
+   * @type {string}
+   */
+  name: string;
+
+  /**
+   * Type
+   *
+   * @type {FieldType}
+   */
+  type: FieldType;
+
+  /**
+   * Converter
+   *
+   * @type {ValueConverter}
+   */
+  converter?: ValueConverter;
+}
+
+/**
+ * Datasource frame
+ */
+export interface DataSourceFrame {
+  [type: string]: DataSourceFrameField[];
 }

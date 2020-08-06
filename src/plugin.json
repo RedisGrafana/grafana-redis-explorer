@@ -44,22 +44,26 @@
     {
       "method": "GET",
       "path": "cluster",
-      "url": "https://{{ .JsonData.host }}/v1/cluster"
+      "url": "https://{{ .JsonData.host }}/v1/cluster",
+      "reqRole": "Viewer"
     },
     {
       "method": "GET",
       "path": "license",
-      "url": "https://{{ .JsonData.host }}/v1/license"
+      "url": "https://{{ .JsonData.host }}/v1/license",
+      "reqRole": "Viewer"
     },
     {
       "method": "GET",
       "path": "nodes",
-      "url": "https://{{ .JsonData.host }}/v1/nodes"
+      "url": "https://{{ .JsonData.host }}/v1/nodes",
+      "reqRole": "Viewer"
     },
     {
       "method": "GET",
       "path": "bdbs",
-      "url": "https://{{ .JsonData.host }}/v1/bdbs"
+      "url": "https://{{ .JsonData.host }}/v1/bdbs",
+      "reqRole": "Viewer"
     }
   ],
   "type": "datasource"
