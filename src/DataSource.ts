@@ -7,21 +7,39 @@ import {
   DataSourceApi,
   DataSourceInstanceSettings,
 } from '@grafana/data';
-import { getBackendSrv } from '@grafana/runtime';
-import { DATASOURCE_FRAME, DataSourceFrameField, DataSourceTestResult, DataSourceTestStatus } from './api';
-import { REDataSourceOptions, REQuery } from './types';
+import { TemplateSrv } from '@grafana/runtime';
+import { Api, DATASOURCE_FRAME } from './api';
+import {
+  DataSourceFrameField,
+  DataSourceTestResult,
+  DataSourceTestStatus,
+  REDataSourceOptions,
+  REQuery,
+} from './types';
 
 /**
  * Redis Enterprise Datasource
  */
 export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
   /**
+   * Redis Enterprise Api
+   *
+   * @type {Api}
+   */
+  api: Api;
+
+  /**
    * Constructor
    *
    * @param {DataSourceInstanceSettings<REDataSourceOptions>} instanceSettings Settings
+   * @param {TemplateSrv<REDataSourceOptions>} templateSrv Template
    */
-  constructor(public instanceSettings: DataSourceInstanceSettings<REDataSourceOptions>) {
+  constructor(
+    public instanceSettings: DataSourceInstanceSettings<REDataSourceOptions>,
+    private templateSrv: TemplateSrv
+  ) {
     super(instanceSettings);
+    this.api = new Api(instanceSettings);
   }
 
   /**
@@ -36,7 +54,18 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
     await Promise.all(
       options.targets.map(async (query) => {
         const getter = `get${upperFirst(query.queryType)}`;
-        const apiData = await (this as any)[getter](query);
+
+        /**
+         * Replace Variables
+         * TODO: Research and do globally
+         */
+        query.bdb = this.templateSrv.replace(query.bdb ?? '', options.scopedVars);
+        query.node = this.templateSrv.replace(query.node ?? '', options.scopedVars);
+
+        /**
+         * Execute request
+         */
+        const apiData = await (this.api as any)[getter](query);
 
         /**
          * No data returned
@@ -77,7 +106,7 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
     /**
      * Get cluster information
      */
-    const cluster = await this.getCluster();
+    const cluster = await this.api.getCluster();
     const isStatusOk = cluster && cluster.name;
 
     /**
@@ -85,83 +114,9 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
      */
     return {
       status: isStatusOk ? DataSourceTestStatus.SUCCESS : DataSourceTestStatus.ERROR,
-      message: isStatusOk ? `Success. Cluster name is "${cluster.name}"` : "Error. Can't retrive cluster information.",
+      message: isStatusOk
+        ? `Connected. Cluster name is "${cluster.name}".`
+        : "Error. Can't retrieve cluster information.",
     };
-  }
-
-  /**
-   * Get cluster info
-   *
-   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-cluster
-   * @async
-   * @returns {Promise<Record<string, any>>} Cluster info
-   */
-  async getCluster(): Promise<Record<string, any>> {
-    return getBackendSrv()
-      .datasourceRequest({
-        url: `${this.instanceSettings.url}/cluster`,
-      })
-      .then((res: any) => res.data);
-  }
-
-  /**
-   * Get the license details, including license string, expiration, and supported features
-   *
-   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-license
-   * @async
-   * @returns {Promise<Record<string, any>>} License details
-   */
-  async getLicense(): Promise<Record<string, any>> {
-    return getBackendSrv()
-      .datasourceRequest({
-        url: `${this.instanceSettings.url}/license`,
-      })
-      .then((res: any) => res.data);
-  }
-
-  /**
-   * Get all cluster nodes
-   *
-   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-nodes
-   * @async
-   * @returns {Promise<Record<string, any>[]>} Array with all nodes
-   */
-  async getNodes(): Promise<Array<Record<string, any>>> {
-    return getBackendSrv()
-      .datasourceRequest({
-        url: `${this.instanceSettings.url}/nodes`,
-      })
-      .then((res: any) => res.data);
-  }
-
-  /**
-   * Get all databases in the cluster
-   *
-   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-bdbs
-   * @async
-   * @returns {Promise<Record<string, any>[]>} Array with all databases
-   */
-  async getBdbs(): Promise<Array<Record<string, any>>> {
-    return getBackendSrv()
-      .datasourceRequest({
-        url: `${this.instanceSettings.url}/bdbs`,
-      })
-      .then((res: any) => res.data);
-  }
-
-  /**
-   * Get all alert states for bdb
-   *
-   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-bdbs-alerts-(int-uid)
-   * @async
-   * @returns {Promise<Record<string, any>>} Hash of alert objects and their state
-   */
-  async getBdbAlerts(query: REQuery): Promise<Record<string, any>> {
-    // TODO: find better solution
-    return getBackendSrv()
-      .datasourceRequest({
-        url: `https://${this.instanceSettings.jsonData.host}/v1/bdbs/${query.bdb}`,
-      })
-      .then((res: any) => res.data);
   }
 }

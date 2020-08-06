@@ -1,9 +1,14 @@
-import React, { PureComponent } from 'react';
+import React, { ChangeEvent, PureComponent } from 'react';
 import { QueryEditorProps, SelectableValue } from '@grafana/data';
-import { InlineFormLabel, Select } from '@grafana/ui';
+import { Button, InlineFormLabel, LegacyForms, Select } from '@grafana/ui';
 import { QUERY_TYPE, QueryTypeValue } from '../api';
 import { DataSource } from '../DataSource';
 import { REDataSourceOptions, REQuery } from '../types';
+
+/**
+ * Form Field
+ */
+const { FormField } = LegacyForms;
 
 /**
  * Editor Property
@@ -36,19 +41,12 @@ export class QueryEditor extends PureComponent<Props> {
    * @async
    * @param {SelectableValue<QueryTypeValue>} item Type value
    */
-  onQueryTypeChanged = async (item: SelectableValue<QueryTypeValue>) => {
-    const { onChange, onRunQuery, query } = this.props;
+  onQueryTypeChange = async (item: SelectableValue<QueryTypeValue>) => {
+    const { onChange, query } = this.props;
     onChange({
       ...query,
       queryType: item.value!,
     });
-
-    switch (item.value) {
-      case QueryTypeValue.BDB_ALERTS:
-        break;
-      default:
-        onRunQuery();
-    }
   };
 
   /**
@@ -56,13 +54,26 @@ export class QueryEditor extends PureComponent<Props> {
    *
    * @param {SelectableValue<Record<string, any>>} item Bdb value
    */
-  onDatabaseChanged = (item: SelectableValue<Record<string, any>>) => {
-    const { onChange, onRunQuery, query } = this.props;
-    onChange({
-      ...query,
-      bdb: item.value!,
-    });
+  onDatabaseChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { onChange, query } = this.props;
+    onChange({ ...query, bdb: event.target.value });
+  };
 
+  /**
+   * On Node change
+   *
+   * @param {SelectableValue<Record<string, any>>} item Node value
+   */
+  onNodeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { onChange, query } = this.props;
+    onChange({ ...query, node: event.target.value });
+  };
+
+  /**
+   * Execute the Query
+   */
+  executeQuery = () => {
+    const { onRunQuery } = this.props;
     onRunQuery();
   };
 
@@ -76,21 +87,43 @@ export class QueryEditor extends PureComponent<Props> {
      * Return content
      */
     return (
-      <div className="gf-form">
-        <InlineFormLabel width={8}>Type</InlineFormLabel>
-        <Select
-          width={40}
-          options={QUERY_TYPE}
-          value={QUERY_TYPE.find((type) => type.value === query.queryType)}
-          onChange={this.onQueryTypeChanged}
-        />
-        <span>&nbsp;</span>
-        {query.queryType === QueryTypeValue.BDB_ALERTS && (
-          <>
-            <InlineFormLabel width={8}>Database</InlineFormLabel>
-            <Select width={40} options={this.bdbs} menuPlacement="bottom" onChange={this.onDatabaseChanged} />
-          </>
-        )}
+      <div>
+        <div className="gf-form">
+          <InlineFormLabel width={8}>Type</InlineFormLabel>
+          <Select
+            width={40}
+            options={QUERY_TYPE}
+            value={QUERY_TYPE.find((type) => type.value === query.queryType)}
+            onChange={this.onQueryTypeChange}
+          />
+          <span>&nbsp;</span>
+          {query.queryType === QueryTypeValue.BDBS && (
+            <>
+              <FormField
+                labelWidth={8}
+                inputWidth={10}
+                value={query.bdb}
+                onChange={this.onDatabaseChange}
+                label="Database Id"
+                tooltip="Specify to return specific node information"
+              />
+            </>
+          )}
+          {query.queryType === QueryTypeValue.NODES && (
+            <>
+              <FormField
+                labelWidth={8}
+                inputWidth={10}
+                value={query.node}
+                onChange={this.onNodeChange}
+                label="Node Id"
+                tooltip="Specify to return specific node information"
+              />
+            </>
+          )}
+        </div>
+
+        <Button onClick={this.executeQuery}>Run</Button>
       </div>
     );
   }
@@ -101,16 +134,15 @@ export class QueryEditor extends PureComponent<Props> {
    * @async
    */
   private async getBdbs() {
-    const bdbs = await this.props.datasource.getBdbs();
-
+    //    const bdbs = []; //await this.props.datasource.api.getBdbs();
     /**
      * Return Databases
      */
-    this.bdbs = bdbs.map((bdb) => {
-      return {
-        label: bdb.name,
-        value: bdb.uid,
-      };
-    });
+    //  this.bdbs = bdbs.map((bdb) => {
+    //  return {
+    //   label: bdb.name,
+    //      value: bdb.uid,
+    //  };
+    // });
   }
 }

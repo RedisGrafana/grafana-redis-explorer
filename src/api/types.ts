@@ -1,4 +1,5 @@
-import { dateMath, FieldType, SelectableValue, ValueConverter } from '@grafana/data';
+import { DataSourceFrame } from 'types';
+import { dateMath, FieldType, SelectableValue } from '@grafana/data';
 
 /**
  * Query Type Values
@@ -9,38 +10,6 @@ export enum QueryTypeValue {
   NODES = 'nodes',
   BDBS = 'bdbs',
   BDB_ALERTS = 'bdbAlerts',
-}
-
-/**
- * Datasource test status
- */
-export enum DataSourceTestStatus {
-  SUCCESS = 'success',
-  ERROR = 'error',
-}
-
-/**
- * Datasource test result
- */
-export interface DataSourceTestResult {
-  status: DataSourceTestStatus;
-  message: string;
-}
-
-/**
- * Datasource frame field
- */
-export interface DataSourceFrameField {
-  name: string;
-  type: FieldType;
-  converter?: ValueConverter;
-}
-
-/**
- * Datasource frame
- */
-export interface DataSourceFrame {
-  [type: string]: DataSourceFrameField[];
 }
 
 /**
@@ -104,7 +73,16 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
       name: 'memory_size',
       type: FieldType.number,
     },
+    {
+      name: 'backup',
+      type: FieldType.boolean,
+    },
+    {
+      name: 'replication',
+      type: FieldType.boolean,
+    },
   ],
+  [QueryTypeValue.BDB_ALERTS]: [],
 };
 
 /**
@@ -123,12 +101,12 @@ export const QUERY_TYPE: SelectableValue[] = [
   },
   {
     label: 'Nodes',
-    description: 'Nodes information',
+    description: 'All nodes or specific node information',
     value: QueryTypeValue.NODES,
   },
   {
     label: 'Databases',
-    description: 'Database information',
+    description: 'All databases or specific database information',
     value: QueryTypeValue.BDBS,
   },
   {
