@@ -7,7 +7,7 @@ import {
   DataSourceApi,
   DataSourceInstanceSettings,
 } from '@grafana/data';
-import { TemplateSrv } from '@grafana/runtime';
+import { getTemplateSrv } from '@grafana/runtime';
 import { Api, DATASOURCE_FRAME } from './api';
 import {
   DataSourceFrameField,
@@ -32,12 +32,8 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
    * Constructor
    *
    * @param {DataSourceInstanceSettings<REDataSourceOptions>} instanceSettings Settings
-   * @param {TemplateSrv<REDataSourceOptions>} templateSrv Template
    */
-  constructor(
-    public instanceSettings: DataSourceInstanceSettings<REDataSourceOptions>,
-    private templateSrv: TemplateSrv
-  ) {
+  constructor(public instanceSettings: DataSourceInstanceSettings<REDataSourceOptions>) {
     super(instanceSettings);
     this.api = new Api(instanceSettings);
   }
@@ -59,8 +55,8 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
          * Replace Variables
          * TODO: Research and do globally
          */
-        query.bdb = this.templateSrv.replace(query.bdb ?? '', options.scopedVars);
-        query.node = this.templateSrv.replace(query.node ?? '', options.scopedVars);
+        query.bdb = getTemplateSrv().replace(query.bdb ?? '', options.scopedVars);
+        query.node = getTemplateSrv().replace(query.node ?? '', options.scopedVars);
 
         /**
          * Execute request

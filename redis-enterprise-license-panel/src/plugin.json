@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "grafanaDependency": ">=7.0.0",
+    "grafanaVersion": "7.x.x",
+    "plugins": []
+  },
+  "id": "redis-enterprise-license-panel",
+  "info": {
+    "author": {
+      "name": "Redis Labs",
+      "url": "https://oss.redislabs.com"
+    },
+    "description": "Redis Enterprise License panel",
+    "keywords": ["redis", "redis-enterprise", "plugin"],
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://github.com/mikhailredis/redis-enterprise-datasource"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/mikhailredis/redis-enterprise-datasource/blob/master/LICENSE"
+      }
+    ],
+    "logos": {
+      "large": "img/logo.svg",
+      "small": "img/logo.svg"
+    },
+    "screenshots": [],
+    "updated": "%TODAY%",
+    "version": "%VERSION%"
+  },
+  "name": "Redis Enterprise License",
+  "type": "panel"
+}
