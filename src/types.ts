@@ -72,7 +72,18 @@ export enum DataSourceTestStatus {
  * Datasource test result
  */
 export interface DataSourceTestResult {
+  /**
+   * Status
+   *
+   * @type {DataSourceTestStatus}
+   */
   status: DataSourceTestStatus;
+
+  /**
+   * Message
+   *
+   * @type {string}
+   */
   message: string;
 }
 
@@ -80,8 +91,25 @@ export interface DataSourceTestResult {
  * Datasource frame field
  */
 export interface DataSourceFrameField {
+  /**
+   * Field Name
+   *
+   * @type {string}
+   */
   name: string;
+
+  /**
+   * Type
+   *
+   * @type {FieldType}
+   */
   type: FieldType;
+
+  /**
+   * Converter
+   *
+   * @type {ValueConverter}
+   */
   converter?: ValueConverter;
 }
 
