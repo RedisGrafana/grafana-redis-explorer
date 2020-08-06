@@ -1,7 +1,9 @@
-import { REDataSourceOptions, REQuery } from 'types';
+import { omit, toPairs } from 'lodash';
 import { DataSourceInstanceSettings } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
+import { REDataSourceOptions, REQuery } from '../types';
 import { Bdb, Cluster, License, Log, Node } from './models';
+import { LogItem } from './types';
 
 /**
  * Redis Enterprise API
@@ -112,9 +114,9 @@ export class Api {
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-logs
    * @async
    * @param {REQuery} query Query
-   * @returns {Log[]} Array of events
+   * @returns {LogItem[]} Array of events
    */
-  async getLogs(query: REQuery): Promise<Log[]> {
+  async getLogs(query: REQuery): Promise<LogItem[]> {
     return getBackendSrv()
       .datasourceRequest({
         method: 'GET',
@@ -122,8 +124,28 @@ export class Api {
       })
       .then((res: any) =>
         res.data.map((item: Log) => {
-          return { ...item, level: item.severity };
+          return {
+            time: item.time,
+            level: item.severity,
+            content: this.getLogContent(item, 'time'),
+          };
         })
       );
+  }
+
+  /**
+   * Get log item content
+   *
+   * @param {Record<string, any>} item Log item
+   * @param {string} timestampField Timestamp field
+   * @returns {string} Log item content
+   */
+  private getLogContent(item: Record<string, any>, timestampField: string): string {
+    const timestamp = item[timestampField];
+    const content = toPairs(omit(item, [timestampField]))
+      .map((value) => value.join('='))
+      .join(' ');
+
+    return [timestamp, content].join(' ');
   }
 }

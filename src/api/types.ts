@@ -14,6 +14,15 @@ export enum QueryTypeValue {
 }
 
 /**
+ * Log item
+ */
+export interface LogItem {
+  time: string;
+  content: string;
+  level: string;
+}
+
+/**
  * Datasource frame data
  */
 export const DATASOURCE_FRAME: DataSourceFrame = {
@@ -107,7 +116,7 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
         type: FieldType.time,
       },
       {
-        name: 'type',
+        name: 'content',
         type: FieldType.string,
       },
       {

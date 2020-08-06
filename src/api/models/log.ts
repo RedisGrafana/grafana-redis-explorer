@@ -10,23 +10,9 @@ export interface Log {
   severity: string;
 
   /**
-   * Type
-   *
-   * @type {string}
-   */
-  type: string;
-
-  /**
    * Timestamp
    *
    * @type {string}
    */
   time: string;
-
-  /**
-   * Log level
-   *
-   * @type {string}
-   */
-  level?: string;
 }

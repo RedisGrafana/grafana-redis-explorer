@@ -1,4 +1,4 @@
-import { isArray, upperFirst, pick } from 'lodash';
+import { isArray, upperFirst } from 'lodash';
 import {
   ArrayDataFrame,
   DataFrame,
@@ -83,10 +83,7 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
               refId: query.refId,
             });
 
-            (isArray(apiData) ? apiData : [apiData]).forEach((item) => {
-              const keys = frameData.fields.map((field) => field.name);
-              mutableFrame.add(pick(item, keys));
-            });
+            (isArray(apiData) ? apiData : [apiData]).forEach((item) => mutableFrame.add(item));
             data.push(mutableFrame);
 
             break;
