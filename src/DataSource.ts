@@ -6,11 +6,13 @@ import {
   DataQueryResponse,
   DataSourceApi,
   DataSourceInstanceSettings,
+  MutableDataFrame,
 } from '@grafana/data';
 import { getTemplateSrv } from '@grafana/runtime';
 import { Api, DATASOURCE_FRAME } from './api';
 import {
-  DataSourceFrameField,
+  DataSourceArrayFrameField,
+  DataSourceFrameType,
   DataSourceTestResult,
   DataSourceTestStatus,
   REDataSourceOptions,
@@ -61,7 +63,7 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
         /**
          * Execute request
          */
-        const apiData = await (this.api as any)[getter](query);
+        const apiData = (this.api as any)[getter] ? await (this.api as any)[getter](query) : undefined;
 
         /**
          * No data returned
@@ -73,22 +75,53 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
         /**
          * Data Frames from JSON
          */
-        const frame = new ArrayDataFrame(isArray(apiData) ? (apiData as any[]) : [apiData]);
-        const frameData: DataSourceFrameField[] = DATASOURCE_FRAME[query.queryType];
+        const frameData = DATASOURCE_FRAME[query.queryType];
+        switch (frameData.frame) {
+          case DataSourceFrameType.MUTABLE:
+            /**
+             * Mutable DataFrame
+             */
+            const mutableFrame = new MutableDataFrame({
+              fields: frameData.fields,
+              refId: query.refId,
+            });
 
-        /**
-         * Set Field Type
-         */
-        frameData.forEach((field) => frame.setFieldType(field.name, field.type, field.converter));
-        frame.refId = query.refId;
+            /**
+             * Add Fields
+             */
+            (isArray(apiData) ? apiData : [apiData]).forEach((item) => mutableFrame.add(item));
 
-        /**
-         * Add Data Frame
-         */
-        data.push(frame);
+            /**
+             * Add Frames
+             */
+            data.push(mutableFrame);
+            break;
+          case DataSourceFrameType.ARRAY:
+          default:
+            /**
+             * Array DataFrame
+             */
+            const arrayFrame = new ArrayDataFrame(isArray(apiData) ? (apiData as any[]) : [apiData]);
+
+            /**
+             * Set Field Types
+             */
+            frameData.fields.forEach((field: DataSourceArrayFrameField) =>
+              arrayFrame.setFieldType(field.name, field.type, field.converter)
+            );
+
+            /**
+             * Add Frames
+             */
+            data.push({ ...arrayFrame, refId: query.refId });
+            break;
+        }
       })
     );
 
+    /**
+     * Return Frames
+     */
     return { data };
   }
 

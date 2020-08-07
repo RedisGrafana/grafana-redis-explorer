@@ -1,7 +1,9 @@
-import { REDataSourceOptions, REQuery } from 'types';
+import { omit, toPairs } from 'lodash';
 import { DataSourceInstanceSettings } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
-import { Bdb, Cluster, License, Node } from './models';
+import { REDataSourceOptions, REQuery } from '../types';
+import { Bdb, Cluster, License, Log, Node } from './models';
+import { LogItem } from './types';
 
 /**
  * Redis Enterprise API
@@ -19,7 +21,7 @@ export class Api {
    *
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-cluster
    * @async
-   * @returns {Cluster} Cluster info
+   * @returns {Promise<Cluster>} Cluster info
    */
   async getCluster(): Promise<Cluster> {
     return getBackendSrv()
@@ -35,7 +37,7 @@ export class Api {
    *
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-license
    * @async
-   * @returns {License>} License details
+   * @returns {Promise<License>>} License details
    */
   async getLicense(): Promise<License> {
     return getBackendSrv()
@@ -52,7 +54,7 @@ export class Api {
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-nodes
    * @async
    * @param {REQuery} query Query
-   * @returns {Node} Array with all nodes
+   * @returns {Promise<Node[] | Node>} Array with all nodes
    */
   async getNodes(query: REQuery): Promise<Node[] | Node> {
     let url = `${this.instanceSettings.url}/nodes`;
@@ -60,9 +62,6 @@ export class Api {
       url += `/${query.node}`;
     }
 
-    /**
-     * Request
-     */
     return getBackendSrv()
       .datasourceRequest({
         method: 'GET',
@@ -77,7 +76,7 @@ export class Api {
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-bdbs
    * @async
    * @param {REQuery} query Query
-   * @returns {Bdb>} Array with all databases
+   * @returns {Promise<Bdb[] | Bdb>} Array with all databases
    */
   async getBdbs(query: REQuery): Promise<Bdb[] | Bdb> {
     let url = `${this.instanceSettings.url}/bdbs`;
@@ -85,9 +84,6 @@ export class Api {
       url += `/${query.bdb}`;
     }
 
-    /**
-     * Request
-     */
     return getBackendSrv()
       .datasourceRequest({
         method: 'GET',
@@ -110,5 +106,50 @@ export class Api {
         url: `${this.instanceSettings.url}/bdbs/${query.bdb}`,
       })
       .then((res: any) => res.data);
+  }
+
+  /**
+   * Get cluster events log
+   *
+   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-logs
+   * @async
+   * @param {REQuery} query Query
+   * @returns {LogItem[]} Array of events
+   */
+  async getLogs(query: REQuery): Promise<LogItem[]> {
+    return getBackendSrv()
+      .datasourceRequest({
+        method: 'GET',
+        url: `${this.instanceSettings.url}/logs`,
+      })
+      .then((res: any) =>
+        res.data.map((item: Log) => {
+          return {
+            time: item.time,
+            level: item.severity,
+            content: this.getLogContent(item, 'time'),
+          };
+        })
+      );
+  }
+
+  /**
+   * Get log item content
+   *
+   * @param {Record<string, any>} item Log item
+   * @param {string} timestampField Timestamp field
+   * @returns {string} Log item content
+   */
+  private getLogContent(item: Record<string, any>, timestampField: string): string {
+    const timestamp = item[timestampField];
+
+    /**
+     * Join property and values
+     */
+    const content = toPairs(omit(item, [timestampField]))
+      .map((value) => value.join('='))
+      .join(' ');
+
+    return [timestamp, content].join(' ');
   }
 }

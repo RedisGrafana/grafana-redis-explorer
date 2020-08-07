@@ -15,7 +15,7 @@ interface Props extends PanelProps<LicensePanelOptions> {}
  */
 export const LicensePanel: React.FC<Props> = ({ options, data, width, height }) => {
   const licenseField = first(data.series)
-    ?.fields.filter(field => field.name == 'license')
+    ?.fields.filter(field => field.name === 'license')
     .map(field => field);
 
   if (!licenseField) {
