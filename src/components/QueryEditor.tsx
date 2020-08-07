@@ -52,7 +52,7 @@ export class QueryEditor extends PureComponent<Props> {
   /**
    * On Database change
    *
-   * @param {SelectableValue<Record<string, any>>} item Bdb value
+   * @param {ChangeEvent<HTMLInputElement>} event Event
    */
   onDatabaseChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onChange, query } = this.props;
@@ -62,11 +62,21 @@ export class QueryEditor extends PureComponent<Props> {
   /**
    * On Node change
    *
-   * @param {SelectableValue<Record<string, any>>} item Node value
+   * @param {ChangeEvent<HTMLInputElement>} event Event
    */
   onNodeChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onChange, query } = this.props;
     onChange({ ...query, node: event.target.value });
+  };
+
+  /**
+   * On Module change
+   *
+   * @param {ChangeEvent<HTMLInputElement>} event Event
+   */
+  onModuleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { onChange, query } = this.props;
+    onChange({ ...query, module: event.target.value });
   };
 
   /**
@@ -105,7 +115,7 @@ export class QueryEditor extends PureComponent<Props> {
                 value={query.bdb}
                 onChange={this.onDatabaseChange}
                 label="Database Id"
-                tooltip="Specify to return specific node information"
+                tooltip="Specify to return specific database information"
               />
             </>
           )}
@@ -118,6 +128,18 @@ export class QueryEditor extends PureComponent<Props> {
                 onChange={this.onNodeChange}
                 label="Node Id"
                 tooltip="Specify to return specific node information"
+              />
+            </>
+          )}
+          {query.queryType === QueryTypeValue.MODULES && (
+            <>
+              <FormField
+                labelWidth={8}
+                inputWidth={10}
+                value={query.module}
+                onChange={this.onModuleChange}
+                label="Module Id"
+                tooltip="Specify to return specific module information"
               />
             </>
           )}

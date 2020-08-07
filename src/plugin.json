@@ -68,6 +68,12 @@
     },
     {
       "method": "GET",
+      "path": "modules",
+      "url": "https://{{ .JsonData.host }}/v1/modules",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
       "path": "logs",
       "url": "https://{{ .JsonData.host }}/v1/logs",
       "reqRole": "Viewer"

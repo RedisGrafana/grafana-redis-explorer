@@ -2,7 +2,7 @@ import { omit, toPairs } from 'lodash';
 import { DataSourceInstanceSettings } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
 import { REDataSourceOptions, REQuery } from '../types';
-import { Bdb, Cluster, License, Log, Node } from './models';
+import { Bdb, Cluster, License, Log, Module, Node } from './models';
 import { LogItem } from './types';
 
 /**
@@ -54,7 +54,7 @@ export class Api {
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-nodes
    * @async
    * @param {REQuery} query Query
-   * @returns {Promise<Node[] | Node>} Array with all nodes
+   * @returns {Promise<Node[] | Node>} Array with all nodes or node
    */
   async getNodes(query: REQuery): Promise<Node[] | Node> {
     let url = `${this.instanceSettings.url}/nodes`;
@@ -76,12 +76,34 @@ export class Api {
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-bdbs
    * @async
    * @param {REQuery} query Query
-   * @returns {Promise<Bdb[] | Bdb>} Array with all databases
+   * @returns {Promise<Bdb[] | Bdb>} Array with all databases or database
    */
   async getBdbs(query: REQuery): Promise<Bdb[] | Bdb> {
     let url = `${this.instanceSettings.url}/bdbs`;
     if (query.bdb) {
       url += `/${query.bdb}`;
+    }
+
+    return getBackendSrv()
+      .datasourceRequest({
+        method: 'GET',
+        url: url,
+      })
+      .then((res: any) => res.data);
+  }
+
+  /**
+   * Get all modules or specific module
+   *
+   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-modules
+   * @async
+   * @param {REQuery} query Query
+   * @returns {Promise<Module[] | Module>} Array with all modules or module
+   */
+  async getModules(query: REQuery): Promise<Module[] | Module> {
+    let url = `${this.instanceSettings.url}/modules`;
+    if (query.module) {
+      url += `/${query.module}`;
     }
 
     return getBackendSrv()

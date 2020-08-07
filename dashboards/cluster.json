@@ -15,27 +15,145 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
-  "iteration": 1596710269910,
+  "id": 1,
+  "iteration": 1596777624985,
   "links": [],
   "panels": [
     {
-      "datasource": null,
+      "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 3,
+        "w": 3,
         "x": 0,
         "y": 0
       },
-      "id": 39,
+      "id": 6,
       "options": {
-        "allowUpdate": true
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["mean"],
+          "fields": "/.*/",
+          "values": true
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.1.2",
+      "scopedVars": {
+        "cluster": {
+          "selected": true,
+          "text": "Localhost",
+          "value": "Localhost"
+        }
+      },
+      "targets": [
+        {
+          "queryType": "cluster",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Cluster name",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": ["name"]
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": "$cluster",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "license"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 107
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 3,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["mean"],
+          "fields": "/.*/",
+          "values": true
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.1.2",
+      "scopedVars": {
+        "cluster": {
+          "selected": true,
+          "text": "Localhost",
+          "value": "Localhost"
+        }
       },
       "targets": [
         {
@@ -45,11 +163,102 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "License",
-      "type": "redis-enterprise-license-panel"
+      "title": "Expiration",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": ["expiration_date"]
+            }
+          }
+        }
+      ],
+      "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": "$cluster",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "license"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 107
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 6,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["mean"],
+          "fields": "",
+          "values": true
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.1.2",
+      "scopedVars": {
+        "cluster": {
+          "selected": true,
+          "text": "Localhost",
+          "value": "Localhost"
+        }
+      },
+      "targets": [
+        {
+          "queryType": "license",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Shards Limit",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": ["shards_limit"]
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -57,10 +266,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 13,
         "w": 12,
-        "x": 0,
-        "y": 8
+        "x": 12,
+        "y": 0
       },
       "id": 37,
       "options": {
@@ -81,26 +290,33 @@
       "type": "logs"
     },
     {
-      "collapsed": false,
-      "datasource": null,
+      "datasource": "$cluster",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "gridPos": {
-        "h": 1,
-        "w": 24,
+        "h": 10,
+        "w": 12,
         "x": 0,
-        "y": 16
+        "y": 3
       },
-      "id": 11,
-      "panels": [],
-      "repeat": "cluster",
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "Redis Enterprise",
-          "value": "Redis Enterprise"
+      "id": 39,
+      "options": {
+        "allowUpdate": true
+      },
+      "targets": [
+        {
+          "queryType": "license",
+          "refId": "A"
         }
-      },
-      "title": "Cluster: $cluster",
-      "type": "row"
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "License",
+      "type": "redis-enterprise-license-panel"
     },
     {
       "datasource": "$cluster",
@@ -239,9 +455,9 @@
       },
       "gridPos": {
         "h": 12,
-        "w": 21,
+        "w": 24,
         "x": 0,
-        "y": 17
+        "y": 13
       },
       "id": 2,
       "links": [],
@@ -254,12 +470,12 @@
           }
         ]
       },
-      "pluginVersion": "7.0.1",
+      "pluginVersion": "7.1.2",
       "scopedVars": {
         "cluster": {
-          "selected": false,
-          "text": "Redis Enterprise",
-          "value": "Redis Enterprise"
+          "selected": true,
+          "text": "Localhost",
+          "value": "Localhost"
         }
       },
       "targets": [
@@ -330,244 +546,6 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 21,
-        "y": 17
-      },
-      "id": 6,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["mean"],
-          "fields": "/.*/",
-          "values": true
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.0.1",
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "Redis Enterprise",
-          "value": "Redis Enterprise"
-        }
-      },
-      "targets": [
-        {
-          "queryType": "cluster",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Cluster name",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": ["name"]
-            }
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": "$cluster",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "license"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 107
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 21,
-        "y": 20
-      },
-      "id": 8,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["mean"],
-          "fields": "/.*/",
-          "values": true
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.0.1",
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "Redis Enterprise",
-          "value": "Redis Enterprise"
-        }
-      },
-      "targets": [
-        {
-          "queryType": "license",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Expiration",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": ["expiration_date"]
-            }
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": "$cluster",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "dark-green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "license"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 107
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 21,
-        "y": 23
-      },
-      "id": 9,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["mean"],
-          "fields": "",
-          "values": true
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.0.1",
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "Redis Enterprise",
-          "value": "Redis Enterprise"
-        }
-      },
-      "targets": [
-        {
-          "queryType": "license",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Shards Limit",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": ["shards_limit"]
-            }
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": "$cluster",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
             "align": null,
             "displayMode": "auto"
           },
@@ -595,7 +573,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 82
+                "value": 100
               }
             ]
           },
@@ -687,10 +665,10 @@
         ]
       },
       "gridPos": {
-        "h": 10,
-        "w": 13,
+        "h": 6,
+        "w": 14,
         "x": 0,
-        "y": 29
+        "y": 25
       },
       "id": 4,
       "options": {
@@ -702,12 +680,12 @@
           }
         ]
       },
-      "pluginVersion": "7.0.1",
+      "pluginVersion": "7.1.2",
       "scopedVars": {
         "cluster": {
-          "selected": false,
-          "text": "Redis Enterprise",
-          "value": "Redis Enterprise"
+          "selected": true,
+          "text": "Localhost",
+          "value": "Localhost"
         }
       },
       "targets": [
@@ -767,37 +745,12 @@
       "type": "table"
     },
     {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 39
-      },
-      "id": 30,
-      "panels": [],
-      "repeat": null,
-      "repeatIteration": 1596710269910,
-      "repeatPanelId": 11,
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "default",
-          "value": "default"
-        }
-      },
-      "title": "Cluster: $cluster",
-      "type": "row"
-    },
-    {
       "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
           "custom": {
             "align": null
           },
-          "links": [],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -817,88 +770,24 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Memory Limit"
+              "options": "Description"
             },
             "properties": [
               {
-                "id": "unit",
-                "value": "decbytes"
-              },
-              {
                 "id": "custom.width",
-                "value": 121
+                "value": 349
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "Type"
+              "options": "uid"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 103
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Shards"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 99
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Version"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 122
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Replication"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 141
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Persistence"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 162
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Eviction"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 126
+                "value": 268
               }
             ]
           },
@@ -910,444 +799,19 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 469
-              },
-              {
-                "id": "links",
-                "value": [
-                  {
-                    "title": "Database",
-                    "url": "/d/fu8ZoZIGk/database?orgId=1&${__url_time_range}&var-bdb=${__data.fields[uid]}"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 12,
-        "w": 21,
-        "x": 0,
-        "y": 40
-      },
-      "id": 31,
-      "links": [],
-      "options": {
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": false,
-            "displayName": "Name"
-          }
-        ]
-      },
-      "pluginVersion": "7.0.1",
-      "repeatIteration": 1596710269910,
-      "repeatPanelId": 2,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "default",
-          "value": "default"
-        }
-      },
-      "targets": [
-        {
-          "queryType": "bdbs",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Databases",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": [
-                "memory_size",
-                "replication",
-                "name",
-                "version",
-                "data_persistence",
-                "eviction_policy",
-                "type",
-                "shards_count",
-                "status",
-                "uid"
-              ]
-            }
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {},
-            "indexByName": {
-              "data_persistence": 7,
-              "eviction_policy": 8,
-              "memory_size": 3,
-              "name": 1,
-              "replication": 6,
-              "shards_count": 4,
-              "status": 9,
-              "type": 2,
-              "uid": 0,
-              "version": 5
-            },
-            "renameByName": {
-              "data_persistence": "Persistence",
-              "eviction_policy": "Eviction",
-              "memory_size": "Memory Limit",
-              "name": "Name",
-              "redis_version": "Version",
-              "replication": "Replication",
-              "shards_count": "Shards",
-              "status": "Status",
-              "type": "Type",
-              "uid": "Id",
-              "version": "Version"
-            }
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "datasource": "$cluster",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 21,
-        "y": 40
-      },
-      "id": 32,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["mean"],
-          "fields": "/.*/",
-          "values": true
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.0.1",
-      "repeatIteration": 1596710269910,
-      "repeatPanelId": 6,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "default",
-          "value": "default"
-        }
-      },
-      "targets": [
-        {
-          "queryType": "cluster",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Cluster name",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": ["name"]
-            }
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": "$cluster",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "license"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 107
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 21,
-        "y": 43
-      },
-      "id": 33,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["mean"],
-          "fields": "/.*/",
-          "values": true
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.0.1",
-      "repeatIteration": 1596710269910,
-      "repeatPanelId": 8,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "default",
-          "value": "default"
-        }
-      },
-      "targets": [
-        {
-          "queryType": "license",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Expiration",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": ["expiration_date"]
-            }
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": "$cluster",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "dark-green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "license"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 107
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 21,
-        "y": 46
-      },
-      "id": 34,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["mean"],
-          "fields": "",
-          "values": true
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.0.1",
-      "repeatIteration": 1596710269910,
-      "repeatPanelId": 9,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "default",
-          "value": "default"
-        }
-      },
-      "targets": [
-        {
-          "queryType": "license",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Shards Limit",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": ["shards_limit"]
-            }
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": "$cluster",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": null,
-            "displayMode": "auto"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Cores"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 82
+                "value": 204
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "Shards"
+              "options": "capabilities"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 88
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Total Memory"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "decbytes"
-              },
-              {
-                "id": "custom.width",
-                "value": 133
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "IP Address"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 113
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "OS"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 210
+                "value": 284
               }
             ]
           },
@@ -1359,84 +823,59 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 104
+                "value": 79
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "Id"
+              "options": "command_line_args"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 60
-              },
-              {
-                "id": "links",
-                "value": [
-                  {
-                    "title": "Node",
-                    "url": "/d/r9RbAZSGk/node?orgId=1&${__url_time_range}&var-node=${__data.fields[uid]}"
-                  }
-                ]
+                "value": 375
               }
             ]
           }
         ]
       },
       "gridPos": {
-        "h": 10,
-        "w": 13,
+        "h": 9,
+        "w": 14,
         "x": 0,
-        "y": 52
+        "y": 31
       },
-      "id": 35,
+      "id": 41,
       "options": {
         "showHeader": true,
-        "sortBy": [
-          {
-            "desc": false,
-            "displayName": "Id"
-          }
-        ]
+        "sortBy": []
       },
-      "pluginVersion": "7.0.1",
-      "repeatIteration": 1596710269910,
-      "repeatPanelId": 4,
-      "repeatedByRow": true,
+      "pluginVersion": "7.1.2",
       "scopedVars": {
         "cluster": {
-          "selected": false,
-          "text": "default",
-          "value": "default"
+          "selected": true,
+          "text": "Localhost",
+          "value": "Localhost"
         }
       },
       "targets": [
         {
-          "queryType": "nodes",
+          "module": "",
+          "queryType": "modules",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Nodes",
+      "title": "Modules",
       "transformations": [
         {
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": [
-                "total_memory",
-                "addr",
-                "os_version",
-                "status",
-                "software_version",
-                "shard_count",
-                "cores",
-                "uid"
-              ]
+              "names": ["display_name", "description", "semantic_version", "command_line_args"]
             }
           }
         },
@@ -1445,24 +884,16 @@
           "options": {
             "excludeByName": {},
             "indexByName": {
-              "addr": 1,
-              "cores": 6,
-              "os_version": 4,
-              "shard_count": 3,
-              "software_version": 5,
-              "status": 7,
-              "total_memory": 2,
-              "uid": 0
+              "command_line_args": 2,
+              "description": 1,
+              "display_name": 0,
+              "module_name": 4,
+              "semantic_version": 3
             },
             "renameByName": {
-              "addr": "IP Address",
-              "cores": "Cores",
-              "os_version": "OS",
-              "shard_count": "Shards",
-              "software_version": "Version",
-              "status": "Status",
-              "total_memory": "Total Memory",
-              "uid": "Id"
+              "description": "Description",
+              "display_name": "Name",
+              "semantic_version": "Version"
             }
           }
         }
@@ -1470,7 +901,7 @@
       "type": "table"
     }
   ],
-  "schemaVersion": 25,
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1478,8 +909,8 @@
       {
         "current": {
           "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "text": "Localhost",
+          "value": ["Localhost"]
         },
         "hide": 0,
         "includeAll": true,
@@ -1506,5 +937,5 @@
   "timezone": "",
   "title": "Cluster Overview",
   "uid": "viroIzSGz",
-  "version": 3
+  "version": 84
 }
