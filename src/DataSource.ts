@@ -78,28 +78,50 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
         const frameData = DATASOURCE_FRAME[query.queryType];
         switch (frameData.frame) {
           case DataSourceFrameType.MUTABLE:
+            /**
+             * Mutable DataFrame
+             */
             const mutableFrame = new MutableDataFrame({
               fields: frameData.fields,
               refId: query.refId,
             });
 
+            /**
+             * Add Fields
+             */
             (isArray(apiData) ? apiData : [apiData]).forEach((item) => mutableFrame.add(item));
-            data.push(mutableFrame);
 
+            /**
+             * Add Frames
+             */
+            data.push(mutableFrame);
             break;
           case DataSourceFrameType.ARRAY:
           default:
+            /**
+             * Array DataFrame
+             */
             const arrayFrame = new ArrayDataFrame(isArray(apiData) ? (apiData as any[]) : [apiData]);
+
+            /**
+             * Set Field Types
+             */
             frameData.fields.forEach((field: DataSourceArrayFrameField) =>
               arrayFrame.setFieldType(field.name, field.type, field.converter)
             );
-            data.push({ ...arrayFrame, refId: query.refId });
 
+            /**
+             * Add Frames
+             */
+            data.push({ ...arrayFrame, refId: query.refId });
             break;
         }
       })
     );
 
+    /**
+     * Return Frames
+     */
     return { data };
   }
 

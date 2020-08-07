@@ -142,6 +142,10 @@ export class Api {
    */
   private getLogContent(item: Record<string, any>, timestampField: string): string {
     const timestamp = item[timestampField];
+
+    /**
+     * Join property and values
+     */
     const content = toPairs(omit(item, [timestampField]))
       .map((value) => value.join('='))
       .join(' ');
