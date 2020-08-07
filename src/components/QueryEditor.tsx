@@ -1,3 +1,4 @@
+import { css } from 'emotion';
 import React, { ChangeEvent, PureComponent } from 'react';
 import { QueryEditorProps, SelectableValue } from '@grafana/data';
 import { Button, InlineFormLabel, LegacyForms, Select } from '@grafana/ui';
@@ -141,15 +142,18 @@ export class QueryEditor extends PureComponent<Props> {
         <div className="gf-form">
           <InlineFormLabel width={8}>Type</InlineFormLabel>
           <Select
+            className={css`
+              margin-right: 5px;
+            `}
             width={40}
             options={QUERY_TYPE}
             value={QUERY_TYPE.find((type) => type.value === query.queryType)}
             onChange={this.onQueryTypeChange}
           />
-          <span>&nbsp;</span>
+
           {query.queryType === QueryTypeValue.ALERTS && (
             <>
-              <InlineFormLabel width={8}>Alert Type</InlineFormLabel>
+              <InlineFormLabel width={8}>Type</InlineFormLabel>
               <Select
                 width={40}
                 options={ALERT_TYPE}
@@ -158,6 +162,7 @@ export class QueryEditor extends PureComponent<Props> {
               />
             </>
           )}
+
           {query.alertType && (
             <div className="gf-form">
               {query.alertType === QueryTypeValue.BDBS && (
@@ -170,6 +175,7 @@ export class QueryEditor extends PureComponent<Props> {
                   tooltip="Specify to return specific database information"
                 />
               )}
+
               {query.alertType === QueryTypeValue.NODES && (
                 <FormField
                   labelWidth={8}
@@ -185,42 +191,75 @@ export class QueryEditor extends PureComponent<Props> {
 
           {query.queryType === QueryTypeValue.STATS && (
             <>
-              <InlineFormLabel width={8}>Stats Type</InlineFormLabel>
-              <Select width={40} options={STATS_TYPE} onChange={this.onStatsTypeChange} />
+              <InlineFormLabel width={8}>Type</InlineFormLabel>
+              <Select
+                width={40}
+                options={STATS_TYPE}
+                value={STATS_TYPE.find((type) => type.value === query.statsType)}
+                onChange={this.onStatsTypeChange}
+              />
             </>
-          )}
-          {query.statsType && (
-            <div className="gf-form">
-              <>
-                <InlineFormLabel width={8}>Interval</InlineFormLabel>
-                <Select width={40} options={STATS_INTERVAL} onChange={this.onStatsIntervalChange} />
-              </>
-
-              {query.statsType === QueryTypeValue.BDBS && (
-                <FormField
-                  labelWidth={8}
-                  inputWidth={10}
-                  value={query.bdb}
-                  onChange={this.onDatabaseChange}
-                  label="Database Id"
-                  tooltip="Specify to return specific database information"
-                />
-              )}
-              {query.statsType === QueryTypeValue.NODES && (
-                <FormField
-                  labelWidth={8}
-                  inputWidth={10}
-                  value={query.node}
-                  onChange={this.onNodeChange}
-                  label="Node Id"
-                  tooltip="Specify to return specific node information"
-                />
-              )}
-            </div>
           )}
 
           {query.queryType === QueryTypeValue.BDBS && (
-            <>
+            <FormField
+              labelWidth={8}
+              inputWidth={10}
+              value={query.bdb}
+              onChange={this.onDatabaseChange}
+              label="Database Id"
+              tooltip="Specify to return specific database information"
+            />
+          )}
+
+          {query.queryType === QueryTypeValue.NODES && (
+            <FormField
+              labelWidth={8}
+              inputWidth={10}
+              value={query.node}
+              onChange={this.onNodeChange}
+              label="Node Id"
+              tooltip="Specify to return specific node information"
+            />
+          )}
+
+          {query.queryType === QueryTypeValue.MODULES && (
+            <FormField
+              labelWidth={8}
+              inputWidth={10}
+              value={query.module}
+              onChange={this.onModuleChange}
+              label="Module Id"
+              tooltip="Specify to return specific module information"
+            />
+          )}
+
+          {query.queryType === QueryTypeValue.USERS && (
+            <FormField
+              labelWidth={8}
+              inputWidth={10}
+              value={query.user}
+              onChange={this.onUserChange}
+              label="User Id"
+              tooltip="Specify to return specific user information"
+            />
+          )}
+        </div>
+
+        {query.queryType === QueryTypeValue.STATS && query.statsType && (
+          <div className="gf-form">
+            <InlineFormLabel width={8}>Interval</InlineFormLabel>
+            <Select
+              className={css`
+                margin-right: 5px;
+              `}
+              width={40}
+              options={STATS_INTERVAL}
+              value={STATS_INTERVAL.find((type) => type.value === query.statsInterval)}
+              onChange={this.onStatsIntervalChange}
+            />
+
+            {query.statsType === QueryTypeValue.BDBS && (
               <FormField
                 labelWidth={8}
                 inputWidth={10}
@@ -229,10 +268,8 @@ export class QueryEditor extends PureComponent<Props> {
                 label="Database Id"
                 tooltip="Specify to return specific database information"
               />
-            </>
-          )}
-          {query.queryType === QueryTypeValue.NODES && (
-            <>
+            )}
+            {query.statsType === QueryTypeValue.NODES && (
               <FormField
                 labelWidth={8}
                 inputWidth={10}
@@ -241,33 +278,9 @@ export class QueryEditor extends PureComponent<Props> {
                 label="Node Id"
                 tooltip="Specify to return specific node information"
               />
-            </>
-          )}
-          {query.queryType === QueryTypeValue.MODULES && (
-            <>
-              <FormField
-                labelWidth={8}
-                inputWidth={10}
-                value={query.module}
-                onChange={this.onModuleChange}
-                label="Module Id"
-                tooltip="Specify to return specific module information"
-              />
-            </>
-          )}
-          {query.queryType === QueryTypeValue.USERS && (
-            <>
-              <FormField
-                labelWidth={8}
-                inputWidth={10}
-                value={query.user}
-                onChange={this.onUserChange}
-                label="User Id"
-                tooltip="Specify to return specific user information"
-              />
-            </>
-          )}
-        </div>
+            )}
+          </div>
+        )}
 
         <Button onClick={this.executeQuery}>Run</Button>
       </div>
