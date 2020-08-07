@@ -122,6 +122,7 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
         type: FieldType.boolean,
       },
     ],
+    omit: ['authentication_admin_pass', 'authentication_sasl_pass', 'authentication_redis_pass'],
   },
   [QueryTypeValue.ALERTS]: {
     frame: DataSourceFrameType.MUTABLE,
@@ -135,8 +136,7 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
         type: FieldType.string,
       },
     ],
-    // TODO: update fields to omit
-    omit: ['bdb_backup_delayed', 'bdb_crdt_src_high_syncer_lag', 'bdb_crdt_src_syncer_connection_error.enabled'],
+    omit: [],
   },
   [QueryTypeValue.LOGS]: {
     frame: DataSourceFrameType.MUTABLE,
