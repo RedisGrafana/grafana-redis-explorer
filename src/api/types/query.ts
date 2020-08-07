@@ -53,6 +53,11 @@ export const QUERY_TYPE: SelectableValue[] = [
     description: 'All nodes or specific node information',
     value: QueryTypeValue.NODES,
   },
+  {
+    label: 'Users',
+    description: 'All users or specific user information',
+    value: QueryTypeValue.USERS,
+  },
 ];
 
 /**
