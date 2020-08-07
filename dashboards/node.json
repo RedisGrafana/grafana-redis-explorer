@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 3,
-  "iteration": 1596824095120,
+  "iteration": 1596825726671,
   "links": [
     {
       "icon": "dashboard",
@@ -74,9 +74,21 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Database",
+      "title": "Node",
       "transformations": [],
       "type": "table"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 17,
+      "title": "Alerts",
+      "type": "row"
     },
     {
       "datasource": "$cluster",
@@ -87,10 +99,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 17,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 9
       },
       "id": 15,
       "options": {
@@ -120,7 +132,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "Localhost",
           "value": "Localhost"
         },
@@ -139,7 +151,7 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "1",
           "value": "1"
         },
@@ -169,5 +181,5 @@
   "timezone": "",
   "title": "Node",
   "uid": "r9RbAZSGk",
-  "version": 11
+  "version": 13
 }

@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 2,
-  "iteration": 1596823960633,
+  "iteration": 1596825788173,
   "links": [
     {
       "icon": "dashboard",
@@ -78,6 +78,20 @@
       "type": "table"
     },
     {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 4
+      },
+      "id": 17,
+      "panels": [],
+      "title": "Alerts",
+      "type": "row"
+    },
+    {
       "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
@@ -86,10 +100,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 17,
+        "h": 15,
+        "w": 24,
         "x": 0,
-        "y": 4
+        "y": 5
       },
       "id": 15,
       "options": {
@@ -119,7 +133,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "Localhost",
           "value": "Localhost"
         },
@@ -168,5 +182,5 @@
   "timezone": "",
   "title": "Database",
   "uid": "fu8ZoZIGk",
-  "version": 17
+  "version": 19
 }
