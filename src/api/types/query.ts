@@ -111,6 +111,10 @@ export const STATS_TYPE: SelectableValue[] = [
  */
 export const STATS_INTERVAL: SelectableValue[] = [
   {
+    label: 'All',
+    value: '',
+  },
+  {
     label: '1 Second',
     value: '1sec',
   },

@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 7,
-  "iteration": 1596792029506,
+  "iteration": 1596797195145,
   "links": [],
   "panels": [
     {
@@ -367,6 +367,40 @@
       "type": "logs"
     },
     {
+      "datasource": "Redis Enterprise",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 21,
+        "x": 0,
+        "y": 20
+      },
+      "id": 55,
+      "options": {
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "queryType": "stats",
+          "refId": "A",
+          "statsInterval": "",
+          "statsType": "cluster"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Stats",
+      "type": "logs"
+    },
+    {
       "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
@@ -505,7 +539,7 @@
         "h": 12,
         "w": 21,
         "x": 0,
-        "y": 20
+        "y": 27
       },
       "id": 2,
       "links": [],
@@ -601,7 +635,7 @@
         "h": 8,
         "w": 21,
         "x": 0,
-        "y": 32
+        "y": 39
       },
       "id": 41,
       "options": {
@@ -609,6 +643,13 @@
         "showTime": false,
         "sortOrder": "Descending",
         "wrapLogMessage": false
+      },
+      "scopedVars": {
+        "cluster": {
+          "selected": false,
+          "text": "Redis Enterprise",
+          "value": "Redis Enterprise"
+        }
       },
       "targets": [
         {
@@ -620,6 +661,40 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Alert States for all Databases",
+      "type": "logs"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 21,
+        "x": 0,
+        "y": 47
+      },
+      "id": 57,
+      "options": {
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "queryType": "stats",
+          "refId": "A",
+          "statsInterval": "",
+          "statsType": "bdbs"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "All Databases Stats",
       "type": "logs"
     },
     {
@@ -749,7 +824,7 @@
         "h": 8,
         "w": 21,
         "x": 0,
-        "y": 40
+        "y": 55
       },
       "id": 4,
       "options": {
@@ -837,7 +912,7 @@
         "h": 9,
         "w": 21,
         "x": 0,
-        "y": 48
+        "y": 63
       },
       "id": 43,
       "options": {
@@ -845,6 +920,13 @@
         "showTime": false,
         "sortOrder": "Descending",
         "wrapLogMessage": false
+      },
+      "scopedVars": {
+        "cluster": {
+          "selected": false,
+          "text": "Redis Enterprise",
+          "value": "Redis Enterprise"
+        }
       },
       "targets": [
         {
@@ -855,7 +937,41 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Alert states for all Nodes",
+      "title": "Alert States for all Nodes",
+      "type": "logs"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 21,
+        "x": 0,
+        "y": 72
+      },
+      "id": 59,
+      "options": {
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "queryType": "stats",
+          "refId": "A",
+          "statsInterval": "",
+          "statsType": "nodes"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "All Nodes Stats",
       "type": "logs"
     }
   ],
@@ -905,5 +1021,5 @@
   "timezone": "",
   "title": "Cluster Overview",
   "uid": "viroIzSGz",
-  "version": 2
+  "version": 3
 }

@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 5,
-  "iteration": 1596792502777,
+  "iteration": 1596797625288,
   "links": [
     {
       "icon": "dashboard",
@@ -110,6 +110,41 @@
       "timeShift": null,
       "title": "All Alert States",
       "type": "logs"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 17,
+        "x": 0,
+        "y": 12
+      },
+      "id": 17,
+      "options": {
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "bdb": "$bdb",
+          "queryType": "stats",
+          "refId": "A",
+          "statsInterval": "",
+          "statsType": "bdbs"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "All Stats",
+      "type": "logs"
     }
   ],
   "schemaVersion": 25,
@@ -178,5 +213,5 @@
   "timezone": "",
   "title": "Database",
   "uid": "fu8ZoZIGk",
-  "version": 2
+  "version": 3
 }
