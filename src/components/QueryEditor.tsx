@@ -1,7 +1,7 @@
 import React, { ChangeEvent, PureComponent } from 'react';
 import { QueryEditorProps, SelectableValue } from '@grafana/data';
 import { Button, InlineFormLabel, LegacyForms, Select } from '@grafana/ui';
-import { ALERT_TYPE, QUERY_TYPE, QueryTypeValue } from '../api';
+import { ALERT_TYPE, QUERY_TYPE, STATS_INTERVAL, STATS_TYPE, QueryTypeValue } from '../api';
 import { DataSource } from '../DataSource';
 import { REDataSourceOptions, REQuery } from '../types';
 
@@ -55,6 +55,28 @@ export class QueryEditor extends PureComponent<Props> {
   onAlertTypeChange = async (item: SelectableValue<QueryTypeValue>) => {
     const { onChange, query } = this.props;
     onChange({ ...query, alertType: item.value! });
+  };
+
+  /**
+   * On Stats Type change
+   *
+   * @async
+   * @param {SelectableValue<QueryTypeValue>} item Type value
+   */
+  onStatsTypeChange = async (item: SelectableValue<QueryTypeValue>) => {
+    const { onChange, query } = this.props;
+    onChange({ ...query, statsType: item.value! });
+  };
+
+  /**
+   * On Stats Interval change
+   *
+   * @async
+   * @param {SelectableValue<QueryTypeValue>} item Type value
+   */
+  onStatsIntervalChange = async (item: SelectableValue<QueryTypeValue>) => {
+    const { onChange, query } = this.props;
+    onChange({ ...query, statsInterval: item.value! });
   };
 
   /**
@@ -144,6 +166,42 @@ export class QueryEditor extends PureComponent<Props> {
                 />
               )}
               {query.alertType === QueryTypeValue.NODES && (
+                <FormField
+                  labelWidth={8}
+                  inputWidth={10}
+                  value={query.node}
+                  onChange={this.onNodeChange}
+                  label="Node Id"
+                  tooltip="Specify to return specific node information"
+                />
+              )}
+            </div>
+          )}
+
+          {query.queryType === QueryTypeValue.STATS && (
+            <>
+              <InlineFormLabel width={8}>Stats Type</InlineFormLabel>
+              <Select width={40} options={STATS_TYPE} onChange={this.onStatsTypeChange} />
+            </>
+          )}
+          {query.statsType && (
+            <div className="gf-form">
+              <>
+                <InlineFormLabel width={8}>Interval</InlineFormLabel>
+                <Select width={40} options={STATS_INTERVAL} onChange={this.onStatsIntervalChange} />
+              </>
+
+              {query.statsType === QueryTypeValue.BDBS && (
+                <FormField
+                  labelWidth={8}
+                  inputWidth={10}
+                  value={query.bdb}
+                  onChange={this.onDatabaseChange}
+                  label="Database Id"
+                  tooltip="Specify to return specific database information"
+                />
+              )}
+              {query.statsType === QueryTypeValue.NODES && (
                 <FormField
                   labelWidth={8}
                   inputWidth={10}

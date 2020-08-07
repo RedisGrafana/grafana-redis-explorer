@@ -50,6 +50,12 @@
     },
     {
       "method": "GET",
+      "path": "cluster/stats",
+      "url": "https://{{ .JsonData.host }}/v1/cluster/stats",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
       "path": "license",
       "url": "https://{{ .JsonData.host }}/v1/license",
       "reqRole": "Viewer"
@@ -62,8 +68,33 @@
     },
     {
       "method": "GET",
+      "path": "nodes/alerts",
+      "url": "https://{{ .JsonData.host }}/v1/nodes/alerts",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
+      "path": "nodes/stats",
+      "url": "https://{{ .JsonData.host }}/v1/nodes/stats",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
       "path": "bdbs",
       "url": "https://{{ .JsonData.host }}/v1/bdbs",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
+      "path": "bdbs/alerts",
+      "url": "https://{{ .JsonData.host }}/v1/bdbs/alerts",
+      "reqRole": "Viewer"
+    },
+
+    {
+      "method": "GET",
+      "path": "bdbs/stats",
+      "url": "https://{{ .JsonData.host }}/v1/bdbs/stats",
       "reqRole": "Viewer"
     },
     {
@@ -82,18 +113,6 @@
       "method": "GET",
       "path": "logs",
       "url": "https://{{ .JsonData.host }}/v1/logs",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "bdbs/alerts",
-      "url": "https://{{ .JsonData.host }}/v1/bdbs/alerts",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "nodes/alerts",
-      "url": "https://{{ .JsonData.host }}/v1/nodes/alerts",
       "reqRole": "Viewer"
     }
   ],
