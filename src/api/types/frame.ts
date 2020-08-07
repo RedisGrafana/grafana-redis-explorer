@@ -87,6 +87,11 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
         name: 'name',
         type: FieldType.string,
       },
+      {
+        name: 'password_issue_date',
+        type: FieldType.time,
+        converter: (value: string) => dateMath.parse(value),
+      },
     ],
   },
   [QueryTypeValue.BDBS]: {
