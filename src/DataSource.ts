@@ -9,7 +9,7 @@ import {
   MutableDataFrame,
 } from '@grafana/data';
 import { getTemplateSrv } from '@grafana/runtime';
-import { Api, DATASOURCE_FRAME } from './api';
+import { Api, DATASOURCE_FRAME, QueryTypeValue } from './api';
 import {
   DataSourceArrayFrameField,
   DataSourceFrameType,
@@ -135,7 +135,10 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
     /**
      * Get cluster information
      */
-    const cluster = await this.api.getCluster();
+    const cluster = await this.api.getCluster({
+      queryType: QueryTypeValue.CLUSTER,
+      refId: '',
+    });
     const isStatusOk = cluster && cluster.name;
 
     /**

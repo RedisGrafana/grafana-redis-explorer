@@ -124,8 +124,19 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
     ],
   },
   [QueryTypeValue.ALERTS]: {
-    frame: DataSourceFrameType.ARRAY,
-    fields: [],
+    frame: DataSourceFrameType.MUTABLE,
+    fields: [
+      {
+        name: 'time',
+        type: FieldType.time,
+      },
+      {
+        name: 'content',
+        type: FieldType.string,
+      },
+    ],
+    // TODO: update fields to omit
+    omit: ['bdb_backup_delayed', 'bdb_crdt_src_high_syncer_lag', 'bdb_crdt_src_syncer_connection_error.enabled'],
   },
   [QueryTypeValue.LOGS]: {
     frame: DataSourceFrameType.MUTABLE,

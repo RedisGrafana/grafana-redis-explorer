@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 3,
-  "iteration": 1596686058835,
+  "id": 6,
+  "iteration": 1596792635562,
   "links": [
     {
       "icon": "dashboard",
@@ -63,7 +63,7 @@
       "options": {
         "showHeader": true
       },
-      "pluginVersion": "7.1.2",
+      "pluginVersion": "7.0.1",
       "targets": [
         {
           "bdb": "",
@@ -77,9 +77,43 @@
       "title": "Database",
       "transformations": [],
       "type": "table"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 15,
+        "x": 0,
+        "y": 8
+      },
+      "id": 15,
+      "options": {
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "alertType": "nodes",
+          "node": "$node",
+          "queryType": "alerts",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "All Alert States",
+      "type": "logs"
     }
   ],
-  "schemaVersion": 26,
+  "schemaVersion": 25,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -87,8 +121,8 @@
       {
         "current": {
           "selected": false,
-          "text": "Localhost",
-          "value": "Localhost"
+          "text": "Redis Enterprise",
+          "value": "Redis Enterprise"
         },
         "hide": 0,
         "includeAll": false,
@@ -130,10 +164,20 @@
     "to": "now"
   },
   "timepicker": {
-    "refresh_intervals": ["10s", "30s", "1m", "5m", "15m", "30m", "1h", "2h", "1d"]
+    "refresh_intervals": [
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
   },
   "timezone": "",
   "title": "Node",
   "uid": "r9RbAZSGk",
-  "version": 7
+  "version": 2
 }

@@ -54,3 +54,19 @@ export const QUERY_TYPE: SelectableValue[] = [
     value: QueryTypeValue.NODES,
   },
 ];
+
+/**
+ * Alert type
+ */
+export const ALERT_TYPE: SelectableValue[] = [
+  {
+    label: 'Database',
+    description: 'Specific database',
+    value: QueryTypeValue.BDBS,
+  },
+  {
+    label: 'Node',
+    description: 'Specific node',
+    value: QueryTypeValue.NODES,
+  },
+];

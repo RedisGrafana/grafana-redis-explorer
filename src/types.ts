@@ -13,6 +13,13 @@ export interface REQuery extends DataQuery {
   queryType: QueryTypeValue;
 
   /**
+   * Alert Type
+   *
+   * @type {QueryTypeValue}
+   */
+  alertType?: QueryTypeValue;
+
+  /**
    * Database
    *
    * @type {string}
@@ -160,6 +167,7 @@ export interface DataSourceMutableField {
 export interface DataSourceFrame {
   [type: string]: {
     frame: DataSourceFrameType;
-    fields: (DataSourceArrayFrameField | DataSourceMutableField)[];
+    fields: Array<DataSourceArrayFrameField | DataSourceMutableField>;
+    omit?: string[];
   };
 }
