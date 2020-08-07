@@ -122,10 +122,21 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
         type: FieldType.boolean,
       },
     ],
+    omit: ['authentication_admin_pass', 'authentication_sasl_pass', 'authentication_redis_pass'],
   },
   [QueryTypeValue.ALERTS]: {
-    frame: DataSourceFrameType.ARRAY,
-    fields: [],
+    frame: DataSourceFrameType.MUTABLE,
+    fields: [
+      {
+        name: 'time',
+        type: FieldType.time,
+      },
+      {
+        name: 'content',
+        type: FieldType.string,
+      },
+    ],
+    omit: [],
   },
   [QueryTypeValue.LOGS]: {
     frame: DataSourceFrameType.MUTABLE,

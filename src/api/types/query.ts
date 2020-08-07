@@ -53,4 +53,25 @@ export const QUERY_TYPE: SelectableValue[] = [
     description: 'All nodes or specific node information',
     value: QueryTypeValue.NODES,
   },
+  {
+    label: 'Users',
+    description: 'All users or specific user information',
+    value: QueryTypeValue.USERS,
+  },
+];
+
+/**
+ * Alert type
+ */
+export const ALERT_TYPE: SelectableValue[] = [
+  {
+    label: 'Database',
+    description: 'Specific database',
+    value: QueryTypeValue.BDBS,
+  },
+  {
+    label: 'Node',
+    description: 'Specific node',
+    value: QueryTypeValue.NODES,
+  },
 ];

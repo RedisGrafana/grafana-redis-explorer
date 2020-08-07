@@ -1,9 +1,9 @@
-import { omit, toPairs } from 'lodash';
+import { assign, defaultTo, get, isArray, isNaN, isNil, isObject, keys, omit, toPairs } from 'lodash';
 import { DataSourceInstanceSettings } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
 import { REDataSourceOptions, REQuery } from '../types';
 import { Bdb, Cluster, License, Log, Module, Node, User } from './models';
-import { LogItem } from './types';
+import { DATASOURCE_FRAME, LogItem, QueryTypeValue } from './types';
 
 /**
  * Redis Enterprise API
@@ -21,15 +21,16 @@ export class Api {
    *
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-cluster
    * @async
+   * @param {REQuery} query Query
    * @returns {Promise<Cluster>} Cluster info
    */
-  async getCluster(): Promise<Cluster> {
+  async getCluster(query: REQuery): Promise<Cluster> {
     return getBackendSrv()
       .datasourceRequest({
         method: 'GET',
         url: `${this.instanceSettings.url}/cluster`,
       })
-      .then((res: any) => res.data);
+      .then((res: any) => this.filterData(res.data, query));
   }
 
   /**
@@ -37,15 +38,16 @@ export class Api {
    *
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-license
    * @async
+   * @param {REQuery} query Query
    * @returns {Promise<License>>} License details
    */
-  async getLicense(): Promise<License> {
+  async getLicense(query: REQuery): Promise<License> {
     return getBackendSrv()
       .datasourceRequest({
         method: 'GET',
         url: `${this.instanceSettings.url}/license`,
       })
-      .then((res: any) => res.data);
+      .then((res: any) => this.filterData(res.data, query));
   }
 
   /**
@@ -65,9 +67,9 @@ export class Api {
     return getBackendSrv()
       .datasourceRequest({
         method: 'GET',
-        url: url,
+        url,
       })
-      .then((res: any) => res.data);
+      .then((res: any) => this.filterData(res.data, query));
   }
 
   /**
@@ -87,9 +89,9 @@ export class Api {
     return getBackendSrv()
       .datasourceRequest({
         method: 'GET',
-        url: url,
+        url,
       })
-      .then((res: any) => res.data);
+      .then((res: any) => this.filterData(res.data, query));
   }
 
   /**
@@ -109,9 +111,9 @@ export class Api {
     return getBackendSrv()
       .datasourceRequest({
         method: 'GET',
-        url: url,
+        url,
       })
-      .then((res: any) => res.data);
+      .then((res: any) => this.filterData(res.data, query));
   }
 
   /**
@@ -131,25 +133,65 @@ export class Api {
     return getBackendSrv()
       .datasourceRequest({
         method: 'GET',
-        url: url,
+        url,
       })
-      .then((res: any) => res.data);
+      .then((res: any) => this.filterData(res.data, query));
   }
 
   /**
-   * Get all alert states for bdb
+   * Get all alert states
    *
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-bdbs-alerts-(int-uid)
+   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-nodes-alerts-(int-uid)
    * @async
-   * @returns {Promise<Record<string, any>>} Hash of alert objects and their state
+   * @returns {Promise<LogItem[]>} Array of alerts
    */
-  async getBdbAlerts(query: REQuery): Promise<Record<string, any>> {
+  async getAlerts(query: REQuery): Promise<LogItem[]> {
+    let url = `${this.instanceSettings.url}/${query.alertType}/alerts`;
+
+    /**
+     * Alert Types
+     */
+    switch (query.alertType) {
+      case QueryTypeValue.BDBS:
+        if (query.bdb) {
+          url += `/${query.bdb}`;
+        }
+        break;
+      case QueryTypeValue.NODES:
+        if (query.node) {
+          url += `/${query.node}`;
+        }
+        break;
+    }
+
     return getBackendSrv()
       .datasourceRequest({
         method: 'GET',
-        url: `${this.instanceSettings.url}/bdbs/${query.bdb}`,
+        url,
       })
-      .then((res: any) => res.data);
+      .then((res: Record<string, any>) => {
+        const logItems: LogItem[] = [];
+        const resKeys = keys(res.data);
+        const isArrayRequest = !Boolean(resKeys.filter((key) => isNaN(parseInt(key, 10))).length);
+        const time = new Date().toISOString();
+
+        if (isArrayRequest) {
+          resKeys.forEach((key) =>
+            logItems.push({
+              time,
+              content: this.getLogContent({ ...this.filterData(res.data[key], query), id: key }),
+            })
+          );
+        } else {
+          logItems.push({
+            time,
+            content: this.getLogContent(this.filterData(res.data, query)),
+          });
+        }
+
+        return logItems;
+      });
   }
 
   /**
@@ -167,7 +209,7 @@ export class Api {
         url: `${this.instanceSettings.url}/logs`,
       })
       .then((res: any) =>
-        res.data.map((item: Log) => {
+        this.filterData(res.data, query).map((item: Log) => {
           return {
             time: item.time,
             level: item.severity,
@@ -178,22 +220,60 @@ export class Api {
   }
 
   /**
+   * Filter data
+   *
+   * @param data Response data
+   * @param {REQuery} query Query
+   */
+  private filterData(data: any, query: REQuery): any {
+    const frameData = DATASOURCE_FRAME[query.queryType];
+    if (isNil(frameData) || isNil(frameData.omit)) {
+      return data;
+    }
+
+    /**
+     * Omit fields
+     */
+    const omitFields = defaultTo(frameData.omit, []);
+    return isArray(data)
+      ? data.map((item: any) => (isObject(item) ? omit(item, omitFields) : item))
+      : omit(data, omitFields);
+  }
+
+  /**
    * Get log item content
    *
    * @param {Record<string, any>} item Log item
    * @param {string} timestampField Timestamp field
    * @returns {string} Log item content
    */
-  private getLogContent(item: Record<string, any>, timestampField: string): string {
-    const timestamp = item[timestampField];
+  private getLogContent(item: Record<string, any>, timestampField = ''): string {
+    /**
+     * Flatten item
+     */
+    item = assign(
+      {},
+      ...(function flatten(bit, path = ''): any {
+        return [].concat(
+          ...keys(bit).map((key) => {
+            const pathKey = path ? `${path}:${key}` : key;
+            return isObject(bit[key]) ? flatten(bit[key], pathKey) : { [pathKey]: bit[key] };
+          })
+        );
+      })(item)
+    );
 
     /**
      * Join property and values
      */
-    const content = toPairs(omit(item, [timestampField]))
-      .map((value) => value.join('='))
-      .join(' ');
+    const timestamp = get(item, timestampField);
+    const contentData = toPairs(timestampField ? omit(item, ['id', timestampField]) : item);
+    if (!isNil(item.id)) {
+      contentData.unshift(['id', item.id]);
+    }
 
-    return [timestamp, content].join(' ');
+    const content = contentData.map((value) => value.join('=')).join(' ');
+
+    return timestamp ? [timestamp, content].join(' ') : content;
   }
 }

@@ -4,5 +4,5 @@
 export interface LogItem {
   time: string;
   content: string;
-  level: string;
+  level?: string;
 }

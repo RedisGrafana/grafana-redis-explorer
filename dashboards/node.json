@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 3,
-  "iteration": 1596686058835,
+  "iteration": 1596825726671,
   "links": [
     {
       "icon": "dashboard",
@@ -74,9 +74,55 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Database",
+      "title": "Node",
       "transformations": [],
       "type": "table"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 17,
+      "title": "Alerts",
+      "type": "row"
+    },
+    {
+      "datasource": "$cluster",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 17,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 15,
+      "options": {
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "alertType": "nodes",
+          "node": "$node",
+          "queryType": "alerts",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Alerts",
+      "type": "logs"
     }
   ],
   "schemaVersion": 26,
@@ -105,7 +151,7 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "1",
           "value": "1"
         },
@@ -135,5 +181,5 @@
   "timezone": "",
   "title": "Node",
   "uid": "r9RbAZSGk",
-  "version": 7
+  "version": 13
 }
