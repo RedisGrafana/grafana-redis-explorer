@@ -150,7 +150,12 @@ export class QueryEditor extends PureComponent<Props> {
           {query.queryType === QueryTypeValue.ALERTS && (
             <>
               <InlineFormLabel width={8}>Alert Type</InlineFormLabel>
-              <Select width={40} options={ALERT_TYPE} onChange={this.onAlertTypeChange} />
+              <Select
+                width={40}
+                options={ALERT_TYPE}
+                value={ALERT_TYPE.find((type) => type.value === query.alertType)}
+                onChange={this.onAlertTypeChange}
+              />
             </>
           )}
           {query.alertType && (
@@ -213,6 +218,7 @@ export class QueryEditor extends PureComponent<Props> {
               )}
             </div>
           )}
+
           {query.queryType === QueryTypeValue.BDBS && (
             <>
               <FormField

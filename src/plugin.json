@@ -114,6 +114,18 @@
       "path": "logs",
       "url": "https://{{ .JsonData.host }}/v1/logs",
       "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
+      "path": "bdbs/alerts",
+      "url": "https://{{ .JsonData.host }}/v1/bdbs/alerts",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
+      "path": "nodes/alerts",
+      "url": "https://{{ .JsonData.host }}/v1/nodes/alerts",
+      "reqRole": "Viewer"
     }
   ],
   "type": "datasource"

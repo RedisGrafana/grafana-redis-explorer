@@ -61,6 +61,11 @@ export const QUERY_TYPE: SelectableValue[] = [
     description: 'Database, Nodes and Cluster stats',
     value: QueryTypeValue.STATS,
   },
+  {
+    label: 'Users',
+    description: 'All users or specific user information',
+    value: QueryTypeValue.USERS,
+  },
 ];
 
 /**

@@ -217,6 +217,10 @@ export class Api {
    */
   async getAlerts(query: REQuery): Promise<LogItem[]> {
     let url = `${this.instanceSettings.url}/${query.alertType}/alerts`;
+
+    /**
+     * Alert Types
+     */
     switch (query.alertType) {
       case QueryTypeValue.BDBS:
         if (query.bdb) {
@@ -240,7 +244,8 @@ export class Api {
         const resKeys = keys(res.data);
         const isArrayRequest = !Boolean(resKeys.filter((key) => isNaN(parseInt(key, 10))).length);
         const time = new Date().toISOString();
-        if (isArrayRequest) {
+
+      if (isArrayRequest) {
           resKeys.forEach((key) =>
             logItems.push({
               time,
@@ -295,6 +300,9 @@ export class Api {
       return data;
     }
 
+    /**
+     * Omit fields
+     */
     const omitFields = defaultTo(frameData.omit, []);
     return isArray(data)
       ? data.map((item: any) => (isObject(item) ? omit(item, omitFields) : item))
