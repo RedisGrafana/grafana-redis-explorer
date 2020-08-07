@@ -19,6 +19,7 @@ export interface REQuery extends DataQuery {
    */
   alertType?: QueryTypeValue;
 
+  /**
    * Stats Type
    *
    * @type {QueryTypeValue}

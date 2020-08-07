@@ -1,7 +1,7 @@
 import React, { ChangeEvent, PureComponent } from 'react';
 import { QueryEditorProps, SelectableValue } from '@grafana/data';
 import { Button, InlineFormLabel, LegacyForms, Select } from '@grafana/ui';
-import { ALERT_TYPE, QUERY_TYPE, STATS_INTERVAL, STATS_TYPE, QueryTypeValue } from '../api';
+import { ALERT_TYPE, QUERY_TYPE, QueryTypeValue, STATS_INTERVAL, STATS_TYPE } from '../api';
 import { DataSource } from '../DataSource';
 import { REDataSourceOptions, REQuery } from '../types';
 

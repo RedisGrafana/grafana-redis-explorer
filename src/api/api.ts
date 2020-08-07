@@ -1,9 +1,9 @@
-import { omit, toPairs, assign, keys, isObject, isNaN, isNil, defaultTo, isArray, get } from 'lodash';
+import { assign, defaultTo, get, isArray, isNaN, isNil, isObject, keys, omit, toPairs } from 'lodash';
 import { DataSourceInstanceSettings, TimeRange } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
 import { REDataSourceOptions, REQuery } from '../types';
 import { Bdb, Cluster, License, Log, Module, Node, Stat, User } from './models';
-import { LogItem, QueryTypeValue, DATASOURCE_FRAME } from './types';
+import { DATASOURCE_FRAME, LogItem, QueryTypeValue } from './types';
 
 /**
  * Redis Enterprise API
@@ -245,7 +245,7 @@ export class Api {
         const isArrayRequest = !Boolean(resKeys.filter((key) => isNaN(parseInt(key, 10))).length);
         const time = new Date().toISOString();
 
-      if (isArrayRequest) {
+        if (isArrayRequest) {
           resKeys.forEach((key) =>
             logItems.push({
               time,
