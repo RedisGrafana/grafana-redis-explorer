@@ -25,6 +25,13 @@ export interface REQuery extends DataQuery {
    * @type {string}
    */
   node?: string;
+
+  /**
+   * Module
+   *
+   * @type {string}
+   */
+  module?: string;
 }
 
 /**

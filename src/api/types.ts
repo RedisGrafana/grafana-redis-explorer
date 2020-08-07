@@ -5,12 +5,13 @@ import { DataSourceFrame, DataSourceFrameType } from '../types';
  * Query Type Values
  */
 export enum QueryTypeValue {
+  ALERTS = 'alerts',
+  BDBS = 'bdbs',
   CLUSTER = 'cluster',
   LICENSE = 'license',
-  NODES = 'nodes',
-  BDBS = 'bdbs',
-  BDB_ALERTS = 'bdbAlerts',
   LOGS = 'logs',
+  MODULES = 'modules',
+  NODES = 'nodes',
 }
 
 /**
@@ -75,6 +76,23 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
       },
     ],
   },
+  [QueryTypeValue.MODULES]: {
+    frame: DataSourceFrameType.ARRAY,
+    fields: [
+      {
+        name: 'uid',
+        type: FieldType.string,
+      },
+      {
+        name: 'semantic_version',
+        type: FieldType.string,
+      },
+      {
+        name: 'display_name',
+        type: FieldType.string,
+      },
+    ],
+  },
   [QueryTypeValue.BDBS]: {
     frame: DataSourceFrameType.ARRAY,
     fields: [
@@ -104,7 +122,7 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
       },
     ],
   },
-  [QueryTypeValue.BDB_ALERTS]: {
+  [QueryTypeValue.ALERTS]: {
     frame: DataSourceFrameType.ARRAY,
     fields: [],
   },
@@ -132,19 +150,9 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
  */
 export const QUERY_TYPE: SelectableValue[] = [
   {
-    label: 'Cluster',
-    description: 'Cluster information',
-    value: QueryTypeValue.CLUSTER,
-  },
-  {
-    label: 'License',
-    description: 'License information',
-    value: QueryTypeValue.LICENSE,
-  },
-  {
-    label: 'Nodes',
-    description: 'All nodes or specific node information',
-    value: QueryTypeValue.NODES,
+    label: 'Alerts',
+    description: 'Database, Nodes and Cluster alerts',
+    value: QueryTypeValue.ALERTS,
   },
   {
     label: 'Databases',
@@ -152,13 +160,28 @@ export const QUERY_TYPE: SelectableValue[] = [
     value: QueryTypeValue.BDBS,
   },
   {
-    label: 'Database Alerts',
-    description: 'Database alerts',
-    value: QueryTypeValue.BDB_ALERTS,
+    label: 'Cluster',
+    description: 'Cluster information',
+    value: QueryTypeValue.CLUSTER,
   },
   {
     label: 'Cluster Logs',
     description: 'Cluster events log',
     value: QueryTypeValue.LOGS,
+  },
+  {
+    label: 'License',
+    description: 'License information',
+    value: QueryTypeValue.LICENSE,
+  },
+  {
+    label: 'Modules',
+    description: 'All modules or specific module information',
+    value: QueryTypeValue.MODULES,
+  },
+  {
+    label: 'Nodes',
+    description: 'All nodes or specific node information',
+    value: QueryTypeValue.NODES,
   },
 ];
