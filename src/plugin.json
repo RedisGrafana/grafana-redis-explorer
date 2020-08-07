@@ -74,6 +74,12 @@
     },
     {
       "method": "GET",
+      "path": "users",
+      "url": "https://{{ .JsonData.host }}/v1/users",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
       "path": "logs",
       "url": "https://{{ .JsonData.host }}/v1/logs",
       "reqRole": "Viewer"
