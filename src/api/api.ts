@@ -2,7 +2,7 @@ import { omit, toPairs } from 'lodash';
 import { DataSourceInstanceSettings } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
 import { REDataSourceOptions, REQuery } from '../types';
-import { Bdb, Cluster, License, Log, Module, Node } from './models';
+import { Bdb, Cluster, License, Log, Module, Node, User } from './models';
 import { LogItem } from './types';
 
 /**
@@ -104,6 +104,28 @@ export class Api {
     let url = `${this.instanceSettings.url}/modules`;
     if (query.module) {
       url += `/${query.module}`;
+    }
+
+    return getBackendSrv()
+      .datasourceRequest({
+        method: 'GET',
+        url: url,
+      })
+      .then((res: any) => res.data);
+  }
+
+  /**
+   * Get all users or specific user
+   *
+   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-users
+   * @async
+   * @param {REQuery} query Query
+   * @returns {Promise<User[] | User>} Array with all users or user
+   */
+  async getUsers(query: REQuery): Promise<User[] | User> {
+    let url = `${this.instanceSettings.url}/users`;
+    if (query.user) {
+      url += `/${query.user}`;
     }
 
     return getBackendSrv()

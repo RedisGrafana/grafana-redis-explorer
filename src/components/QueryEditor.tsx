@@ -80,6 +80,16 @@ export class QueryEditor extends PureComponent<Props> {
   };
 
   /**
+   * On User change
+   *
+   * @param {ChangeEvent<HTMLInputElement>} event Event
+   */
+  onUserChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { onChange, query } = this.props;
+    onChange({ ...query, user: event.target.value });
+  };
+
+  /**
    * Execute the Query
    */
   executeQuery = () => {
@@ -140,6 +150,18 @@ export class QueryEditor extends PureComponent<Props> {
                 onChange={this.onModuleChange}
                 label="Module Id"
                 tooltip="Specify to return specific module information"
+              />
+            </>
+          )}
+          {query.queryType === QueryTypeValue.USERS && (
+            <>
+              <FormField
+                labelWidth={8}
+                inputWidth={10}
+                value={query.user}
+                onChange={this.onUserChange}
+                label="User Id"
+                tooltip="Specify to return specific user information"
               />
             </>
           )}

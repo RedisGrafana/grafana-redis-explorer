@@ -1,27 +1,6 @@
-import { dateMath, FieldType, SelectableValue } from '@grafana/data';
-import { DataSourceFrame, DataSourceFrameType } from '../types';
-
-/**
- * Query Type Values
- */
-export enum QueryTypeValue {
-  ALERTS = 'alerts',
-  BDBS = 'bdbs',
-  CLUSTER = 'cluster',
-  LICENSE = 'license',
-  LOGS = 'logs',
-  MODULES = 'modules',
-  NODES = 'nodes',
-}
-
-/**
- * Log item
- */
-export interface LogItem {
-  time: string;
-  content: string;
-  level: string;
-}
+import { dateMath, FieldType } from '@grafana/data';
+import { DataSourceFrame, DataSourceFrameType } from '../../types';
+import { QueryTypeValue } from './query';
 
 /**
  * Datasource frame data
@@ -93,6 +72,28 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
       },
     ],
   },
+  [QueryTypeValue.USERS]: {
+    frame: DataSourceFrameType.ARRAY,
+    fields: [
+      {
+        name: 'uid',
+        type: FieldType.number,
+      },
+      {
+        name: 'email',
+        type: FieldType.string,
+      },
+      {
+        name: 'name',
+        type: FieldType.string,
+      },
+      {
+        name: 'password_issue_date',
+        type: FieldType.time,
+        converter: (value: string) => dateMath.parse(value),
+      },
+    ],
+  },
   [QueryTypeValue.BDBS]: {
     frame: DataSourceFrameType.ARRAY,
     fields: [
@@ -144,44 +145,3 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
     ],
   },
 };
-
-/**
- * Query Type
- */
-export const QUERY_TYPE: SelectableValue[] = [
-  {
-    label: 'Alerts',
-    description: 'Database, Nodes and Cluster alerts',
-    value: QueryTypeValue.ALERTS,
-  },
-  {
-    label: 'Databases',
-    description: 'All databases or specific database information',
-    value: QueryTypeValue.BDBS,
-  },
-  {
-    label: 'Cluster',
-    description: 'Cluster information',
-    value: QueryTypeValue.CLUSTER,
-  },
-  {
-    label: 'Cluster Logs',
-    description: 'Cluster events log',
-    value: QueryTypeValue.LOGS,
-  },
-  {
-    label: 'License',
-    description: 'License information',
-    value: QueryTypeValue.LICENSE,
-  },
-  {
-    label: 'Modules',
-    description: 'All modules or specific module information',
-    value: QueryTypeValue.MODULES,
-  },
-  {
-    label: 'Nodes',
-    description: 'All nodes or specific node information',
-    value: QueryTypeValue.NODES,
-  },
-];

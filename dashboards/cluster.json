@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1596777624985,
+  "iteration": 1596781257110,
   "links": [],
   "panels": [
     {
@@ -63,13 +63,6 @@
         "textMode": "auto"
       },
       "pluginVersion": "7.1.2",
-      "scopedVars": {
-        "cluster": {
-          "selected": true,
-          "text": "Localhost",
-          "value": "Localhost"
-        }
-      },
       "targets": [
         {
           "queryType": "cluster",
@@ -148,13 +141,6 @@
         "textMode": "auto"
       },
       "pluginVersion": "7.1.2",
-      "scopedVars": {
-        "cluster": {
-          "selected": true,
-          "text": "Localhost",
-          "value": "Localhost"
-        }
-      },
       "targets": [
         {
           "queryType": "license",
@@ -229,13 +215,6 @@
         "textMode": "auto"
       },
       "pluginVersion": "7.1.2",
-      "scopedVars": {
-        "cluster": {
-          "selected": true,
-          "text": "Localhost",
-          "value": "Localhost"
-        }
-      },
       "targets": [
         {
           "queryType": "license",
@@ -471,13 +450,6 @@
         ]
       },
       "pluginVersion": "7.1.2",
-      "scopedVars": {
-        "cluster": {
-          "selected": true,
-          "text": "Localhost",
-          "value": "Localhost"
-        }
-      },
       "targets": [
         {
           "queryType": "bdbs",
@@ -625,7 +597,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 210
+                "value": 238
               }
             ]
           },
@@ -637,7 +609,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 104
+                "value": 137
               }
             ]
           },
@@ -665,8 +637,8 @@
         ]
       },
       "gridPos": {
-        "h": 6,
-        "w": 14,
+        "h": 5,
+        "w": 15,
         "x": 0,
         "y": 25
       },
@@ -681,13 +653,6 @@
         ]
       },
       "pluginVersion": "7.1.2",
-      "scopedVars": {
-        "cluster": {
-          "selected": true,
-          "text": "Localhost",
-          "value": "Localhost"
-        }
-      },
       "targets": [
         {
           "queryType": "nodes",
@@ -775,7 +740,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 349
+                "value": 552
               }
             ]
           },
@@ -835,7 +800,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 375
+                "value": 259
               }
             ]
           }
@@ -843,9 +808,9 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 14,
+        "w": 15,
         "x": 0,
-        "y": 31
+        "y": 30
       },
       "id": 41,
       "options": {
@@ -853,13 +818,6 @@
         "sortBy": []
       },
       "pluginVersion": "7.1.2",
-      "scopedVars": {
-        "cluster": {
-          "selected": true,
-          "text": "Localhost",
-          "value": "Localhost"
-        }
-      },
       "targets": [
         {
           "module": "",
@@ -894,6 +852,87 @@
               "description": "Description",
               "display_name": "Name",
               "semantic_version": "Version"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "$cluster",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 0,
+        "y": 39
+      },
+      "id": 43,
+      "options": {
+        "showHeader": true
+      },
+      "pluginVersion": "7.1.2",
+      "targets": [
+        {
+          "queryType": "users",
+          "refId": "A",
+          "user": ""
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Users",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": ["password_issue_date", "email", "role", "email_alerts", "auth_method", "name"]
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "auth_method": 3,
+              "email": 1,
+              "email_alerts": 4,
+              "name": 0,
+              "password_issue_date": 5,
+              "role": 2,
+              "role_uids": 6
+            },
+            "renameByName": {
+              "auth_method": "Authentication",
+              "email": "Email",
+              "email_alerts": "Email Alerts",
+              "name": "Name",
+              "password_issue_date": "Password Issue Date",
+              "role": "Role",
+              "uid": ""
             }
           }
         }
@@ -937,5 +976,5 @@
   "timezone": "",
   "title": "Cluster Overview",
   "uid": "viroIzSGz",
-  "version": 84
+  "version": 89
 }
