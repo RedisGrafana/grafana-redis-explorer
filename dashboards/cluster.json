@@ -15,32 +15,10 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 7,
-  "iteration": 1596792029506,
+  "id": 1,
+  "iteration": 1596826421793,
   "links": [],
   "panels": [
-    {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 11,
-      "panels": [],
-      "repeat": "cluster",
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "Redis Enterprise",
-          "value": "Redis Enterprise"
-        }
-      },
-      "title": "Cluster: $cluster",
-      "type": "row"
-    },
     {
       "datasource": "$cluster",
       "fieldConfig": {
@@ -66,34 +44,25 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 3,
+        "h": 4,
+        "w": 4,
         "x": 0,
-        "y": 1
+        "y": 0
       },
       "id": 6,
       "options": {
-        "colorMode": "value",
+        "colorMode": "background",
         "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
+        "justifyMode": "center",
+        "orientation": "vertical",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "/.*/",
           "values": true
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.0.1",
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "Redis Enterprise",
-          "value": "Redis Enterprise"
-        }
-      },
+      "pluginVersion": "7.1.2",
       "targets": [
         {
           "queryType": "cluster",
@@ -102,15 +71,13 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Cluster name",
+      "title": "Cluster",
       "transformations": [
         {
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": [
-                "name"
-              ]
+              "names": ["name", "rack_aware"]
             }
           }
         }
@@ -129,12 +96,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "dark-blue",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
@@ -143,179 +106,41 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "license"
+              "options": "expiration_date"
             },
             "properties": [
               {
                 "id": "custom.width",
                 "value": 107
+              },
+              {
+                "id": "unit",
+                "value": "dateTimeFromNow"
               }
             ]
           }
         ]
       },
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 1
+        "h": 4,
+        "w": 5,
+        "x": 4,
+        "y": 0
       },
       "id": 8,
       "options": {
-        "colorMode": "value",
+        "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "center",
-        "orientation": "auto",
+        "orientation": "vertical",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "/.*/",
           "values": true
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.0.1",
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "Redis Enterprise",
-          "value": "Redis Enterprise"
-        }
-      },
-      "targets": [
-        {
-          "queryType": "license",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Expiration",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": [
-                "expiration_date"
-              ]
-            }
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": "$cluster",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "dark-green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "license"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 107
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 1
-      },
-      "id": 9,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "values": true
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.0.1",
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "Redis Enterprise",
-          "value": "Redis Enterprise"
-        }
-      },
-      "targets": [
-        {
-          "queryType": "license",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Shards Limit",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": [
-                "shards_limit"
-              ]
-            }
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": "Redis Enterprise",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 21,
-        "x": 0,
-        "y": 4
-      },
-      "id": 39,
-      "options": {
-        "allowUpdate": true
-      },
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "Redis Enterprise",
-          "value": "Redis Enterprise"
-        }
-      },
+      "pluginVersion": "7.1.2",
       "targets": [
         {
           "queryType": "license",
@@ -325,46 +150,17 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "License",
-      "type": "redis-enterprise-license-panel"
-    },
-    {
-      "datasource": "Redis Enterprise",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 21,
-        "x": 0,
-        "y": 12
-      },
-      "id": 37,
-      "options": {
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "Redis Enterprise",
-          "value": "Redis Enterprise"
-        }
-      },
-      "targets": [
+      "transformations": [
         {
-          "queryType": "logs",
-          "refId": "A"
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": ["expiration_date", "shards_limit", "features"]
+            }
+          }
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Events Log",
-      "type": "logs"
+      "type": "stat"
     },
     {
       "datasource": "$cluster",
@@ -493,9 +289,33 @@
                 "value": [
                   {
                     "title": "Database",
-                    "url": "/d/fu8ZoZIGk/database?orgId=1&${__url_time_range}&var-bdb=${__data.fields[uid]}"
+                    "url": "/d/fu8ZoZIGk/database?orgId=1&${__url_time_range}&var-cluster=${cluster}&var-bdb=${__data.fields[uid]}"
                   }
                 ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Id"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 61
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "SSL"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           }
@@ -503,9 +323,9 @@
       },
       "gridPos": {
         "h": 12,
-        "w": 21,
+        "w": 24,
         "x": 0,
-        "y": 20
+        "y": 4
       },
       "id": 2,
       "links": [],
@@ -518,14 +338,7 @@
           }
         ]
       },
-      "pluginVersion": "7.0.1",
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "Redis Enterprise",
-          "value": "Redis Enterprise"
-        }
-      },
+      "pluginVersion": "7.1.2",
       "targets": [
         {
           "queryType": "bdbs",
@@ -548,9 +361,11 @@
                 "data_persistence",
                 "eviction_policy",
                 "type",
+                "uid",
                 "shards_count",
                 "status",
-                "uid"
+                "shards_placement",
+                "ssl"
               ]
             }
           }
@@ -566,7 +381,9 @@
               "name": 1,
               "replication": 6,
               "shards_count": 4,
-              "status": 9,
+              "shards_placement": 9,
+              "ssl": 10,
+              "status": 11,
               "type": 2,
               "uid": 0,
               "version": 5
@@ -579,6 +396,8 @@
               "redis_version": "Version",
               "replication": "Replication",
               "shards_count": "Shards",
+              "shards_placement": "Shard Placement",
+              "ssl": "SSL",
               "status": "Status",
               "type": "Type",
               "uid": "Id",
@@ -590,7 +409,22 @@
       "type": "table"
     },
     {
+      "collapsed": false,
       "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 11,
+      "panels": [],
+      "repeat": null,
+      "title": "Events and Alerts",
+      "type": "row"
+    },
+    {
+      "datasource": "Localhost",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -598,17 +432,49 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 21,
+        "h": 10,
+        "w": 24,
         "x": 0,
-        "y": 32
+        "y": 17
       },
-      "id": 41,
+      "id": 37,
       "options": {
         "showLabels": false,
         "showTime": false,
         "sortOrder": "Descending",
         "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "queryType": "logs",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Events",
+      "type": "logs"
+    },
+    {
+      "datasource": "Localhost",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 13,
+        "x": 0,
+        "y": 27
+      },
+      "id": 41,
+      "options": {
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
       },
       "targets": [
         {
@@ -619,8 +485,55 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Alert States for all Databases",
+      "title": "Databases Alerts",
       "type": "logs"
+    },
+    {
+      "datasource": "$cluster",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 11,
+        "x": 13,
+        "y": 27
+      },
+      "id": 43,
+      "options": {
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "alertType": "nodes",
+          "queryType": "alerts",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Node Alerts",
+      "type": "logs"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 39
+      },
+      "id": 45,
+      "panels": [],
+      "title": "Cluster",
+      "type": "row"
     },
     {
       "datasource": "$cluster",
@@ -737,7 +650,7 @@
                 "value": [
                   {
                     "title": "Node",
-                    "url": "/d/r9RbAZSGk/node?orgId=1&${__url_time_range}&var-node=${__data.fields[uid]}"
+                    "url": "/d/r9RbAZSGk/node?orgId=1&${__url_time_range}&var-cluster=${cluster}&var-node=${__data.fields[uid]}"
                   }
                 ]
               }
@@ -746,8 +659,8 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 21,
+        "h": 10,
+        "w": 13,
         "x": 0,
         "y": 40
       },
@@ -761,14 +674,7 @@
           }
         ]
       },
-      "pluginVersion": "7.0.1",
-      "scopedVars": {
-        "cluster": {
-          "selected": false,
-          "text": "Redis Enterprise",
-          "value": "Redis Enterprise"
-        }
-      },
+      "pluginVersion": "7.1.2",
       "targets": [
         {
           "queryType": "nodes",
@@ -826,7 +732,7 @@
       "type": "table"
     },
     {
-      "datasource": null,
+      "datasource": "Localhost",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -834,32 +740,28 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 21,
-        "x": 0,
-        "y": 48
+        "h": 10,
+        "w": 11,
+        "x": 13,
+        "y": 40
       },
-      "id": 43,
+      "id": 39,
       "options": {
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
+        "allowUpdate": true
       },
       "targets": [
         {
-          "alertType": "nodes",
-          "queryType": "alerts",
+          "queryType": "license",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Alert states for all Nodes",
-      "type": "logs"
+      "title": "License",
+      "type": "redis-enterprise-license-panel"
     }
   ],
-  "schemaVersion": 25,
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -867,8 +769,8 @@
       {
         "current": {
           "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "text": "Localhost",
+          "value": ["Localhost"]
         },
         "hide": 0,
         "includeAll": true,
@@ -890,20 +792,10 @@
     "to": "now"
   },
   "timepicker": {
-    "refresh_intervals": [
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
-    ]
+    "refresh_intervals": ["10s", "30s", "1m", "5m", "15m", "30m", "1h", "2h", "1d"]
   },
   "timezone": "",
   "title": "Cluster Overview",
   "uid": "viroIzSGz",
-  "version": 2
+  "version": 119
 }
