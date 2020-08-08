@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1596846035048,
+  "iteration": 1596851446682,
   "links": [],
   "panels": [
     {
@@ -492,7 +492,7 @@
         {
           "queryType": "stats",
           "refId": "A",
-          "statsInterval": "1hour",
+          "statsInterval": "15min",
           "statsType": "cluster"
         }
       ],
@@ -612,7 +612,7 @@
         {
           "queryType": "stats",
           "refId": "A",
-          "statsInterval": "1hour",
+          "statsInterval": "15min",
           "statsType": "cluster"
         }
       ],
@@ -759,7 +759,7 @@
         {
           "queryType": "stats",
           "refId": "A",
-          "statsInterval": "1hour",
+          "statsInterval": "15min",
           "statsType": "cluster"
         }
       ],
@@ -1515,7 +1515,7 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -1524,5 +1524,5 @@
   "timezone": "",
   "title": "Cluster Overview",
   "uid": "viroIzSGz",
-  "version": 164
+  "version": 170
 }
