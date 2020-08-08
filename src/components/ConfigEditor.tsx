@@ -95,9 +95,9 @@ export class ConfigEditor extends PureComponent<Props, State> {
 
         <div className="gf-form">
           <FormField
-            label="Host"
-            placeholder="redis:9443"
-            tooltip="Accepts host:port address. Example: redis:9443"
+            label="Cluster URL"
+            placeholder="https://redis-enterprise-cluster:9443"
+            tooltip="Accepts https://host:port address."
             labelWidth={10}
             inputWidth={20}
             value={jsonData.host || ''}

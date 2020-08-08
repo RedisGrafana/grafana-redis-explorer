@@ -11,22 +11,20 @@ export enum QueryTypeValue {
   LOGS = 'logs',
   MODULES = 'modules',
   NODES = 'nodes',
+  STATS = 'stats',
   USERS = 'users',
 }
 
 /**
  * Query Type
+ *
+ * @type {SelectableValue[]}
  */
 export const QUERY_TYPE: SelectableValue[] = [
   {
     label: 'Alerts',
     description: 'Database, Nodes and Cluster alerts',
     value: QueryTypeValue.ALERTS,
-  },
-  {
-    label: 'Databases',
-    description: 'All databases or specific database information',
-    value: QueryTypeValue.BDBS,
   },
   {
     label: 'Cluster',
@@ -37,6 +35,11 @@ export const QUERY_TYPE: SelectableValue[] = [
     label: 'Cluster Logs',
     description: 'Cluster events log',
     value: QueryTypeValue.LOGS,
+  },
+  {
+    label: 'Databases',
+    description: 'All databases or specific database information',
+    value: QueryTypeValue.BDBS,
   },
   {
     label: 'License',
@@ -54,24 +57,13 @@ export const QUERY_TYPE: SelectableValue[] = [
     value: QueryTypeValue.NODES,
   },
   {
+    label: 'Stats',
+    description: 'Database, Nodes and Cluster stats',
+    value: QueryTypeValue.STATS,
+  },
+  {
     label: 'Users',
     description: 'All users or specific user information',
     value: QueryTypeValue.USERS,
-  },
-];
-
-/**
- * Alert type
- */
-export const ALERT_TYPE: SelectableValue[] = [
-  {
-    label: 'Database',
-    description: 'Specific database',
-    value: QueryTypeValue.BDBS,
-  },
-  {
-    label: 'Node',
-    description: 'Specific node',
-    value: QueryTypeValue.NODES,
   },
 ];

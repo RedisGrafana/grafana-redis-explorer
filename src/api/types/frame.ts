@@ -13,6 +13,11 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
         name: 'name',
         type: FieldType.string,
       },
+      {
+        name: 'created_time',
+        type: FieldType.time,
+        converter: (value: string) => dateMath.parse(value),
+      },
     ],
   },
   [QueryTypeValue.LICENSE]: {
@@ -136,7 +141,25 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
         type: FieldType.string,
       },
     ],
-    omit: [],
+  },
+  [QueryTypeValue.STATS]: {
+    frame: DataSourceFrameType.ARRAY,
+    fields: [
+      {
+        name: 'stime',
+        type: FieldType.time,
+        converter: (value: string) => dateMath.parse(value),
+      },
+      {
+        name: 'etime',
+        type: FieldType.time,
+        converter: (value: string) => dateMath.parse(value),
+      },
+      {
+        name: 'conns',
+        type: FieldType.number,
+      },
+    ],
   },
   [QueryTypeValue.LOGS]: {
     frame: DataSourceFrameType.MUTABLE,

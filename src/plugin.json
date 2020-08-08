@@ -45,55 +45,86 @@
     {
       "method": "GET",
       "path": "cluster",
-      "url": "https://{{ .JsonData.host }}/v1/cluster",
+      "url": "{{ .JsonData.host }}/v1/cluster",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
+      "path": "cluster/stats",
+      "url": "{{ .JsonData.host }}/v1/cluster/stats",
       "reqRole": "Viewer"
     },
     {
       "method": "GET",
       "path": "license",
-      "url": "https://{{ .JsonData.host }}/v1/license",
+      "url": "{{ .JsonData.host }}/v1/license",
       "reqRole": "Viewer"
     },
     {
       "method": "GET",
       "path": "nodes",
-      "url": "https://{{ .JsonData.host }}/v1/nodes",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "bdbs",
-      "url": "https://{{ .JsonData.host }}/v1/bdbs",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "modules",
-      "url": "https://{{ .JsonData.host }}/v1/modules",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "users",
-      "url": "https://{{ .JsonData.host }}/v1/users",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "logs",
-      "url": "https://{{ .JsonData.host }}/v1/logs",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "bdbs/alerts",
-      "url": "https://{{ .JsonData.host }}/v1/bdbs/alerts",
+      "url": "{{ .JsonData.host }}/v1/nodes",
       "reqRole": "Viewer"
     },
     {
       "method": "GET",
       "path": "nodes/alerts",
-      "url": "https://{{ .JsonData.host }}/v1/nodes/alerts",
+      "url": "{{ .JsonData.host }}/v1/nodes/alerts",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
+      "path": "nodes/stats",
+      "url": "{{ .JsonData.host }}/v1/nodes/stats",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
+      "path": "bdbs",
+      "url": "{{ .JsonData.host }}/v1/bdbs",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
+      "path": "bdbs/alerts",
+      "url": "{{ .JsonData.host }}/v1/bdbs/alerts",
+      "reqRole": "Viewer"
+    },
+
+    {
+      "method": "GET",
+      "path": "bdbs/stats",
+      "url": "{{ .JsonData.host }}/v1/bdbs/stats",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
+      "path": "modules",
+      "url": "{{ .JsonData.host }}/v1/modules",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
+      "path": "users",
+      "url": "{{ .JsonData.host }}/v1/users",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
+      "path": "logs",
+      "url": "{{ .JsonData.host }}/v1/logs",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
+      "path": "bdbs/alerts",
+      "url": "{{ .JsonData.host }}/v1/bdbs/alerts",
+      "reqRole": "Viewer"
+    },
+    {
+      "method": "GET",
+      "path": "nodes/alerts",
+      "url": "{{ .JsonData.host }}/v1/nodes/alerts",
       "reqRole": "Viewer"
     }
   ],

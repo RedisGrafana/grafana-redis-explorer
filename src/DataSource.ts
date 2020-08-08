@@ -48,11 +48,10 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
    */
   async query(options: DataQueryRequest<REQuery>): Promise<DataQueryResponse> {
     const data: DataFrame[] = [];
+    const { range } = options;
 
     await Promise.all(
       options.targets.map(async (query) => {
-        const getter = `get${upperFirst(query.queryType)}`;
-
         /**
          * Replace Variables
          * TODO: Research and do globally
@@ -63,7 +62,8 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
         /**
          * Execute request
          */
-        const apiData = (this.api as any)[getter] ? await (this.api as any)[getter](query) : undefined;
+        const getter = `get${upperFirst(query.queryType)}`;
+        const apiData = (this.api as any)[getter] ? await (this.api as any)[getter](query, range) : undefined;
 
         /**
          * No data returned

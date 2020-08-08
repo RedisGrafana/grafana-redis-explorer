@@ -1,8 +1,8 @@
-import { assign, defaultTo, get, isArray, isNaN, isNil, isObject, keys, omit, toPairs } from 'lodash';
-import { DataSourceInstanceSettings } from '@grafana/data';
+import { assign, defaultTo, get, isArray, isNaN, isNil, isObject, keys, omit, sortBy, toPairs } from 'lodash';
+import { DataSourceInstanceSettings, TimeRange } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
 import { REDataSourceOptions, REQuery } from '../types';
-import { Bdb, Cluster, License, Log, Module, Node, User } from './models';
+import { Bdb, Cluster, License, Log, Module, Node, Stat, User } from './models';
 import { DATASOURCE_FRAME, LogItem, QueryTypeValue } from './types';
 
 /**
@@ -139,6 +139,63 @@ export class Api {
   }
 
   /**
+   * Get all stats
+   *
+   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-cluster-stats
+   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-nodes-stats
+   * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-bdbs-stats
+   * @async
+   * @param {REQuery} query Query
+   * @param {TimeRange} range Time range
+   * @returns {Promise<Stat[]>} Array with all stats
+   */
+  async getStats(query: REQuery, range: TimeRange): Promise<Stat[]> {
+    let url = `${this.instanceSettings.url}/${query.statsType}/stats`;
+    const params = new URLSearchParams();
+
+    /**
+     * Stats Type
+     */
+    switch (query.statsType) {
+      case QueryTypeValue.BDBS:
+        if (query.bdb) {
+          url += `/${query.bdb}`;
+        }
+        break;
+      case QueryTypeValue.NODES:
+        if (query.node) {
+          url += `/${query.node}`;
+        }
+        break;
+    }
+
+    /**
+     * Interval
+     */
+    if (query.statsInterval) {
+      params.append('interval', query.statsInterval);
+    }
+
+    /**
+     * Time Range
+     */
+    if (range.from) {
+      params.append('stime', range.from.toISOString().split('.')[0] + 'Z');
+    }
+
+    if (range.to) {
+      params.append('etime', range.to.toISOString().split('.')[0] + 'Z');
+    }
+
+    return getBackendSrv()
+      .datasourceRequest({
+        method: 'GET',
+        url: [url, params.toString()].join('?'),
+      })
+      .then((res: any) => this.filterData(sortBy(res.data.intervals, 'etime'), query));
+  }
+
+  /**
    * Get all alert states
    *
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-bdbs-alerts-(int-uid)
@@ -267,13 +324,13 @@ export class Api {
      * Join property and values
      */
     const timestamp = get(item, timestampField);
-    const contentData = toPairs(timestampField ? omit(item, ['id', timestampField]) : item);
-    if (!isNil(item.id)) {
+    const contentData = toPairs(omit(item, ['id', timestampField]));
+
+    if (item.id) {
       contentData.unshift(['id', item.id]);
     }
 
     const content = contentData.map((value) => value.join('=')).join(' ');
-
     return timestamp ? [timestamp, content].join(' ') : content;
   }
 }
