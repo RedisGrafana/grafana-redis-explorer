@@ -2,7 +2,7 @@ import { assign, defaultTo, get, isArray, isNaN, isNil, isObject, keys, omit, so
 import { DataSourceInstanceSettings, TimeRange } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
 import { REDataSourceOptions, REQuery } from '../types';
-import { Bdb, Cluster, License, Log, Module, Node, User } from './models';
+import { Bdb, Cluster, License, Log, Module, Node, Stat, User } from './models';
 import { DATASOURCE_FRAME, LogItem, QueryTypeValue } from './types';
 
 /**
@@ -147,9 +147,9 @@ export class Api {
    * @async
    * @param {REQuery} query Query
    * @param {TimeRange} range Time range
-   * @returns {Promise<LogItem[]>} Array with all stats
+   * @returns {Promise<Stat[]>} Array with all stats
    */
-  async getStats(query: REQuery, range: TimeRange): Promise<LogItem[]> {
+  async getStats(query: REQuery, range: TimeRange): Promise<Stat[]> {
     let url = `${this.instanceSettings.url}/${query.statsType}/stats`;
     const params = new URLSearchParams();
 
