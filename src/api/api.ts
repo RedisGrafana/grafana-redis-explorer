@@ -1,8 +1,8 @@
-import { assign, defaultTo, get, isArray, isNaN, isNil, isObject, keys, omit, toPairs } from 'lodash';
+import { assign, defaultTo, get, isArray, isNaN, isNil, isObject, keys, omit, sortBy, toPairs } from 'lodash';
 import { DataSourceInstanceSettings, TimeRange } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
 import { REDataSourceOptions, REQuery } from '../types';
-import { Bdb, Cluster, License, Log, Module, Node, Stat, User } from './models';
+import { Bdb, Cluster, License, Log, Module, Node, User } from './models';
 import { DATASOURCE_FRAME, LogItem, QueryTypeValue } from './types';
 
 /**
@@ -153,6 +153,9 @@ export class Api {
     let url = `${this.instanceSettings.url}/${query.statsType}/stats`;
     const params = new URLSearchParams();
 
+    /**
+     * Stats Type
+     */
     switch (query.statsType) {
       case QueryTypeValue.BDBS:
         if (query.bdb) {
@@ -166,10 +169,16 @@ export class Api {
         break;
     }
 
+    /**
+     * Interval
+     */
     if (query.statsInterval) {
       params.append('interval', query.statsInterval);
     }
 
+    /**
+     * Time Range
+     */
     if (range.from) {
       params.append('stime', range.from.toISOString().split('.')[0] + 'Z');
     }
@@ -183,28 +192,7 @@ export class Api {
         method: 'GET',
         url: [url, params.toString()].join('?'),
       })
-      .then((res: any) => {
-        const logItems: LogItem[] = [];
-        const getStats = (id: string, intervals: Stat[]): LogItem[] => {
-          const stats: LogItem[] = [];
-          intervals.forEach((interval: Stat) => {
-            stats.push({
-              time: interval.etime,
-              content: this.getLogContent({ ...this.filterData(interval, query), id }),
-            });
-          });
-
-          return stats;
-        };
-
-        if (isArray(res.data)) {
-          res.data.forEach((item: any) => logItems.push(...getStats(item.uid, item.intervals)));
-        } else {
-          logItems.push(...getStats(res.data.uid, res.data.intervals));
-        }
-
-        return logItems;
-      });
+      .then((res: any) => this.filterData(sortBy(res.data.intervals, 'etime'), query));
   }
 
   /**
