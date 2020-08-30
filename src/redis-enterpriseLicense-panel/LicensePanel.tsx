@@ -1,10 +1,10 @@
 import { css, cx } from 'emotion';
 import { first } from 'lodash';
 import React from 'react';
-import { LicensePanelOptions } from 'types';
 import { PanelProps } from '@grafana/data';
 import { getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
 import { Button, Container, Field, TextArea } from '@grafana/ui';
+import { LicensePanelOptions } from './types';
 
 /**
  * Panel Property
@@ -15,7 +15,7 @@ interface Props extends PanelProps<LicensePanelOptions> {}
  * Panel
  */
 export const LicensePanel: React.FC<Props> = ({ options, data, width, height }) => {
-  const licenseField = first(data.series)?.fields.filter(field => field.name === 'license');
+  const licenseField = first(data.series)?.fields.filter((field) => field.name === 'license');
 
   if (!licenseField) {
     return <div>No data</div>;

@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
-  "iteration": 1596850861366,
+  "id": 4,
+  "iteration": 1598770728667,
   "links": [
     {
       "icon": "dashboard",
@@ -55,7 +55,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 17,
+        "w": 24,
         "x": 0,
         "y": 0
       },
@@ -63,7 +63,7 @@
       "options": {
         "showHeader": true
       },
-      "pluginVersion": "7.1.2",
+      "pluginVersion": "7.1.3",
       "targets": [
         {
           "bdb": "$bdb",
@@ -85,50 +85,9 @@
       "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "custom": {}
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 198
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "etime"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 191
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -153,7 +112,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "percentage": false,
-      "pluginVersion": "7.1.2",
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -248,50 +207,9 @@
       "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "custom": {}
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 198
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "etime"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 191
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -316,7 +234,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "percentage": false,
-      "pluginVersion": "7.1.2",
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -411,50 +329,9 @@
       "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "custom": {}
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 198
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "etime"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 191
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -479,7 +356,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "percentage": false,
-      "pluginVersion": "7.1.2",
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -624,8 +501,8 @@
       {
         "current": {
           "selected": false,
-          "text": "Analyzer",
-          "value": "Analyzer"
+          "text": "Redis Enterprise Software",
+          "value": "Redis Enterprise Software"
         },
         "hide": 0,
         "includeAll": false,
@@ -672,5 +549,5 @@
   "timezone": "",
   "title": "Database",
   "uid": "fu8ZoZIGk",
-  "version": 35
+  "version": 1
 }
