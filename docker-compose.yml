@@ -15,13 +15,13 @@ services:
     container_name: grafana
     image: grafana/grafana:latest
     ports:
-      - '3000:3000'
+      - 3000:3000/tcp
     environment:
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_BASIC_ENABLED=false
       - GF_ENABLE_GZIP=true
-      # - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=redis-enterprise-datasource
+      # - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=redis-enterprise-app
       # Uncomment to run in debug mode
       # - GF_LOG_LEVEL=debug
     volumes:
