@@ -26,7 +26,7 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
   /**
    * Redis Enterprise Api
    *
-   * @type {Api}
+   * @type {Api} api
    */
   api: Api;
 
@@ -44,6 +44,7 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
    * Query for data
    *
    * @async
+   * @param {DataQueryRequest<REQuery>} options Options
    * @returns {Promise<DataQueryResponse>} Response
    */
   async query(options: DataQueryRequest<REQuery>): Promise<DataQueryResponse> {

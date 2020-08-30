@@ -3,6 +3,7 @@ import { first } from 'lodash';
 import React from 'react';
 import { LicensePanelOptions } from 'types';
 import { PanelProps } from '@grafana/data';
+import { getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
 import { Button, Container, Field, TextArea } from '@grafana/ui';
 
 /**
@@ -14,9 +15,7 @@ interface Props extends PanelProps<LicensePanelOptions> {}
  * Panel
  */
 export const LicensePanel: React.FC<Props> = ({ options, data, width, height }) => {
-  const licenseField = first(data.series)
-    ?.fields.filter(field => field.name === 'license')
-    .map(field => field);
+  const licenseField = first(data.series)?.fields.filter(field => field.name === 'license');
 
   if (!licenseField) {
     return <div>No data</div>;
@@ -50,7 +49,27 @@ export const LicensePanel: React.FC<Props> = ({ options, data, width, height }) 
       <Container>
         {options.allowUpdate && (
           <div>
-            <Button>Update</Button>
+            <Button
+              onClick={async () => {
+                const ds = await getDataSourceSrv().get();
+                try {
+                  await getBackendSrv().datasourceRequest({
+                    method: 'POST',
+                    url: '/license',
+                    data: {
+                      queries: [
+                        {
+                          datasourceId: ds.id,
+                          refId: '1',
+                        },
+                      ],
+                    },
+                  });
+                } catch (error) {}
+              }}
+            >
+              Update
+            </Button>
           </div>
         )}
       </Container>
