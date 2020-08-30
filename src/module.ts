@@ -1,12 +1,9 @@
-import { DataSourcePlugin } from '@grafana/data';
-import { ConfigEditor } from './components/ConfigEditor';
-import { QueryEditor } from './components/QueryEditor';
-import { DataSource } from './DataSource';
-import { REDataSourceOptions, REQuery } from './types';
+import { RootPage } from 'RootPage';
+import { AppPlugin } from '@grafana/data';
+import { ExampleConfigCtrl } from './legacy/config';
+import { GlobalSettings } from './types';
 
-/**
- * Init Data Source plugin
- */
-export const plugin = new DataSourcePlugin<DataSource, REQuery, REDataSourceOptions>(DataSource)
-  .setConfigEditor(ConfigEditor)
-  .setQueryEditor(QueryEditor);
+// Legacy exports just for testing
+export { ExampleConfigCtrl as ConfigCtrl };
+
+export const plugin = new AppPlugin<GlobalSettings>().setRootPage(RootPage);

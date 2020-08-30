@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
-  "iteration": 1596851446682,
+  "id": 3,
+  "iteration": 1598770641091,
   "links": [],
   "panels": [
     {
@@ -75,7 +75,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.1.2",
+      "pluginVersion": "7.1.3",
       "targets": [
         {
           "queryType": "cluster",
@@ -165,7 +165,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.1.2",
+      "pluginVersion": "7.1.3",
       "targets": [
         {
           "queryType": "license",
@@ -375,7 +375,7 @@
           }
         ]
       },
-      "pluginVersion": "7.1.2",
+      "pluginVersion": "7.1.3",
       "targets": [
         {
           "queryType": "bdbs",
@@ -480,7 +480,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "percentage": false,
-      "pluginVersion": "7.1.2",
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -600,7 +600,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "percentage": false,
-      "pluginVersion": "7.1.2",
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -704,23 +704,7 @@
       "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "custom": {}
         },
         "overrides": []
       },
@@ -747,7 +731,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "percentage": false,
-      "pluginVersion": "7.1.2",
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1047,7 +1031,7 @@
           }
         ]
       },
-      "pluginVersion": "7.1.2",
+      "pluginVersion": "7.1.3",
       "targets": [
         {
           "queryType": "nodes",
@@ -1247,7 +1231,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.1.2",
+      "pluginVersion": "7.1.3",
       "targets": [
         {
           "queryType": "modules",
@@ -1359,7 +1343,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.1.2",
+      "pluginVersion": "7.1.3",
       "targets": [
         {
           "queryType": "users",
@@ -1496,8 +1480,8 @@
       {
         "current": {
           "selected": false,
-          "text": "Analyzer",
-          "value": ["Analyzer"]
+          "text": "All",
+          "value": "$__all"
         },
         "hide": 0,
         "includeAll": true,
@@ -1524,5 +1508,5 @@
   "timezone": "",
   "title": "Cluster Overview",
   "uid": "viroIzSGz",
-  "version": 170
+  "version": 1
 }

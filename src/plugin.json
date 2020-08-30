@@ -1,132 +1,66 @@
 {
-  "alerting": true,
   "dependencies": {
-    "grafanaDependency": ">=7.0.0",
-    "grafanaVersion": "7.x.x",
+    "grafanaVersion": "7.0.x",
     "plugins": []
   },
-  "id": "redis-enterprise-datasource",
+  "id": "redis-enterprise-app",
   "includes": [
     {
+      "addToNav": true,
+      "name": "Home",
+      "path": "/a/redis-enterprise-app/",
+      "type": "page"
+    },
+    {
+      "name": "Redis Enterprise License Panel",
+      "type": "panel"
+    },
+    {
+      "name": "Redis Enterprise Datasource",
+      "type": "datasource"
+    },
+    {
       "name": "Cluster Overview",
-      "path": "dashboards/overview.json",
+      "path": "dashboards/cluster.json",
+      "type": "dashboard"
+    },
+    {
+      "name": "Database",
+      "path": "dashboards/database.json",
+      "type": "dashboard"
+    },
+    {
+      "name": "Node",
+      "path": "dashboards/node.json",
       "type": "dashboard"
     }
   ],
   "info": {
     "author": {
       "name": "Redis Labs",
-      "url": "https://oss.redislabs.com"
+      "url": "https://redislabs.com"
     },
-    "description": "Redis Enterprise Datasource",
-    "keywords": ["redis", "redis-enterprise", "plugin"],
-    "links": [
-      {
-        "name": "Website",
-        "url": "https://github.com/mikhailredis/redis-enterprise-datasource"
-      },
-      {
-        "name": "License",
-        "url": "https://github.com/mikhailredis/redis-enterprise-datasource/blob/master/LICENSE"
-      }
-    ],
     "logos": {
       "large": "img/logo.svg",
       "small": "img/logo.svg"
     },
-    "screenshots": [],
+    "screenshots": [
+      {
+        "name": "Summary Dashboard",
+        "path": "img/screenshot-dash-summary.png"
+      },
+      {
+        "name": "HTTP Dashboard",
+        "path": "img/screenshot-dash-http.png"
+      },
+      {
+        "name": "Check List",
+        "path": "img/screenshot-check-list.png"
+      }
+    ],
     "updated": "%TODAY%",
     "version": "%VERSION%"
   },
-  "logs": true,
-  "metrics": true,
   "name": "Redis Enterprise",
-  "routes": [
-    {
-      "method": "GET",
-      "path": "cluster",
-      "url": "{{ .JsonData.host }}/v1/cluster",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "cluster/stats",
-      "url": "{{ .JsonData.host }}/v1/cluster/stats",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "license",
-      "url": "{{ .JsonData.host }}/v1/license",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "nodes",
-      "url": "{{ .JsonData.host }}/v1/nodes",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "nodes/alerts",
-      "url": "{{ .JsonData.host }}/v1/nodes/alerts",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "nodes/stats",
-      "url": "{{ .JsonData.host }}/v1/nodes/stats",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "bdbs",
-      "url": "{{ .JsonData.host }}/v1/bdbs",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "bdbs/alerts",
-      "url": "{{ .JsonData.host }}/v1/bdbs/alerts",
-      "reqRole": "Viewer"
-    },
-
-    {
-      "method": "GET",
-      "path": "bdbs/stats",
-      "url": "{{ .JsonData.host }}/v1/bdbs/stats",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "modules",
-      "url": "{{ .JsonData.host }}/v1/modules",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "users",
-      "url": "{{ .JsonData.host }}/v1/users",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "logs",
-      "url": "{{ .JsonData.host }}/v1/logs",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "bdbs/alerts",
-      "url": "{{ .JsonData.host }}/v1/bdbs/alerts",
-      "reqRole": "Viewer"
-    },
-    {
-      "method": "GET",
-      "path": "nodes/alerts",
-      "url": "{{ .JsonData.host }}/v1/nodes/alerts",
-      "reqRole": "Viewer"
-    }
-  ],
-  "type": "datasource"
+  "type": "app"
 }

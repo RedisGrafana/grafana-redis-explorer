@@ -1,4 +1,4 @@
-# Grafana Redis Enterprise Datasource
+# Grafana Redis Enterprise App
 
 ## Summary
 
