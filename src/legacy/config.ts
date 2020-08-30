@@ -42,7 +42,7 @@ export class ExampleConfigCtrl {
     }
 
     getLocationSrv().update({
-      path: 'a/redis-enterprise-app/?page=config',
+      path: 'a/redis-enterprise-app',
       partial: false,
     });
     return this.$q.resolve(true);

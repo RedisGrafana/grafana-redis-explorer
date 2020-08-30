@@ -44,23 +44,10 @@
       "large": "img/logo.svg",
       "small": "img/logo.svg"
     },
-    "screenshots": [
-      {
-        "name": "Summary Dashboard",
-        "path": "img/screenshot-dash-summary.png"
-      },
-      {
-        "name": "HTTP Dashboard",
-        "path": "img/screenshot-dash-http.png"
-      },
-      {
-        "name": "Check List",
-        "path": "img/screenshot-check-list.png"
-      }
-    ],
+    "screenshots": [],
     "updated": "%TODAY%",
     "version": "%VERSION%"
   },
-  "name": "Redis Enterprise",
+  "name": "Redis Enterprise Explorer",
   "type": "app"
 }

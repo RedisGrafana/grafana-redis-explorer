@@ -3,5 +3,4 @@
 ## v1.0.0
 
 - Initial release based on Grafana 7.1.0.
-- Supports Hosts, Databases and Licenses.
-- Provides Redis Enterprise Overview dashboard.
+- Includes Redis Enterprise Datasource and Redis Enterprise License Panel.
