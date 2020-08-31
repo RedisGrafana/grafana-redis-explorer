@@ -9,6 +9,6 @@ import { GlobalSettings } from './types';
 export { ConfigCtrl };
 
 /**
- * Applicationg Plug-in
+ * Application Plug-in
  */
 export const plugin = new AppPlugin<GlobalSettings>().setRootPage(RootPage);
