@@ -23,7 +23,7 @@ interface State {}
  */
 export class ConfigEditor extends PureComponent<Props, State> {
   /**
-   * Redis Enterprise API host change listener
+   * Redis Enterprise Software API host change listener
    *
    * @param {ChangeEvent<HTMLInputElement>} event Change event
    */
@@ -39,7 +39,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
   };
 
   /**
-   * Redis Enterprise API user change listener
+   * Redis Enterprise Software API user change listener
    *
    * @param {ChangeEvent<HTMLInputElement>} event Change event
    */
@@ -53,7 +53,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
   };
 
   /**
-   * Redis Enterprise API password change listener.
+   * Redis Enterprise Software API password change listener.
    * Secure field (only sent to the backend)
    *
    * @param {ChangeEvent<HTMLInputElement>} event Change event
@@ -67,7 +67,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
   };
 
   /**
-   * Redis Enterprise API password reset listener
+   * Redis Enterprise Software API password reset listener
    */
   onBasicAuthPasswordReset = () => {
     const { onOptionsChange, options } = this.props;

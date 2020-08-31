@@ -3,7 +3,7 @@ import { LicensePanel } from './LicensePanel';
 import { LicensePanelOptions } from './types';
 
 /**
- * Init Panel plugin
+ * Panel plugin
  */
 export const plugin = new PanelPlugin<LicensePanelOptions>(LicensePanel).setPanelOptions((builder) => {
   return builder.addBooleanSwitch({

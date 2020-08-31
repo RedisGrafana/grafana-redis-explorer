@@ -1,6 +1,4 @@
 /**
  * Global Settings
  */
-export interface GlobalSettings {
-  // anything?
-}
+export interface GlobalSettings {}

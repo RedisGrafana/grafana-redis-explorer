@@ -1,20 +1,20 @@
 {
   "author": "Redis Labs",
-  "description": "Redis Enterprise App for Grafana",
+  "description": "Redis Application for Grafana",
   "devDependencies": {
-    "@grafana/data": "7.1.2",
-    "@grafana/runtime": "7.1.2",
-    "@grafana/toolkit": "7.1.2",
-    "@grafana/ui": "7.1.2",
-    "@testing-library/jest-dom": "5.11.2",
+    "@grafana/data": "7.1.5",
+    "@grafana/runtime": "7.1.5",
+    "@grafana/toolkit": "7.1.5",
+    "@grafana/ui": "7.1.5",
+    "@testing-library/jest-dom": "5.11.4",
     "@testing-library/react": "^10.4.8",
-    "@types/lodash": "4.14.159"
+    "@types/lodash": "4.14.161"
   },
   "engines": {
     "node": ">=12"
   },
   "license": "Apache-2.0",
-  "name": "redis-enterprise-app",
+  "name": "redis-app",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
     "dev": "grafana-toolkit plugin:dev",

@@ -1,14 +1,22 @@
 {
   "dependencies": {
-    "grafanaVersion": "7.0.x",
-    "plugins": []
+    "grafanaVersion": "7.x.x",
+    "grafanaDependency": ">=7.1.0",
+    "plugins": [
+      {
+        "type": "datasource",
+        "name": "Redis Data Source",
+        "id": "redis-datasource",
+        "version": "^1.1.2"
+      }
+    ]
   },
-  "id": "redis-enterprise-app",
+  "id": "redis-app",
   "includes": [
     {
       "addToNav": true,
       "name": "Home",
-      "path": "/a/redis-enterprise-app/",
+      "path": "/a/redis-app/",
       "type": "page"
     },
     {
@@ -38,7 +46,7 @@
   "info": {
     "author": {
       "name": "Redis Labs",
-      "url": "https://redislabs.com"
+      "url": "https://oss.redislabs.com"
     },
     "logos": {
       "large": "img/logo.svg",
@@ -48,6 +56,6 @@
     "updated": "%TODAY%",
     "version": "%VERSION%"
   },
-  "name": "Redis Enterprise Explorer",
+  "name": "Redis Application",
   "type": "app"
 }
