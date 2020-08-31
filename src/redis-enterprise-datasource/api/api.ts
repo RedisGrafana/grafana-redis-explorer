@@ -6,7 +6,7 @@ import { Bdb, Cluster, License, Log, Module, Node, Stat, User } from './models';
 import { DATASOURCE_FRAME, LogItem, QueryTypeValue } from './types';
 
 /**
- * Redis Enterprise API
+ * Redis Enterprise Software API
  */
 export class Api {
   /**

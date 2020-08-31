@@ -102,7 +102,7 @@ export class ConfigCtrl {
      * Update location
      */
     getLocationSrv().update({
-      path: 'a/redis-enterprise-app',
+      path: 'a/redis-app',
       partial: false,
     });
 

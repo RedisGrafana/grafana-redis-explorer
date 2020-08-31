@@ -24,7 +24,7 @@ import {
  */
 export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
   /**
-   * Redis Enterprise Api
+   * Redis Enterprise Software Api
    *
    * @type {Api} api
    */

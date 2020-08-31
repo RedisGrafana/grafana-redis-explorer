@@ -21,10 +21,10 @@ services:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_BASIC_ENABLED=false
       - GF_ENABLE_GZIP=true
-      # - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=redis-enterprise-app
+      # - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=redis-app
       # Uncomment to run in debug mode
       # - GF_LOG_LEVEL=debug
     volumes:
-      - ./dist:/var/lib/grafana/plugins/redis-enterprise-app
+      - ./dist:/var/lib/grafana/plugins/redis-app
       # Uncomment to preserve Grafana configuration
       # - ./data:/var/lib/grafana

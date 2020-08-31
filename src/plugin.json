@@ -4,12 +4,12 @@
     "grafanaDependency": ">=7.1.0",
     "plugins": []
   },
-  "id": "redis-enterprise-app",
+  "id": "redis-app",
   "includes": [
     {
       "addToNav": true,
       "name": "Home",
-      "path": "/a/redis-enterprise-app/",
+      "path": "/a/redis-app/",
       "type": "page"
     },
     {
@@ -49,6 +49,6 @@
     "updated": "%TODAY%",
     "version": "%VERSION%"
   },
-  "name": "Redis Enterprise Explorer",
+  "name": "Redis Application",
   "type": "app"
 }

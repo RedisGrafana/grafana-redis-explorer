@@ -68,7 +68,7 @@ export interface REQuery extends DataQuery {
  */
 export interface REDataSourceOptions extends DataSourceJsonData {
   /**
-   * Host to access Redis Enterprise API
+   * Host to access Redis Enterprise Software API
    *
    * @type {string}
    */
@@ -88,7 +88,7 @@ export interface REDataSourceOptions extends DataSourceJsonData {
  */
 export interface RESecureJsonData {
   /**
-   * Password to access Redis Enterprise API
+   * Password to access Redis Enterprise Software API
    *
    * @type {string}
    */

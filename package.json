@@ -1,6 +1,6 @@
 {
   "author": "Redis Labs",
-  "description": "Redis Enterprise Explorer for Grafana",
+  "description": "Redis Application for Grafana",
   "devDependencies": {
     "@grafana/data": "7.1.5",
     "@grafana/runtime": "7.1.5",
@@ -14,7 +14,7 @@
     "node": ">=12"
   },
   "license": "Apache-2.0",
-  "name": "redis-enterprise-app",
+  "name": "redis-app",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
     "dev": "grafana-toolkit plugin:dev",
