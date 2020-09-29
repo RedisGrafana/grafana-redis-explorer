@@ -7,16 +7,16 @@
         "type": "datasource",
         "name": "Redis Data Source",
         "id": "redis-datasource",
-        "version": "^1.1.2"
+        "version": "^1.2.0"
       }
     ]
   },
-  "id": "redis-app",
+  "id": "redis-enterprise-app",
   "includes": [
     {
       "addToNav": true,
       "name": "Home",
-      "path": "/a/redis-app/",
+      "path": "/a/redis-enterprise-app/",
       "type": "page"
     },
     {
@@ -56,6 +56,6 @@
     "updated": "%TODAY%",
     "version": "%VERSION%"
   },
-  "name": "Redis Application",
+  "name": "Redis Enterprise Application",
   "type": "app"
 }
