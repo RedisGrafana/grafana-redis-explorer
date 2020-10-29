@@ -59,6 +59,7 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
          */
         query.bdb = getTemplateSrv().replace(query.bdb ?? '', options.scopedVars);
         query.node = getTemplateSrv().replace(query.node ?? '', options.scopedVars);
+        query.statsInterval = getTemplateSrv().replace(query.statsInterval ?? '', options.scopedVars);
 
         /**
          * Execute request

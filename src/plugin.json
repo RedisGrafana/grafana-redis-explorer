@@ -32,18 +32,22 @@
     {
       "addToNav": true,
       "name": "Cluster Overview",
-      "path": "dashboards/cluster.json",
+      "path": "dashboards/cluster-overview.json",
       "role": "Admin",
       "type": "dashboard"
     },
     {
-      "name": "Database",
-      "path": "dashboards/database.json",
+      "addToNav": true,
+      "name": "Cluster Nodes",
+      "path": "dashboards/cluster-nodes.json",
+      "role": "Admin",
       "type": "dashboard"
     },
     {
-      "name": "Node",
-      "path": "dashboards/node.json",
+      "addToNav": true,
+      "name": "Cluster Databases",
+      "path": "dashboards/cluster-dbs.json",
+      "role": "Admin",
       "type": "dashboard"
     }
   ],
