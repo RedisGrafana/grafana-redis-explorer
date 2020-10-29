@@ -8,6 +8,12 @@
         "name": "Redis Application plug-in",
         "type": "app",
         "version": "^1.0.1"
+      },
+      {
+        "id": "grafana-worldmap-panel",
+        "name": "Worldmap Panel",
+        "type": "panel",
+        "version": "^0.3.2"
       }
     ]
   },
@@ -31,6 +37,13 @@
     },
     {
       "addToNav": true,
+      "name": "Redis Enterprise",
+      "path": "dashboards/redis-enterprise.json",
+      "role": "Admin",
+      "type": "dashboard"
+    },
+    {
+      "addToNav": true,
       "name": "Cluster Overview",
       "path": "dashboards/cluster-overview.json",
       "role": "Admin",
@@ -47,6 +60,13 @@
       "addToNav": true,
       "name": "Cluster Databases",
       "path": "dashboards/cluster-dbs.json",
+      "role": "Admin",
+      "type": "dashboard"
+    },
+    {
+      "addToNav": true,
+      "name": "Cluster Settings",
+      "path": "dashboards/cluster-settings.json",
       "role": "Admin",
       "type": "dashboard"
     }
