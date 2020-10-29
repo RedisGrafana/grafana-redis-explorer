@@ -2,13 +2,13 @@
   "author": "Redis Labs",
   "description": "Redis Enterprise Application for Grafana",
   "devDependencies": {
-    "@grafana/data": "7.2.0",
-    "@grafana/runtime": "7.2.0",
-    "@grafana/toolkit": "7.2.0",
-    "@grafana/ui": "7.2.0",
-    "@testing-library/jest-dom": "5.11.4",
-    "@testing-library/react": "^11.0.4",
-    "@types/lodash": "4.14.161"
+    "@grafana/data": "7.3.0",
+    "@grafana/runtime": "7.3.0",
+    "@grafana/toolkit": "7.3.0",
+    "@grafana/ui": "7.3.0",
+    "@testing-library/jest-dom": "5.11.5",
+    "@testing-library/react": "^11.1.0",
+    "@types/lodash": "4.14.163"
   },
   "engines": {
     "node": ">=12"
