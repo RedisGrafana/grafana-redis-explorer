@@ -15,13 +15,13 @@
     },
     {
       "type": "datasource",
-      "id": "redis-enterprise-datasource",
+      "id": "redis-enterprise-software-datasource",
       "name": "Redis Enterprise Software",
       "version": "%VERSION%"
     },
     {
       "type": "panel",
-      "id": "redis-enterpriseLicense-panel",
+      "id": "redis-enterprise-license-panel",
       "name": "Redis Enterprise License",
       "version": "%VERSION%"
     },
@@ -234,7 +234,7 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "License",
-      "type": "redis-enterpriseLicense-panel"
+      "type": "redis-enterprise-license-panel"
     },
     {
       "datasource": "$cluster",
@@ -461,7 +461,7 @@
         "multi": false,
         "name": "cluster",
         "options": [],
-        "query": "redis-enterprise-datasource",
+        "query": "redis-enterprise-software-datasource",
         "queryValue": "",
         "refresh": 1,
         "regex": "",
