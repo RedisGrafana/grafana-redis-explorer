@@ -255,6 +255,7 @@ export class QueryEditor extends PureComponent<Props> {
               `}
               width={40}
               options={STATS_INTERVAL}
+              allowCustomValue={true}
               value={STATS_INTERVAL.find((type) => type.value === query.statsInterval)}
               onChange={this.onStatsIntervalChange}
             />
