@@ -1,6 +1,5 @@
+import { head } from 'lodash';
 import React, { PureComponent } from 'react';
-import { QueryTypeValue } from 'redis-enterprise-datasource/api';
-import { REQuery } from 'redis-enterprise-datasource/types';
 import {
   AppRootProps,
   DataQueryRequest,
@@ -11,9 +10,10 @@ import {
 } from '@grafana/data';
 import { getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
 import { InfoBox } from '@grafana/ui';
+import { QueryTypeValue } from '../redis-enterprise-software-datasource/api';
+import { REQuery } from '../redis-enterprise-software-datasource/types';
 import { DataSourceType, GlobalSettings } from '../types';
 import { DataSourceList } from './data-source-list';
-import { head } from 'lodash';
 
 /**
  * Properties
@@ -124,7 +124,7 @@ export class RootPage extends PureComponent<Props, State> {
       text: 'Home',
       url: path,
       id: 'home',
-      icon: 'fa fa-fw fa-sitemap',
+      icon: 'fa fa-fw fa-database',
       active: true,
     });
 

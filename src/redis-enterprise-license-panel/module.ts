@@ -1,5 +1,5 @@
 import { PanelPlugin } from '@grafana/data';
-import { LicensePanel } from './LicensePanel';
+import { LicensePanel } from './license-panel';
 import { LicensePanelOptions } from './types';
 
 /**

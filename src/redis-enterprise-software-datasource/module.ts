@@ -1,7 +1,6 @@
 import { DataSourcePlugin } from '@grafana/data';
-import { ConfigEditor } from './components/ConfigEditor';
-import { QueryEditor } from './components/QueryEditor';
-import { DataSource } from './DataSource';
+import { ConfigEditor, QueryEditor } from './components';
+import { DataSource } from './data-source';
 import { REDataSourceOptions, REQuery } from './types';
 
 /**

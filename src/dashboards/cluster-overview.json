@@ -21,7 +21,7 @@
     },
     {
       "type": "datasource",
-      "id": "redis-enterprise-datasource",
+      "id": "redis-enterprise-software-datasource",
       "name": "Redis Enterprise Software",
       "version": "%VERSION%"
     },
@@ -1128,7 +1128,7 @@
         "multi": false,
         "name": "cluster",
         "options": [],
-        "query": "redis-enterprise-datasource",
+        "query": "redis-enterprise-software-datasource",
         "queryValue": "",
         "refresh": 1,
         "regex": "",

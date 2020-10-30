@@ -7,7 +7,7 @@ export interface GlobalSettings {}
  * Data Source types
  */
 export enum DataSourceType {
-  SOFTWARE = 'redis-enterprise-datasource',
+  SOFTWARE = 'redis-enterprise-software-datasource',
 }
 
 /**

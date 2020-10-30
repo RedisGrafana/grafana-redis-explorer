@@ -75,7 +75,7 @@ export class ConfigCtrl {
        * Check Datasources
        */
       const datasources = Object.values(config.datasources).filter((ds) => {
-        return ds.type === 'redis-enterprise-datasource';
+        return ds.type === 'redis-enterprise-software-datasource';
       });
 
       /**
