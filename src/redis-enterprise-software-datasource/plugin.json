@@ -1,12 +1,12 @@
 {
   "alerting": true,
-  "id": "redis-enterprise-datasource",
+  "id": "redis-enterprise-software-datasource",
   "info": {
     "author": {
       "name": "Redis Labs",
       "url": "https://oss.redislabs.com"
     },
-    "description": "Redis Enterprise Datasource",
+    "description": "Redis Enterprise Software",
     "logos": {
       "large": "img/logo.svg",
       "small": "img/logo.svg"
