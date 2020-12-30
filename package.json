@@ -1,6 +1,6 @@
 {
   "author": "Redis Labs",
-  "description": "Redis Enterprise Application for Grafana",
+  "description": "Redis Explorer for Grafana",
   "devDependencies": {
     "@grafana/data": "7.3.0",
     "@grafana/runtime": "7.3.0",
@@ -14,13 +14,13 @@
     "node": ">=12"
   },
   "license": "Apache-2.0",
-  "name": "redis-enterprise-app",
+  "name": "redis-explorer",
   "scripts": {
-    "build": "grafana-toolkit plugin:build",
+    "build": "grafana-toolkit plugin:build --coverage",
     "dev": "grafana-toolkit plugin:dev",
     "format": "prettier --write \"**\"",
     "start": "docker-compose up",
-    "test": "grafana-toolkit plugin:test",
+    "test": "grafana-toolkit plugin:test --coverage",
     "watch": "grafana-toolkit plugin:dev --watch"
   },
   "version": "1.0.0"

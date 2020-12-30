@@ -1,9 +1,9 @@
-# How to install and build Grafana with Redis Enterprise Application plug-in on RPM-based Linux
+# How to install and build Grafana with Redis Explorer plug-in on RPM-based Linux
 
 ## Clone repository
 
 ```bash
-git clone https://github.com/RedisGrafana/grafana-redis-enterprise-app.git
+git clone https://github.com/RedisGrafana/grafana-redis-explorer.git
 ```
 
 ## Install Grafana
@@ -39,10 +39,10 @@ yarn build
 - Move distribution to Grafana's `plugins/` folder
 
 ```bash
-mv dist/ /var/lib/grafana/plugins/redis-enterprise-app
+mv dist/ /var/lib/grafana/plugins/redis-explorer
 ```
 
-- Add `redis-enterprise-app` to allowed unsigned plugins
+- Add `redis-explorer` to allowed unsigned plugins
 
 ```bash
 vi /etc/grafana/grafana.ini
@@ -53,7 +53,7 @@ vi /etc/grafana/grafana.ini
 ;enable_alpha = false
 ;app_tls_skip_verify_insecure = false
 # Enter a comma-separated list of plugin identifiers to identify plugins that are allowed to be loaded even if they lack a valid signature.
-allow_loading_unsigned_plugins = redis-enterprise-app
+allow_loading_unsigned_plugins = redis-explorer
 ```
 
 - Verify that plugin is registered
@@ -62,6 +62,6 @@ allow_loading_unsigned_plugins = redis-enterprise-app
 tail -100 /var/log/grafana/grafana.log
 ```
 
-- Enable Redis Enterprise Application in Grafana using `Configuration` -> `Plugins`
+- Enable Redis Explorer in Grafana using `Configuration` -> `Plugins`
 
-If you have questions, enhancement ideas or running into issues, please just open an issue on the repository: https://github.com/RedisGrafana/grafana-redis-enterprise-app
+If you have questions, enhancement ideas or running into issues, please just open an issue on the repository: https://github.com/RedisGrafana/grafana-redis-explorer
