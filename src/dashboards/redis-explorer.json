@@ -22,7 +22,7 @@
     {
       "type": "datasource",
       "id": "redis-enterprise-software-datasource",
-      "name": "Redis Enterprise Software",
+      "name": "Redis Enterprise Clusters",
       "version": "%VERSION%"
     },
     {
@@ -730,7 +730,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Redis Enterprise",
+  "title": "Redis Explorer",
   "uid": "1dKhTjtGk",
   "version": 17
 }

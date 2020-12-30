@@ -21,12 +21,6 @@
     },
     {
       "type": "panel",
-      "id": "redis-enterprise-license-panel",
-      "name": "Redis Enterprise License",
-      "version": "%VERSION%"
-    },
-    {
-      "type": "panel",
       "id": "table",
       "name": "Table",
       "version": ""
@@ -206,35 +200,6 @@
         }
       ],
       "type": "table"
-    },
-    {
-      "datasource": "$cluster",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 15,
-        "w": 10,
-        "x": 14,
-        "y": 0
-      },
-      "id": 39,
-      "options": {
-        "allowUpdate": false
-      },
-      "targets": [
-        {
-          "queryType": "license",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "License",
-      "type": "redis-enterprise-license-panel"
     },
     {
       "datasource": "$cluster",
