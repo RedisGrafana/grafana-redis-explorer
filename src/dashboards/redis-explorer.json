@@ -22,7 +22,7 @@
     {
       "type": "datasource",
       "id": "redis-enterprise-software-datasource",
-      "name": "Redis Enterprise Software",
+      "name": "Redis Enterprise Clusters",
       "version": "%VERSION%"
     },
     {
