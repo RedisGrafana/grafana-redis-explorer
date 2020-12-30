@@ -8,9 +8,9 @@
 
 ## Introduction
 
-### What is the Redis Enterprie Application for Grafana?
+### What is the Redis Explorer for Grafana?
 
-The Redis Explorer, is a plug-in for Grafana that allows users to connect to Redis Enterprise software REST API and build dashboards to easily monitor Redis Enterprise software clusters. It provides out-of-the box panels and predefined dashboards - but the plug-in allows to build entirely customized dashboards, tuned to your needs.
+The Redis Explorer, is a plug-in for Grafana that allows users to connect to Redis Enterprise software REST API and build dashboards to easily monitor Redis Enterprise software clusters. It provides data source and predefined dashboards.
 
 ### What Grafana version is supported?
 
