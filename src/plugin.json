@@ -17,28 +17,24 @@
       }
     ]
   },
-  "id": "redis-enterprise-app",
+  "id": "redis-explorer",
   "includes": [
     {
       "addToNav": true,
       "defaultNav": true,
       "name": "Home",
-      "path": "/a/redis-enterprise-app/",
+      "path": "/a/redis-explorer/",
       "role": "Admin",
       "type": "page"
     },
     {
-      "name": "Redis Enterprise License Panel",
-      "type": "panel"
-    },
-    {
-      "name": "Redis Enterprise Datasource",
+      "name": "Redis Enterprise Data Source",
       "type": "datasource"
     },
     {
       "addToNav": true,
-      "name": "Redis Enterprise",
-      "path": "dashboards/redis-enterprise.json",
+      "name": "Redis Explorer",
+      "path": "dashboards/redis-explorer.json",
       "role": "Admin",
       "type": "dashboard"
     },
@@ -76,16 +72,16 @@
       "name": "Redis Labs",
       "url": "https://oss.redislabs.com"
     },
-    "description": "Redis Enterprise Application",
-    "keywords": ["redis", "enterprise", "plugin"],
+    "description": "Redis Explorer",
+    "keywords": ["redis", "plugin"],
     "links": [
       {
         "name": "Website",
-        "url": "https://github.com/RedisGrafana/grafana-redis-enterprise-app"
+        "url": "https://github.com/RedisGrafana/grafana-redis-explorer"
       },
       {
         "name": "License",
-        "url": "https://github.com/RedisGrafana/grafana-redis-enterprise-app/blob/master/LICENSE"
+        "url": "https://github.com/RedisGrafana/grafana-redis-explorer/blob/master/LICENSE"
       }
     ],
     "logos": {
@@ -96,6 +92,6 @@
     "updated": "%TODAY%",
     "version": "%VERSION%"
   },
-  "name": "Redis Enterprise Application",
+  "name": "Redis Explorer",
   "type": "app"
 }
