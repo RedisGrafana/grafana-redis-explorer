@@ -8,7 +8,11 @@
     "@grafana/ui": "7.3.6",
     "@testing-library/jest-dom": "5.11.8",
     "@testing-library/react": "^11.2.2",
-    "@types/lodash": "4.14.166"
+    "@types/enzyme": "^3.10.8",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/lodash": "4.14.166",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5"
   },
   "engines": {
     "node": ">=12"
