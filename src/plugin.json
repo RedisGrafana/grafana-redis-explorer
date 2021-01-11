@@ -8,12 +8,6 @@
         "name": "Redis Application plug-in",
         "type": "app",
         "version": "^1.0.1"
-      },
-      {
-        "id": "grafana-worldmap-panel",
-        "name": "Worldmap Panel",
-        "type": "panel",
-        "version": "^0.3.2"
       }
     ]
   },
