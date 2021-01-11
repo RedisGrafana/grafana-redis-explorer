@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.2.1"
+      "version": "7.3.5"
     },
     {
       "type": "panel",
@@ -49,7 +49,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1603990616006,
+  "iteration": 1610344553372,
   "links": [],
   "panels": [
     {
@@ -169,7 +169,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 469
+                "value": 416
               }
             ]
           },
@@ -216,7 +216,7 @@
           }
         ]
       },
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "queryType": "bdbs",
@@ -339,7 +339,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "bdb": "$db",
@@ -394,6 +394,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "$cluster",
+      "decimals": 0,
       "fieldConfig": {
         "defaults": {
           "custom": {
@@ -414,7 +415,7 @@
               }
             ]
           },
-          "unit": "µs"
+          "unit": "short"
         },
         "overrides": []
       },
@@ -429,13 +430,16 @@
       "hiddenSeries": false,
       "id": 139,
       "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
         "min": false,
         "show": true,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -444,7 +448,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.3.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -477,7 +481,7 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["etime", "avg_latency", "avg_read_latency", "avg_write_latency"]
+              "names": ["etime", "instantaneous_ops_per_sec"]
             }
           }
         },
@@ -497,7 +501,8 @@
               "cpu_steal": "Steal",
               "cpu_system": "System",
               "cpu_user": "User",
-              "etime": "Time"
+              "etime": "Time",
+              "instantaneous_ops_per_sec": "Ops/Sec"
             }
           }
         }
@@ -512,7 +517,7 @@
       },
       "yaxes": [
         {
-          "format": "µs",
+          "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -574,13 +579,16 @@
       "hiddenSeries": false,
       "id": 51,
       "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
         "min": false,
         "show": true,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -589,7 +597,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.3.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -701,13 +709,16 @@
       "hiddenSeries": false,
       "id": 53,
       "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
         "min": false,
         "show": true,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -716,7 +727,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.3.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -823,7 +834,7 @@
               }
             ]
           },
-          "unit": "bytes"
+          "unit": "decbytes"
         },
         "overrides": []
       },
@@ -846,7 +857,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "bdb": "$db",
@@ -904,9 +915,10 @@
       {
         "current": {
           "selected": false,
-          "text": "Analyzer",
-          "value": "Analyzer"
+          "text": "Redis Enterprise Software",
+          "value": "Redis Enterprise Software"
         },
+        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -929,6 +941,7 @@
           "text": "15min",
           "value": "15min"
         },
+        "error": null,
         "hide": 0,
         "label": "Interval",
         "name": "interval",
@@ -982,6 +995,7 @@
           "text": ["All"],
           "value": ["$__all"]
         },
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "Database",
@@ -1026,5 +1040,5 @@
   "timezone": "",
   "title": "Cluster Databases",
   "uid": "k_A8MjtMk",
-  "version": 27
+  "version": 3
 }
