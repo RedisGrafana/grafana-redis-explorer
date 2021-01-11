@@ -27,7 +27,7 @@
     },
     {
       "addToNav": true,
-      "name": "Clusters",
+      "name": "Enterprise Clusters",
       "path": "dashboards/redis-explorer.json",
       "role": "Admin",
       "type": "dashboard"
