@@ -53,7 +53,7 @@ export const DataSourceList: FC<Props> = ({ datasources }) => {
         <ol className="card-list">
           {datasources?.map((redis, index) => {
             const title = redis.fields?.name ? 'Working as expected' : "Can't connect";
-            const fill = redis.fields?.name ? '#5B62F5' : '#A7A7A7';
+            const fill = redis.fields?.name ? '#DC382D' : '#A7A7A7';
 
             return (
               <li className="card-item-wrapper" key={index} aria-label="check-card">
