@@ -52,7 +52,6 @@ export const DataSourceList: FC<Props> = ({ datasources }) => {
             const title = redis.fields?.name ? 'Working as expected' : "Can't connect";
             const fill = redis.fields?.name ? '#5B62F5' : '#A7A7A7';
 
-            console.log(redis);
             return (
               <li className="card-item-wrapper" key={index} aria-label="check-card">
                 <a className="card-item" href={`datasources/edit/${redis.id}`}>

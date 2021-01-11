@@ -4,8 +4,8 @@ import { shallow } from 'enzyme';
 import { Config } from './config';
 import { DataSourceType } from '../types';
 
-/*
- Plugin
+/**
+ * Plugin
  */
 const getPlugin = (overridePlugin: any = { meta: {} }) => ({
   ...overridePlugin,
@@ -15,8 +15,8 @@ const getPlugin = (overridePlugin: any = { meta: {} }) => ({
   },
 });
 
-/*
- Config
+/**
+ * Config
  */
 describe('Config', () => {
   let initialDataSources = config.datasources;
@@ -28,8 +28,8 @@ describe('Config', () => {
     }));
   });
 
-  /*
-   Initialization
+  /**
+   * Initialization
    */
   describe('Initialization', () => {
     it('If plugin is not enabled, state should have isEnabled = false and isConfigured = false', () => {
@@ -65,8 +65,8 @@ describe('Config', () => {
     });
   });
 
-  /*
-   Rendering
+  /**
+   * Rendering
    */
   describe('rendering', () => {
     beforeAll(() => {
@@ -126,8 +126,8 @@ describe('Config', () => {
     });
   });
 
-  /*
-   Methods
+  /**
+   * Methods
    */
   describe('Methods', () => {
     it('onUpdate should call goHome method', () => {
