@@ -14,6 +14,9 @@ interface Props {
   datasources?: any[];
 }
 
+/**
+ * Data Sources list
+ */
 export const DataSourceList: FC<Props> = ({ datasources }) => {
   /**
    * Check if any data sources was added

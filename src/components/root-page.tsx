@@ -134,7 +134,7 @@ export class RootPage extends PureComponent<Props, State> {
     const node = {
       text: 'Redis Explorer',
       img: meta.info.logos.large,
-      subTitle: 'Redis Enterprise Software',
+      subTitle: 'Redis Enterprise clusters',
       url: path,
       children: tabs,
     };
