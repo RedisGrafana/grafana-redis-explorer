@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.2.1"
+      "version": "7.3.5"
     },
     {
       "type": "panel",
@@ -43,7 +43,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1603990154497,
+  "iteration": 1610344304933,
   "links": [],
   "panels": [
     {
@@ -233,7 +233,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "node": "",
@@ -353,13 +353,16 @@
       "hiddenSeries": false,
       "id": 51,
       "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
         "min": false,
         "show": true,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -368,7 +371,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.3.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -436,7 +439,7 @@
           "format": "percentunit",
           "label": null,
           "logBase": 1,
-          "max": null,
+          "max": "1",
           "min": "0",
           "show": true
         },
@@ -477,13 +480,16 @@
       "hiddenSeries": false,
       "id": 52,
       "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
         "min": false,
         "show": true,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -492,7 +498,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.3.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -612,13 +618,16 @@
       "hiddenSeries": false,
       "id": 53,
       "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
         "min": false,
         "show": true,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -627,7 +636,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.3.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -729,9 +738,10 @@
       {
         "current": {
           "selected": false,
-          "text": "Analyzer",
-          "value": "Analyzer"
+          "text": "Redis Enterprise Software",
+          "value": "Redis Enterprise Software"
         },
+        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -751,9 +761,10 @@
         "auto_min": "10s",
         "current": {
           "selected": false,
-          "text": "15min",
-          "value": "15min"
+          "text": "1hour",
+          "value": "1hour"
         },
+        "error": null,
         "hide": 0,
         "label": "Interval",
         "name": "interval",
@@ -774,12 +785,12 @@
             "value": "5min"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "15min",
             "value": "15min"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "1hour",
             "value": "1hour"
           },
@@ -807,6 +818,7 @@
           "text": ["All"],
           "value": ["$__all"]
         },
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "Node",
@@ -851,5 +863,5 @@
   "timezone": "",
   "title": "Cluster Nodes",
   "uid": "hqze6rtGz",
-  "version": 15
+  "version": 2
 }

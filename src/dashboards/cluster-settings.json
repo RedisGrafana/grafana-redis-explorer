@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.3.0"
+      "version": "7.3.5"
     },
     {
       "type": "panel",
@@ -43,7 +43,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1604010515096,
+  "iteration": 1610342176191,
   "links": [],
   "panels": [
     {
@@ -78,7 +78,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 452
+                "value": 673
               }
             ]
           },
@@ -102,7 +102,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 166
+                "value": 377
               }
             ]
           },
@@ -126,7 +126,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 170
+                "value": 285
               }
             ]
           },
@@ -141,12 +141,24 @@
                 "value": 259
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Arguments"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 458
+              }
+            ]
           }
         ]
       },
       "gridPos": {
-        "h": 9,
-        "w": 14,
+        "h": 11,
+        "w": 24,
         "x": 0,
         "y": 0
       },
@@ -160,7 +172,7 @@
           }
         ]
       },
-      "pluginVersion": "7.3.0",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "queryType": "modules",
@@ -233,7 +245,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 73
+                "value": 276
               }
             ]
           },
@@ -245,7 +257,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 134
+                "value": 206
               }
             ]
           },
@@ -260,14 +272,26 @@
                 "value": "dateTimeFromNow"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Authentication"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 301
+              }
+            ]
           }
         ]
       },
       "gridPos": {
         "h": 6,
-        "w": 14,
+        "w": 24,
         "x": 0,
-        "y": 9
+        "y": 11
       },
       "id": 49,
       "options": {
@@ -279,7 +303,7 @@
           }
         ]
       },
-      "pluginVersion": "7.3.0",
+      "pluginVersion": "7.3.5",
       "targets": [
         {
           "queryType": "users",
@@ -327,12 +351,12 @@
     },
     {
       "collapsed": false,
-      "datasource": "",
+      "datasource": "$cluster",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 17
       },
       "id": 11,
       "panels": [],
@@ -349,17 +373,17 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
-        "w": 13,
+        "h": 8,
+        "w": 24,
         "x": 0,
-        "y": 16
+        "y": 18
       },
       "id": 41,
       "options": {
         "showLabels": false,
         "showTime": true,
         "sortOrder": "Descending",
-        "wrapLogMessage": false
+        "wrapLogMessage": true
       },
       "targets": [
         {
@@ -382,17 +406,17 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
-        "w": 11,
-        "x": 13,
-        "y": 16
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 26
       },
       "id": 43,
       "options": {
         "showLabels": false,
         "showTime": true,
         "sortOrder": "Descending",
-        "wrapLogMessage": false
+        "wrapLogMessage": true
       },
       "targets": [
         {
@@ -415,9 +439,9 @@
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "Analyzer",
-          "value": "Analyzer"
+          "selected": true,
+          "text": "Redis Enterprise Software",
+          "value": "Redis Enterprise Software"
         },
         "error": null,
         "hide": 0,

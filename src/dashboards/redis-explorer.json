@@ -1,14 +1,5 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_ANALYZER",
-      "label": "Analyzer",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "redis-enterprise-software-datasource",
-      "pluginName": "Redis Enterprise Software"
-    }
-  ],
+  "__inputs": [],
   "__requires": [
     {
       "type": "grafana",
@@ -52,11 +43,11 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1610340352135,
+  "iteration": 1610341151550,
   "links": [],
   "panels": [
     {
-      "datasource": "${DS_ANALYZER}",
+      "datasource": "$cluster",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -65,7 +56,7 @@
       },
       "id": 6,
       "panels": [],
-      "repeat": "Cluster",
+      "repeat": "cluster",
       "title": "$cluster",
       "type": "row"
     },
@@ -598,9 +589,9 @@
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "Analyzer",
-          "value": "Analyzer"
+          "selected": true,
+          "text": "Redis Enterprise Software",
+          "value": "Redis Enterprise Software"
         },
         "error": null,
         "hide": 0,
@@ -620,8 +611,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "15min",
-          "value": "15min"
+          "text": "1hour",
+          "value": "1hour"
         },
         "error": null,
         "hide": 0,
@@ -679,7 +670,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Redis Explorer",
+  "title": "Software Clusters",
   "uid": "1dKhTjtGk",
-  "version": 1
+  "version": 4
 }

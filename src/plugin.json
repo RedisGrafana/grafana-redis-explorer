@@ -27,7 +27,7 @@
     },
     {
       "addToNav": true,
-      "name": "Redis Explorer",
+      "name": "Clusters",
       "path": "dashboards/redis-explorer.json",
       "role": "Admin",
       "type": "dashboard"
