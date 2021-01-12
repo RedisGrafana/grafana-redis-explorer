@@ -20,14 +20,12 @@ const getPlugin = (overridePlugin: any = { meta: {} }) => ({
  */
 describe('Config', () => {
   let initialDataSources = config.datasources;
-  let initialWindowLocation = window.location;
 
   beforeAll(() => {
-    delete window.location;
-    window.location = {
+    jest.spyOn(Config, 'getLocation').mockImplementation((): any => ({
       assign: jest.fn(),
       reload: jest.fn(),
-    } as any;
+    }));
   });
 
   /**
@@ -211,6 +209,5 @@ describe('Config', () => {
   afterAll(() => {
     config.datasources = initialDataSources;
     jest.resetAllMocks();
-    window.location = initialWindowLocation;
   });
 });
