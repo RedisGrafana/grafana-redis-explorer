@@ -32,7 +32,7 @@ const apiMock = {
   getLogs: jest.fn().mockImplementation(() => Promise.resolve([])),
 };
 
-jest.mock('./api/Api', () => ({
+jest.mock('./api/api', () => ({
   Api: jest.fn().mockImplementation(() => apiMock),
 }));
 

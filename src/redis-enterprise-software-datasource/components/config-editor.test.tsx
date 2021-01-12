@@ -1,6 +1,6 @@
 import React from 'react';
 import { DataSourceSettings } from '@grafana/data';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { shallow } from 'enzyme';
 import { ConfigEditor } from './config-editor';
 import { REDataSourceOptions } from '../types';
 
