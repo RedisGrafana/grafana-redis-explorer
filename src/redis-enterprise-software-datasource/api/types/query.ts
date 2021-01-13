@@ -67,3 +67,21 @@ export const QUERY_TYPE: SelectableValue[] = [
     value: QueryTypeValue.USERS,
   },
 ];
+
+/**
+ * Variable Query Type
+ *
+ * @type {SelectableValue[]}
+ */
+export const VARIABLE_QUERY_TYPE: SelectableValue[] = [
+  {
+    label: 'Databases',
+    description: 'All databases ids',
+    value: QueryTypeValue.BDBS,
+  },
+  {
+    label: 'Nodes',
+    description: 'All nodes ids',
+    value: QueryTypeValue.NODES,
+  },
+];

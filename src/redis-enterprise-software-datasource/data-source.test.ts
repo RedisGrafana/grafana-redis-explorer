@@ -1,7 +1,7 @@
-import { DataQueryRequest, dateTime, DateTime, MutableDataFrame, DataQueryResponse } from '@grafana/data';
+import { DataQueryRequest, DataQueryResponse, DateTime, dateTime, MutableDataFrame } from '@grafana/data';
 import { DataSource } from './data-source';
-import { QueryTypeValue, LogItem } from './api';
-import { REQuery, DataSourceTestStatus } from './types';
+import { LogItem, QueryTypeValue } from './api';
+import { DataSourceTestStatus, REQuery } from './types';
 
 /**
  * Override Request
@@ -30,6 +30,8 @@ const getRequest = (overrideRequest: OverrideRequest = {}): DataQueryRequest<REQ
 const apiMock = {
   getCluster: jest.fn().mockImplementation(() => Promise.resolve({})),
   getLogs: jest.fn().mockImplementation(() => Promise.resolve([])),
+  getNodes: jest.fn().mockImplementation(() => Promise.resolve([])),
+  getBdbs: jest.fn().mockImplementation(() => Promise.resolve([])),
 };
 
 jest.mock('./api/api', () => ({
@@ -142,6 +144,7 @@ describe('DataSource', () => {
       const result = await dataSource.query(request);
       expect(result).toEqual({ data: [] });
       const request2 = getRequest({ targets: [{ refId: 'A', queryType: QueryTypeValue.NODES }] });
+      apiMock.getNodes.mockImplementationOnce(() => Promise.resolve());
       const resultWithNoApiMethod = await dataSource.query(request2);
       expect(resultWithNoApiMethod).toEqual({ data: [] });
       done();
@@ -173,6 +176,43 @@ describe('DataSource', () => {
         status: DataSourceTestStatus.ERROR,
         message: "Error. Can't retrieve cluster information.",
       });
+      done();
+    });
+  });
+
+  /**
+   * metricFindQuery
+   */
+  describe('metricFindQuery', () => {
+    it('Should return values for BDBS', async (done) => {
+      const responseData = [
+        {
+          uid: '123',
+        },
+        {
+          uid: '222',
+        },
+      ];
+      apiMock.getBdbs.mockImplementationOnce(() => Promise.resolve(responseData));
+      const result = await dataSource.metricFindQuery({ queryType: QueryTypeValue.BDBS });
+      expect(apiMock.getBdbs).toHaveBeenCalled();
+      expect(result).toEqual(responseData.map(({ uid }) => ({ text: uid })));
+      done();
+    });
+
+    it('Should return values for NODES', async (done) => {
+      const responseData = [
+        {
+          uid: '111',
+        },
+        {
+          uid: '222',
+        },
+      ];
+      apiMock.getNodes.mockImplementationOnce(() => Promise.resolve(responseData));
+      const result = await dataSource.metricFindQuery({ queryType: QueryTypeValue.NODES });
+      expect(apiMock.getNodes).toHaveBeenCalled();
+      expect(result).toEqual(responseData.map(({ uid }) => ({ text: uid })));
       done();
     });
   });

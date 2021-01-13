@@ -7,6 +7,7 @@ import {
   DataSourceApi,
   DataSourceInstanceSettings,
   MutableDataFrame,
+  MetricFindValue,
 } from '@grafana/data';
 import { getTemplateSrv } from '@grafana/runtime';
 import { Api, DATASOURCE_FRAME, QueryTypeValue } from './api';
@@ -17,6 +18,7 @@ import {
   DataSourceTestStatus,
   REDataSourceOptions,
   REQuery,
+  VariableQuery,
 } from './types';
 
 /**
@@ -38,6 +40,22 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
   constructor(public instanceSettings: DataSourceInstanceSettings<REDataSourceOptions>) {
     super(instanceSettings);
     this.api = new Api(instanceSettings);
+  }
+
+  /**
+   * Metric Find query
+   * @param query
+   * @param options
+   */
+  async metricFindQuery(query: VariableQuery, options?: any): Promise<MetricFindValue[]> {
+    const apiQuery = {
+      ...query,
+      refId: '',
+    };
+    const response =
+      query.queryType === QueryTypeValue.BDBS ? await this.api.getBdbs(apiQuery) : await this.api.getNodes(apiQuery);
+
+    return (Array.isArray(response) ? response : [response]).map((item: any) => ({ text: item.uid }));
   }
 
   /**

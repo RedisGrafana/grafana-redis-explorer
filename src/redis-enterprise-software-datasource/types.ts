@@ -2,6 +2,18 @@ import { DataQuery, DataSourceJsonData, FieldType, ValueConverter } from '@grafa
 import { QueryTypeValue } from './api';
 
 /**
+ * Variable Query interface
+ */
+export interface VariableQuery {
+  /**
+   * Query Type
+   *
+   * @type {QueryTypeValue}
+   */
+  queryType: QueryTypeValue;
+}
+
+/**
  * Query interface
  */
 export interface REQuery extends DataQuery {
