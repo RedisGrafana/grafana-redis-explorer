@@ -143,8 +143,7 @@ describe('DataSource', () => {
       apiMock.getLogs.mockImplementationOnce(() => Promise.resolve(null));
       const result = await dataSource.query(request);
       expect(result).toEqual({ data: [] });
-      const request2 = getRequest({ targets: [{ refId: 'A', queryType: QueryTypeValue.NODES }] });
-      apiMock.getNodes.mockImplementationOnce(() => Promise.resolve());
+      const request2 = getRequest({ targets: [{ refId: 'A', queryType: QueryTypeValue.LICENSE }] });
       const resultWithNoApiMethod = await dataSource.query(request2);
       expect(resultWithNoApiMethod).toEqual({ data: [] });
       done();
@@ -213,6 +212,17 @@ describe('DataSource', () => {
       const result = await dataSource.metricFindQuery({ queryType: QueryTypeValue.NODES });
       expect(apiMock.getNodes).toHaveBeenCalled();
       expect(result).toEqual(responseData.map(({ uid }) => ({ text: uid })));
+      done();
+    });
+
+    it('Should convert object to Values if was get an object', async (done) => {
+      const responseData = {
+        uid: '222',
+      };
+      apiMock.getNodes.mockImplementationOnce(() => Promise.resolve(responseData));
+      const result = await dataSource.metricFindQuery({ queryType: QueryTypeValue.NODES });
+      expect(apiMock.getNodes).toHaveBeenCalled();
+      expect(result).toEqual([responseData].map(({ uid }) => ({ text: uid })));
       done();
     });
   });
