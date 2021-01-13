@@ -44,6 +44,19 @@ describe('Config', () => {
       expect(wrapper.state().isConfigured).toBeFalsy();
     });
 
+    it('If no plugin.meta, state should have isEnabled = false and isConfigured = false', () => {
+      const plugin = getPlugin();
+      plugin.meta = null;
+      config.datasources = {
+        redis: {
+          type: DataSourceType.SOFTWARE,
+        } as any,
+      };
+      const wrapper = shallow<Config>(<Config plugin={plugin} query={null as any} />);
+      expect(wrapper.state().isEnabled).toBeFalsy();
+      expect(wrapper.state().isConfigured).toBeFalsy();
+    });
+
     it('If plugin is enabled but config does not have needed datasources, state should have isEnabled = true and isConfigured = false', () => {
       const plugin = getPlugin({ meta: { enabled: true } });
       config.datasources = {};

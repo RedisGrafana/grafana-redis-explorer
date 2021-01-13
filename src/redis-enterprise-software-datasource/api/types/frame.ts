@@ -3,6 +3,13 @@ import { DataSourceFrame, DataSourceFrameType } from '../../types';
 import { QueryTypeValue } from './query';
 
 /**
+ * Convert Time
+ * Have to be one function for good tests coverage
+ * @param value
+ */
+const convertTime = (value: string) => dateMath.parse(value);
+
+/**
  * Datasource frame data
  */
 export const DATASOURCE_FRAME: DataSourceFrame = {
@@ -16,7 +23,7 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
       {
         name: 'created_time',
         type: FieldType.time,
-        converter: (value: string) => dateMath.parse(value),
+        converter: convertTime,
       },
     ],
   },
@@ -38,12 +45,12 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
       {
         name: 'activation_date',
         type: FieldType.time,
-        converter: (value: string) => dateMath.parse(value),
+        converter: convertTime,
       },
       {
         name: 'expiration_date',
         type: FieldType.time,
-        converter: (value: string) => dateMath.parse(value),
+        converter: convertTime,
       },
     ],
   },
@@ -95,7 +102,7 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
       {
         name: 'password_issue_date',
         type: FieldType.time,
-        converter: (value: string) => dateMath.parse(value),
+        converter: convertTime,
       },
     ],
   },
@@ -148,12 +155,12 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
       {
         name: 'stime',
         type: FieldType.time,
-        converter: (value: string) => dateMath.parse(value),
+        converter: convertTime,
       },
       {
         name: 'etime',
         type: FieldType.time,
-        converter: (value: string) => dateMath.parse(value),
+        converter: convertTime,
       },
       {
         name: 'conns',
