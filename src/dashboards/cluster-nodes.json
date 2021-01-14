@@ -43,7 +43,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1610344304933,
+  "iteration": 1610606340094,
   "links": [],
   "panels": [
     {
@@ -813,43 +813,28 @@
       },
       {
         "allValue": null,
-        "current": {
-          "selected": false,
-          "text": ["All"],
-          "value": ["$__all"]
-        },
+        "current": {},
+        "datasource": "$cluster",
+        "definition": "",
         "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "Node",
-        "multi": true,
+        "multi": false,
         "name": "node",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "1",
-            "value": "1"
-          },
-          {
-            "selected": false,
-            "text": "2",
-            "value": "2"
-          },
-          {
-            "selected": false,
-            "text": "3",
-            "value": "3"
-          }
-        ],
-        "query": "1,2,3",
-        "queryValue": "",
+        "options": [],
+        "query": {
+          "queryType": "nodes"
+        },
+        "refresh": 1,
+        "regex": "",
         "skipUrlSync": false,
-        "type": "custom"
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
@@ -863,5 +848,5 @@
   "timezone": "",
   "title": "Cluster Nodes",
   "uid": "hqze6rtGz",
-  "version": 2
+  "version": 3
 }
