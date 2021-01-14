@@ -32,9 +32,8 @@ export class ClusterDatabases extends PureComponent<any, State> {
       url: options.url,
       access: 'proxy',
       jsonData: {
-        acl: true,
+        acl: false,
         tlsSkipVerify: db.ssl,
-        user: 'Admin',
         tlsAuth: db.ssl,
       },
       secureJsonData: {
