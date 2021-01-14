@@ -1,5 +1,5 @@
 import { DataSourcePlugin } from '@grafana/data';
-import { ConfigEditor, QueryEditor } from './components';
+import { ConfigEditor, QueryEditor, VariableQueryEditor } from './components';
 import { DataSource } from './data-source';
 import { REDataSourceOptions, REQuery } from './types';
 
@@ -8,4 +8,5 @@ import { REDataSourceOptions, REQuery } from './types';
  */
 export const plugin = new DataSourcePlugin<DataSource, REQuery, REDataSourceOptions>(DataSource)
   .setConfigEditor(ConfigEditor)
-  .setQueryEditor(QueryEditor);
+  .setQueryEditor(QueryEditor)
+  .setVariableQueryEditor(VariableQueryEditor);

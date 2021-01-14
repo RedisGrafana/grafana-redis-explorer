@@ -49,7 +49,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1610344553372,
+  "iteration": 1610606776055,
   "links": [],
   "panels": [
     {
@@ -851,7 +851,7 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": ["last"],
           "fields": "",
           "values": false
         },
@@ -937,7 +937,7 @@
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "15min",
           "value": "15min"
         },
@@ -990,43 +990,28 @@
       },
       {
         "allValue": null,
-        "current": {
-          "selected": true,
-          "text": ["All"],
-          "value": ["$__all"]
-        },
+        "current": {},
+        "datasource": "$cluster",
+        "definition": "",
         "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "Database",
-        "multi": true,
+        "multi": false,
         "name": "db",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "1",
-            "value": "1"
-          },
-          {
-            "selected": false,
-            "text": "2",
-            "value": "2"
-          },
-          {
-            "selected": false,
-            "text": "3",
-            "value": "3"
-          }
-        ],
-        "query": "1,2,3",
-        "queryValue": "",
+        "options": [],
+        "query": {
+          "queryType": "bdbs"
+        },
+        "refresh": 1,
+        "regex": "",
         "skipUrlSync": false,
-        "type": "custom"
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
