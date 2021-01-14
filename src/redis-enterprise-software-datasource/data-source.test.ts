@@ -1,6 +1,6 @@
 import { DataQueryRequest, DataQueryResponse, DateTime, dateTime, MutableDataFrame } from '@grafana/data';
-import { DataSource } from './data-source';
 import { LogItem, QueryTypeValue } from './api';
+import { DataSource } from './data-source';
 import { DataSourceTestStatus, REQuery } from './types';
 
 /**

@@ -6,8 +6,8 @@ import {
   DataQueryResponse,
   DataSourceApi,
   DataSourceInstanceSettings,
-  MutableDataFrame,
   MetricFindValue,
+  MutableDataFrame,
 } from '@grafana/data';
 import { getTemplateSrv } from '@grafana/runtime';
 import { Api, DATASOURCE_FRAME, QueryTypeValue } from './api';
@@ -52,6 +52,10 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
       ...query,
       refId: '',
     };
+
+    /**
+     * Get Databases or Nodes
+     */
     const response =
       query.queryType === QueryTypeValue.BDBS ? await this.api.getBdbs(apiQuery) : await this.api.getNodes(apiQuery);
 

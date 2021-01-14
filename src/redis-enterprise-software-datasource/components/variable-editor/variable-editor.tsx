@@ -1,16 +1,33 @@
 import React, { PureComponent } from 'react';
 import { SelectableValue } from '@grafana/data';
-import { Select, InlineFormLabel } from '@grafana/ui';
+import { InlineFormLabel, Select } from '@grafana/ui';
 import { QueryTypeValue, VARIABLE_QUERY_TYPE } from '../../api';
-import { VariableQuery } from '../../types';
 import { DataSource } from '../../data-source';
+import { VariableQuery } from '../../types';
 
+/**
+ * Properties
+ */
 interface VariableQueryProps {
+  /**
+   * Data source
+   *
+   * @type {DataSource}
+   */
+  datasource: DataSource;
+
+  /**
+   * Query
+   *
+   * @type {VariableQuery}
+   */
   query: VariableQuery;
   onChange: (query: VariableQuery, definition: string) => void;
-  datasource: DataSource;
 }
 
+/**
+ * Variable Query Editor
+ */
 export class VariableQueryEditor extends PureComponent<VariableQueryProps> {
   /**
    * Change query type
