@@ -1,6 +1,8 @@
 import { RedisEnterpriseSoftware } from 'icons';
+import { css } from 'emotion';
 import React, { FC } from 'react';
 import { Container, HorizontalGroup, InfoBox, LinkButton, VerticalGroup } from '@grafana/ui';
+import { ClusterDatabases } from './cluster-databases';
 
 /**
  * Properties
@@ -12,12 +14,15 @@ interface Props {
    * @type {any[]}
    */
   datasources?: any[];
+  query?: {
+    datasource?: string;
+  };
 }
 
 /**
  * Data Sources list
  */
-export const DataSourceList: FC<Props> = ({ datasources }) => {
+export const DataSourceList: FC<Props> = ({ datasources, query }) => {
   /**
    * Check if any data sources was added
    */
@@ -37,12 +42,24 @@ export const DataSourceList: FC<Props> = ({ datasources }) => {
     );
   }
 
+  const isShowDatasourceDetails = !!query?.datasource;
+  const renderedDatasources: any = isShowDatasourceDetails
+    ? [datasources?.find((datasource: any) => datasource.id === parseInt(query?.datasource || '', 10))].filter(
+        (datasource) => !!datasource
+      )
+    : datasources;
+
   /**
    * Return
    */
   return (
     <div>
       <div className="page-action-bar">
+        {isShowDatasourceDetails && (
+          <LinkButton href="/a/redis-explorer/" icon="arrow-left" variant="link">
+            Back
+          </LinkButton>
+        )}
         <div className="page-action-bar__spacer" />
         <LinkButton href="datasources/new" icon="plus">
           Add Redis Enterprise Data Source
@@ -51,7 +68,7 @@ export const DataSourceList: FC<Props> = ({ datasources }) => {
 
       <section className="card-section card-list-layout-list">
         <ol className="card-list">
-          {datasources?.map((redis, index) => {
+          {renderedDatasources?.map((redis: any, index: number) => {
             const title = redis.fields?.name ? 'Working as expected' : "Can't connect";
             const fill = redis.fields?.name ? '#DC382D' : '#A7A7A7';
 
@@ -71,9 +88,21 @@ export const DataSourceList: FC<Props> = ({ datasources }) => {
 
                     <HorizontalGroup justify="flex-end">
                       {!redis.commands?.length && (
-                        <div className="card-item-header">
-                          <div className="card-item-type">{redis.fields?.name}</div>
-                        </div>
+                        <>
+                          <Container margin="xs">
+                            <div className="card-item-type">{redis.fields?.name}</div>
+                          </Container>
+                          {!isShowDatasourceDetails && (
+                            <Container margin="xs">
+                              <LinkButton
+                                variant="secondary"
+                                href={`/a/redis-explorer?datasource=${redis.id}`}
+                                title="Show cluster databases"
+                                icon="database"
+                              />
+                            </Container>
+                          )}
+                        </>
                       )}
                     </HorizontalGroup>
                   </HorizontalGroup>
@@ -82,6 +111,17 @@ export const DataSourceList: FC<Props> = ({ datasources }) => {
             );
           })}
         </ol>
+        {isShowDatasourceDetails && renderedDatasources.length > 0 && (
+          <div
+            className={css`
+              background-color: #202226;
+              padding: 16px;
+            `}
+          >
+            <div className="card-item-name">Databases</div>
+            <ClusterDatabases datasource={renderedDatasources[0]} />
+          </div>
+        )}
       </section>
     </div>
   );

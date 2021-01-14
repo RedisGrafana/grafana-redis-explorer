@@ -165,6 +165,6 @@ export class RootPage extends PureComponent<Props, State> {
       );
     }
 
-    return <DataSourceList datasources={datasources} />;
+    return <DataSourceList datasources={datasources} query={this.props.query} />;
   }
 }
