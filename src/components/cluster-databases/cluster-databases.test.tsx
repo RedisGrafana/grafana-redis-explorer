@@ -223,7 +223,7 @@ describe('ClusterDatabases', () => {
       });
 
       it('If ssl=true should return correct', () => {
-        const dataSource = getDataSource();
+        const dataSource = getDataSource({ fields: { proxy_certificate: 'proxy-cert' } });
         const wrapper = shallow<ClusterDatabases>(<ClusterDatabases dataSource={dataSource as any} />, {
           disableLifecycleMethods: true,
         });
@@ -238,7 +238,7 @@ describe('ClusterDatabases', () => {
         expect(result.jsonData.acl).toBeFalsy();
         expect(result.secureJsonData.tlsClientCert).toEqual(db.authentication_ssl_client_certs[0]);
         expect(result.secureJsonData.tlsClientKey).toEqual(db.authentication_ssl_crdt_certs[0]);
-        expect(result.secureJsonData.tlsCACert).toEqual(db.authentication_ssl_crdt_certs[0]);
+        expect(result.secureJsonData.tlsCACert).toEqual(dataSource.fields.proxy_certificate);
         expect(result.secureJsonFields.tlsClientCert).toBeTruthy();
         expect(result.secureJsonFields.tlsClientKey).toBeTruthy();
         expect(result.secureJsonFields.tlsCACert).toBeTruthy();
