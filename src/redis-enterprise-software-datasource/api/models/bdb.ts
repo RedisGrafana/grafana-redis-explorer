@@ -10,6 +10,15 @@ enum Status {
   Active = 'active',
 }
 
+type ModuleName = 'timeseries' | 'rg' | 'search' | 'json' | 'graph' | 'bloom' | 'ai';
+
+interface Module {
+  module_args: string;
+  module_id: string;
+  module_name: ModuleName;
+  semantic_version: string;
+}
+
 export interface BdbEndpoint {
   addr: string[];
   addr_type: AddressType;
@@ -31,7 +40,7 @@ export interface Bdb {
   authentication_sasl_pass: string;
   authentication_sasl_uname: string;
   authentication_ssl_client_certs: string[];
-  authentication_ssl_crdt_certs: [];
+  authentication_ssl_crdt_certs: string[];
   auto_upgrade: boolean;
   background_op: [{ status: 'idle' }];
   backup: boolean;
@@ -80,7 +89,7 @@ export interface Bdb {
   memory_size: number;
   metrics_export_all: boolean;
   mkms: boolean;
-  module_list: [];
+  module_list: Module[];
   name: string;
   oss_cluster: boolean;
   oss_cluster_api_preferred_ip_type: AddressType;

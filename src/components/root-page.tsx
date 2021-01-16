@@ -7,12 +7,13 @@ import {
   DataQueryResponseData,
   Field,
   NavModelItem,
+  DataSourceInstanceSettings,
 } from '@grafana/data';
 import { getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
 import { InfoBox } from '@grafana/ui';
 import { QueryTypeValue } from '../redis-enterprise-software-datasource/api';
 import { REQuery } from '../redis-enterprise-software-datasource/types';
-import { DataSourceType, GlobalSettings } from '../types';
+import { DataSourceType, GlobalSettings, EnterpriseDataSourceInstanceSettings } from '../types';
 import { DataSourceList } from './data-source-list';
 
 /**
@@ -29,7 +30,7 @@ interface State {
    *
    * @type {any[]}
    */
-  datasources?: any[];
+  dataSources: EnterpriseDataSourceInstanceSettings[];
 
   /**
    * Loading
@@ -48,6 +49,7 @@ export class RootPage extends PureComponent<Props, State> {
    */
   state: State = {
     loading: true,
+    dataSources: [],
   };
 
   /**
@@ -59,10 +61,10 @@ export class RootPage extends PureComponent<Props, State> {
     /**
      * Get data sources
      */
-    const datasources = await getBackendSrv()
+    const dataSources = await getBackendSrv()
       .get('/api/datasources')
-      .then((result: any) => {
-        return result.filter((ds: any) => {
+      .then((result: DataSourceInstanceSettings[]) => {
+        return result.filter((ds: DataSourceInstanceSettings) => {
           return ds.type === DataSourceType.SOFTWARE;
         });
       });
@@ -70,9 +72,12 @@ export class RootPage extends PureComponent<Props, State> {
     /**
      * Check supported commands for Redis Data Sources
      */
-    await Promise.all(
-      datasources.map(async (ds: any) => {
-        ds.fields = {};
+    const finalDataSources = await Promise.all(
+      dataSources.map(async (ds: DataSourceInstanceSettings) => {
+        const enterpriseDs: EnterpriseDataSourceInstanceSettings = {
+          ...ds,
+          fields: {},
+        };
 
         /**
          * Get Data Source
@@ -94,10 +99,12 @@ export class RootPage extends PureComponent<Props, State> {
           .then((data: DataQueryResponseData[]) =>
             data.forEach((item: DataQueryResponseData) => {
               item.fields.forEach((field: Field) => {
-                ds.fields[field.name] = head(field.values.toArray());
+                enterpriseDs.fields[field.name] = head(field.values.toArray());
               });
             })
           );
+
+        return enterpriseDs;
       })
     );
 
@@ -105,7 +112,7 @@ export class RootPage extends PureComponent<Props, State> {
      * Set state
      */
     this.setState({
-      datasources,
+      dataSources: finalDataSources,
       loading: false,
     });
   }
@@ -152,7 +159,7 @@ export class RootPage extends PureComponent<Props, State> {
    * Render
    */
   render() {
-    const { loading, datasources } = this.state;
+    const { loading, dataSources } = this.state;
 
     /**
      * Loading
@@ -165,6 +172,6 @@ export class RootPage extends PureComponent<Props, State> {
       );
     }
 
-    return <DataSourceList datasources={datasources} query={this.props.query} />;
+    return <DataSourceList dataSources={dataSources} query={this.props.query} />;
   }
 }

@@ -1,7 +1,7 @@
 import { RedisEnterpriseSoftware } from 'icons';
-import { css } from 'emotion';
 import React, { FC } from 'react';
 import { Container, HorizontalGroup, InfoBox, LinkButton, VerticalGroup } from '@grafana/ui';
+import { EnterpriseDataSourceInstanceSettings } from 'types';
 import { ClusterDatabases } from './cluster-databases';
 
 /**
@@ -11,9 +11,9 @@ interface Props {
   /**
    * Data sources
    *
-   * @type {any[]}
+   * @type {EnterpriseDataSourceInstanceSettings[]}
    */
-  datasources?: any[];
+  dataSources: EnterpriseDataSourceInstanceSettings[];
   query?: {
     datasource?: string;
   };
@@ -22,11 +22,11 @@ interface Props {
 /**
  * Data Sources list
  */
-export const DataSourceList: FC<Props> = ({ datasources, query }) => {
+export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
   /**
    * Check if any data sources was added
    */
-  if (datasources?.length === 0) {
+  if (dataSources.length === 0) {
     return (
       <div>
         <div className="page-action-bar">
@@ -42,12 +42,20 @@ export const DataSourceList: FC<Props> = ({ datasources, query }) => {
     );
   }
 
-  const isShowDatasourceDetails = !!query?.datasource;
-  const renderedDatasources: any = isShowDatasourceDetails
-    ? [datasources?.find((datasource: any) => datasource.id === parseInt(query?.datasource || '', 10))].filter(
-        (datasource) => !!datasource
-      )
-    : datasources;
+  const isShowDataSourceDetails = query && query.datasource !== undefined;
+  let renderedDataSources = dataSources;
+  /**
+   * Filter active data source if open url with ?datasource=[datasourceId]
+   * Double checking query in the if statement is needed here for narrowing query type and good tests coverage,
+   * because unable to create case when isShowDataSourceDetails=true and query=undefined.
+   * It's a bug of typescript types narrowing.
+   */
+  if (isShowDataSourceDetails && query && query.datasource !== undefined) {
+    let activeDataSourceId = parseInt(query.datasource, 10);
+    renderedDataSources = dataSources.filter(
+      (dataSources: EnterpriseDataSourceInstanceSettings) => dataSources.id === activeDataSourceId
+    );
+  }
 
   /**
    * Return
@@ -55,7 +63,7 @@ export const DataSourceList: FC<Props> = ({ datasources, query }) => {
   return (
     <div>
       <div className="page-action-bar">
-        {isShowDatasourceDetails && (
+        {isShowDataSourceDetails && (
           <LinkButton href="/a/redis-explorer/" icon="arrow-left" variant="link">
             Back
           </LinkButton>
@@ -68,7 +76,7 @@ export const DataSourceList: FC<Props> = ({ datasources, query }) => {
 
       <section className="card-section card-list-layout-list">
         <ol className="card-list">
-          {renderedDatasources?.map((redis: any, index: number) => {
+          {renderedDataSources.map((redis: any, index: number) => {
             const title = redis.fields?.name ? 'Working as expected' : "Can't connect";
             const fill = redis.fields?.name ? '#DC382D' : '#A7A7A7';
 
@@ -92,14 +100,16 @@ export const DataSourceList: FC<Props> = ({ datasources, query }) => {
                           <Container margin="xs">
                             <div className="card-item-type">{redis.fields?.name}</div>
                           </Container>
-                          {!isShowDatasourceDetails && (
+                          {!isShowDataSourceDetails && (
                             <Container margin="xs">
                               <LinkButton
                                 variant="secondary"
                                 href={`/a/redis-explorer?datasource=${redis.id}`}
                                 title="Show cluster databases"
                                 icon="database"
-                              />
+                              >
+                                Databases
+                              </LinkButton>
                             </Container>
                           )}
                         </>
@@ -111,15 +121,12 @@ export const DataSourceList: FC<Props> = ({ datasources, query }) => {
             );
           })}
         </ol>
-        {isShowDatasourceDetails && renderedDatasources.length > 0 && (
-          <div
-            className={css`
-              background-color: #202226;
-              padding: 16px;
-            `}
-          >
-            <div className="card-item-name">Databases</div>
-            <ClusterDatabases datasource={renderedDatasources[0]} />
+        {isShowDataSourceDetails && renderedDataSources.length > 0 && (
+          <div className="card-item-wrapper">
+            <div className="card-item">
+              <div className="card-item-name">Databases</div>
+              <ClusterDatabases dataSource={renderedDataSources[0]} />
+            </div>
           </div>
         )}
       </section>
