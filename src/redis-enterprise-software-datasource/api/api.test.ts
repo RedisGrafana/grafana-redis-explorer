@@ -83,6 +83,7 @@ describe('Api', () => {
           uid: 123,
         },
       ];
+
       datasourceRequestMock.mockImplementationOnce(() => Promise.resolve({ data }));
       const result = await api.getNodes({ refId: 'A', queryType: QueryTypeValue.NODES, node: 'my-node' });
       expect(datasourceRequestMock).toHaveBeenCalledWith({
@@ -111,9 +112,9 @@ describe('Api', () => {
           uid: 123,
           authentication_admin_pass: '123',
           authentication_sasl_pass: '123',
-          authentication_redis_pass: '123',
         },
       ];
+
       datasourceRequestMock.mockImplementationOnce(() => Promise.resolve({ data }));
       const result = await api.getBdbs({ refId: 'A', queryType: QueryTypeValue.BDBS, bdb: 'my-bdb' });
       expect(datasourceRequestMock).toHaveBeenCalledWith({
@@ -121,6 +122,7 @@ describe('Api', () => {
         url: `${instanceSettings.url}/bdbs/my-bdb`,
       });
       expect(result).toEqual([{ uid: data[0].uid }]);
+
       await api.getBdbs({ refId: 'A', queryType: QueryTypeValue.BDBS });
       expect(datasourceRequestMock).toHaveBeenCalledWith({
         method: 'GET',
@@ -135,10 +137,10 @@ describe('Api', () => {
           uid: 123,
           authentication_admin_pass: '123',
           authentication_sasl_pass: '123',
-          authentication_redis_pass: '123',
         },
         1234,
       ];
+
       datasourceRequestMock.mockImplementationOnce(() => Promise.resolve({ data }));
       const query = { refId: 'A', queryType: QueryTypeValue.BDBS, bdb: 'my-bdb' };
       const result = await api.getBdbs(query);
@@ -147,6 +149,7 @@ describe('Api', () => {
         url: `${instanceSettings.url}/bdbs/my-bdb`,
       });
       expect(result).toEqual([{ uid: 123 }, 1234]);
+
       datasourceRequestMock.mockImplementationOnce(() => Promise.resolve({ data: data[0] }));
       const result2 = await api.getBdbs(query);
       expect(datasourceRequestMock).toHaveBeenCalledWith({
