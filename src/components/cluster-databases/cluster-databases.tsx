@@ -82,6 +82,7 @@ export class ClusterDatabases extends PureComponent<Props, State> {
         tlsCACert: db.ssl ? this.props.dataSource.fields.proxy_certificate : '',
       },
       secureJsonFields: {
+        password: db.authentication_redis_pass ? true : false,
         tlsClientCert: db.ssl,
         tlsClientKey: db.ssl,
         tlsCACert: db.ssl,

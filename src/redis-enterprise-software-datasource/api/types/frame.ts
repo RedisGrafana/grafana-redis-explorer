@@ -134,7 +134,7 @@ export const DATASOURCE_FRAME: DataSourceFrame = {
         type: FieldType.boolean,
       },
     ],
-    omit: ['authentication_admin_pass', 'authentication_sasl_pass', 'authentication_redis_pass'],
+    omit: ['authentication_admin_pass', 'authentication_sasl_pass'],
   },
   [QueryTypeValue.ALERTS]: {
     frame: DataSourceFrameType.MUTABLE,
