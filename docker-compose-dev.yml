@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  redis:
+    container_name: redis
+    image: redislabs/redis:latest
+    cap_add:
+      - SYS_RESOURCE
+    ports:
+      - 8443:8443/tcp
+      - 9443:9443/tcp
+      - 12000-12050:12000-12050/tcp
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000/tcp
+    environment:
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_BASIC_ENABLED=false
+      - GF_ENABLE_GZIP=true
+      - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=redis-app,redis-datasource,redis-explorer
+      # Uncomment to run in debug mode
+      # - GF_LOG_LEVEL=debug
+    volumes:
+      - ./dist:/var/lib/grafana/plugins/redis-explorer
+      - ../grafana-redis-app:/var/lib/grafana/plugins/redis-app
+      - ../grafana-redis-datasource:/var/lib/grafana/plugins/redis-datasource
+      # Uncomment to preserve Grafana configuration
+      # - ./data:/var/lib/grafana
