@@ -48,3 +48,15 @@ export interface SVGProps extends React.HTMLAttributes<SVGElement> {
 export interface EnterpriseDataSourceInstanceSettings extends DataSourceInstanceSettings {
   fields: any;
 }
+
+/**
+ * New Data Source Options
+ */
+export interface NewDatasourceOptions {
+  /**
+   * URL
+   *
+   * @type {string}
+   */
+  url: string;
+}

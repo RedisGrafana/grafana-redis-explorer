@@ -1,7 +1,7 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-import { QueryTypeValue, Bdb } from 'redis-enterprise-software-datasource/api';
-import { ClusterDatabase } from './cluster-database';
+import { shallow } from 'enzyme';
+import { Bdb, QueryTypeValue } from 'redis-enterprise-software-datasource/api';
+import { ClusterDatabase } from '../cluster-database';
 import { ClusterDatabases } from './cluster-databases';
 
 const backendSrvMock = {

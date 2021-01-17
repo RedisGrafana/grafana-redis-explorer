@@ -1,21 +1,31 @@
-import React, { PureComponent } from 'react';
 import { css } from 'emotion';
-import { getDataSourceSrv, BackendSrv, getBackendSrv, DataSourceSrv } from '@grafana/runtime';
-import { DataSourceInstanceSettings } from '@grafana/data';
+import React, { PureComponent } from 'react';
 import { Bdb, QueryTypeValue } from 'redis-enterprise-software-datasource/api';
 import { EnterpriseDataSourceInstanceSettings } from 'types';
-import { ClusterDatabase, NewDatasourceOptions } from './cluster-database';
+import { DataSourceInstanceSettings } from '@grafana/data';
+import { BackendSrv, DataSourceSrv, getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
+import { NewDatasourceOptions } from '../../types';
+import { ClusterDatabase } from '../cluster-database';
 
+/**
+ * Properties
+ */
 interface Props {
   dataSource: EnterpriseDataSourceInstanceSettings;
 }
 
+/**
+ * State
+ */
 interface State {
   bdbs: Bdb[];
   dataSources: DataSourceInstanceSettings[];
   isLoading: boolean;
 }
 
+/**
+ * Cluster Databases
+ */
 export class ClusterDatabases extends PureComponent<Props, State> {
   /**
    * Service to communicate via http(s) to a remote backend such as the Grafana backend, a data source etc.

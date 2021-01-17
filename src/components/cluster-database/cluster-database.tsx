@@ -1,38 +1,47 @@
-import React, { PureComponent } from 'react';
-import { SelectableValue } from '@grafana/data';
-import { Select, Button, InlineFormLabel, HorizontalGroup, Container } from '@grafana/ui';
-import { Bdb, BdbEndpoint } from 'redis-enterprise-software-datasource/api';
 import {
   HighAvailability,
   MultiLayerSecurity,
   RedisAI,
   RedisBloom,
-  RedisSearch,
   RedisGears,
   RedisGraph,
   RedisJSON,
+  RedisSearch,
   RedisTimeSeries,
 } from 'icons';
-import { NewDatasourceOptions } from './types';
+import React, { PureComponent } from 'react';
+import { Bdb, BdbEndpoint } from 'redis-enterprise-software-datasource/api';
+import { SelectableValue } from '@grafana/data';
+import { Button, Container, HorizontalGroup, InlineFormLabel, Select } from '@grafana/ui';
+import { NewDatasourceOptions } from '../../types';
 
+/**
+ * Properties
+ */
 interface Props {
   db: Bdb;
   onAdd: (db: Bdb, options: NewDatasourceOptions) => void;
   isCanAdd: boolean;
 }
 
+/**
+ * State
+ */
 interface State {
   endpointOptions: Array<SelectableValue<string>>;
   selectedEndpointValue: string | undefined;
 }
 
+/**
+ * Icon Style
+ */
 const iconStyle = {
   marginTop: 6,
   display: 'inline-block',
 };
 
 /**
- * ClusterDatabase
+ * Cluster Database
  */
 export class ClusterDatabase extends PureComponent<Props, State> {
   /**
