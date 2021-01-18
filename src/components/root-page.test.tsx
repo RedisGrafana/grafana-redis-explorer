@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { AppPluginMeta, PluginType, toDataFrame, FieldType } from '@grafana/data';
+import { AppPluginMeta, FieldType, PluginType, toDataFrame } from '@grafana/data';
 import { InfoBox } from '@grafana/ui';
-import { DataSourceType } from '../types';
-import { RootPage } from './root-page';
 import { QueryTypeValue } from '../redis-enterprise-software-datasource/api';
+import { DataSourceType } from '../types';
 import { DataSourceList } from './data-source-list';
+import { RootPage } from './root-page';
 
 /**
  * Meta

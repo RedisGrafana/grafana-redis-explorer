@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { InfoBox } from '@grafana/ui';
 import { RedisEnterpriseSoftware } from 'icons';
-import { ClusterDatabases } from './cluster-databases';
+import { ClusterDatabases } from '../cluster-databases';
 import { DataSourceList } from './data-source-list';
 
 type ShallowComponent = ShallowWrapper<typeof DataSourceList>;

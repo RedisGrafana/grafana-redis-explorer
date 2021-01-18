@@ -1,8 +1,8 @@
 import { RedisEnterpriseSoftware } from 'icons';
 import React, { FC } from 'react';
-import { Container, HorizontalGroup, InfoBox, LinkButton, VerticalGroup } from '@grafana/ui';
 import { EnterpriseDataSourceInstanceSettings } from 'types';
-import { ClusterDatabases } from './cluster-databases';
+import { Container, HorizontalGroup, InfoBox, LinkButton, VerticalGroup } from '@grafana/ui';
+import { ClusterDatabases } from '../cluster-databases';
 
 /**
  * Properties

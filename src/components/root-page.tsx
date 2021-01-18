@@ -5,15 +5,15 @@ import {
   DataQueryRequest,
   DataQueryResponse,
   DataQueryResponseData,
+  DataSourceInstanceSettings,
   Field,
   NavModelItem,
-  DataSourceInstanceSettings,
 } from '@grafana/data';
 import { getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
 import { InfoBox } from '@grafana/ui';
 import { QueryTypeValue } from '../redis-enterprise-software-datasource/api';
 import { REQuery } from '../redis-enterprise-software-datasource/types';
-import { DataSourceType, GlobalSettings, EnterpriseDataSourceInstanceSettings } from '../types';
+import { DataSourceType, EnterpriseDataSourceInstanceSettings, GlobalSettings } from '../types';
 import { DataSourceList } from './data-source-list';
 
 /**

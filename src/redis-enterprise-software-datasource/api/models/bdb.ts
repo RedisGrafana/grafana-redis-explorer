@@ -1,17 +1,38 @@
+/**
+ * State
+ */
 type State = 'disabled' | 'enabled';
 
+/**
+ * Address Type
+ */
 type AddressType = 'external' | 'internal';
 
+/**
+ * Proxy
+ */
 type Proxy = 'single';
 
+/**
+ * Eviction
+ */
 type Eviction = 'volatile-lru';
 
+/**
+ * Status
+ */
 enum Status {
   Active = 'active',
 }
 
+/**
+ * Module names
+ */
 type ModuleName = 'timeseries' | 'rg' | 'search' | 'json' | 'graph' | 'bloom' | 'ai' | 'ft';
 
+/**
+ * Module
+ */
 interface Module {
   module_args: string;
   module_id: string;
@@ -19,6 +40,9 @@ interface Module {
   semantic_version: string;
 }
 
+/**
+ * Endpoint
+ */
 export interface BdbEndpoint {
   addr: string[];
   addr_type: AddressType;
@@ -90,7 +114,14 @@ export interface Bdb {
   metrics_export_all: boolean;
   mkms: boolean;
   module_list: Module[];
+
+  /**
+   * Database name.
+   *
+   * @type {string}
+   */
   name: string;
+
   oss_cluster: boolean;
   oss_cluster_api_preferred_ip_type: AddressType;
   oss_sharding: boolean;
@@ -121,26 +152,13 @@ export interface Bdb {
   syncer_mode: 'centralized';
   tls_mode: 'disabled';
   type: 'redis';
+  /**
+   * Cluster unique ID of database.
+   *
+   * @type {number}
+   */
   uid: number;
+
   version: string;
   wait_command: boolean;
 }
-
-// /**
-//  * Bdb (Database)
-//  */
-// export interface Bdb {
-//   /**
-//    * Database name
-//    *
-//    * @type {string}
-//    */
-//   name: string;
-//
-//   /**
-//    * Cluster unique ID of database.
-//    *
-//    * @type {number}
-//    */
-//   uid: number;
-// }
