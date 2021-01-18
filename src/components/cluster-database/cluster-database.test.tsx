@@ -145,6 +145,10 @@ describe('ClusterDatabase', () => {
           moduleName: 'search',
         },
         {
+          component: RedisSearch,
+          moduleName: 'ft',
+        },
+        {
           component: RedisBloom,
           moduleName: 'bloom',
         },
