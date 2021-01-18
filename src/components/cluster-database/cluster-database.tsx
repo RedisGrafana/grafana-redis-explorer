@@ -131,7 +131,7 @@ export class ClusterDatabase extends PureComponent<Props, State> {
     return (
       <HorizontalGroup justify="space-between" align="center">
         <HorizontalGroup justify="flex-start">
-          {db.acl.length > 0 && (
+          {db.tls_mode !== 'disabled' && (
             <Container margin="xs">
               <MultiLayerSecurity fill={fill} size={32} style={iconStyle} />
             </Container>

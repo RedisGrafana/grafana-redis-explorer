@@ -8,8 +8,8 @@ export const MultiLayerSecurity: FC<SVGProps> = ({ size, fill, ...rest }) => {
   return (
     <a
       target="_blank"
-      href="https://docs.redislabs.com/latest/rs/administering/access-control/user-roles/"
-      title="Role-Based Access Control"
+      href="https://docs.redislabs.com/latest/rs/administering/designing-production/security/"
+      title="TLS Authentication and Encryption"
     >
       <svg
         version="1.1"
