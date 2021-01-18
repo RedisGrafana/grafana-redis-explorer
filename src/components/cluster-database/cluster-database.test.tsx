@@ -1,17 +1,17 @@
-import { shallow, ShallowWrapper } from 'enzyme';
 import React from 'react';
-import { Bdb, BdbEndpoint } from 'redis-enterprise-software-datasource/api';
+import { shallow, ShallowWrapper } from 'enzyme';
 import {
+  HighAvailability,
   MultiLayerSecurity,
-  RedisTimeSeries,
+  RedisAI,
   RedisBloom,
   RedisGears,
   RedisGraph,
   RedisJSON,
   RedisSearch,
-  RedisAI,
-  HighAvailability,
+  RedisTimeSeries,
 } from 'icons';
+import { Bdb, BdbEndpoint } from 'redis-enterprise-software-datasource/api';
 import { ClusterDatabase } from './cluster-database';
 
 type ShallowComponent = ShallowWrapper<ClusterDatabase['props'], ClusterDatabase['state'], ClusterDatabase>;
@@ -43,7 +43,7 @@ const getDb = (dbOptions: { [K in keyof Bdb]?: any } = {}): any => ({
 });
 
 /**
- * ClusterDatabase
+ * Cluster Database
  */
 describe('ClusterDatabase', () => {
   const onAdd = jest.fn();

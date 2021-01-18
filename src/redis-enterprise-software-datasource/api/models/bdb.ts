@@ -10,7 +10,7 @@ enum Status {
   Active = 'active',
 }
 
-type ModuleName = 'timeseries' | 'rg' | 'search' | 'json' | 'graph' | 'bloom' | 'ai';
+type ModuleName = 'timeseries' | 'rg' | 'search' | 'json' | 'graph' | 'bloom' | 'ai' | 'ft';
 
 interface Module {
   module_args: string;

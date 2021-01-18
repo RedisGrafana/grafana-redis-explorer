@@ -3,6 +3,7 @@ import {
   MultiLayerSecurity,
   RedisAI,
   RedisBloom,
+  RedisCube,
   RedisGears,
   RedisGraph,
   RedisJSON,
@@ -19,9 +20,21 @@ import { NewDatasourceOptions } from '../../types';
  * Properties
  */
 interface Props {
+  /**
+   * Database
+   *
+   * @type {Bdb}
+   */
   db: Bdb;
-  onAdd: (db: Bdb, options: NewDatasourceOptions) => void;
+
+  /**
+   * Already added
+   *
+   * @type {boolean}
+   */
   isCanAdd: boolean;
+
+  onAdd: (db: Bdb, options: NewDatasourceOptions) => void;
 }
 
 /**
@@ -45,7 +58,8 @@ const iconStyle = {
  */
 export class ClusterDatabase extends PureComponent<Props, State> {
   /**
-   * getBdbUrl convert endpoint info to correct url for redis-datasource
+   * Convert endpoint info to correct url for redis-datasource
+   *
    * @param endpoint
    */
   static getBdbUrl(endpoint: BdbEndpoint) {
@@ -53,7 +67,8 @@ export class ClusterDatabase extends PureComponent<Props, State> {
   }
 
   /**
-   * convertEndpointToSelectableValue converts endpoint to the selectable value
+   * Converts endpoint to the selectable value
+   *
    * @param endpoint
    */
   static convertEndpointToSelectableValue(endpoint: BdbEndpoint): SelectableValue<string> {
@@ -63,8 +78,14 @@ export class ClusterDatabase extends PureComponent<Props, State> {
     };
   }
 
+  /**
+   * Constructor
+   *
+   * @param props
+   */
   constructor(props: Props) {
     super(props);
+
     /**
      * Convert Endpoints To SelectableValues
      */
@@ -72,6 +93,9 @@ export class ClusterDatabase extends PureComponent<Props, State> {
       ClusterDatabase.convertEndpointToSelectableValue(endpoint)
     );
 
+    /**
+     * Set State
+     */
     this.state = {
       endpointOptions,
       selectedEndpointValue: endpointOptions.length > 0 ? endpointOptions[0].value : undefined,
@@ -79,7 +103,8 @@ export class ClusterDatabase extends PureComponent<Props, State> {
   }
 
   /**
-   * onChangeEndpoint
+   * Change Endpoint
+   *
    * @param item
    */
   onChangeEndpoint = (item: SelectableValue<string>) => {
@@ -95,6 +120,9 @@ export class ClusterDatabase extends PureComponent<Props, State> {
     this.props.onAdd(this.props.db, { url: this.state.selectedEndpointValue! });
   };
 
+  /**
+   * Render
+   */
   render() {
     const { isCanAdd, db } = this.props;
     const { endpointOptions, selectedEndpointValue } = this.state;
@@ -102,31 +130,43 @@ export class ClusterDatabase extends PureComponent<Props, State> {
 
     return (
       <HorizontalGroup justify="space-between" align="center">
-        <HorizontalGroup>
-          <Container margin="xs">{this.props.db.name}</Container>
-        </HorizontalGroup>
-        <HorizontalGroup justify="flex-end">
+        <HorizontalGroup justify="flex-start">
           {(db.tls_mode !== 'disabled' || db.acl.length > 0) && (
             <Container margin="xs">
               <MultiLayerSecurity fill={fill} size={32} style={iconStyle} />
             </Container>
           )}
+
           {db.oss_cluster && (
             <Container margin="xs">
               <HighAvailability fill={fill} size={32} style={iconStyle} />
             </Container>
           )}
+
           {db.module_list.map((module) => (
             <Container margin="xs" key={module.module_id}>
               {module.module_name === 'timeseries' && <RedisTimeSeries fill={fill} size={32} style={iconStyle} />}
               {module.module_name === 'rg' && <RedisGears fill={fill} size={32} style={iconStyle} />}
-              {module.module_name === 'search' && <RedisSearch fill={fill} size={32} style={iconStyle} />}
+              {(module.module_name === 'search' || module.module_name === 'ft') && (
+                <RedisSearch fill={fill} size={32} style={iconStyle} />
+              )}
               {module.module_name === 'bloom' && <RedisBloom fill={fill} size={32} style={iconStyle} />}
               {module.module_name === 'json' && <RedisJSON fill={fill} size={32} style={iconStyle} />}
               {module.module_name === 'graph' && <RedisGraph fill={fill} size={32} style={iconStyle} />}
               {module.module_name === 'ai' && <RedisAI fill={fill} size={32} style={iconStyle} />}
             </Container>
           ))}
+
+          {!db.module_list.length && (
+            <Container margin="xs">
+              <RedisCube fill={fill} size={32} style={iconStyle} />
+            </Container>
+          )}
+
+          <Container margin="xs">{this.props.db.name}</Container>
+        </HorizontalGroup>
+
+        <HorizontalGroup justify="flex-end">
           {isCanAdd && (
             <>
               {endpointOptions.length > 1 && (
@@ -142,11 +182,16 @@ export class ClusterDatabase extends PureComponent<Props, State> {
                   </div>
                 </Container>
               )}
+
               <Container>
-                <Button onClick={this.onAdd}>Add Redis Datasource</Button>
+                <Button onClick={this.onAdd} icon="plus">
+                  Add Redis Data Source
+                </Button>
               </Container>
             </>
           )}
+
+          {!isCanAdd && <Container>Already added</Container>}
         </HorizontalGroup>
       </HorizontalGroup>
     );
