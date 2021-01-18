@@ -8,7 +8,7 @@ export const RedisGears: FC<SVGProps> = ({ size, fill, ...rest }) => {
   return (
     <a
       target="_blank"
-      href="http://redisgears.io"
+      href="https://docs.redislabs.com/latest/modules/redisgears/"
       title="RedisGears is a serverless engine for transaction, batch and event-driven data processing in Redis."
     >
       <svg version="1.1" id="RedisGears" x="0px" y="0px" viewBox="0 0 32 32" width={size} height={size} {...rest}>

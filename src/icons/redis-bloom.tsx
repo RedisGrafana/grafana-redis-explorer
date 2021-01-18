@@ -8,8 +8,8 @@ export const RedisBloom: FC<SVGProps> = ({ size, fill, ...rest }) => {
   return (
     <a
       target="_blank"
-      href="http://redisbloom.io"
-      title="RedisBloom module provides four datatypes, a Scalable Bloom Filter and Cuckoo Filter, a Count-Mins-Sketch and a Top-K."
+      href="https://docs.redislabs.com/latest/modules/redisbloom/"
+      title="A Bloom filter is a probabilistic data structure which provides an efficient way to verify that an entry is certainly not in a set."
     >
       <svg version="1.1" id="RedisBloom" x="0px" y="0px" viewBox="0 0 32 32" width={size} height={size} {...rest}>
         <path

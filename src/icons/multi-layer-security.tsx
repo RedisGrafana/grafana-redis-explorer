@@ -6,7 +6,11 @@ import { SVGProps } from '../types';
  */
 export const MultiLayerSecurity: FC<SVGProps> = ({ size, fill, ...rest }) => {
   return (
-    <a target="_blank" href="http://redis.io" title="Multi Layer Security enabled.">
+    <a
+      target="_blank"
+      href="https://docs.redislabs.com/latest/rs/administering/access-control/user-roles/"
+      title="Role-Based Access Control"
+    >
       <svg
         version="1.1"
         id="MultiLayerSecurity"

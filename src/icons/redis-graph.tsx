@@ -8,7 +8,7 @@ export const RedisGraph: FC<SVGProps> = ({ size, fill, ...rest }) => {
   return (
     <a
       target="_blank"
-      href="http://redisgraph.io"
+      href="https://docs.redislabs.com/latest/modules/redisgraph/"
       title="RedisGraph is the first queryable Property Graph database to use sparse matrices to represent the adjacency matrix in graphs and linear algebra to query the graph."
     >
       <svg version="1.1" id="RedisGraph" x="0px" y="0px" viewBox="0 0 32 32" width={size} height={size} {...rest}>

@@ -8,7 +8,7 @@ export const RedisAI: FC<SVGProps> = ({ size, fill, ...rest }) => {
   return (
     <a
       target="_blank"
-      href="http://redisai.io"
+      href="https://docs.redislabs.com/latest/modules/redisai/"
       title="RedisAI is a Redis module for executing Deep Learning/Machine Learning models and managing their data."
     >
       <svg version="1.1" id="RedisAI" x="0px" y="0px" viewBox="0 0 32 32" width={size} height={size} {...rest}>

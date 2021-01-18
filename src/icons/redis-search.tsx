@@ -8,7 +8,7 @@ export const RedisSearch: FC<SVGProps> = ({ size, fill, ...rest }) => {
   return (
     <a
       target="_blank"
-      href="http://redisearch.io"
+      href="https://docs.redislabs.com/latest/modules/redisearch/"
       title="RediSearch is a Full-Text and Secondary Index engine over Redis."
     >
       <svg version="1.1" id="RediSearch" x="0px" y="0px" viewBox="0 0 32 32" width={size} height={size} {...rest}>
