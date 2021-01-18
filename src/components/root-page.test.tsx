@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { AppPluginMeta, PluginType, toDataFrame, FieldType } from '@grafana/data';
+import { AppPluginMeta, FieldType, PluginType, toDataFrame } from '@grafana/data';
 import { InfoBox } from '@grafana/ui';
-import { DataSourceType } from '../types';
-import { RootPage } from './root-page';
 import { QueryTypeValue } from '../redis-enterprise-software-datasource/api';
+import { DataSourceType } from '../types';
 import { DataSourceList } from './data-source-list';
+import { RootPage } from './root-page';
 
 /**
  * Meta
@@ -126,7 +126,7 @@ describe('RootPage', () => {
         expect(getRedisMock).toHaveBeenCalledWith('redis');
         expect(redisMock.query).toHaveBeenCalledWith({ targets: [{ queryType: QueryTypeValue.CLUSTER }] });
         expect(wrapper.state().loading).toBeFalsy();
-        expect(wrapper.state().datasources).toEqual([
+        expect(wrapper.state().dataSources).toEqual([
           {
             type: DataSourceType.SOFTWARE,
             name: 'redis',
@@ -191,7 +191,7 @@ describe('RootPage', () => {
         );
         expect(loadingMessageComponent.exists()).not.toBeTruthy();
         expect(dataSourceListComponent.exists()).toBeTruthy();
-        expect(dataSourceListComponent.prop('datasources')).toEqual(wrapper.state().datasources);
+        expect(dataSourceListComponent.prop('dataSources')).toEqual(wrapper.state().dataSources);
         done();
       });
     });

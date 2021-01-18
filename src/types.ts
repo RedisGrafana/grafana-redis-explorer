@@ -1,3 +1,5 @@
+import { DataSourceInstanceSettings } from '@grafana/data';
+
 /**
  * Global Settings
  */
@@ -41,4 +43,28 @@ export interface SVGProps extends React.HTMLAttributes<SVGElement> {
    * @type {string}
    */
   className?: string;
+}
+
+/**
+ * Instance Settings
+ */
+export interface EnterpriseDataSourceInstanceSettings extends DataSourceInstanceSettings {
+  /**
+   * Fields
+   *
+   * @type {any}
+   */
+  fields: any;
+}
+
+/**
+ * New Data Source Options
+ */
+export interface NewDatasourceOptions {
+  /**
+   * URL
+   *
+   * @type {string}
+   */
+  url: string;
 }
