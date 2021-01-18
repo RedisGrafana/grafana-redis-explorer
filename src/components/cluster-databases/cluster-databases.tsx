@@ -11,6 +11,11 @@ import { ClusterDatabase } from '../cluster-database';
  * Properties
  */
 interface Props {
+  /**
+   * Data Source
+   *
+   * @type {EnterpriseDataSourceInstanceSettings}
+   */
   dataSource: EnterpriseDataSourceInstanceSettings;
 }
 
@@ -18,8 +23,25 @@ interface Props {
  * State
  */
 interface State {
+  /**
+   * Databases
+   *
+   * @type {Bdb[]}
+   */
   bdbs: Bdb[];
+
+  /**
+   * Data Sources
+   *
+   * @type {DataSourceInstanceSettings[]}
+   */
   dataSources: DataSourceInstanceSettings[];
+
+  /**
+   * Loading
+   *
+   * @type {boolean}
+   */
   isLoading: boolean;
 }
 
@@ -37,6 +59,9 @@ export class ClusterDatabases extends PureComponent<Props, State> {
    */
   private dataSourceSrv: DataSourceSrv = getDataSourceSrv();
 
+  /**
+   * State
+   */
   state = {
     bdbs: [],
     dataSources: [],
@@ -66,11 +91,13 @@ export class ClusterDatabases extends PureComponent<Props, State> {
     if (dataSourceApi) {
       return dataSourceApi.api.getBdbs({ queryType: QueryTypeValue.BDBS, refId: '' });
     }
+
     return Promise.resolve([]);
   };
 
   /**
    * Get correct config for data source
+   *
    * @param db
    * @param options
    */
@@ -102,6 +129,7 @@ export class ClusterDatabases extends PureComponent<Props, State> {
 
   /**
    * Add a data source
+   *
    * @param db
    * @param options
    */
@@ -126,19 +154,24 @@ export class ClusterDatabases extends PureComponent<Props, State> {
 
     return (
       <>
-        {bdbs.map((db: Bdb) => (
-          <div key={db.name} className={css(`margin: 12px 0;`)}>
-            <ClusterDatabase
-              isCanAdd={
-                !dataSources.find(
-                  (item: DataSourceInstanceSettings) => item.name === `${this.props.dataSource.fields.name}:${db.name}`
-                )
-              }
-              db={db}
-              onAdd={this.onAddDataSource}
-            />
-          </div>
-        ))}
+        {bdbs
+          .sort(function(a: Bdb, b: Bdb) {
+            return a.name.localeCompare(b.name);
+          })
+          .map((db: Bdb) => (
+            <div key={db.name} className={css(`margin: 12px 0;`)}>
+              <ClusterDatabase
+                isCanAdd={
+                  !dataSources.find(
+                    (item: DataSourceInstanceSettings) =>
+                      item.name === `${this.props.dataSource.fields.name}:${db.name}`
+                  )
+                }
+                db={db}
+                onAdd={this.onAddDataSource}
+              />
+            </div>
+          ))}
       </>
     );
   }

@@ -4,11 +4,17 @@ import { Bdb, QueryTypeValue } from 'redis-enterprise-software-datasource/api';
 import { ClusterDatabase } from '../cluster-database';
 import { ClusterDatabases } from './cluster-databases';
 
+/**
+ * Backend Service
+ */
 const backendSrvMock = {
   post: jest.fn(),
   get: jest.fn(),
 };
 
+/**
+ * Data Source
+ */
 const dataSourceMock = {
   api: {
     getBdbs: jest.fn(),
@@ -27,6 +33,7 @@ jest.mock('@grafana/runtime', () => ({
 
 /**
  * getDb
+ *
  * @param dbOptions
  */
 const getDb = (dbOptions: { [K in keyof Bdb]?: any } = {}): any => ({
@@ -38,6 +45,7 @@ const getDb = (dbOptions: { [K in keyof Bdb]?: any } = {}): any => ({
 
 /**
  * getDataSource
+ *
  * @param dsOptions
  */
 const getDataSource = (dsOptions: any = {}) => ({

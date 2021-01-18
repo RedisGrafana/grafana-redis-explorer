@@ -45,7 +45,15 @@ export interface SVGProps extends React.HTMLAttributes<SVGElement> {
   className?: string;
 }
 
+/**
+ * Instance Settings
+ */
 export interface EnterpriseDataSourceInstanceSettings extends DataSourceInstanceSettings {
+  /**
+   * Fields
+   *
+   * @type {any}
+   */
   fields: any;
 }
 
