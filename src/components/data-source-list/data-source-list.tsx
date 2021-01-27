@@ -64,7 +64,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
     <div>
       <div className="page-action-bar">
         {isShowDataSourceDetails && (
-          <LinkButton href="/a/redis-explorer/" icon="arrow-left" variant="link">
+          <LinkButton href="/a/redis-explorer-app/" icon="arrow-left" variant="link">
             Back
           </LinkButton>
         )}
@@ -104,7 +104,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
                             <Container margin="xs">
                               <LinkButton
                                 variant="secondary"
-                                href={`/a/redis-explorer?datasource=${redis.id}`}
+                                href={`/a/redis-explorer-app?datasource=${redis.id}`}
                                 title="Show cluster databases"
                                 icon="database"
                               >

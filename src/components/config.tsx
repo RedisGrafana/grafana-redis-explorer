@@ -7,7 +7,7 @@ import { DataSourceType, GlobalSettings } from '../types';
 /**
  * Plug-in Path
  */
-const HOME_PATH = 'a/redis-explorer/';
+const HOME_PATH = 'a/redis-explorer-app/';
 
 /**
  * Page Properties

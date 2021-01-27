@@ -21,10 +21,11 @@ services:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_BASIC_ENABLED=false
       - GF_ENABLE_GZIP=true
-      # - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=redis-explorer
+      - GF_USERS_DEFAULT_THEME=light
+      # - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=redis-explorer-app
       # Uncomment to run in debug mode
       # - GF_LOG_LEVEL=debug
     volumes:
-      - ./dist:/var/lib/grafana/plugins/redis-explorer
+      - ./dist:/var/lib/grafana/plugins/redis-explorer-app
       # Uncomment to preserve Grafana configuration
       # - ./data:/var/lib/grafana

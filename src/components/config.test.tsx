@@ -200,7 +200,7 @@ describe('Config', () => {
       const wrapper = shallow<Config>(<Config plugin={plugin} query={null as any} />);
       wrapper.instance().goHome();
       expect(updateLocationMock).toHaveBeenCalledWith({
-        path: 'a/redis-explorer/',
+        path: 'a/redis-explorer-app/',
         partial: false,
       });
     });
