@@ -11,12 +11,12 @@ ENV GF_USERS_DEFAULT_THEME="light"
 
 # Paths
 ENV GF_PATHS_PROVISIONING="/etc/grafana/provisioning"
-ENV GF_PATHS_PLUGINS="/var/lib/grafana-plugins"
+ENV GF_PATHS_PLUGINS="/var/lib/grafana/plugins"
 
 # Copy artifacts
-COPY dist $GF_PATHS_PLUGINS
-COPY redis-datasource $GF_PATHS_PLUGINS
-COPY redis-app $GF_PATHS_PLUGINS
+COPY dist $GF_PATHS_PLUGINS/redis-explorer-app
+COPY redis-datasource $GF_PATHS_PLUGINS/redis-datasource
+COPY redis-app $GF_PATHS_PLUGINS/redis-app
 
 # Provisioning
 COPY provisioning/plugins $GF_PATHS_PROVISIONING/plugins
