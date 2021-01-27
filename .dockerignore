@@ -4,5 +4,5 @@
 # Allow files and directories
 !/dist
 !/provisioning
-!/grafana-redis-app
-!/grafana-redis-datasource
+!/redis-app
+!/redis-datasource
