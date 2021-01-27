@@ -11,13 +11,13 @@
       }
     ]
   },
-  "id": "redis-explorer",
+  "id": "redis-explorer-app",
   "includes": [
     {
       "addToNav": true,
       "defaultNav": true,
       "name": "Home",
-      "path": "/a/redis-explorer/",
+      "path": "/a/redis-explorer-app/",
       "role": "Admin",
       "type": "page"
     },

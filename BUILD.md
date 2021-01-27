@@ -39,10 +39,10 @@ yarn build
 - Move distribution to Grafana's `plugins/` folder
 
 ```bash
-mv dist/ /var/lib/grafana/plugins/redis-explorer
+mv dist/ /var/lib/grafana/plugins/redis-explorer-app
 ```
 
-- Add `redis-explorer` to allowed unsigned plugins
+- Add `redis-explorer-app` to allowed unsigned plugins
 
 ```bash
 vi /etc/grafana/grafana.ini
@@ -53,7 +53,7 @@ vi /etc/grafana/grafana.ini
 ;enable_alpha = false
 ;app_tls_skip_verify_insecure = false
 # Enter a comma-separated list of plugin identifiers to identify plugins that are allowed to be loaded even if they lack a valid signature.
-allow_loading_unsigned_plugins = redis-explorer
+allow_loading_unsigned_plugins = redis-explorer-app
 ```
 
 - Verify that plugin is registered
