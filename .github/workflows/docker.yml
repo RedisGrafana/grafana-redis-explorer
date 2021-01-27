@@ -95,6 +95,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          repository: RedisGrafana/grafana-redis-app
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.2
@@ -192,11 +194,16 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: grafana-redis-datasource
+          path: redis-datasource
 
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
           name: grafana-redis-app
+          path: redis-app
+
+      - name: Display structure of downloaded files
+        run: ls -R
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
