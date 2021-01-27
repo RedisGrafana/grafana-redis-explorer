@@ -20,3 +20,7 @@ COPY redis-app $GF_PATHS_PLUGINS/redis-app
 
 # Provisioning
 COPY provisioning/plugins $GF_PATHS_PROVISIONING/plugins
+
+# Add Execute permissions
+
+RUN chmod +x $GF_PATHS_PLUGINS/redis-datasource/redis-datasource*
