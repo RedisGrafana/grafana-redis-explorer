@@ -1,5 +1,12 @@
 # Redis Explorer plug-in for Grafana
 
+[![Grafana 7](https://img.shields.io/badge/Grafana-7-orange)](https://www.grafana.com)
+[![Redis Data Source](https://img.shields.io/badge/dynamic/json?color=blue&label=Redis%20Data%20Source&query=%24.version&url=https%3A%2F%2Fgrafana.com%2Fapi%2Fplugins%2Fredis-datasource)](https://grafana.com/grafana/plugins/redis-datasource)
+[![Redis Application plug-in](https://img.shields.io/badge/dynamic/json?color=blue&label=Redis%20Application%20plug-in&query=%24.version&url=https%3A%2F%2Fgrafana.com%2Fapi%2Fplugins%2Fredis-app)](https://grafana.com/grafana/plugins/redis-app)
+![CI](https://github.com/RedisGrafana/grafana-redis-explorer/workflows/CI/badge.svg)
+![Docker](https://github.com/RedisGrafana/grafana-redis-explorer/workflows/Docker/badge.svg)
+[![codecov](https://codecov.io/gh/RedisGrafana/grafana-redis-explorer/branch/master/graph/badge.svg?token=15SIRGU8SX)](https://codecov.io/gh/RedisGrafana/grafana-redis-explorer)
+
 ## Summary
 
 - [**Introduction**](#introduction)
@@ -26,19 +33,29 @@ To learn how to build Redis Explorer plug-in and register in the new or existing
 
 ## Getting Started
 
-### Run using `docker-compose` for development
+### Run using `docker` the nightly build (UNSTABLE)
 
-Explorer plug-in have to be built following [BUILD](https://github.com/RedisGrafana/grafana-redis-explorer/blob/master/BUILD.md) instructions before starting using `docker-compose.yml` file.
+Supported platforms are:
 
-Project provides `docker-compose.yml` to start Redis Explorer and Grafana 7.0.
+- linux/amd64
+- linux/arm64
+- linux/arm
 
 ```bash
-docker-compose up
+docker run -d -p 3000:3000 --name=explorer ghcr.io/redisgrafana/redis-explorer:latest
+```
+
+### Run using `docker-compose` for development
+
+Explorer plug-in have to be built following [BUILD](https://github.com/RedisGrafana/grafana-redis-explorer/blob/master/BUILD.md) instructions before starting using `docker-compose-dev.yml` file.
+
+```bash
+docker-compose -f docker-compose-dev.yml up
 ```
 
 ### Open Grafana
 
-Open Grafana in your browser and enable Redis Explorer plug-in.
+Open Grafana in your browser, enable Redis Explorer plug-in and configure Data Sources.
 
 ## Feedback
 
