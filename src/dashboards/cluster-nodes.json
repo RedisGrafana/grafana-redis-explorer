@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.3.5"
+      "version": "7.3.7"
     },
     {
       "type": "panel",
@@ -17,7 +17,7 @@
       "type": "datasource",
       "id": "redis-enterprise-software-datasource",
       "name": "Redis Enterprise Software",
-      "version": "%VERSION%"
+      "version": "1.0.0"
     },
     {
       "type": "panel",
@@ -43,8 +43,16 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1610606340094,
-  "links": [],
+  "iteration": 1611801509182,
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": ["explorer"],
+      "type": "dashboards"
+    }
+  ],
   "panels": [
     {
       "datasource": "$cluster",
@@ -233,7 +241,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "node": "",
@@ -371,7 +379,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -498,7 +506,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -636,7 +644,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -732,7 +740,7 @@
   "refresh": false,
   "schemaVersion": 26,
   "style": "dark",
-  "tags": [],
+  "tags": ["explorer"],
   "templating": {
     "list": [
       {
@@ -848,5 +856,5 @@
   "timezone": "",
   "title": "Cluster Nodes",
   "uid": "hqze6rtGz",
-  "version": 3
+  "version": 1
 }
