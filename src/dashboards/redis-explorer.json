@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.3.5"
+      "version": "7.3.7"
     },
     {
       "type": "panel",
@@ -43,7 +43,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1610345535656,
+  "iteration": 1611804296337,
   "links": [],
   "panels": [
     {
@@ -68,6 +68,12 @@
             "align": null,
             "filterable": false
           },
+          "links": [
+            {
+              "title": "Cluster Overview",
+              "url": "d/viroIzSGz/cluster-overview?${__all_variables}"
+            }
+          ],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -88,6 +94,12 @@
         "y": 1
       },
       "id": 4,
+      "links": [
+        {
+          "title": "Cluster Overview",
+          "url": "d/viroIzSGz/cluster-overview?${__all_variables}"
+        }
+      ],
       "options": {
         "colorMode": "background",
         "graphMode": "area",
@@ -100,7 +112,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "queryType": "cluster",
@@ -161,7 +173,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -289,7 +301,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -426,7 +438,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -564,7 +576,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "queryType": "license",
@@ -678,5 +690,5 @@
   "timezone": "",
   "title": "Enterprise Clusters",
   "uid": "1dKhTjtGk",
-  "version": 1
+  "version": 4
 }

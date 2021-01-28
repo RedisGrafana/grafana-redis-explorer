@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.3.5"
+      "version": "7.3.7"
     },
     {
       "type": "panel",
@@ -23,12 +23,18 @@
       "type": "datasource",
       "id": "redis-enterprise-software-datasource",
       "name": "Redis Enterprise Software",
-      "version": "%VERSION%"
+      "version": "1.0.0"
     },
     {
       "type": "panel",
       "id": "stat",
       "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
       "version": ""
     }
   ],
@@ -49,8 +55,16 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1610344713193,
-  "links": [],
+  "iteration": 1611803023796,
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": ["explorer"],
+      "type": "dashboards"
+    }
+  ],
   "panels": [
     {
       "datasource": "$cluster",
@@ -91,7 +105,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "queryType": "cluster",
@@ -166,7 +180,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "panelId": 6,
@@ -228,7 +242,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "panelId": 6,
@@ -290,7 +304,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "queryType": "license",
@@ -365,7 +379,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "panelId": 56,
@@ -427,7 +441,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "panelId": 56,
@@ -505,7 +519,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -627,7 +641,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -753,7 +767,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -879,7 +893,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1014,7 +1028,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1107,6 +1121,309 @@
       "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Role"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 276
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 206
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Password Issue Date"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeFromNow"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Authentication"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 301
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "id": 64,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Name"
+          }
+        ]
+      },
+      "pluginVersion": "7.3.7",
+      "targets": [
+        {
+          "queryType": "users",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Users",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": ["password_issue_date", "email", "role", "email_alerts", "auth_method", "name"]
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "auth_method": 3,
+              "email": 1,
+              "email_alerts": 4,
+              "name": 0,
+              "password_issue_date": 5,
+              "role": 2,
+              "role_uids": 6
+            },
+            "renameByName": {
+              "auth_method": "Authentication",
+              "email": "Email",
+              "email_alerts": "Email Alerts",
+              "name": "Name",
+              "password_issue_date": "Password Issue Date",
+              "role": "Role",
+              "uid": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "$cluster",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Description"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 673
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "uid"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 268
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 377
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "capabilities"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 284
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Version"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 285
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "command_line_args"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 259
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Arguments"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 458
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "id": 62,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Name"
+          }
+        ]
+      },
+      "pluginVersion": "7.3.7",
+      "targets": [
+        {
+          "queryType": "modules",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Modules",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": ["display_name", "description", "semantic_version", "command_line_args"]
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "command_line_args": 2,
+              "description": 1,
+              "display_name": 0,
+              "module_name": 4,
+              "semantic_version": 3
+            },
+            "renameByName": {
+              "command_line_args": "Arguments",
+              "description": "Description",
+              "display_name": "Name",
+              "semantic_version": "Version"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "$cluster",
+      "fieldConfig": {
+        "defaults": {
           "custom": {}
         },
         "overrides": []
@@ -1115,7 +1432,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 36
       },
       "id": 37,
       "options": {
@@ -1134,12 +1451,92 @@
       "timeShift": null,
       "title": "Events",
       "type": "logs"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 46
+      },
+      "id": 66,
+      "panels": [],
+      "title": "Alerts",
+      "type": "row"
+    },
+    {
+      "datasource": "$cluster",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 47
+      },
+      "id": 68,
+      "options": {
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "alertType": "bdbs",
+          "queryType": "alerts",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Databases",
+      "type": "logs"
+    },
+    {
+      "datasource": "$cluster",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 55
+      },
+      "id": 70,
+      "options": {
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "alertType": "nodes",
+          "queryType": "alerts",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Nodes",
+      "type": "logs"
     }
   ],
   "refresh": false,
   "schemaVersion": 26,
   "style": "dark",
-  "tags": [],
+  "tags": ["explorer"],
   "templating": {
     "list": [
       {
@@ -1167,7 +1564,7 @@
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "1hour",
           "value": "1hour"
         },

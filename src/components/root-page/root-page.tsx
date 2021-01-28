@@ -11,10 +11,11 @@ import {
 } from '@grafana/data';
 import { getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
 import { InfoBox } from '@grafana/ui';
-import { QueryTypeValue } from '../redis-enterprise-software-datasource/api';
-import { REQuery } from '../redis-enterprise-software-datasource/types';
-import { DataSourceType, EnterpriseDataSourceInstanceSettings, GlobalSettings } from '../types';
-import { DataSourceList } from './data-source-list';
+import { DataSourceType } from '../../constants';
+import { QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
+import { REQuery } from '../../redis-enterprise-software-datasource/types';
+import { EnterpriseDataSourceInstanceSettings, GlobalSettings } from '../../types';
+import { DataSourceList } from '../data-source-list';
 
 /**
  * Properties

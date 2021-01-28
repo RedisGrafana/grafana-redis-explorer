@@ -54,7 +54,9 @@ describe('DataSourceList', () => {
       dataSources.forEach((dataSource, index) => {
         const currentItem = dataSourceElement.at(index);
         expect(currentItem.exists()).toBeTruthy();
-        expect(currentItem.find('.card-item').prop('href')).toEqual(`datasources/edit/${dataSource.id}`);
+        expect(currentItem.find('.card-item').prop('href')).toEqual(
+          `d/viroIzSGz/cluster-overview?var-cluster=${dataSource.name}`
+        );
         expect(currentItem.find(RedisEnterpriseSoftware).prop('fill')).toEqual(
           dataSource.fields ? FILLS.success : FILLS.error
         );

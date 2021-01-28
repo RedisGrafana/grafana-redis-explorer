@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.3.5"
+      "version": "7.3.7"
     },
     {
       "type": "panel",
@@ -17,7 +17,7 @@
       "type": "datasource",
       "id": "redis-enterprise-software-datasource",
       "name": "Redis Enterprise Software",
-      "version": "%VERSION%"
+      "version": "1.0.0"
     },
     {
       "type": "panel",
@@ -49,8 +49,16 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1610606776055,
-  "links": [],
+  "iteration": 1611804113107,
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": ["explorer"],
+      "type": "dashboards"
+    }
+  ],
   "panels": [
     {
       "datasource": "$cluster",
@@ -216,7 +224,7 @@
           }
         ]
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "queryType": "bdbs",
@@ -288,7 +296,7 @@
     },
     {
       "collapsed": false,
-      "datasource": "",
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -339,7 +347,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "bdb": "$db",
@@ -355,8 +363,7 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["authentication_sasl_uname", "name"],
-              "pattern": "/name/"
+              "pattern": "/^name$/"
             }
           }
         },
@@ -364,7 +371,8 @@
           "id": "organize",
           "options": {
             "excludeByName": {
-              "authentication_sasl_uname": true
+              "authentication_sasl_uname": false,
+              "authorized_names": false
             },
             "indexByName": {},
             "renameByName": {
@@ -448,7 +456,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -597,7 +605,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -727,7 +735,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -857,7 +865,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "bdb": "$db",
@@ -909,7 +917,7 @@
   "refresh": false,
   "schemaVersion": 26,
   "style": "dark",
-  "tags": [],
+  "tags": ["explorer"],
   "templating": {
     "list": [
       {
@@ -937,7 +945,7 @@
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "15min",
           "value": "15min"
         },
