@@ -41,7 +41,8 @@ export class VariableQueryEditor extends PureComponent<VariableQueryProps> {
     };
     const values = await datasource.metricFindQuery(newQuery);
 
-    onChange(newQuery, values.map(({ text }) => text).join(','));
+    const noValuesText = newQuery.queryType === QueryTypeValue.BDBS ? 'Database ids' : 'Node ids';
+    onChange(newQuery, values.map(({ text }) => text).join(',') || noValuesText);
   };
 
   /**

@@ -43,5 +43,26 @@ describe('VariableQueryEditor', () => {
       );
       done();
     });
+
+    it('Should set default definition if no values', async () => {
+      const datasource = {
+        metricFindQuery: jest.fn().mockImplementation(() => Promise.resolve([])),
+      };
+      const wrapper = shallow<VariableQueryEditor>(
+        <VariableQueryEditor
+          query={{ queryType: QueryTypeValue.NODES }}
+          onChange={onChange}
+          datasource={datasource as any}
+        />
+      );
+      const testedComponent = getComponent(wrapper);
+      await testedComponent.simulate('change', { value: QueryTypeValue.BDBS });
+      expect(onChange).toHaveBeenCalledWith(
+        {
+          queryType: QueryTypeValue.BDBS,
+        },
+        'Database ids'
+      );
+    });
   });
 });
