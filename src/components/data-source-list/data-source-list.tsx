@@ -53,7 +53,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
           path: `datasources/edit/${id}`,
         });
       });
-  }, []);
+  }, [dataSources]);
   /**
    * Check if any data sources was added
    */
