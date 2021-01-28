@@ -35,7 +35,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
       <div>
         <div className="page-action-bar">
           <div className="page-action-bar__spacer" />
-          <LinkButton href="datasources/new" icon="plus">
+          <LinkButton href="datasources/new" icon="plus" variant="secondary">
             Add Redis Enterprise Data Source
           </LinkButton>
         </div>
