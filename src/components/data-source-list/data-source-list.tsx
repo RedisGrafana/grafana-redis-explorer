@@ -122,7 +122,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
                               <LinkButton
                                 variant="secondary"
                                 href={`datasources/edit/${redis.id}`}
-                                title="Show cluster databases"
+                                title="Data Source Settings"
                                 icon="sliders-v-alt"
                               >
                                 Settings
