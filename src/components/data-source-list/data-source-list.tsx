@@ -1,8 +1,10 @@
 import { RedisEnterpriseSoftware } from 'icons';
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { EnterpriseDataSourceInstanceSettings } from 'types';
-import { Container, HorizontalGroup, InfoBox, LinkButton, VerticalGroup } from '@grafana/ui';
+import { Container, HorizontalGroup, InfoBox, LinkButton, VerticalGroup, Button } from '@grafana/ui';
+import { getBackendSrv, getLocationSrv } from '@grafana/runtime';
 import { ClusterDatabases } from '../cluster-databases';
+import { DataSourceType } from '../../constants';
 
 /**
  * Properties
@@ -23,10 +25,35 @@ interface Props {
   };
 }
 
+const getNewDataSourceName = (dataSources: EnterpriseDataSourceInstanceSettings[]) => {
+  let postfix = 1;
+  const name = 'Redis Enterprise Software';
+  if (!dataSources.some((dataSource) => dataSource.name === name)) {
+    return name;
+  }
+  while (dataSources.some((dataSource) => dataSource.name === `${name}-${postfix}`)) {
+    postfix++;
+  }
+  return `${name}-${postfix}`;
+};
+
 /**
  * Data Sources list
  */
 export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
+  const addNewDataSource = useCallback(() => {
+    getBackendSrv()
+      .post('/api/datasources', {
+        name: getNewDataSourceName(dataSources),
+        type: DataSourceType.SOFTWARE,
+        access: 'proxy',
+      })
+      .then(({ id }) => {
+        getLocationSrv().update({
+          path: `datasources/edit/${id}`,
+        });
+      });
+  }, []);
   /**
    * Check if any data sources was added
    */
@@ -35,9 +62,9 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
       <div>
         <div className="page-action-bar">
           <div className="page-action-bar__spacer" />
-          <LinkButton href="datasources/new" icon="plus" variant="secondary">
+          <Button onClick={addNewDataSource} icon="plus" variant="secondary">
             Add Redis Enterprise Data Source
-          </LinkButton>
+          </Button>
         </div>
         <InfoBox title="Please add Redis Enterprise Data Sources.">
           <p>You can add as many data sources as you want to support multiple Redis Enterprise clusters.</p>
@@ -76,9 +103,9 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
         )}
 
         <div className="page-action-bar__spacer" />
-        <LinkButton href="datasources/new" icon="plus" variant="secondary">
+        <Button onClick={addNewDataSource} icon="plus" variant="secondary">
           Add Redis Enterprise Data Source
-        </LinkButton>
+        </Button>
       </div>
 
       <section className="card-section card-list-layout-list">

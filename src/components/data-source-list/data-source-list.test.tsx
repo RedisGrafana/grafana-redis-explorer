@@ -4,8 +4,21 @@ import { InfoBox } from '@grafana/ui';
 import { RedisEnterpriseSoftware } from 'icons';
 import { ClusterDatabases } from '../cluster-databases';
 import { DataSourceList } from './data-source-list';
+import { DataSourceType } from '../../constants';
 
 type ShallowComponent = ShallowWrapper<typeof DataSourceList>;
+
+const backendSrvMock = {
+  post: jest.fn(),
+};
+const locationSrvMock = {
+  update: jest.fn(),
+};
+
+jest.mock('@grafana/runtime', () => ({
+  getBackendSrv: () => backendSrvMock,
+  getLocationSrv: () => locationSrvMock,
+}));
 
 /**
  * DataSourceList
@@ -19,6 +32,11 @@ describe('DataSourceList', () => {
     success: 'Working as expected',
     error: `Can't connect`,
   };
+
+  beforeEach(() => {
+    Object.values(backendSrvMock).forEach((mock) => mock.mockClear());
+    Object.values(locationSrvMock).forEach((mock) => mock.mockClear());
+  });
 
   it('If dataSources.length=0 should show no items message', () => {
     const wrapper = shallow<ShallowComponent>(<DataSourceList dataSources={[]} />);
@@ -96,6 +114,63 @@ describe('DataSourceList', () => {
       const dataSourceComponents = wrapper.find('.card-list').find('.card-item-wrapper');
       expect(dataSourceComponents.length).toEqual(1);
       expect(wrapper.find(ClusterDatabases).exists()).toBeTruthy();
+    });
+  });
+
+  /**
+   * addNewDataSource
+   */
+  describe('addNewDataSource', () => {
+    it('Should add new datasource and redirect on edit page', (done) => {
+      const dataSources = [
+        {
+          id: 1,
+          name: 'Redis Data Source',
+        },
+      ];
+      const wrapper = shallow<ShallowComponent>(
+        <DataSourceList dataSources={dataSources as any} query={{ datasource: '1' }} />
+      );
+      const addDataSourceButton = wrapper.findWhere((node) => node.text() === 'Add Redis Enterprise Data Source').at(0);
+      backendSrvMock.post.mockImplementationOnce(() => Promise.resolve({ id: 123 }));
+      addDataSourceButton.simulate('click');
+      setImmediate(() => {
+        expect(backendSrvMock.post).toHaveBeenCalledWith('/api/datasources', {
+          name: 'Redis Enterprise Software',
+          type: DataSourceType.SOFTWARE,
+          access: 'proxy',
+        });
+        expect(locationSrvMock.update).toHaveBeenCalledWith({ path: 'datasources/edit/123' });
+        done();
+      });
+    });
+
+    it('Should calc new name', (done) => {
+      const dataSources = [
+        {
+          id: 1,
+          name: 'Redis Enterprise Software',
+        },
+        {
+          id: 2,
+          name: 'Redis Enterprise Software-1',
+        },
+      ];
+      const wrapper = shallow<ShallowComponent>(
+        <DataSourceList dataSources={dataSources as any} query={{ datasource: '1' }} />
+      );
+      const addDataSourceButton = wrapper.findWhere((node) => node.text() === 'Add Redis Enterprise Data Source').at(0);
+      backendSrvMock.post.mockImplementationOnce(() => Promise.resolve({ id: 1234 }));
+      addDataSourceButton.simulate('click');
+      setImmediate(() => {
+        expect(backendSrvMock.post).toHaveBeenCalledWith('/api/datasources', {
+          name: 'Redis Enterprise Software-2',
+          type: DataSourceType.SOFTWARE,
+          access: 'proxy',
+        });
+        expect(locationSrvMock.update).toHaveBeenCalledWith({ path: 'datasources/edit/1234' });
+        done();
+      });
     });
   });
 });
