@@ -6,13 +6,6 @@ import { DataSourceInstanceSettings } from '@grafana/data';
 export interface GlobalSettings {}
 
 /**
- * Data Source types
- */
-export enum DataSourceType {
-  SOFTWARE = 'redis-enterprise-software-datasource',
-}
-
-/**
  * SVG
  */
 export interface SVGProps extends React.HTMLAttributes<SVGElement> {

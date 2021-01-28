@@ -14,6 +14,10 @@ interface Props {
    * @type {EnterpriseDataSourceInstanceSettings[]}
    */
   dataSources: EnterpriseDataSourceInstanceSettings[];
+
+  /**
+   * Query
+   */
   query?: {
     datasource?: string;
   };
@@ -44,6 +48,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
 
   const isShowDataSourceDetails = query && query.datasource !== undefined;
   let renderedDataSources = dataSources;
+
   /**
    * Filter active data source if open url with ?datasource=[datasourceId]
    * Double checking query in the if statement is needed here for narrowing query type and good tests coverage,
@@ -52,6 +57,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
    */
   if (isShowDataSourceDetails && query && query.datasource !== undefined) {
     let activeDataSourceId = parseInt(query.datasource, 10);
+
     renderedDataSources = dataSources.filter(
       (dataSources: EnterpriseDataSourceInstanceSettings) => dataSources.id === activeDataSourceId
     );
@@ -68,8 +74,9 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
             Back
           </LinkButton>
         )}
+
         <div className="page-action-bar__spacer" />
-        <LinkButton href="datasources/new" icon="plus">
+        <LinkButton href="datasources/new" icon="plus" variant="secondary">
           Add Redis Enterprise Data Source
         </LinkButton>
       </div>
@@ -82,7 +89,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
 
             return (
               <li className="card-item-wrapper" key={index} aria-label="check-card">
-                <a className="card-item" href={`datasources/edit/${redis.id}`}>
+                <a className="card-item" href={`d/viroIzSGz/cluster-overview?var-cluster=${redis.name}`}>
                   <HorizontalGroup justify="space-between">
                     <HorizontalGroup justify="flex-start">
                       <Container margin="xs">
@@ -100,15 +107,25 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
                           <Container margin="xs">
                             <div className="card-item-type">{redis.fields?.name}</div>
                           </Container>
+
                           {!isShowDataSourceDetails && (
                             <Container margin="xs">
                               <LinkButton
-                                variant="secondary"
+                                variant="primary"
                                 href={`/a/redis-explorer-app?datasource=${redis.id}`}
                                 title="Show cluster databases"
                                 icon="database"
                               >
                                 Databases
+                              </LinkButton>
+                              &nbsp;
+                              <LinkButton
+                                variant="secondary"
+                                href={`datasources/edit/${redis.id}`}
+                                title="Show cluster databases"
+                                icon="sliders-v-alt"
+                              >
+                                Settings
                               </LinkButton>
                             </Container>
                           )}

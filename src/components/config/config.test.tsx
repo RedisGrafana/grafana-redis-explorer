@@ -1,8 +1,8 @@
 import React from 'react';
-import { config, setLocationSrv } from '@grafana/runtime';
 import { shallow } from 'enzyme';
+import { config, setLocationSrv } from '@grafana/runtime';
+import { DataSourceType } from '../../constants';
 import { Config } from './config';
-import { DataSourceType } from '../types';
 
 /**
  * Plugin
