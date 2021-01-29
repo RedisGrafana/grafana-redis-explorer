@@ -9,7 +9,7 @@ import {
   Field,
   NavModelItem,
 } from '@grafana/data';
-import { getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
+import { getDataSourceSrv, getBackendSrv } from '@grafana/runtime';
 import { InfoBox } from '@grafana/ui';
 import { DataSourceType } from '../../constants';
 import { QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
@@ -83,28 +83,38 @@ export class RootPage extends PureComponent<Props, State> {
         /**
          * Get Data Source
          */
-        const redis = await getDataSourceSrv().get(ds.name);
+        try {
+          const redis = await getDataSourceSrv().get(ds.name);
 
-        /**
-         * Execute query
-         */
-        const query = (redis.query({
-          targets: [{ queryType: QueryTypeValue.CLUSTER }],
-        } as DataQueryRequest<REQuery>) as unknown) as Promise<DataQueryResponse>;
+          /**
+           * Execute query
+           */
+          const query = (redis.query({
+            targets: [{ queryType: QueryTypeValue.CLUSTER }],
+          } as DataQueryRequest<REQuery>) as unknown) as Promise<DataQueryResponse>;
 
-        /**
-         * Get available commands
-         */
-        await query
-          .then((response: DataQueryResponse) => response.data)
-          .then((data: DataQueryResponseData[]) =>
-            data.forEach((item: DataQueryResponseData) => {
-              item.fields.forEach((field: Field) => {
-                enterpriseDs.fields[field.name] = head(field.values.toArray());
-              });
-            })
-          );
-
+          /**
+           * Get available commands
+           */
+          await query
+            .then((response: DataQueryResponse) => response.data)
+            .then((data: DataQueryResponseData[]) =>
+              data.forEach((item: DataQueryResponseData) => {
+                item.fields.forEach((field: Field) => {
+                  enterpriseDs.fields[field.name] = head(field.values.toArray());
+                });
+              })
+            )
+            .catch(() => {});
+        } catch (e) {
+          /**
+           * Workaround
+           * Could be a case when dataSourceSrv does not contain a data source that was added via http api
+           * We are unable to call updateFrontendSettings into plugins
+           * https://github.com/grafana/grafana/blob/1d689888b0fc2de2dbed6e606eee19561a3ef006/public/app/features/datasources/state/actions.ts#L211
+           */
+          window.location.reload();
+        }
         return enterpriseDs;
       })
     );
