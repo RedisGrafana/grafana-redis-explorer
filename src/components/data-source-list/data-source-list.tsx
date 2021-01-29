@@ -1,10 +1,10 @@
 import { RedisEnterpriseSoftware } from 'icons';
 import React, { FC, useCallback } from 'react';
 import { EnterpriseDataSourceInstanceSettings } from 'types';
-import { Container, HorizontalGroup, InfoBox, LinkButton, VerticalGroup, Button } from '@grafana/ui';
 import { getBackendSrv, getLocationSrv } from '@grafana/runtime';
+import { Button, Container, HorizontalGroup, InfoBox, LinkButton, VerticalGroup } from '@grafana/ui';
+import { DataSourceName, DataSourceType } from '../../constants';
 import { ClusterDatabases } from '../cluster-databases';
-import { DataSourceType } from '../../constants';
 
 /**
  * Properties
@@ -25,15 +25,26 @@ interface Props {
   };
 }
 
+/**
+ * New Data Source
+ *
+ * @param dataSources
+ */
 const getNewDataSourceName = (dataSources: EnterpriseDataSourceInstanceSettings[]) => {
   let postfix = 1;
-  const name = 'Redis Enterprise Software';
+  const name = DataSourceName.SOFTWARE;
+
+  /**
+   * Check if exists
+   */
   if (!dataSources.some((dataSource) => dataSource.name === name)) {
     return name;
   }
+
   while (dataSources.some((dataSource) => dataSource.name === `${name}-${postfix}`)) {
     postfix++;
   }
+
   return `${name}-${postfix}`;
 };
 
@@ -54,6 +65,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
         });
       });
   }, [dataSources]);
+
   /**
    * Check if any data sources was added
    */
@@ -63,7 +75,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
         <div className="page-action-bar">
           <div className="page-action-bar__spacer" />
           <Button onClick={addNewDataSource} icon="plus" variant="secondary">
-            Add Redis Enterprise Data Source
+            Add Redis Enterprise Software
           </Button>
         </div>
         <InfoBox title="Please add Redis Enterprise Data Sources.">
@@ -104,7 +116,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
 
         <div className="page-action-bar__spacer" />
         <Button onClick={addNewDataSource} icon="plus" variant="secondary">
-          Add Redis Enterprise Data Source
+          Add Redis Enterprise Software
         </Button>
       </div>
 
@@ -165,6 +177,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
             );
           })}
         </ol>
+
         {isShowDataSourceDetails && renderedDataSources.length > 0 && (
           <div className="card-item-wrapper">
             <div className="card-item">
