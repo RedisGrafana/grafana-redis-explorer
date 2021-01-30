@@ -1,24 +1,44 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { InfoBox } from '@grafana/ui';
 import { RedisEnterpriseSoftware } from 'icons';
+import { InfoBox } from '@grafana/ui';
+import { DataSourceName, DataSourceType } from '../../constants';
 import { ClusterDatabases } from '../cluster-databases';
 import { DataSourceList } from './data-source-list';
 
 type ShallowComponent = ShallowWrapper<typeof DataSourceList>;
 
+const backendSrvMock = {
+  post: jest.fn(),
+};
+
+const locationSrvMock = {
+  update: jest.fn(),
+};
+
+jest.mock('@grafana/runtime', () => ({
+  getBackendSrv: () => backendSrvMock,
+  getLocationSrv: () => locationSrvMock,
+}));
+
 /**
- * DataSourceList
+ * Data Source List
  */
 describe('DataSourceList', () => {
   const FILLS = {
     success: '#DC382D',
     error: '#A7A7A7',
   };
+
   const TITLES = {
     success: 'Working as expected',
     error: `Can't connect`,
   };
+
+  beforeEach(() => {
+    Object.values(backendSrvMock).forEach((mock) => mock.mockClear());
+    Object.values(locationSrvMock).forEach((mock) => mock.mockClear());
+  });
 
   it('If dataSources.length=0 should show no items message', () => {
     const wrapper = shallow<ShallowComponent>(<DataSourceList dataSources={[]} />);
@@ -49,8 +69,10 @@ describe('DataSourceList', () => {
           fields: null,
         },
       ];
+
       const wrapper = shallow<ShallowComponent>(<DataSourceList dataSources={dataSources as any} />);
       const dataSourceElement = wrapper.find('.card-item-wrapper');
+
       dataSources.forEach((dataSource, index) => {
         const currentItem = dataSourceElement.at(index);
         expect(currentItem.exists()).toBeTruthy();
@@ -90,12 +112,74 @@ describe('DataSourceList', () => {
           fields: null,
         },
       ];
+
       const wrapper = shallow<ShallowComponent>(
         <DataSourceList dataSources={dataSources as any} query={{ datasource: '1' }} />
       );
       const dataSourceComponents = wrapper.find('.card-list').find('.card-item-wrapper');
       expect(dataSourceComponents.length).toEqual(1);
       expect(wrapper.find(ClusterDatabases).exists()).toBeTruthy();
+    });
+  });
+
+  /**
+   * addNewDataSource
+   */
+  describe('addNewDataSource', () => {
+    it('Should add new datasource and redirect on edit page', (done) => {
+      const dataSources = [
+        {
+          id: 1,
+          name: 'Redis Data Source',
+        },
+      ];
+
+      const wrapper = shallow<ShallowComponent>(
+        <DataSourceList dataSources={dataSources as any} query={{ datasource: '1' }} />
+      );
+      const addDataSourceButton = wrapper.findWhere((node) => node.text() === 'Add Redis Enterprise Software').at(0);
+
+      backendSrvMock.post.mockImplementationOnce(() => Promise.resolve({ id: 123 }));
+      addDataSourceButton.simulate('click');
+      setImmediate(() => {
+        expect(backendSrvMock.post).toHaveBeenCalledWith('/api/datasources', {
+          name: DataSourceName.SOFTWARE,
+          type: DataSourceType.SOFTWARE,
+          access: 'proxy',
+        });
+        expect(locationSrvMock.update).toHaveBeenCalledWith({ path: 'datasources/edit/123' });
+        done();
+      });
+    });
+
+    it('Should calc new name', (done) => {
+      const dataSources = [
+        {
+          id: 1,
+          name: 'Redis Enterprise Software',
+        },
+        {
+          id: 2,
+          name: 'Redis Enterprise Software-1',
+        },
+      ];
+
+      const wrapper = shallow<ShallowComponent>(
+        <DataSourceList dataSources={dataSources as any} query={{ datasource: '1' }} />
+      );
+      const addDataSourceButton = wrapper.findWhere((node) => node.text() === 'Add Redis Enterprise Software').at(0);
+
+      backendSrvMock.post.mockImplementationOnce(() => Promise.resolve({ id: 1234 }));
+      addDataSourceButton.simulate('click');
+      setImmediate(() => {
+        expect(backendSrvMock.post).toHaveBeenCalledWith('/api/datasources', {
+          name: `${DataSourceName.SOFTWARE}-2`,
+          type: DataSourceType.SOFTWARE,
+          access: 'proxy',
+        });
+        expect(locationSrvMock.update).toHaveBeenCalledWith({ path: 'datasources/edit/1234' });
+        done();
+      });
     });
   });
 });

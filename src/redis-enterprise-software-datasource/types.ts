@@ -1,5 +1,6 @@
 import { DataQuery, DataSourceJsonData, FieldType, ValueConverter } from '@grafana/data';
 import { QueryTypeValue } from './api';
+import { DataSourceFrameType, DataSourceTestStatus } from './constants';
 
 /**
  * Variable Query interface
@@ -108,14 +109,6 @@ export interface RESecureJsonData {
 }
 
 /**
- * Datasource test status
- */
-export enum DataSourceTestStatus {
-  SUCCESS = 'success',
-  ERROR = 'error',
-}
-
-/**
  * Datasource test result
  */
 export interface DataSourceTestResult {
@@ -132,14 +125,6 @@ export interface DataSourceTestResult {
    * @type {string}
    */
   message: string;
-}
-
-/**
- * Datasource frame type
- */
-export enum DataSourceFrameType {
-  ARRAY = 'ArrayDataFrame',
-  MUTABLE = 'MutableDataFrame',
 }
 
 /**

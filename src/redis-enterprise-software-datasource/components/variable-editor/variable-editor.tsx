@@ -22,6 +22,10 @@ interface VariableQueryProps {
    * @type {VariableQuery}
    */
   query: VariableQuery;
+
+  /**
+   * On Change
+   */
   onChange: (query: VariableQuery, definition: string) => void;
 }
 
@@ -35,13 +39,19 @@ export class VariableQueryEditor extends PureComponent<VariableQueryProps> {
    */
   onChangeType = async (item: SelectableValue<QueryTypeValue>) => {
     const { query, onChange, datasource } = this.props;
+
     const newQuery = {
       ...query,
       queryType: item.value!,
     };
+
+    /**
+     * Run Query
+     */
     const values = await datasource.metricFindQuery(newQuery);
 
-    onChange(newQuery, values.map(({ text }) => text).join(','));
+    const noValuesText = newQuery.queryType === QueryTypeValue.BDBS ? 'Database ids' : 'Node ids';
+    onChange(newQuery, values.map(({ text }) => text).join(',') || noValuesText);
   };
 
   /**
