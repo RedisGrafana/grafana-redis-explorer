@@ -12,12 +12,18 @@ import {
 import { getTemplateSrv } from '@grafana/runtime';
 import { Api, DATASOURCE_FRAME, QueryTypeValue } from '../api';
 import { DataSourceFrameType, DataSourceTestStatus } from '../constants';
-import { DataSourceArrayFrameField, DataSourceTestResult, REDataSourceOptions, REQuery, VariableQuery } from '../types';
+import {
+  DataSourceArrayFrameField,
+  DataSourceOptions,
+  DataSourceTestResult,
+  RedisEnterpriseQuery,
+  VariableQuery,
+} from '../types';
 
 /**
  * Redis Enterprise Datasource
  */
-export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
+export class DataSource extends DataSourceApi<RedisEnterpriseQuery, DataSourceOptions> {
   /**
    * Redis Enterprise Software Api
    *
@@ -28,9 +34,9 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
   /**
    * Constructor
    *
-   * @param {DataSourceInstanceSettings<REDataSourceOptions>} instanceSettings Settings
+   * @param {DataSourceInstanceSettings<DataSourceOptions>} instanceSettings Settings
    */
-  constructor(public instanceSettings: DataSourceInstanceSettings<REDataSourceOptions>) {
+  constructor(public instanceSettings: DataSourceInstanceSettings<DataSourceOptions>) {
     super(instanceSettings);
     this.api = new Api(instanceSettings);
   }
@@ -63,10 +69,10 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
    * Query for data
    *
    * @async
-   * @param {DataQueryRequest<REQuery>} options Options
+   * @param {DataQueryRequest<RedisEnterpriseQuery>} options Options
    * @returns {Promise<DataQueryResponse>} Response
    */
-  async query(options: DataQueryRequest<REQuery>): Promise<DataQueryResponse> {
+  async query(options: DataQueryRequest<RedisEnterpriseQuery>): Promise<DataQueryResponse> {
     const data: DataFrame[] = [];
     const { range } = options;
 

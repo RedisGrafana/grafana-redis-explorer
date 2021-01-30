@@ -1,7 +1,7 @@
 import { DataQueryRequest, DataQueryResponse, DateTime, dateTime, MutableDataFrame } from '@grafana/data';
 import { LogItem, QueryTypeValue } from '../api';
 import { DataSourceTestStatus } from '../constants';
-import { REQuery } from '../types';
+import { RedisEnterpriseQuery } from '../types';
 import { DataSource } from './data-source';
 
 /**
@@ -9,13 +9,13 @@ import { DataSource } from './data-source';
  */
 interface OverrideRequest {
   [key: string]: unknown;
-  targets?: REQuery[];
+  targets?: RedisEnterpriseQuery[];
 }
 
 /**
  * Request
  */
-const getRequest = (overrideRequest: OverrideRequest = {}): DataQueryRequest<REQuery> => ({
+const getRequest = (overrideRequest: OverrideRequest = {}): DataQueryRequest<RedisEnterpriseQuery> => ({
   requestId: '',
   interval: '',
   intervalMs: 0,

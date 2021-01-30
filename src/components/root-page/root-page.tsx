@@ -13,7 +13,7 @@ import { config, getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
 import { InfoBox } from '@grafana/ui';
 import { DataSourceType } from '../../constants';
 import { QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
-import { REQuery } from '../../redis-enterprise-software-datasource/types';
+import { RedisEnterpriseQuery } from '../../redis-enterprise-software-datasource/types';
 import { EnterpriseDataSourceInstanceSettings, GlobalSettings } from '../../types';
 import { DataSourceList } from '../data-source-list';
 
@@ -110,7 +110,7 @@ export class RootPage extends PureComponent<Props, State> {
          */
         const query = (redis.query({
           targets: [{ queryType: QueryTypeValue.CLUSTER }],
-        } as DataQueryRequest<REQuery>) as unknown) as Promise<DataQueryResponse>;
+        } as DataQueryRequest<RedisEnterpriseQuery>) as unknown) as Promise<DataQueryResponse>;
 
         /**
          * Get available commands

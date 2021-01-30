@@ -17,7 +17,7 @@ export interface VariableQuery {
 /**
  * Query interface
  */
-export interface REQuery extends DataQuery {
+export interface RedisEnterpriseQuery extends DataQuery {
   /**
    * Query Type
    *
@@ -79,7 +79,7 @@ export interface REQuery extends DataQuery {
  * Datasource configuration options.
  * These are options configured for each DataSource instance
  */
-export interface REDataSourceOptions extends DataSourceJsonData {
+export interface DataSourceOptions extends DataSourceJsonData {
   /**
    * Host to access Redis Enterprise Software API
    *
@@ -99,7 +99,7 @@ export interface REDataSourceOptions extends DataSourceJsonData {
  * Datasource secure configuration options.
  * Value that is used in the backend, but never sent over HTTP to the frontend
  */
-export interface RESecureJsonData {
+export interface SecureJsonData {
   /**
    * Password to access Redis Enterprise Software API
    *

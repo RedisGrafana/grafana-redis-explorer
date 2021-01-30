@@ -2,7 +2,7 @@ import React from 'react';
 import { DataSourceSettings } from '@grafana/data';
 import { shallow } from 'enzyme';
 import { ConfigEditor } from './config-editor';
-import { REDataSourceOptions } from '../../types';
+import { DataSourceOptions } from '../../types';
 
 /**
  * Override Options
@@ -20,7 +20,7 @@ const getOptions = ({
   jsonData = {},
   secureJsonData = {},
   ...overrideOptions
-}: OverrideOptions = {}): DataSourceSettings<REDataSourceOptions, any> => ({
+}: OverrideOptions = {}): DataSourceSettings<DataSourceOptions, any> => ({
   id: 1,
   orgId: 2,
   name: '',

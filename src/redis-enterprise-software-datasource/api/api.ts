@@ -1,7 +1,7 @@
 import { assign, defaultTo, get, isArray, isNaN, isNil, isObject, keys, omit, sortBy, toPairs } from 'lodash';
 import { DataSourceInstanceSettings, TimeRange } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
-import { REDataSourceOptions, REQuery } from '../types';
+import { DataSourceOptions, RedisEnterpriseQuery } from '../types';
 import { Bdb, Cluster, License, Log, Module, Node, Stat, User } from './models';
 import { DATASOURCE_FRAME, LogItem, QueryTypeValue } from './types';
 
@@ -12,19 +12,19 @@ export class Api {
   /**
    * Constructor
    *
-   * @param {DataSourceInstanceSettings<REDataSourceOptions>} instanceSettings Settings
+   * @param {DataSourceInstanceSettings<DataSourceOptions>} instanceSettings Settings
    */
-  constructor(public instanceSettings: DataSourceInstanceSettings<REDataSourceOptions>) {}
+  constructor(public instanceSettings: DataSourceInstanceSettings<DataSourceOptions>) {}
 
   /**
    * Get cluster info
    *
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-cluster
    * @async
-   * @param {REQuery} query Query
+   * @param {RedisEnterpriseQuery} query Query
    * @returns {Promise<Cluster>} Cluster info
    */
-  async getCluster(query: REQuery): Promise<Cluster> {
+  async getCluster(query: RedisEnterpriseQuery): Promise<Cluster> {
     return getBackendSrv()
       .datasourceRequest({
         method: 'GET',
@@ -38,10 +38,10 @@ export class Api {
    *
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-license
    * @async
-   * @param {REQuery} query Query
+   * @param {RedisEnterpriseQuery} query Query
    * @returns {Promise<License>>} License details
    */
-  async getLicense(query: REQuery): Promise<License> {
+  async getLicense(query: RedisEnterpriseQuery): Promise<License> {
     return getBackendSrv()
       .datasourceRequest({
         method: 'GET',
@@ -55,10 +55,10 @@ export class Api {
    *
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-nodes
    * @async
-   * @param {REQuery} query Query
+   * @param {RedisEnterpriseQuery} query Query
    * @returns {Promise<Node[] | Node>} Array with all nodes or node
    */
-  async getNodes(query: REQuery): Promise<Node[] | Node> {
+  async getNodes(query: RedisEnterpriseQuery): Promise<Node[] | Node> {
     let url = `${this.instanceSettings.url}/nodes`;
     if (query.node) {
       url += `/${query.node}`;
@@ -77,10 +77,10 @@ export class Api {
    *
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-bdbs
    * @async
-   * @param {REQuery} query Query
+   * @param {RedisEnterpriseQuery} query Query
    * @returns {Promise<Bdb[] | Bdb>} Array with all databases or database
    */
-  async getBdbs(query: REQuery): Promise<Bdb[] | Bdb> {
+  async getBdbs(query: RedisEnterpriseQuery): Promise<Bdb[] | Bdb> {
     let url = `${this.instanceSettings.url}/bdbs`;
     if (query.bdb) {
       url += `/${query.bdb}`;
@@ -99,10 +99,10 @@ export class Api {
    *
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-modules
    * @async
-   * @param {REQuery} query Query
+   * @param {RedisEnterpriseQuery} query Query
    * @returns {Promise<Module[] | Module>} Array with all modules or module
    */
-  async getModules(query: REQuery): Promise<Module[] | Module> {
+  async getModules(query: RedisEnterpriseQuery): Promise<Module[] | Module> {
     let url = `${this.instanceSettings.url}/modules`;
     if (query.module) {
       url += `/${query.module}`;
@@ -121,10 +121,10 @@ export class Api {
    *
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-users
    * @async
-   * @param {REQuery} query Query
+   * @param {RedisEnterpriseQuery} query Query
    * @returns {Promise<User[] | User>} Array with all users or user
    */
-  async getUsers(query: REQuery): Promise<User[] | User> {
+  async getUsers(query: RedisEnterpriseQuery): Promise<User[] | User> {
     let url = `${this.instanceSettings.url}/users`;
     if (query.user) {
       url += `/${query.user}`;
@@ -145,11 +145,11 @@ export class Api {
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-nodes-stats
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-bdbs-stats
    * @async
-   * @param {REQuery} query Query
+   * @param {RedisEnterpriseQuery} query Query
    * @param {TimeRange} range Time range
    * @returns {Promise<Stat[]>} Array with all stats
    */
-  async getStats(query: REQuery, range: TimeRange): Promise<Stat[]> {
+  async getStats(query: RedisEnterpriseQuery, range: TimeRange): Promise<Stat[]> {
     let url = `${this.instanceSettings.url}/${query.statsType}/stats`;
     const params = new URLSearchParams();
 
@@ -203,7 +203,7 @@ export class Api {
    * @async
    * @returns {Promise<LogItem[]>} Array of alerts
    */
-  async getAlerts(query: REQuery): Promise<LogItem[]> {
+  async getAlerts(query: RedisEnterpriseQuery): Promise<LogItem[]> {
     let url = `${this.instanceSettings.url}/${query.alertType}/alerts`;
 
     /**
@@ -256,10 +256,10 @@ export class Api {
    *
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-logs
    * @async
-   * @param {REQuery} query Query
+   * @param {RedisEnterpriseQuery} query Query
    * @returns {LogItem[]} Array of events
    */
-  async getLogs(query: REQuery): Promise<LogItem[]> {
+  async getLogs(query: RedisEnterpriseQuery): Promise<LogItem[]> {
     return getBackendSrv()
       .datasourceRequest({
         method: 'GET',
@@ -280,9 +280,9 @@ export class Api {
    * Filter data
    *
    * @param data Response data
-   * @param {REQuery} query Query
+   * @param {RedisEnterpriseQuery} query Query
    */
-  private filterData(data: any, query: REQuery): any {
+  private filterData(data: any, query: RedisEnterpriseQuery): any {
     const frameData = DATASOURCE_FRAME[query.queryType];
     if (isNil(frameData) || isNil(frameData.omit)) {
       return data;
