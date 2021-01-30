@@ -13,7 +13,7 @@ services:
 
   grafana:
     container_name: grafana
-    image: grafana/grafana:latest
+    image: ghcr.io/redisgrafana/redis-explorer:latest
     ports:
       - 3000:3000/tcp
     environment:
@@ -23,9 +23,7 @@ services:
       - GF_ENABLE_GZIP=true
       - GF_USERS_DEFAULT_THEME=light
       # - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=redis-explorer-app
-      # Uncomment to run in debug mode
-      # - GF_LOG_LEVEL=debug
     volumes:
-      - ./dist:/var/lib/grafana/plugins/redis-explorer-app
+      - ./provisioning/plugins:/etc/grafana/provisioning/plugins
       # Uncomment to preserve Grafana configuration
       # - ./data:/var/lib/grafana
