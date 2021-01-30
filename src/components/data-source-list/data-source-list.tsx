@@ -124,6 +124,8 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
         <ol className="card-list">
           {renderedDataSources.map((redis: any, index: number) => {
             const title = redis.fields?.name ? 'Working as expected' : "Can't connect";
+            const name = redis.fields?.name ? redis.fields?.name : 'Unknown';
+            const url = redis.jsonData?.host ? redis.jsonData?.host : 'Not provided';
             const fill = redis.fields?.name ? '#DC382D' : '#A7A7A7';
 
             return (
@@ -136,7 +138,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
                       </Container>
                       <VerticalGroup>
                         <div className="card-item-name">{redis.name}</div>
-                        <div className="card-item-sub-name">{redis.jsonData?.host}</div>
+                        <div className="card-item-sub-name">{url}</div>
                       </VerticalGroup>
                     </HorizontalGroup>
 
@@ -144,19 +146,21 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
                       {!redis.commands?.length && (
                         <>
                           <Container margin="xs">
-                            <div className="card-item-type">{redis.fields?.name}</div>
+                            <div className="card-item-type">{name}</div>
                           </Container>
 
                           {!isShowDataSourceDetails && (
                             <Container margin="xs">
-                              <LinkButton
-                                variant="primary"
-                                href={`/a/redis-explorer-app?datasource=${redis.id}`}
-                                title="Show cluster databases"
-                                icon="database"
-                              >
-                                Databases
-                              </LinkButton>
+                              {redis.fields?.name && (
+                                <LinkButton
+                                  variant="primary"
+                                  href={`/a/redis-explorer-app?datasource=${redis.id}`}
+                                  title="Show cluster databases"
+                                  icon="database"
+                                >
+                                  Databases
+                                </LinkButton>
+                              )}
                               &nbsp;
                               <LinkButton
                                 variant="secondary"
