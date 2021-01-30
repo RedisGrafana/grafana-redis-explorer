@@ -10,9 +10,9 @@ import {
   MutableDataFrame,
 } from '@grafana/data';
 import { getTemplateSrv } from '@grafana/runtime';
-import { Api, DATASOURCE_FRAME, QueryTypeValue } from './api';
-import { DataSourceFrameType, DataSourceTestStatus } from './constants';
-import { DataSourceArrayFrameField, DataSourceTestResult, REDataSourceOptions, REQuery, VariableQuery } from './types';
+import { Api, DATASOURCE_FRAME, QueryTypeValue } from '../api';
+import { DataSourceFrameType, DataSourceTestStatus } from '../constants';
+import { DataSourceArrayFrameField, DataSourceTestResult, REDataSourceOptions, REQuery, VariableQuery } from '../types';
 
 /**
  * Redis Enterprise Datasource

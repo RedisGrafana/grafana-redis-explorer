@@ -86,9 +86,9 @@ describe('DataSourceList', () => {
           dataSource.fields ? TITLES.success : TITLES.error
         );
         expect(currentItem.find('.card-item-name').text()).toEqual(dataSource.name);
-        expect(currentItem.find('.card-item-sub-name').text()).toEqual(dataSource.jsonData?.host || '');
+        expect(currentItem.find('.card-item-sub-name').text()).toEqual(dataSource.jsonData?.host || 'Not provided');
         if (!dataSource.commands || dataSource.commands.length === 0) {
-          expect(currentItem.find('.card-item-type').text()).toEqual(dataSource.fields?.name || '');
+          expect(currentItem.find('.card-item-type').text()).toEqual(dataSource.fields?.name || 'Unknown');
         }
       });
     });

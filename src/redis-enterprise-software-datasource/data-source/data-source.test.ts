@@ -1,8 +1,8 @@
 import { DataQueryRequest, DataQueryResponse, DateTime, dateTime, MutableDataFrame } from '@grafana/data';
-import { LogItem, QueryTypeValue } from './api';
-import { DataSourceTestStatus } from './constants';
+import { LogItem, QueryTypeValue } from '../api';
+import { DataSourceTestStatus } from '../constants';
+import { REQuery } from '../types';
 import { DataSource } from './data-source';
-import { REQuery } from './types';
 
 /**
  * Override Request
@@ -35,7 +35,7 @@ const apiMock = {
   getBdbs: jest.fn().mockImplementation(() => Promise.resolve([])),
 };
 
-jest.mock('./api/api', () => ({
+jest.mock('../api/api', () => ({
   Api: jest.fn().mockImplementation(() => apiMock),
 }));
 
