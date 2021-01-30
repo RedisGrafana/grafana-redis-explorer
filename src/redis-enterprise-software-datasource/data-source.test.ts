@@ -1,7 +1,8 @@
 import { DataQueryRequest, DataQueryResponse, DateTime, dateTime, MutableDataFrame } from '@grafana/data';
 import { LogItem, QueryTypeValue } from './api';
+import { DataSourceTestStatus } from './constants';
 import { DataSource } from './data-source';
-import { DataSourceTestStatus, REQuery } from './types';
+import { REQuery } from './types';
 
 /**
  * Override Request

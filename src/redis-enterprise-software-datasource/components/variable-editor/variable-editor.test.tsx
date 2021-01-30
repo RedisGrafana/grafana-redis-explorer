@@ -1,15 +1,16 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { VariableQueryEditor } from './variable-editor';
 import { QueryTypeValue } from '../../api';
+import { VariableQueryEditor } from './variable-editor';
 
 type ShallowComponent = ShallowWrapper<VariableQueryEditor['props'], VariableQueryEditor['state'], VariableQueryEditor>;
 
 /**
- * VariableQueryEditor
+ * Variable Query Editor
  */
 describe('VariableQueryEditor', () => {
   const onChange = jest.fn();
+
   /**
    * VariableQueryType
    */
@@ -31,9 +32,11 @@ describe('VariableQueryEditor', () => {
           datasource={datasource as any}
         />
       );
+
       const testedComponent = getComponent(wrapper);
       expect(testedComponent.prop('value')).toEqual(QueryTypeValue.BDBS);
       await testedComponent.simulate('change', { value: QueryTypeValue.NODES });
+
       expect(datasource.metricFindQuery).toHaveBeenCalled();
       expect(onChange).toHaveBeenCalledWith(
         {
@@ -48,6 +51,7 @@ describe('VariableQueryEditor', () => {
       const datasource = {
         metricFindQuery: jest.fn().mockImplementation(() => Promise.resolve([])),
       };
+
       const wrapper = shallow<VariableQueryEditor>(
         <VariableQueryEditor
           query={{ queryType: QueryTypeValue.NODES }}
@@ -55,6 +59,7 @@ describe('VariableQueryEditor', () => {
           datasource={datasource as any}
         />
       );
+
       const testedComponent = getComponent(wrapper);
       await testedComponent.simulate('change', { value: QueryTypeValue.BDBS });
       expect(onChange).toHaveBeenCalledWith(

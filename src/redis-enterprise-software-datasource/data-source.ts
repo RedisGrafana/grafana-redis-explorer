@@ -11,15 +11,8 @@ import {
 } from '@grafana/data';
 import { getTemplateSrv } from '@grafana/runtime';
 import { Api, DATASOURCE_FRAME, QueryTypeValue } from './api';
-import {
-  DataSourceArrayFrameField,
-  DataSourceFrameType,
-  DataSourceTestResult,
-  DataSourceTestStatus,
-  REDataSourceOptions,
-  REQuery,
-  VariableQuery,
-} from './types';
+import { DataSourceFrameType, DataSourceTestStatus } from './constants';
+import { DataSourceArrayFrameField, DataSourceTestResult, REDataSourceOptions, REQuery, VariableQuery } from './types';
 
 /**
  * Redis Enterprise Datasource
