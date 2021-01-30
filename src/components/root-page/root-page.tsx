@@ -71,6 +71,26 @@ export class RootPage extends PureComponent<Props, State> {
       });
 
     /**
+     * Workaround, until reload function will be added to DataSourceSrv
+     *
+     * @see https://github.com/grafana/grafana/issues/30728
+     * @see https://github.com/grafana/grafana/issues/29809
+     */
+    await getBackendSrv()
+      .get('/api/frontend/settings')
+      .then((settings: any) => {
+        if (!settings.datasources) {
+          return;
+        }
+
+        /**
+         * Set data sources
+         */
+        config.datasources = settings.datasources;
+        config.defaultDatasource = settings.defaultDatasource;
+      });
+
+    /**
      * Check supported commands for Redis Data Sources
      */
     const finalDataSources = await Promise.all(
@@ -79,26 +99,6 @@ export class RootPage extends PureComponent<Props, State> {
           ...ds,
           fields: {},
         };
-
-        /**
-         * Workaround, until reload function will be added to DataSourceSrv
-         *
-         * @see https://github.com/grafana/grafana/issues/30728
-         * @see https://github.com/grafana/grafana/issues/29809
-         */
-        await getBackendSrv()
-          .get('/api/frontend/settings')
-          .then((settings: any) => {
-            if (!settings.datasources) {
-              return;
-            }
-
-            /**
-             * Set data sources
-             */
-            config.datasources = settings.datasources;
-            config.defaultDatasource = settings.defaultDatasource;
-          });
 
         /**
          * Get Data Source
