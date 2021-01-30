@@ -823,7 +823,7 @@
         "allValue": null,
         "current": {},
         "datasource": "$cluster",
-        "definition": "",
+        "definition": "Node ids",
         "error": null,
         "hide": 0,
         "includeAll": true,

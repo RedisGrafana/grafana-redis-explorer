@@ -11,15 +11,8 @@ import {
 } from '@grafana/data';
 import { getTemplateSrv } from '@grafana/runtime';
 import { Api, DATASOURCE_FRAME, QueryTypeValue } from './api';
-import {
-  DataSourceArrayFrameField,
-  DataSourceFrameType,
-  DataSourceTestResult,
-  DataSourceTestStatus,
-  REDataSourceOptions,
-  REQuery,
-  VariableQuery,
-} from './types';
+import { DataSourceFrameType, DataSourceTestStatus } from './constants';
+import { DataSourceArrayFrameField, DataSourceTestResult, REDataSourceOptions, REQuery, VariableQuery } from './types';
 
 /**
  * Redis Enterprise Datasource
@@ -56,10 +49,14 @@ export class DataSource extends DataSourceApi<REQuery, REDataSourceOptions> {
     /**
      * Get Databases or Nodes
      */
-    const response =
-      query.queryType === QueryTypeValue.BDBS ? await this.api.getBdbs(apiQuery) : await this.api.getNodes(apiQuery);
+    try {
+      const response =
+        query.queryType === QueryTypeValue.BDBS ? await this.api.getBdbs(apiQuery) : await this.api.getNodes(apiQuery);
 
-    return (Array.isArray(response) ? response : [response]).map((item: any) => ({ text: item.uid }));
+      return (Array.isArray(response) ? response : [response]).map((item: any) => ({ text: item.uid }));
+    } catch (e) {
+      return [];
+    }
   }
 
   /**

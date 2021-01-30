@@ -1,5 +1,6 @@
 import { dateMath, FieldType } from '@grafana/data';
-import { DataSourceFrame, DataSourceFrameType } from '../../types';
+import { DataSourceFrameType } from '../../constants';
+import { DataSourceFrame } from '../../types';
 import { QueryTypeValue } from './query';
 
 /**

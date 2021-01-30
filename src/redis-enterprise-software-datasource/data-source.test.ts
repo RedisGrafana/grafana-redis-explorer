@@ -1,7 +1,8 @@
 import { DataQueryRequest, DataQueryResponse, DateTime, dateTime, MutableDataFrame } from '@grafana/data';
 import { LogItem, QueryTypeValue } from './api';
+import { DataSourceTestStatus } from './constants';
 import { DataSource } from './data-source';
-import { DataSourceTestStatus, REQuery } from './types';
+import { REQuery } from './types';
 
 /**
  * Override Request
@@ -64,7 +65,7 @@ describe('DataSource', () => {
    * Query
    */
   describe('Query', () => {
-    it('Should return correct data for ARRAY frame', async (done) => {
+    it('Should return correct data for ARRAY frame', async () => {
       /**
        * Check result
        * @param result
@@ -94,10 +95,9 @@ describe('DataSource', () => {
       apiMock.getCluster.mockImplementationOnce(() => [responseData]);
       const result2 = await dataSource.query(request);
       checkResult(result2);
-      done();
     });
 
-    it('Should return correct data for MUTABLE frame', async (done) => {
+    it('Should return correct data for MUTABLE frame', async () => {
       const checkResult = (result: DataQueryResponse, responseData: any[]) => {
         const data = result.data[0];
 
@@ -135,10 +135,9 @@ describe('DataSource', () => {
       apiMock.getLogs.mockImplementationOnce(() => Promise.resolve(responseData[0]));
       const result2 = await dataSource.query(request);
       checkResult(result2, [responseData[0]]);
-      done();
     });
 
-    it('Should handle empty api result', async (done) => {
+    it('Should handle empty api result', async () => {
       const request = getRequest({ targets: [{ refId: 'A', queryType: QueryTypeValue.LOGS }] });
       apiMock.getLogs.mockImplementationOnce(() => Promise.resolve(null));
       const result = await dataSource.query(request);
@@ -146,7 +145,6 @@ describe('DataSource', () => {
       const request2 = getRequest({ targets: [{ refId: 'A', queryType: QueryTypeValue.LICENSE }] });
       const resultWithNoApiMethod = await dataSource.query(request2);
       expect(resultWithNoApiMethod).toEqual({ data: [] });
-      done();
     });
   });
 
@@ -154,7 +152,7 @@ describe('DataSource', () => {
    * testDatasource
    */
   describe('testDatasource', () => {
-    it('Should handle Success state', async (done) => {
+    it('Should handle Success state', async () => {
       const responseData = {
         name: 'my-cluster',
       };
@@ -164,10 +162,9 @@ describe('DataSource', () => {
         status: DataSourceTestStatus.SUCCESS,
         message: `Connected. Cluster name is "${responseData.name}".`,
       });
-      done();
     });
 
-    it('Should handle Error state', async (done) => {
+    it('Should handle Error state', async () => {
       const responseData = null;
       apiMock.getCluster.mockImplementationOnce(() => Promise.resolve(responseData));
       const result = await dataSource.testDatasource();
@@ -175,7 +172,6 @@ describe('DataSource', () => {
         status: DataSourceTestStatus.ERROR,
         message: "Error. Can't retrieve cluster information.",
       });
-      done();
     });
   });
 
@@ -183,7 +179,7 @@ describe('DataSource', () => {
    * metricFindQuery
    */
   describe('metricFindQuery', () => {
-    it('Should return values for BDBS', async (done) => {
+    it('Should return values for BDBS', async () => {
       const responseData = [
         {
           uid: '123',
@@ -196,10 +192,9 @@ describe('DataSource', () => {
       const result = await dataSource.metricFindQuery({ queryType: QueryTypeValue.BDBS });
       expect(apiMock.getBdbs).toHaveBeenCalled();
       expect(result).toEqual(responseData.map(({ uid }) => ({ text: uid })));
-      done();
     });
 
-    it('Should return values for NODES', async (done) => {
+    it('Should return values for NODES', async () => {
       const responseData = [
         {
           uid: '111',
@@ -212,10 +207,9 @@ describe('DataSource', () => {
       const result = await dataSource.metricFindQuery({ queryType: QueryTypeValue.NODES });
       expect(apiMock.getNodes).toHaveBeenCalled();
       expect(result).toEqual(responseData.map(({ uid }) => ({ text: uid })));
-      done();
     });
 
-    it('Should convert object to Values if was get an object', async (done) => {
+    it('Should convert object to Values if was get an object', async () => {
       const responseData = {
         uid: '222',
       };
@@ -223,7 +217,13 @@ describe('DataSource', () => {
       const result = await dataSource.metricFindQuery({ queryType: QueryTypeValue.NODES });
       expect(apiMock.getNodes).toHaveBeenCalled();
       expect(result).toEqual([responseData].map(({ uid }) => ({ text: uid })));
-      done();
+    });
+
+    it('Should return empty array if api request rejected', async () => {
+      apiMock.getNodes.mockImplementationOnce(() => Promise.reject());
+      const result = await dataSource.metricFindQuery({ queryType: QueryTypeValue.NODES });
+      expect(apiMock.getNodes).toHaveBeenCalled();
+      expect(result).toEqual([]);
     });
   });
 

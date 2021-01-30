@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { QueryEditor } from './query-editor';
-import { REQuery } from '../types';
-import { QueryTypeValue, QUERY_TYPE, ALERT_TYPE, STATS_TYPE, STATS_INTERVAL } from '../api';
+import { REQuery } from '../../types';
+import { QueryTypeValue, QUERY_TYPE, ALERT_TYPE, STATS_TYPE, STATS_INTERVAL } from '../../api';
 
 type ShallowComponent = ShallowWrapper<QueryEditor['props'], QueryEditor['state'], QueryEditor>;
 

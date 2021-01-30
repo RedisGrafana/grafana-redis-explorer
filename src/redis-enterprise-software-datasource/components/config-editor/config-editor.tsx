@@ -1,7 +1,7 @@
 import React, { ChangeEvent, PureComponent } from 'react';
 import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
 import { LegacyForms } from '@grafana/ui';
-import { REDataSourceOptions, RESecureJsonData } from '../types';
+import { REDataSourceOptions, RESecureJsonData } from '../../types';
 
 /**
  * Form fields
