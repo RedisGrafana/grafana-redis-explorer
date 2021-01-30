@@ -195,6 +195,24 @@ describe('RootPage', () => {
         done();
       });
     });
+
+    it('If dataSource is unable to make query, should work correctly', async () => {
+      const wrapper = shallow<RootPage>(
+        <RootPage meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />,
+        { disableLifecycleMethods: true }
+      );
+      getDataSourceMock.mockImplementationOnce(() =>
+        Promise.resolve([{ name: 'my-redis', type: DataSourceType.SOFTWARE }])
+      );
+      redisMock.query.mockImplementationOnce(() => Promise.reject());
+      await wrapper.instance().componentDidMount();
+      const dataSourceListComponent = wrapper.findWhere((node) => node.is(DataSourceList));
+      const loadingMessageComponent = wrapper.findWhere(
+        (node) => node.is(InfoBox) && node.prop('title') === 'Loading...'
+      );
+      expect(loadingMessageComponent.exists()).not.toBeTruthy();
+      expect(dataSourceListComponent.exists()).toBeTruthy();
+    });
   });
 
   afterAll(() => {

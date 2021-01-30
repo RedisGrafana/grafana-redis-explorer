@@ -9,11 +9,11 @@ import {
   Field,
   NavModelItem,
 } from '@grafana/data';
-import { getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
+import { config, getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
 import { InfoBox } from '@grafana/ui';
 import { DataSourceType } from '../../constants';
 import { QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
-import { REQuery } from '../../redis-enterprise-software-datasource/types';
+import { RedisEnterpriseQuery } from '../../redis-enterprise-software-datasource/types';
 import { EnterpriseDataSourceInstanceSettings, GlobalSettings } from '../../types';
 import { DataSourceList } from '../data-source-list';
 
@@ -81,6 +81,26 @@ export class RootPage extends PureComponent<Props, State> {
         };
 
         /**
+         * Workaround, until reload function will be added to DataSourceSrv
+         *
+         * @see https://github.com/grafana/grafana/issues/30728
+         * @see https://github.com/grafana/grafana/issues/29809
+         */
+        await getBackendSrv()
+          .get('/api/frontend/settings')
+          .then((settings: any) => {
+            if (!settings.datasources) {
+              return;
+            }
+
+            /**
+             * Set data sources
+             */
+            config.datasources = settings.datasources;
+            config.defaultDatasource = settings.defaultDatasource;
+          });
+
+        /**
          * Get Data Source
          */
         const redis = await getDataSourceSrv().get(ds.name);
@@ -90,7 +110,7 @@ export class RootPage extends PureComponent<Props, State> {
          */
         const query = (redis.query({
           targets: [{ queryType: QueryTypeValue.CLUSTER }],
-        } as DataQueryRequest<REQuery>) as unknown) as Promise<DataQueryResponse>;
+        } as DataQueryRequest<RedisEnterpriseQuery>) as unknown) as Promise<DataQueryResponse>;
 
         /**
          * Get available commands
@@ -103,7 +123,8 @@ export class RootPage extends PureComponent<Props, State> {
                 enterpriseDs.fields[field.name] = head(field.values.toArray());
               });
             })
-          );
+          )
+          .catch(() => {});
 
         return enterpriseDs;
       })

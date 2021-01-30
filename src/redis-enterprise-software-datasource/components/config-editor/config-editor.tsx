@@ -1,7 +1,7 @@
 import React, { ChangeEvent, PureComponent } from 'react';
 import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
 import { LegacyForms } from '@grafana/ui';
-import { REDataSourceOptions, RESecureJsonData } from '../../types';
+import { DataSourceOptions, SecureJsonData } from '../../types';
 
 /**
  * Form fields
@@ -11,7 +11,7 @@ const { SecretFormField, FormField, Switch } = LegacyForms;
 /**
  * Config editor props
  */
-interface Props extends DataSourcePluginOptionsEditorProps<REDataSourceOptions> {}
+interface Props extends DataSourcePluginOptionsEditorProps<DataSourceOptions> {}
 
 /**
  * Config editor component state
@@ -84,7 +84,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
   render() {
     const { options, onOptionsChange } = this.props;
     const { jsonData, secureJsonFields } = options;
-    const secureJsonData = (options.secureJsonData || {}) as RESecureJsonData;
+    const secureJsonData = (options.secureJsonData || {}) as SecureJsonData;
 
     /**
      * Return content

@@ -1,21 +1,21 @@
 import { DataQueryRequest, DataQueryResponse, DateTime, dateTime, MutableDataFrame } from '@grafana/data';
-import { LogItem, QueryTypeValue } from './api';
-import { DataSourceTestStatus } from './constants';
+import { LogItem, QueryTypeValue } from '../api';
+import { DataSourceTestStatus } from '../constants';
+import { RedisEnterpriseQuery } from '../types';
 import { DataSource } from './data-source';
-import { REQuery } from './types';
 
 /**
  * Override Request
  */
 interface OverrideRequest {
   [key: string]: unknown;
-  targets?: REQuery[];
+  targets?: RedisEnterpriseQuery[];
 }
 
 /**
  * Request
  */
-const getRequest = (overrideRequest: OverrideRequest = {}): DataQueryRequest<REQuery> => ({
+const getRequest = (overrideRequest: OverrideRequest = {}): DataQueryRequest<RedisEnterpriseQuery> => ({
   requestId: '',
   interval: '',
   intervalMs: 0,
@@ -35,7 +35,7 @@ const apiMock = {
   getBdbs: jest.fn().mockImplementation(() => Promise.resolve([])),
 };
 
-jest.mock('./api/api', () => ({
+jest.mock('../api/api', () => ({
   Api: jest.fn().mockImplementation(() => apiMock),
 }));
 
