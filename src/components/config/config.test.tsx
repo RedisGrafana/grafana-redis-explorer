@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { config, setLocationSrv } from '@grafana/runtime';
-import { DataSourceType } from '../../constants';
+import { ApplicationRoot, DataSourceType } from '../../constants';
 import { Config } from './config';
 
 /**
@@ -200,7 +200,7 @@ describe('Config', () => {
       const wrapper = shallow<Config>(<Config plugin={plugin} query={null as any} />);
       wrapper.instance().goHome();
       expect(updateLocationMock).toHaveBeenCalledWith({
-        path: 'a/redis-explorer-app/',
+        path: ApplicationRoot,
         partial: false,
       });
     });

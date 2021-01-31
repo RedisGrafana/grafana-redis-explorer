@@ -3,7 +3,7 @@ import React, { FC, useCallback } from 'react';
 import { EnterpriseDataSourceInstanceSettings } from 'types';
 import { getBackendSrv, getLocationSrv } from '@grafana/runtime';
 import { Button, Container, HorizontalGroup, InfoBox, LinkButton, VerticalGroup } from '@grafana/ui';
-import { DataSourceName, DataSourceType } from '../../constants';
+import { ApplicationRoot, DataSourceName, DataSourceType } from '../../constants';
 import { ClusterDatabases } from '../cluster-databases';
 
 /**
@@ -109,7 +109,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
     <div>
       <div className="page-action-bar">
         {isShowDataSourceDetails && (
-          <LinkButton href="/a/redis-explorer-app/" icon="arrow-left" variant="link">
+          <LinkButton href={ApplicationRoot} icon="arrow-left" variant="link">
             Back
           </LinkButton>
         )}
@@ -159,7 +159,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
                         <Container>
                           <LinkButton
                             variant="primary"
-                            href={`/a/redis-explorer-app?datasource=${redis.id}`}
+                            href={`${ApplicationRoot}?datasource=${redis.id}`}
                             title="Show cluster databases"
                             icon="database"
                           >

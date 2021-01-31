@@ -11,3 +11,8 @@ export enum DataSourceType {
 export enum DataSourceName {
   SOFTWARE = 'Redis Enterprise Software',
 }
+
+/**
+ * Application root page
+ */
+export const ApplicationRoot = '/a/redis-explorer-app';
