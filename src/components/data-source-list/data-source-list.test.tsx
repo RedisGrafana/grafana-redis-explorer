@@ -61,7 +61,6 @@ describe('DataSourceList', () => {
           jsonData: {
             host: '1234',
           },
-          commands: [],
         },
         {
           id: '2',
@@ -87,9 +86,6 @@ describe('DataSourceList', () => {
         );
         expect(currentItem.find('.card-item-name').text()).toEqual(dataSource.name);
         expect(currentItem.find('.card-item-sub-name').text()).toEqual(dataSource.jsonData?.host || 'Not provided');
-        if (!dataSource.commands || dataSource.commands.length === 0) {
-          expect(currentItem.find('.card-item-type').text()).toEqual(dataSource.fields?.name || 'Unknown');
-        }
       });
     });
 
@@ -104,7 +100,6 @@ describe('DataSourceList', () => {
           jsonData: {
             host: '1234',
           },
-          commands: [],
         },
         {
           id: 2,

@@ -109,7 +109,7 @@ describe('RootPage', () => {
       expect(getDataSourceMock).toHaveBeenCalledWith('/api/datasources');
     });
 
-    it('Should check supported commands', (done) => {
+    it('Should retrieve cluster name', (done) => {
       getDataSourceMock.mockImplementationOnce(() =>
         Promise.resolve([
           {
