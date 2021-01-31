@@ -270,6 +270,10 @@ describe('Api', () => {
           },
         })
       );
+
+      /**
+       * Query
+       */
       const query = {
         refId: 'A',
         queryType: QueryTypeValue.STATS,
@@ -277,6 +281,10 @@ describe('Api', () => {
         statsType: QueryTypeValue.NODES,
         statsInterval: '1000',
       };
+
+      /**
+       * Time Range
+       */
       const timeRange = {
         from: dateTime(),
         to: dateTime(),
@@ -285,6 +293,7 @@ describe('Api', () => {
           to: dateTime(),
         },
       };
+
       const result = await api.getStats(query, timeRange);
       const params = new URLSearchParams();
       params.set('interval', query.statsInterval);
@@ -382,10 +391,26 @@ describe('Api', () => {
           ],
         })
       );
-      const result = await api.getLogs({ refId: 'A', queryType: QueryTypeValue.LOGS });
+
+      /**
+       * Time Range
+       */
+      const timeRange = {
+        from: dateTime(),
+        to: dateTime(),
+        raw: {
+          from: dateTime(),
+          to: dateTime(),
+        },
+      };
+      const result = await api.getLogs({ refId: 'A', queryType: QueryTypeValue.LOGS }, timeRange);
+      const params = new URLSearchParams();
+      params.set('stime', timeRange.from.toISOString().split('.')[0] + 'Z');
+      params.set('etime', timeRange.to.toISOString().split('.')[0] + 'Z');
+
       expect(datasourceRequestMock).toHaveBeenCalledWith({
         method: 'GET',
-        url: `${instanceSettings.url}/logs`,
+        url: `${instanceSettings.url}/logs?${params.toString()}`,
       });
       expect(result).toEqual([
         {
