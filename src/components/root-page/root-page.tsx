@@ -91,7 +91,7 @@ export class RootPage extends PureComponent<Props, State> {
       });
 
     /**
-     * Check supported commands for Redis Data Sources
+     * Get Cluster names for Redis Data Sources
      */
     const finalDataSources = await Promise.all(
       dataSources.map(async (ds: DataSourceInstanceSettings) => {
@@ -113,7 +113,7 @@ export class RootPage extends PureComponent<Props, State> {
         } as DataQueryRequest<RedisEnterpriseQuery>) as unknown) as Promise<DataQueryResponse>;
 
         /**
-         * Get available commands
+         * Get Cluster name
          */
         await query
           .then((response: DataQueryResponse) => response.data)

@@ -133,33 +133,33 @@ export class ClusterDatabase extends PureComponent<Props, State> {
         <HorizontalGroup justify="flex-start">
           {db.tls_mode !== 'disabled' && (
             <Container margin="xs">
-              <MultiLayerSecurity fill={fill} size={32} style={iconStyle} />
+              <MultiLayerSecurity fill={fill} size={24} style={iconStyle} />
             </Container>
           )}
 
           {db.oss_cluster && (
             <Container margin="xs">
-              <HighAvailability fill={fill} size={32} style={iconStyle} />
+              <HighAvailability fill={fill} size={24} style={iconStyle} />
             </Container>
           )}
 
           {db.module_list.map((module) => (
             <Container margin="xs" key={module.module_id}>
-              {module.module_name === 'timeseries' && <RedisTimeSeries fill={fill} size={32} style={iconStyle} />}
-              {module.module_name === 'rg' && <RedisGears fill={fill} size={32} style={iconStyle} />}
+              {module.module_name === 'timeseries' && <RedisTimeSeries fill={fill} size={24} style={iconStyle} />}
+              {module.module_name === 'rg' && <RedisGears fill={fill} size={24} style={iconStyle} />}
               {(module.module_name === 'search' || module.module_name === 'ft') && (
-                <RedisSearch fill={fill} size={32} style={iconStyle} />
+                <RedisSearch fill={fill} size={24} style={iconStyle} />
               )}
-              {module.module_name === 'bloom' && <RedisBloom fill={fill} size={32} style={iconStyle} />}
-              {module.module_name === 'json' && <RedisJSON fill={fill} size={32} style={iconStyle} />}
-              {module.module_name === 'graph' && <RedisGraph fill={fill} size={32} style={iconStyle} />}
-              {module.module_name === 'ai' && <RedisAI fill={fill} size={32} style={iconStyle} />}
+              {module.module_name === 'bloom' && <RedisBloom fill={fill} size={24} style={iconStyle} />}
+              {module.module_name === 'json' && <RedisJSON fill={fill} size={24} style={iconStyle} />}
+              {module.module_name === 'graph' && <RedisGraph fill={fill} size={24} style={iconStyle} />}
+              {module.module_name === 'ai' && <RedisAI fill={fill} size={24} style={iconStyle} />}
             </Container>
           ))}
 
           {!db.module_list.length && (
             <Container margin="xs">
-              <RedisCube fill={fill} size={32} style={iconStyle} />
+              <RedisCube fill={fill} size={24} style={iconStyle} />
             </Container>
           )}
 

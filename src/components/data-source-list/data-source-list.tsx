@@ -126,6 +126,7 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
             const title = redis.fields?.name ? 'Working as expected' : "Can't connect";
             const name = redis.fields?.name ? redis.fields?.name : 'Unknown';
             const url = redis.jsonData?.host ? redis.jsonData?.host : 'Not provided';
+            const variant = redis.fields?.name ? 'primary' : 'destructive';
             const fill = redis.fields?.name ? '#DC382D' : '#A7A7A7';
 
             return (
@@ -143,37 +144,40 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
                     </HorizontalGroup>
 
                     <HorizontalGroup justify="flex-end">
-                      {!redis.commands?.length && (
-                        <>
-                          <Container margin="xs">
-                            <div className="card-item-type">{name}</div>
-                          </Container>
+                      <Container>
+                        <LinkButton
+                          variant={variant}
+                          href={`d/viroIzSGz/cluster-overview?var-cluster=${redis.name}`}
+                          title="Cluster Overview"
+                          icon="compass"
+                        >
+                          {name}
+                        </LinkButton>
+                      </Container>
 
-                          {!isShowDataSourceDetails && (
-                            <Container margin="xs">
-                              {redis.fields?.name && (
-                                <LinkButton
-                                  variant="primary"
-                                  href={`/a/redis-explorer-app?datasource=${redis.id}`}
-                                  title="Show cluster databases"
-                                  icon="database"
-                                >
-                                  Databases
-                                </LinkButton>
-                              )}
-                              &nbsp;
-                              <LinkButton
-                                variant="secondary"
-                                href={`datasources/edit/${redis.id}`}
-                                title="Data Source Settings"
-                                icon="sliders-v-alt"
-                              >
-                                Settings
-                              </LinkButton>
-                            </Container>
-                          )}
-                        </>
+                      {!isShowDataSourceDetails && redis.fields?.name && (
+                        <Container>
+                          <LinkButton
+                            variant="primary"
+                            href={`/a/redis-explorer-app?datasource=${redis.id}`}
+                            title="Show cluster databases"
+                            icon="database"
+                          >
+                            Databases
+                          </LinkButton>
+                        </Container>
                       )}
+
+                      <Container>
+                        <LinkButton
+                          variant="secondary"
+                          href={`datasources/edit/${redis.id}`}
+                          title="Data Source Settings"
+                          icon="sliders-v-alt"
+                        >
+                          Settings
+                        </LinkButton>
+                      </Container>
                     </HorizontalGroup>
                   </HorizontalGroup>
                 </a>
