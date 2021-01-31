@@ -2,21 +2,16 @@ import React, { PureComponent } from 'react';
 import { AppPluginMeta, PluginConfigPageProps } from '@grafana/data';
 import { BackendSrv, config, getBackendSrv, getLocationSrv } from '@grafana/runtime';
 import { Button, InfoBox } from '@grafana/ui';
-import { DataSourceType } from '../../constants';
+import { ApplicationRoot, DataSourceType } from '../../constants';
 import { GlobalSettings } from '../../types';
 
 /**
- * Plug-in Path
- */
-const HOME_PATH = 'a/redis-explorer-app/';
-
-/**
- * Page Properties
+ * Properties
  */
 interface Props extends PluginConfigPageProps<AppPluginMeta<GlobalSettings>> {}
 
 /**
- * StateDataSourceType
+ * State
  */
 interface State {
   isConfigured: boolean;
@@ -88,7 +83,7 @@ export class Config extends PureComponent<Props, State> {
    */
   goHome = (): void => {
     getLocationSrv().update({
-      path: HOME_PATH,
+      path: ApplicationRoot,
       partial: false,
     });
   };
@@ -116,7 +111,7 @@ export class Config extends PureComponent<Props, State> {
    */
   onEnable = () => {
     this.updatePluginSettings({ enabled: true, jsonData: {}, pinned: true }).then(() => {
-      Config.getLocation().assign(HOME_PATH);
+      Config.getLocation().assign(ApplicationRoot);
     });
   };
 

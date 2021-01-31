@@ -257,13 +257,28 @@ export class Api {
    * @see https://storage.googleapis.com/rlecrestapi/rest-html/http_rest_api.html#get--v1-logs
    * @async
    * @param {RedisEnterpriseQuery} query Query
+   * @param {TimeRange} range Time range
    * @returns {LogItem[]} Array of events
    */
-  async getLogs(query: RedisEnterpriseQuery): Promise<LogItem[]> {
+  async getLogs(query: RedisEnterpriseQuery, range: TimeRange): Promise<LogItem[]> {
+    let url = `${this.instanceSettings.url}/logs`;
+    const params = new URLSearchParams();
+
+    /**
+     * Time Range
+     */
+    if (range.from) {
+      params.append('stime', range.from.toISOString().split('.')[0] + 'Z');
+    }
+
+    if (range.to) {
+      params.append('etime', range.to.toISOString().split('.')[0] + 'Z');
+    }
+
     return getBackendSrv()
       .datasourceRequest({
         method: 'GET',
-        url: `${this.instanceSettings.url}/logs`,
+        url: [url, params.toString()].join('?'),
       })
       .then((res: any) =>
         this.filterData(res.data, query).map((item: Log) => {
