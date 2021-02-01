@@ -124,8 +124,8 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
         <ol className="card-list">
           {renderedDataSources.map((redis: any, index: number) => {
             const title = redis.fields?.name ? 'Working as expected' : "Can't connect";
-            const name = redis.fields?.name ? redis.fields?.name : 'Unknown';
-            const url = redis.jsonData?.host ? redis.jsonData?.host : 'Not provided';
+            const name = redis.fields?.name || 'Unknown';
+            const url = redis.jsonData?.host || 'Not provided';
             const variant = redis.fields?.name ? 'primary' : 'destructive';
             const fill = redis.fields?.name ? '#DC382D' : '#A7A7A7';
 

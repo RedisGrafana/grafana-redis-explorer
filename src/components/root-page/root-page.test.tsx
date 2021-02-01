@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { AppPluginMeta, FieldType, PluginType, toDataFrame } from '@grafana/data';
 import { InfoBox } from '@grafana/ui';
+import { config } from '@grafana/runtime';
 import { QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
 import { DataSourceType } from '../../constants';
 import { DataSourceList } from '../data-source-list';
@@ -71,6 +72,7 @@ jest.mock('@grafana/runtime', () => ({
   getDataSourceSrv: () => ({
     get: getRedisMock,
   }),
+  config: {},
 }));
 
 /**
@@ -81,11 +83,17 @@ describe('RootPage', () => {
   const path = '/app';
   const onNavChangedMock = jest.fn();
 
+  beforeAll(() => {
+    // runtime.config = bootConfig;
+  });
+
   beforeEach(() => {
     onNavChangedMock.mockClear();
     getDataSourceMock.mockClear();
     getRedisMock.mockClear();
     redisMock.query.mockClear();
+    config.datasources = undefined as any;
+    config.defaultDatasource = undefined as any;
   });
 
   /**
@@ -107,6 +115,34 @@ describe('RootPage', () => {
       );
       wrapper.instance().componentDidMount();
       expect(getDataSourceMock).toHaveBeenCalledWith('/api/datasources');
+    });
+
+    it('Should update bootConfig', async () => {
+      const dataSource = {
+        type: DataSourceType.SOFTWARE,
+        name: 'redis',
+      };
+      getDataSourceMock
+        .mockImplementationOnce(() => Promise.resolve([dataSource]))
+        .mockImplementationOnce(() =>
+          Promise.resolve({
+            datasources: [dataSource],
+            defaultDatasource: dataSource,
+          })
+        );
+      expect(config.datasources).not.toBeDefined();
+      expect(config.defaultDatasource).not.toBeDefined();
+      const wrapper = shallow<RootPage>(
+        <RootPage meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />,
+        {
+          disableLifecycleMethods: true,
+        }
+      );
+      await wrapper.instance().componentDidMount();
+      expect(getDataSourceMock).toHaveBeenCalledWith('/api/datasources');
+      expect(getDataSourceMock).toHaveBeenCalledWith('/api/frontend/settings');
+      expect(config.datasources).toEqual([dataSource]);
+      expect(config.defaultDatasource).toEqual(dataSource);
     });
 
     it('Should retrieve cluster name', (done) => {
