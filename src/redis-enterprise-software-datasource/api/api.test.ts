@@ -1,18 +1,25 @@
 import { dateTime } from '@grafana/data';
+import { Observable } from 'rxjs';
 import { Api } from './api';
 import { QueryTypeValue } from './types';
+
+const getResponse = (response: any) =>
+  new Observable((subscriber) => {
+    subscriber.next(response);
+    subscriber.complete();
+  });
 
 /**
  * DataSourceMock
  */
-const datasourceRequestMock = jest.fn().mockImplementation(() => Promise.resolve([]));
+const fetchRequestMock = jest.fn().mockImplementation(() => getResponse([]));
 
 /**
  * Mock @grafana/runtime
  */
 jest.mock('@grafana/runtime', () => ({
   getBackendSrv: () => ({
-    datasourceRequest: datasourceRequestMock,
+    fetch: fetchRequestMock,
   }),
 }));
 
@@ -23,7 +30,7 @@ describe('Api', () => {
   const api = new Api(instanceSettings as any);
 
   beforeEach(() => {
-    datasourceRequestMock.mockClear();
+    fetchRequestMock.mockClear();
   });
 
   /**
@@ -37,13 +44,9 @@ describe('Api', () => {
           created_time: dateTime().valueOf(),
         },
       ];
-      datasourceRequestMock.mockImplementationOnce(() =>
-        Promise.resolve({
-          data,
-        })
-      );
+      fetchRequestMock.mockImplementationOnce(() => getResponse({ data }));
       const result = await api.getCluster({ refId: 'A', queryType: QueryTypeValue.CLUSTER });
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/cluster`,
       });
@@ -62,9 +65,9 @@ describe('Api', () => {
           name: 'my-name',
         },
       ];
-      datasourceRequestMock.mockImplementationOnce(() => Promise.resolve({ data }));
+      fetchRequestMock.mockImplementationOnce(() => getResponse({ data }));
       const result = await api.getLicense({ refId: 'A', queryType: QueryTypeValue.LICENSE });
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/license`,
       });
@@ -84,16 +87,16 @@ describe('Api', () => {
         },
       ];
 
-      datasourceRequestMock.mockImplementationOnce(() => Promise.resolve({ data }));
+      fetchRequestMock.mockImplementationOnce(() => getResponse({ data }));
       const result = await api.getNodes({ refId: 'A', queryType: QueryTypeValue.NODES, node: 'my-node' });
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/nodes/my-node`,
       });
       expect(result).toEqual(data);
 
       await api.getNodes({ refId: 'A', queryType: QueryTypeValue.NODES });
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/nodes`,
       });
@@ -115,16 +118,16 @@ describe('Api', () => {
         },
       ];
 
-      datasourceRequestMock.mockImplementationOnce(() => Promise.resolve({ data }));
+      fetchRequestMock.mockImplementationOnce(() => getResponse({ data }));
       const result = await api.getBdbs({ refId: 'A', queryType: QueryTypeValue.BDBS, bdb: 'my-bdb' });
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/bdbs/my-bdb`,
       });
       expect(result).toEqual([{ uid: data[0].uid }]);
 
       await api.getBdbs({ refId: 'A', queryType: QueryTypeValue.BDBS });
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/bdbs`,
       });
@@ -141,18 +144,18 @@ describe('Api', () => {
         1234,
       ];
 
-      datasourceRequestMock.mockImplementationOnce(() => Promise.resolve({ data }));
+      fetchRequestMock.mockImplementationOnce(() => getResponse({ data }));
       const query = { refId: 'A', queryType: QueryTypeValue.BDBS, bdb: 'my-bdb' };
       const result = await api.getBdbs(query);
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/bdbs/my-bdb`,
       });
       expect(result).toEqual([{ uid: 123 }, 1234]);
 
-      datasourceRequestMock.mockImplementationOnce(() => Promise.resolve({ data: data[0] }));
+      fetchRequestMock.mockImplementationOnce(() => getResponse({ data: data[0] }));
       const result2 = await api.getBdbs(query);
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/bdbs/my-bdb`,
       });
@@ -171,15 +174,15 @@ describe('Api', () => {
           uid: 123,
         },
       ];
-      datasourceRequestMock.mockImplementationOnce(() => Promise.resolve({ data }));
+      fetchRequestMock.mockImplementationOnce(() => getResponse({ data }));
       const result = await api.getModules({ refId: 'A', queryType: QueryTypeValue.MODULES, module: 'my-module' });
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/modules/my-module`,
       });
       expect(result).toEqual(data);
       await api.getModules({ refId: 'A', queryType: QueryTypeValue.MODULES });
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/modules`,
       });
@@ -197,15 +200,15 @@ describe('Api', () => {
           uid: 123,
         },
       ];
-      datasourceRequestMock.mockImplementationOnce(() => Promise.resolve({ data }));
+      fetchRequestMock.mockImplementationOnce(() => getResponse({ data }));
       const result = await api.getUsers({ refId: 'A', queryType: QueryTypeValue.USERS, user: 'my-user' });
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/users/my-user`,
       });
       expect(result).toEqual(data);
       await api.getUsers({ refId: 'A', queryType: QueryTypeValue.USERS });
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/users/my-user`,
       });
@@ -218,8 +221,8 @@ describe('Api', () => {
    */
   describe('getStats', () => {
     it('Should make getStats request', async (done) => {
-      datasourceRequestMock.mockImplementation(() =>
-        Promise.resolve({
+      fetchRequestMock.mockImplementation(() =>
+        getResponse({
           data: {
             intervals: [
               {
@@ -234,30 +237,30 @@ describe('Api', () => {
       );
       const query = { refId: 'A', queryType: QueryTypeValue.STATS, bdb: 'my-bdb', statsType: QueryTypeValue.BDBS };
       const result = await api.getStats(query, {} as any);
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/${QueryTypeValue.BDBS}/stats/my-bdb?`,
       });
       expect(result).toEqual([{ etime: 1 }, { etime: 2 }]);
-      datasourceRequestMock.mockClear();
+      fetchRequestMock.mockClear();
       await api.getStats({ refId: 'A', queryType: QueryTypeValue.STATS, statsType: QueryTypeValue.BDBS }, {} as any);
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/${QueryTypeValue.BDBS}/stats?`,
       });
-      datasourceRequestMock.mockClear();
+      fetchRequestMock.mockClear();
       await api.getStats({ refId: 'A', queryType: QueryTypeValue.STATS, statsType: QueryTypeValue.NODES }, {} as any);
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/${QueryTypeValue.NODES}/stats?`,
       });
-      datasourceRequestMock.mockReset();
+      fetchRequestMock.mockReset();
       done();
     });
 
     it('Should apply all query parameters for getStats request', async (done) => {
-      datasourceRequestMock.mockImplementationOnce(() =>
-        Promise.resolve({
+      fetchRequestMock.mockImplementationOnce(() =>
+        getResponse({
           data: {
             intervals: [
               {
@@ -300,7 +303,7 @@ describe('Api', () => {
       params.set('stime', timeRange.from.toISOString().split('.')[0] + 'Z');
       params.set('etime', timeRange.to.toISOString().split('.')[0] + 'Z');
       const requestUrl = `${instanceSettings.url}/${QueryTypeValue.NODES}/stats/my-node?${params.toString()}`;
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: requestUrl,
       });
@@ -314,8 +317,8 @@ describe('Api', () => {
    */
   describe('getAlerts', () => {
     it('Should make getAlerts request', async (done) => {
-      datasourceRequestMock.mockImplementation(() =>
-        Promise.resolve({
+      fetchRequestMock.mockImplementation(() =>
+        getResponse({
           data: {
             1: {
               myKey: 'id1',
@@ -328,32 +331,32 @@ describe('Api', () => {
       );
       const query = { refId: 'A', queryType: QueryTypeValue.ALERTS, alertType: QueryTypeValue.BDBS, bdb: 'my-bdb' };
       const result = await api.getAlerts(query);
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/${QueryTypeValue.BDBS}/alerts/my-bdb`,
       });
       expect(result.length).toEqual(2);
       expect(result[0].content).toEqual('id=1 myKey=id1');
       expect(result[1].content).toEqual('id=2 myKey=id2');
-      datasourceRequestMock.mockClear();
+      fetchRequestMock.mockClear();
       await api.getAlerts({ refId: 'A', queryType: QueryTypeValue.ALERTS, alertType: QueryTypeValue.BDBS });
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/${QueryTypeValue.BDBS}/alerts`,
       });
-      datasourceRequestMock.mockClear();
+      fetchRequestMock.mockClear();
       await api.getAlerts({ refId: 'A', queryType: QueryTypeValue.ALERTS, alertType: QueryTypeValue.NODES });
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/${QueryTypeValue.NODES}/alerts`,
       });
-      datasourceRequestMock.mockReset();
+      fetchRequestMock.mockReset();
       done();
     });
 
     it('Should make getAlerts request for no array response', async (done) => {
-      datasourceRequestMock.mockImplementationOnce(() =>
-        Promise.resolve({
+      fetchRequestMock.mockImplementationOnce(() =>
+        getResponse({
           data: {
             key1: {
               myKey: 'id1',
@@ -366,7 +369,7 @@ describe('Api', () => {
       );
       const query = { refId: 'A', queryType: QueryTypeValue.ALERTS, alertType: QueryTypeValue.NODES, node: 'my-node' };
       const result = await api.getAlerts(query);
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/${QueryTypeValue.NODES}/alerts/my-node`,
       });
@@ -381,8 +384,8 @@ describe('Api', () => {
    */
   describe('getLogs', () => {
     it('Should make getLogs request', async (done) => {
-      datasourceRequestMock.mockImplementationOnce(() =>
-        Promise.resolve({
+      fetchRequestMock.mockImplementationOnce(() =>
+        getResponse({
           data: [
             {
               time: 123,
@@ -408,7 +411,36 @@ describe('Api', () => {
       params.set('stime', timeRange.from.toISOString().split('.')[0] + 'Z');
       params.set('etime', timeRange.to.toISOString().split('.')[0] + 'Z');
 
-      expect(datasourceRequestMock).toHaveBeenCalledWith({
+      expect(fetchRequestMock).toHaveBeenCalledWith({
+        method: 'GET',
+        url: `${instanceSettings.url}/logs?${params.toString()}`,
+      });
+      expect(result).toEqual([
+        {
+          time: 123,
+          level: 'high',
+          content: '123 severity=high',
+        },
+      ]);
+      done();
+    });
+
+    it('Should make getLogs request without range', async (done) => {
+      fetchRequestMock.mockImplementationOnce(() =>
+        getResponse({
+          data: [
+            {
+              time: 123,
+              severity: 'high',
+            },
+          ],
+        })
+      );
+
+      const result = await api.getLogs({ refId: 'A', queryType: QueryTypeValue.LOGS }, {} as any);
+      const params = new URLSearchParams();
+
+      expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/logs?${params.toString()}`,
       });
