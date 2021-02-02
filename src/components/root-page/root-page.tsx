@@ -82,7 +82,6 @@ export class RootPage extends PureComponent<Props, State> {
         if (!settings.datasources) {
           return;
         }
-        console.log(config);
 
         /**
          * Set data sources
