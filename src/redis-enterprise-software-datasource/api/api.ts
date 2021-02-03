@@ -1,4 +1,5 @@
 import { assign, defaultTo, get, isArray, isNaN, isNil, isObject, keys, omit, sortBy, toPairs } from 'lodash';
+import { map } from 'rxjs/operators';
 import { DataSourceInstanceSettings, TimeRange } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
 import { DataSourceOptions, RedisEnterpriseQuery } from '../types';
@@ -26,11 +27,12 @@ export class Api {
    */
   async getCluster(query: RedisEnterpriseQuery): Promise<Cluster> {
     return getBackendSrv()
-      .datasourceRequest({
+      .fetch({
         method: 'GET',
         url: `${this.instanceSettings.url}/cluster`,
       })
-      .then((res: any) => this.filterData(res.data, query));
+      .pipe(map((res: any) => this.filterData(res.data, query)))
+      .toPromise();
   }
 
   /**
@@ -43,11 +45,12 @@ export class Api {
    */
   async getLicense(query: RedisEnterpriseQuery): Promise<License> {
     return getBackendSrv()
-      .datasourceRequest({
+      .fetch({
         method: 'GET',
         url: `${this.instanceSettings.url}/license`,
       })
-      .then((res: any) => this.filterData(res.data, query));
+      .pipe(map((res: any) => this.filterData(res.data, query)))
+      .toPromise();
   }
 
   /**
@@ -65,11 +68,12 @@ export class Api {
     }
 
     return getBackendSrv()
-      .datasourceRequest({
+      .fetch({
         method: 'GET',
         url,
       })
-      .then((res: any) => this.filterData(res.data, query));
+      .pipe(map((res: any) => this.filterData(res.data, query)))
+      .toPromise();
   }
 
   /**
@@ -87,11 +91,12 @@ export class Api {
     }
 
     return getBackendSrv()
-      .datasourceRequest({
+      .fetch({
         method: 'GET',
         url,
       })
-      .then((res: any) => this.filterData(res.data, query));
+      .pipe(map((res: any) => this.filterData(res.data, query)))
+      .toPromise();
   }
 
   /**
@@ -109,11 +114,12 @@ export class Api {
     }
 
     return getBackendSrv()
-      .datasourceRequest({
+      .fetch({
         method: 'GET',
         url,
       })
-      .then((res: any) => this.filterData(res.data, query));
+      .pipe(map((res: any) => this.filterData(res.data, query)))
+      .toPromise();
   }
 
   /**
@@ -131,11 +137,12 @@ export class Api {
     }
 
     return getBackendSrv()
-      .datasourceRequest({
+      .fetch({
         method: 'GET',
         url,
       })
-      .then((res: any) => this.filterData(res.data, query));
+      .pipe(map((res: any) => this.filterData(res.data, query)))
+      .toPromise();
   }
 
   /**
@@ -188,11 +195,12 @@ export class Api {
     }
 
     return getBackendSrv()
-      .datasourceRequest({
+      .fetch({
         method: 'GET',
         url: [url, params.toString()].join('?'),
       })
-      .then((res: any) => this.filterData(sortBy(res.data.intervals, 'etime'), query));
+      .pipe(map((res: any) => this.filterData(sortBy(res.data.intervals, 'etime'), query)))
+      .toPromise();
   }
 
   /**
@@ -223,32 +231,35 @@ export class Api {
     }
 
     return getBackendSrv()
-      .datasourceRequest({
+      .fetch({
         method: 'GET',
         url,
       })
-      .then((res: Record<string, any>) => {
-        const logItems: LogItem[] = [];
-        const resKeys = keys(res.data);
-        const isArrayRequest = !Boolean(resKeys.filter((key) => isNaN(parseInt(key, 10))).length);
-        const time = new Date().toISOString();
+      .pipe(
+        map((res: Record<string, any>) => {
+          const logItems: LogItem[] = [];
+          const resKeys = keys(res.data);
+          const isArrayRequest = !Boolean(resKeys.filter((key) => isNaN(parseInt(key, 10))).length);
+          const time = new Date().toISOString();
 
-        if (isArrayRequest) {
-          resKeys.forEach((key) =>
+          if (isArrayRequest) {
+            resKeys.forEach((key) =>
+              logItems.push({
+                time,
+                content: this.getLogContent({ ...this.filterData(res.data[key], query), id: key }),
+              })
+            );
+          } else {
             logItems.push({
               time,
-              content: this.getLogContent({ ...this.filterData(res.data[key], query), id: key }),
-            })
-          );
-        } else {
-          logItems.push({
-            time,
-            content: this.getLogContent(this.filterData(res.data, query)),
-          });
-        }
+              content: this.getLogContent(this.filterData(res.data, query)),
+            });
+          }
 
-        return logItems;
-      });
+          return logItems;
+        })
+      )
+      .toPromise();
   }
 
   /**
@@ -276,19 +287,22 @@ export class Api {
     }
 
     return getBackendSrv()
-      .datasourceRequest({
+      .fetch({
         method: 'GET',
         url: [url, params.toString()].join('?'),
       })
-      .then((res: any) =>
-        this.filterData(res.data, query).map((item: Log) => {
-          return {
-            time: item.time,
-            level: item.severity,
-            content: this.getLogContent(item, 'time'),
-          };
-        })
-      );
+      .pipe(
+        map((res: any) =>
+          this.filterData(res.data, query).map((item: Log) => {
+            return {
+              time: item.time,
+              level: item.severity,
+              content: this.getLogContent(item, 'time'),
+            };
+          })
+        )
+      )
+      .toPromise();
   }
 
   /**

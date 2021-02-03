@@ -1,16 +1,6 @@
 version: '3.4'
 
 services:
-  redis:
-    container_name: redis
-    image: redislabs/redis:latest
-    cap_add:
-      - SYS_RESOURCE
-    ports:
-      - 8443:8443/tcp
-      - 9443:9443/tcp
-      - 12000-12050:12000-12050/tcp
-
   grafana:
     container_name: grafana
     image: grafana/grafana:latest
@@ -26,9 +16,9 @@ services:
       # Uncomment to run in debug mode
       # - GF_LOG_LEVEL=debug
     volumes:
-      - ./dist:/var/lib/grafana/plugins/redis-explorer-app
-      - ../grafana-redis-app:/var/lib/grafana/plugins/redis-app
-      - ../grafana-redis-datasource:/var/lib/grafana/plugins/redis-datasource
-      - ./provisioning/plugins:/etc/grafana/provisioning/plugins
+      - ../dist:/var/lib/grafana/plugins/redis-explorer-app
+      - ../../grafana-redis-app:/var/lib/grafana/plugins/redis-app
+      - ../../grafana-redis-datasource:/var/lib/grafana/plugins/redis-datasource
+      - ../provisioning/plugins:/etc/grafana/provisioning/plugins
       # Uncomment to preserve Grafana configuration
       # - ./data:/var/lib/grafana
