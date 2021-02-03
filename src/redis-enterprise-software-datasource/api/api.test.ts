@@ -1,8 +1,13 @@
-import { dateTime } from '@grafana/data';
 import { Observable } from 'rxjs';
+import { dateTime } from '@grafana/data';
 import { Api } from './api';
 import { QueryTypeValue } from './types';
 
+/**
+ * Response
+ *
+ * @param response
+ */
 const getResponse = (response: any) =>
   new Observable((subscriber) => {
     subscriber.next(response);
@@ -10,7 +15,7 @@ const getResponse = (response: any) =>
   });
 
 /**
- * DataSourceMock
+ * Fetch request Mock
  */
 const fetchRequestMock = jest.fn().mockImplementation(() => getResponse([]));
 
@@ -23,6 +28,9 @@ jest.mock('@grafana/runtime', () => ({
   }),
 }));
 
+/**
+ * API
+ */
 describe('Api', () => {
   const instanceSettings = {
     url: 'my-url',

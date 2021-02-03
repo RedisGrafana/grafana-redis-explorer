@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AppPluginMeta, FieldType, PluginType, toDataFrame } from '@grafana/data';
-import { InfoBox } from '@grafana/ui';
 import { config } from '@grafana/runtime';
-import { QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
+import { InfoBox } from '@grafana/ui';
 import { DataSourceType } from '../../constants';
+import { QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
 import { DataSourceList } from '../data-source-list';
 import { RootPage } from './root-page';
 
@@ -215,10 +215,12 @@ describe('RootPage', () => {
       const wrapper = shallow<RootPage>(
         <RootPage meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />
       );
+
       const loadingMessageComponent = wrapper.findWhere(
         (node) => node.is(InfoBox) && node.prop('title') === 'Loading...'
       );
       expect(loadingMessageComponent.exists()).toBeTruthy();
+
       wrapper.instance().componentDidMount();
       setImmediate(() => {
         const dataSourceListComponent = wrapper.findWhere((node) => node.is(DataSourceList));
@@ -237,11 +239,13 @@ describe('RootPage', () => {
         <RootPage meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />,
         { disableLifecycleMethods: true }
       );
+
       getDataSourceMock.mockImplementationOnce(() =>
         Promise.resolve([{ name: 'my-redis', type: DataSourceType.SOFTWARE }])
       );
       redisMock.query.mockImplementationOnce(() => Promise.reject());
       await wrapper.instance().componentDidMount();
+
       const dataSourceListComponent = wrapper.findWhere((node) => node.is(DataSourceList));
       const loadingMessageComponent = wrapper.findWhere(
         (node) => node.is(InfoBox) && node.prop('title') === 'Loading...'

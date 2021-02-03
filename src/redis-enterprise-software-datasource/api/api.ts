@@ -1,7 +1,7 @@
 import { assign, defaultTo, get, isArray, isNaN, isNil, isObject, keys, omit, sortBy, toPairs } from 'lodash';
+import { map } from 'rxjs/operators';
 import { DataSourceInstanceSettings, TimeRange } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
-import { map } from 'rxjs/operators';
 import { DataSourceOptions, RedisEnterpriseQuery } from '../types';
 import { Bdb, Cluster, License, Log, Module, Node, Stat, User } from './models';
 import { DATASOURCE_FRAME, LogItem, QueryTypeValue } from './types';
