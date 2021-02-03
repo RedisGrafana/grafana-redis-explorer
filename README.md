@@ -47,10 +47,10 @@ docker run -d -p 3000:3000 --name=explorer ghcr.io/redisgrafana/redis-explorer:l
 
 ### Run using `docker-compose` for development
 
-Explorer plug-in have to be built following [BUILD](https://github.com/RedisGrafana/grafana-redis-explorer/blob/master/BUILD.md) instructions before starting using `docker-compose-dev.yml` file.
+Explorer plug-in have to be built following [BUILD](https://github.com/RedisGrafana/grafana-redis-explorer/blob/master/BUILD.md) instructions before starting using `docker-compose/dev.yml` file.
 
 ```bash
-docker-compose -f docker-compose-dev.yml up
+docker-compose -f docker-compose/dev.yml up
 ```
 
 ### Open Grafana
