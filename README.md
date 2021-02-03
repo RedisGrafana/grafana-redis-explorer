@@ -21,7 +21,7 @@ The Redis Explorer, is a plug-in for Grafana that allows users to connect to Red
 
 ### What Grafana version is supported?
 
-Only Grafana 7.0 and later with a new plug-in platform supported.
+Only Grafana 7.1 and later with a new plug-in platform supported.
 
 ### Does this application require anything special configured on the Redis Enterprise?
 
