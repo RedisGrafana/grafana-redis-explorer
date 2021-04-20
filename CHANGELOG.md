@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.1.0 (IN PROGRESS)
+
+
 ## v1.0.0
 
 - Initial release based on Grafana 7.3.6.
