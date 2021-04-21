@@ -2,6 +2,9 @@
 
 ## 1.1.0 (IN PROGRESS)
 
+### Features / Enhancements
+
+- Docker image improvements
 
 ## v1.0.0
 

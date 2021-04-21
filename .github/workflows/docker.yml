@@ -190,6 +190,11 @@ jobs:
       - name: Build and test frontend
         run: yarn build
 
+      - name: Sign plugin
+        run: yarn run grafana-toolkit plugin:sign
+        env:
+          GRAFANA_API_KEY: ${{ secrets.GRAFANA_API_KEY }} # Requires a Grafana API key from Grafana.com.
+
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
