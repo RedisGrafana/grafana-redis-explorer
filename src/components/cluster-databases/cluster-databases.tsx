@@ -72,7 +72,7 @@ export class ClusterDatabases extends PureComponent<Props, State> {
    * Load databases and all data sources
    */
   async componentDidMount() {
-    const dataSources: DataSourceInstanceSettings[] = await this.dataSourceSrv.getAll();
+    const dataSources: DataSourceInstanceSettings[] = await this.dataSourceSrv.getList();
     const bdbs = await this.loadBdbs();
 
     this.setState({
@@ -155,7 +155,7 @@ export class ClusterDatabases extends PureComponent<Props, State> {
     return (
       <>
         {bdbs
-          .sort(function(a: Bdb, b: Bdb) {
+          .sort(function (a: Bdb, b: Bdb) {
             return a.name.localeCompare(b.name);
           })
           .map((db: Bdb) => (

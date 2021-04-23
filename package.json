@@ -2,17 +2,17 @@
   "author": "Redis Labs",
   "description": "Redis Explorer for Grafana",
   "devDependencies": {
-    "@grafana/data": "7.3.6",
-    "@grafana/runtime": "7.3.6",
-    "@grafana/toolkit": "7.3.6",
-    "@grafana/ui": "7.3.6",
-    "@testing-library/jest-dom": "5.11.8",
-    "@testing-library/react": "^11.2.2",
+    "@grafana/data": "7.5.4",
+    "@grafana/runtime": "7.5.4",
+    "@grafana/toolkit": "7.5.4",
+    "@grafana/ui": "7.5.4",
+    "@testing-library/jest-dom": "5.12.0",
+    "@testing-library/react": "^11.2.6",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
-    "@types/lodash": "4.14.166",
+    "@types/lodash": "4.14.168",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.5"
+    "enzyme-adapter-react-16": "^1.15.6"
   },
   "engines": {
     "node": ">=12"
@@ -30,7 +30,8 @@
     "stop": "docker-compose down",
     "stop:dev": "docker-compose -f docker-compose/dev.yml down",
     "test": "grafana-toolkit plugin:test --coverage",
+    "upgrade": "yarn upgrade --latest",
     "watch": "grafana-toolkit plugin:dev --watch"
   },
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

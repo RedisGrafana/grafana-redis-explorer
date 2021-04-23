@@ -8,6 +8,7 @@ export const MultiLayerSecurity: FC<SVGProps> = ({ size, fill, ...rest }) => {
   return (
     <a
       target="_blank"
+      rel="noreferrer"
       href="https://docs.redislabs.com/latest/rs/administering/designing-production/security/"
       title="TLS Authentication and Encryption"
     >

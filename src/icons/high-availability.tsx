@@ -8,6 +8,7 @@ export const HighAvailability: FC<SVGProps> = ({ size, fill, ...rest }) => {
   return (
     <a
       target="_blank"
+      rel="noreferrer"
       href="https://docs.redislabs.com/latest/rs/concepts/data-access/oss-cluster-api/"
       title="Redis OSS Cluster API Architecture"
     >
