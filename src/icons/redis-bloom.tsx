@@ -8,6 +8,7 @@ export const RedisBloom: FC<SVGProps> = ({ size, fill, ...rest }) => {
   return (
     <a
       target="_blank"
+      rel="noreferrer"
       href="https://docs.redislabs.com/latest/modules/redisbloom/"
       title="A Bloom filter is a probabilistic data structure which provides an efficient way to verify that an entry is certainly not in a set."
     >

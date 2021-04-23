@@ -1,5 +1,5 @@
-import React from 'react';
 import { shallow } from 'enzyme';
+import React from 'react';
 import { Bdb, QueryTypeValue } from 'redis-enterprise-software-datasource/api';
 import { ClusterDatabase } from '../cluster-database';
 import { ClusterDatabases } from './cluster-databases';
@@ -23,7 +23,7 @@ const dataSourceMock = {
 
 const dataSourceSrvMock = {
   get: jest.fn().mockImplementation(() => dataSourceMock),
-  getAll: jest.fn(),
+  getList: jest.fn(),
 };
 
 jest.mock('@grafana/runtime', () => ({
@@ -76,7 +76,7 @@ describe('ClusterDatabases', () => {
           name: 1,
         },
       ];
-      dataSourceSrvMock.getAll.mockImplementationOnce(() => Promise.resolve(dataSources));
+      dataSourceSrvMock.getList.mockImplementationOnce(() => Promise.resolve(dataSources));
       const bdbs = [
         {
           name: 'db-name',
@@ -90,7 +90,7 @@ describe('ClusterDatabases', () => {
       const wrapper = shallow<ClusterDatabases>(<ClusterDatabases dataSource={dataSource as any} />);
       expect(wrapper.text()).toEqual('Loading Databases...');
       setImmediate(() => {
-        expect(dataSourceSrvMock.getAll).toHaveBeenCalled();
+        expect(dataSourceSrvMock.getList).toHaveBeenCalled();
         expect(dataSourceSrvMock.get).toHaveBeenCalledWith(dataSource.name);
         expect(dataSourceMock.api.getBdbs).toHaveBeenCalledWith({ queryType: QueryTypeValue.BDBS, refId: '' });
         expect(wrapper.state()).toEqual({
@@ -281,7 +281,7 @@ describe('ClusterDatabases', () => {
       expect(wrapper.state().dataSources).toEqual([]);
       const db = getDb({ authentication_redis_pass: 'password' });
       const getDataSourceRequestDataMock = jest.spyOn(wrapper.instance(), 'getDataSourceRequestData');
-      const updatedDataSources = [{ name: 'dataSource-name', fields: { name: dataSource - name } }];
+      const updatedDataSources = [{ name: 'dataSource-name', fields: { name: dataSource } }];
       backendSrvMock.get.mockImplementationOnce(() => Promise.resolve(updatedDataSources));
       const options = { url: 'my-url' };
       wrapper.instance().onAddDataSource(db, options);

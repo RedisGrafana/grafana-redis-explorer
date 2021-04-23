@@ -8,6 +8,7 @@ export const RedisAI: FC<SVGProps> = ({ size, fill, ...rest }) => {
   return (
     <a
       target="_blank"
+      rel="noreferrer"
       href="https://docs.redislabs.com/latest/modules/redisai/"
       title="RedisAI is a Redis module for executing Deep Learning/Machine Learning models and managing their data."
     >

@@ -8,6 +8,7 @@ export const RedisEnterpriseSoftware: FC<SVGProps> = ({ size, fill, title, ...re
   return (
     <a
       target="_blank"
+      rel="noreferrer"
       href="https://redislabs.com/redis-enterprise-software/overview/"
       title={
         title

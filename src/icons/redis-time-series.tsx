@@ -8,6 +8,7 @@ export const RedisTimeSeries: FC<SVGProps> = ({ size, fill, ...rest }) => {
   return (
     <a
       target="_blank"
+      rel="noreferrer"
       href="https://docs.redislabs.com/latest/modules/redistimeseries/"
       title="RedisTimeSeries is a Redis module developed by Redis Labs to enhance your experience managing time series data with Redis."
     >
