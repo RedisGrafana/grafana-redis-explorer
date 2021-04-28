@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.3.7"
+      "version": "7.5.4"
     },
     {
       "type": "panel",
@@ -43,7 +43,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1612330002228,
+  "iteration": 1619630362933,
   "links": [],
   "panels": [
     {
@@ -64,10 +64,6 @@
       "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null,
-            "filterable": false
-          },
           "links": [
             {
               "title": "Cluster Overview",
@@ -110,9 +106,10 @@
           "fields": "/.*/",
           "values": true
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "queryType": "cluster",
@@ -142,7 +139,6 @@
       "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "unit": "µs"
         },
         "overrides": []
@@ -173,7 +169,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -267,9 +263,7 @@
       "dashes": false,
       "datasource": "$cluster",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -301,7 +295,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -404,9 +398,7 @@
       "dashes": false,
       "datasource": "$cluster",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -438,7 +430,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -527,9 +519,6 @@
       "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -574,9 +563,10 @@
           "fields": "/.*/",
           "values": true
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "queryType": "license",
@@ -600,7 +590,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 26,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -611,6 +601,7 @@
           "text": "Redis Enterprise Software",
           "value": "Redis Enterprise Software"
         },
+        "description": null,
         "error": null,
         "hide": 0,
         "includeAll": true,
@@ -632,6 +623,7 @@
           "text": "1hour",
           "value": "1hour"
         },
+        "description": null,
         "error": null,
         "hide": 0,
         "includeAll": false,
