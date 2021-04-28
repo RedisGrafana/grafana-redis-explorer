@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.3.7"
+      "version": "7.5.4"
     },
     {
       "type": "panel",
@@ -55,7 +55,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1611803023796,
+  "iteration": 1619616356170,
   "links": [
     {
       "icon": "external link",
@@ -70,9 +70,6 @@
       "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -103,9 +100,10 @@
           "fields": "/.*/",
           "values": true
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "queryType": "cluster",
@@ -131,9 +129,6 @@
       "datasource": "-- Dashboard --",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -178,9 +173,10 @@
           "fields": "/.*/",
           "values": true
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "panelId": 6,
@@ -206,9 +202,6 @@
       "datasource": "-- Dashboard --",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -240,9 +233,10 @@
           "fields": "/.*/",
           "values": true
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "panelId": 6,
@@ -268,10 +262,8 @@
       "datasource": "$cluster",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
+          "noValue": "N/A",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -302,9 +294,10 @@
           "fields": "/.*/",
           "values": true
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "queryType": "license",
@@ -330,9 +323,6 @@
       "datasource": "-- Dashboard --",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -377,9 +367,10 @@
           "fields": "/.*/",
           "values": true
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "panelId": 56,
@@ -405,9 +396,6 @@
       "datasource": "-- Dashboard --",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -439,9 +427,10 @@
           "fields": "/.*/",
           "values": true
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "panelId": 56,
@@ -471,24 +460,6 @@
       "datasource": "-- Dashboard --",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null,
-            "filterable": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
           "unit": "µs"
         },
         "overrides": []
@@ -519,7 +490,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -610,7 +581,6 @@
       "datasource": "-- Dashboard --",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "unit": "short"
         },
         "overrides": []
@@ -641,7 +611,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -733,9 +703,7 @@
       "datasource": "$cluster",
       "decimals": 2,
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -767,7 +735,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -859,9 +827,7 @@
       "dashes": false,
       "datasource": "-- Dashboard --",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -893,7 +859,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -994,9 +960,7 @@
       "dashes": false,
       "datasource": "-- Dashboard --",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -1028,7 +992,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1207,7 +1171,7 @@
           }
         ]
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "queryType": "users",
@@ -1379,7 +1343,7 @@
           }
         ]
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.4",
       "targets": [
         {
           "queryType": "modules",
@@ -1394,7 +1358,7 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["display_name", "description", "semantic_version", "command_line_args"]
+              "names": ["command_line_args", "description", "display_name", "semantic_version", "uid"]
             }
           }
         },
@@ -1403,17 +1367,18 @@
           "options": {
             "excludeByName": {},
             "indexByName": {
-              "command_line_args": 2,
-              "description": 1,
-              "display_name": 0,
-              "module_name": 4,
-              "semantic_version": 3
+              "command_line_args": 3,
+              "description": 2,
+              "display_name": 1,
+              "semantic_version": 4,
+              "uid": 0
             },
             "renameByName": {
               "command_line_args": "Arguments",
               "description": "Description",
               "display_name": "Name",
-              "semantic_version": "Version"
+              "semantic_version": "Version",
+              "uid": "Id"
             }
           }
         }
@@ -1423,9 +1388,7 @@
     {
       "datasource": "$cluster",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "gridPos": {
@@ -1436,6 +1399,7 @@
       },
       "id": 37,
       "options": {
+        "dedupStrategy": "none",
         "showLabels": false,
         "showTime": false,
         "sortOrder": "Descending",
@@ -1469,9 +1433,7 @@
     {
       "datasource": "$cluster",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "gridPos": {
@@ -1482,6 +1444,7 @@
       },
       "id": 68,
       "options": {
+        "dedupStrategy": "none",
         "showLabels": false,
         "showTime": true,
         "sortOrder": "Descending",
@@ -1502,9 +1465,7 @@
     {
       "datasource": "$cluster",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "gridPos": {
@@ -1515,6 +1476,7 @@
       },
       "id": 70,
       "options": {
+        "dedupStrategy": "none",
         "showLabels": false,
         "showTime": true,
         "sortOrder": "Descending",
@@ -1534,7 +1496,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 26,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": ["explorer"],
   "templating": {
@@ -1545,6 +1507,7 @@
           "text": "Redis Enterprise Software",
           "value": "Redis Enterprise Software"
         },
+        "description": null,
         "error": null,
         "hide": 0,
         "includeAll": false,
@@ -1564,10 +1527,11 @@
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "1hour",
           "value": "1hour"
         },
+        "description": null,
         "error": null,
         "hide": 0,
         "label": "Interval",
