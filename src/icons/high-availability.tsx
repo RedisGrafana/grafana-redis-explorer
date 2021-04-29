@@ -12,16 +12,7 @@ export const HighAvailability: FC<SVGProps> = ({ size, fill, ...rest }) => {
       href="https://docs.redislabs.com/latest/rs/concepts/data-access/oss-cluster-api/"
       title="Redis OSS Cluster API Architecture"
     >
-      <svg
-        version="1.1"
-        id="Redis OSS Cluster API Architecture"
-        x="0px"
-        y="0px"
-        viewBox="0 0 32 32"
-        width={size}
-        height={size}
-        {...rest}
-      >
+      <svg version="1.1" id="OSSClusterAPI" x="0px" y="0px" viewBox="0 0 32 32" width={size} height={size} {...rest}>
         <path
           fill={fill ? fill : '#DC382D'}
           d="M29.5,0h-9C19.1,0,18,1.1,18,2.5V9h-6.5C10.1,9,9,10.1,9,11.5V18H2.5C1.1,18,0,19.1,0,20.5v9
