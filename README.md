@@ -58,7 +58,7 @@ Take a look at [Documentation](https://redisgrafana.github.io/redis-explorer/ove
 
 ## Development
 
-[Developing Redis Explorer plug-in](https://redisgrafana.github.io/development/redis-datasource/) page provides instructions on building the application and data source plug-ins.
+[Developing Redis Explorer plug-in](https://redisgrafana.github.io/development/redis-explorer/) page provides instructions on building the application and data source plug-ins.
 
 Are you interested in the latest features and updates? Start nightly built [Docker image for Redis Explorer plug-in](https://redisgrafana.github.io/development/images/).
 
