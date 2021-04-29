@@ -20,53 +20,53 @@
 
 ## Introduction
 
-The Redis Explorer is a plug-in for Grafana that allows to connect to Redis Enterprise software clusters using REST API. It provides application pages to add [Redis Data Sources](https://grafana.com/grafana/plugins/redis-datasource/) for managed databases and dashboards to see cluster configuration.
+The Redis Explorer is a plug-in for Grafana that connects to Redis Enterprise software clusters using REST API. It provides application pages to add [Redis Data Sources](https://grafana.com/grafana/plugins/redis-datasource/) for managed databases and dashboards to see cluster configuration.
 
 ### Requirements
 
 Only **Grafana 7.1+** with a new Backend plug-in platform supports Redis plug-ins.
 
-### Does this application require anything special configured on the Redis Enterprise?
+### Does this Application require anything special configured on the Redis Enterprise?
 
-Application can connect to any Redis Enterprise software cluster version 5.4 and later. No special configuration is required.
+The Application can connect to any Redis Enterprise software cluster version 5.4 and later. No unique configuration is required.
 
 ## Getting Started
 
-Use the `grafana-cli` tool to install from the commandline (when added to the official repository):
+Use the `grafana-cli` tool to install from the command-line (when added to the official repository):
 
 ```bash
 grafana-cli plugins install redis-explorer-app
 ```
 
-For Docker instructions and installation without Internet access follow [Quickstart](https://redisgrafana.github.io/quickstart/) page.
+For Docker instructions and installation without Internet access, follow [Quickstart](https://redisgrafana.github.io/quickstart/) page.
 
 ### Open Grafana and enable Redis Explorer plug-in
 
-Open Grafana in your browser, enable Redis Explorer plug-in and configure Redis Enterprise Software Data Sources.
+Open Grafana in your browser, enable Redis Explorer plug-in, and configure Redis Enterprise Software Data Sources.
 
 ![Enable](https://raw.githubusercontent.com/RedisGrafana/grafana-redis-explorer/master/src/img/enable.png)
 
 ### Redis Enterprise Software Data Source
 
-Redis Enterprise Software Data Source included in the Redis Explorer plug-in and allows to connect to Redis Enterprise software clusters using REST API. For detailed information take a look at [Configuration](https://redisgrafana.github.io/redis-explorer/re-software/configuration/) page.
+Redis Enterprise Software Data Source is included in the Redis Explorer plug-in and connects to Redis Enterprise software clusters using REST API. For detailed information, look at [Configuration](https://redisgrafana.github.io/redis-explorer/re-software/configuration/) page.
 
 ![Datasource](https://raw.githubusercontent.com/RedisGrafana/grafana-redis-explorer/master/src/img/datasource.png)
 
 ## Documentation
 
-Take a look at [Documentation](https://redisgrafana.github.io/redis-explorer/overview/) to learn more about Redis Explorer plug-in, Redis Enterprise Software data source and provided dashboards.
+Take a look at [Documentation](https://redisgrafana.github.io/redis-explorer/overview/) to learn more about Redis Explorer plug-in, Redis Enterprise Software data source, and provided dashboards.
 
 ## Development
 
-[Developing Redis Explorer plug-in](https://redisgrafana.github.io/development/redis-datasource/) page provides instructions on how to build the application and data source plug-ins.
+[Developing Redis Explorer plug-in](https://redisgrafana.github.io/development/redis-datasource/) page provides instructions on building the application and data source plug-ins.
 
-Interested in the latest features and updates? Start nightly built [Docker image for Redis Explorer plug-in](https://redisgrafana.github.io/development/images/).
+Are you interested in the latest features and updates? Start nightly built [Docker image for Redis Explorer plug-in](https://redisgrafana.github.io/development/images/).
 
 ## Feedback
 
-We love to hear from users, developers and the whole community interested by this plug-in. These are various ways to get in touch with us:
+We love to hear from users, developers, and the whole community interested in this plug-in. These are various ways to get in touch with us:
 
-- Ask a question, request a new feature and file a bug with [GitHub issues](https://github.com/RedisGrafana/grafana-redis-explorer/issues/new/choose).
+- Ask a question, request a new feature, and file a bug with [GitHub issues](https://github.com/RedisGrafana/grafana-redis-explorer/issues/new/choose).
 - Star the repository to show your support.
 
 ## Contributing
