@@ -75,7 +75,20 @@
       "large": "img/logo.svg",
       "small": "img/logo.svg"
     },
-    "screenshots": [],
+    "screenshots": [
+      {
+        "name": "Cluster Overview Dashboard",
+        "path": "img/overview.png"
+      },
+      {
+        "name": "Redis Enterprise Software Data Source",
+        "path": "img/datasource.png"
+      },
+      {
+        "name": "Enable Redis Explorer plug-in",
+        "path": "img/enable.png"
+      }
+    ],
     "updated": "%TODAY%",
     "version": "%VERSION%"
   },
