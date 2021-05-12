@@ -1,5 +1,7 @@
 # Change Log
 
+## 1.2.0 (IN PROGRESS)
+
 ## 1.1.0 (2021-04-29)
 
 ### Features / Enhancements
@@ -14,7 +16,7 @@
 
 - Remove databases config page (#49)
 
-## v1.0.0 (2021-02-03)
+## 1.0.0 (2021-02-03)
 
 ### Features / Enhancements
 
