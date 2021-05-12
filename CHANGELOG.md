@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.1.0 (2021-04-29)
+## v1.1.0 (2021-04-29)
 
 ### Features / Enhancements
 

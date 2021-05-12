@@ -3,6 +3,7 @@
 ![Dashboard](https://raw.githubusercontent.com/RedisGrafana/grafana-redis-explorer/master/src/img/overview.png)
 
 [![Grafana 7](https://img.shields.io/badge/Grafana-7-orange)](https://www.grafana.com)
+[![Redis Explorer plug-in](https://img.shields.io/badge/dynamic/json?color=blue&label=Redis%20Explorer%20plug-in&query=%24.version&url=https%3A%2F%2Fgrafana.com%2Fapi%2Fplugins%2Fredis-explorer-app)](https://grafana.com/grafana/plugins/redis-explorer-app)
 ![CI](https://github.com/RedisGrafana/grafana-redis-explorer/workflows/CI/badge.svg)
 ![Docker](https://github.com/RedisGrafana/grafana-redis-explorer/workflows/Docker/badge.svg)
 [![codecov](https://codecov.io/gh/RedisGrafana/grafana-redis-explorer/branch/master/graph/badge.svg?token=15SIRGU8SX)](https://codecov.io/gh/RedisGrafana/grafana-redis-explorer)
@@ -32,13 +33,13 @@ The Application can connect to any Redis Enterprise software cluster version 5.4
 
 ## Getting Started
 
-Use the `grafana-cli` tool to install from the command-line (when added to the official repository):
+Use the `grafana-cli` tool to install from the command line:
 
 ```bash
 grafana-cli plugins install redis-explorer-app
 ```
 
-For Docker instructions and installation without Internet access, follow [Quickstart](https://redisgrafana.github.io/quickstart/) page.
+For Docker instructions and installation without Internet access, follow the [Quickstart](https://redisgrafana.github.io/quickstart/) page.
 
 ### Open Grafana and enable Redis Explorer plug-in
 
@@ -48,13 +49,13 @@ Open Grafana in your browser, enable Redis Explorer plug-in, and configure Redis
 
 ### Redis Enterprise Software Data Source
 
-Redis Enterprise Software Data Source is included in the Redis Explorer plug-in and connects to Redis Enterprise software clusters using REST API. For detailed information, look at [Configuration](https://redisgrafana.github.io/redis-explorer/re-software/configuration/) page.
+Redis Enterprise Software Data Source is included in the Redis Explorer plug-in and connects to Redis Enterprise software clusters using REST API. For detailed information, look at the [Configuration](https://redisgrafana.github.io/redis-explorer/re-software/configuration/) page.
 
 ![Datasource](https://raw.githubusercontent.com/RedisGrafana/grafana-redis-explorer/master/src/img/datasource.png)
 
 ## Documentation
 
-Take a look at [Documentation](https://redisgrafana.github.io/redis-explorer/overview/) to learn more about Redis Explorer plug-in, Redis Enterprise Software data source, and provided dashboards.
+Please look at the [Documentation](https://redisgrafana.github.io/redis-explorer/overview/) to learn more about the Redis Explorer plug-in, Redis Enterprise Software data source, and provided dashboards.
 
 ## Development
 
