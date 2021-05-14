@@ -10,7 +10,7 @@ export const RedisTimeSeries: FC<SVGProps> = ({ size, fill, ...rest }) => {
       target="_blank"
       rel="noreferrer"
       href="https://docs.redislabs.com/latest/modules/redistimeseries/"
-      title="RedisTimeSeries is a Redis module developed by Redis Labs to enhance your experience managing time series data with Redis."
+      title="RedisTimeSeries is a Redis module to enhance your experience managing time series data with Redis."
     >
       <svg version="1.1" id="RedisTimeSeries" x="0px" y="0px" viewBox="0 0 32 32" width={size} height={size} {...rest}>
         <path

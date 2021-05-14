@@ -3,8 +3,8 @@
   "id": "redis-enterprise-software-datasource",
   "info": {
     "author": {
-      "name": "Redis Labs",
-      "url": "https://oss.redislabs.com"
+      "name": "RedisGrafana",
+      "url": "https://redisgrafana.github.io/"
     },
     "description": "Redis Enterprise Software",
     "logos": {

@@ -136,8 +136,7 @@ export class Config extends PureComponent<Props, State> {
             </p>
           ) : (
             <p>
-              Click below to <b>Enable</b> the Application and start monitoring your Redis Labs Enterprise clusters
-              today.
+              Click below to <b>Enable</b> the Application and start monitoring your Redis Enterprise clusters today.
             </p>
           )}
         </InfoBox>
