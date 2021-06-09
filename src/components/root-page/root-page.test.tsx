@@ -1,5 +1,5 @@
-import React from 'react';
 import { shallow } from 'enzyme';
+import React from 'react';
 import { AppPluginMeta, FieldType, PluginType, toDataFrame } from '@grafana/data';
 import { config } from '@grafana/runtime';
 import { InfoBox } from '@grafana/ui';
@@ -102,7 +102,7 @@ describe('RootPage', () => {
   describe('Mounting', () => {
     it('Should update navigation', () => {
       const wrapper = shallow<RootPage>(
-        <RootPage meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />
+        <RootPage basename="" meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />
       );
       const testedMethod = jest.spyOn(wrapper.instance(), 'updateNav');
       wrapper.instance().componentDidMount();
@@ -111,7 +111,7 @@ describe('RootPage', () => {
 
     it('Should make get /api/datasources request', () => {
       const wrapper = shallow<RootPage>(
-        <RootPage meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />
+        <RootPage basename="" meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />
       );
       wrapper.instance().componentDidMount();
       expect(getDataSourceMock).toHaveBeenCalledWith('/api/datasources');
@@ -133,7 +133,7 @@ describe('RootPage', () => {
       expect(config.datasources).not.toBeDefined();
       expect(config.defaultDatasource).not.toBeDefined();
       const wrapper = shallow<RootPage>(
-        <RootPage meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />,
+        <RootPage basename="" meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />,
         {
           disableLifecycleMethods: true,
         }
@@ -155,7 +155,7 @@ describe('RootPage', () => {
         ])
       );
       const wrapper = shallow<RootPage>(
-        <RootPage meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />
+        <RootPage basename="" meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />
       );
       wrapper.instance().componentDidMount();
       setImmediate(() => {
@@ -182,7 +182,7 @@ describe('RootPage', () => {
   describe('updateNav', () => {
     it('Should call onNavChanged prop', () => {
       const wrapper = shallow<RootPage>(
-        <RootPage meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />
+        <RootPage basename="" meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />
       );
       wrapper.instance().updateNav();
       const node = {
@@ -213,7 +213,7 @@ describe('RootPage', () => {
   describe('rendering', () => {
     it('Should show message if loading=true', (done) => {
       const wrapper = shallow<RootPage>(
-        <RootPage meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />
+        <RootPage basename="" meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />
       );
 
       const loadingMessageComponent = wrapper.findWhere(
@@ -236,7 +236,7 @@ describe('RootPage', () => {
 
     it('If dataSource is unable to make query, should work correctly', async () => {
       const wrapper = shallow<RootPage>(
-        <RootPage meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />,
+        <RootPage basename="" meta={meta} path={path} query={null as any} onNavChanged={onNavChangedMock} />,
         { disableLifecycleMethods: true }
       );
 
