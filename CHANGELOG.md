@@ -2,6 +2,10 @@
 
 ## 1.2.0 (IN PROGRESS)
 
+### Features / Enhancements
+
+- Upgrade to Grafana 8.0.0 (#53)
+
 ## 1.1.0 (2021-04-29)
 
 ### Features / Enhancements
