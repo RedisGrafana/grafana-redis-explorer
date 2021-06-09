@@ -108,9 +108,9 @@ export class RootPage extends PureComponent<Props, State> {
         /**
          * Execute query
          */
-        const query = (redis.query({
+        const query = redis.query({
           targets: [{ queryType: QueryTypeValue.CLUSTER }],
-        } as DataQueryRequest<RedisEnterpriseQuery>) as unknown) as Promise<DataQueryResponse>;
+        } as DataQueryRequest<RedisEnterpriseQuery>) as unknown as Promise<DataQueryResponse>;
 
         /**
          * Get Cluster name

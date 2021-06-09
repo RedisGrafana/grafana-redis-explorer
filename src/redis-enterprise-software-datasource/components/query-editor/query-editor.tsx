@@ -1,5 +1,5 @@
-import { css } from 'emotion';
 import React, { ChangeEvent, PureComponent } from 'react';
+import { css } from '@emotion/css';
 import { QueryEditorProps, SelectableValue } from '@grafana/data';
 import { Button, InlineFormLabel, LegacyForms, Select } from '@grafana/ui';
 import { ALERT_TYPE, QUERY_TYPE, QueryTypeValue, STATS_INTERVAL, STATS_TYPE } from '../../api';

@@ -26,6 +26,7 @@ const getOptions = ({
   name: '',
   typeLogoUrl: '',
   type: '',
+  uid: '',
   typeName: '',
   access: '',
   url: '',
