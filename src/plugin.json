@@ -17,6 +17,7 @@
       "addToNav": true,
       "defaultNav": true,
       "name": "Home",
+      "icon": "home-alt",
       "path": "/a/redis-explorer-app/",
       "role": "Admin",
       "type": "page"
@@ -28,6 +29,7 @@
     {
       "addToNav": true,
       "name": "Enterprise Clusters",
+      "icon": "monitor",
       "path": "dashboards/redis-explorer.json",
       "role": "Admin",
       "type": "dashboard"
@@ -42,6 +44,7 @@
     {
       "addToNav": true,
       "name": "Cluster Nodes",
+      "icon": "sitemap",
       "path": "dashboards/cluster-nodes.json",
       "role": "Admin",
       "type": "dashboard"
@@ -49,6 +52,7 @@
     {
       "addToNav": true,
       "name": "Cluster Databases",
+      "icon": "database",
       "path": "dashboards/cluster-dbs.json",
       "role": "Admin",
       "type": "dashboard"
