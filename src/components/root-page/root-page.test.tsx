@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { AppPluginMeta, FieldType, PluginType, toDataFrame } from '@grafana/data';
 import { config } from '@grafana/runtime';
-import { InfoBox } from '@grafana/ui';
+import { Alert } from '@grafana/ui';
 import { DataSourceType } from '../../constants';
 import { QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
 import { DataSourceList } from '../data-source-list';
@@ -195,7 +195,7 @@ describe('RootPage', () => {
             text: 'Home',
             url: path,
             id: 'home',
-            icon: 'fa fa-fw fa-database',
+            icon: 'fa fa-fw fa-home',
             active: true,
           },
         ],
@@ -217,7 +217,7 @@ describe('RootPage', () => {
       );
 
       const loadingMessageComponent = wrapper.findWhere(
-        (node) => node.is(InfoBox) && node.prop('title') === 'Loading...'
+        (node) => node.is(Alert) && node.prop('title') === 'Loading...'
       );
       expect(loadingMessageComponent.exists()).toBeTruthy();
 
@@ -225,7 +225,7 @@ describe('RootPage', () => {
       setImmediate(() => {
         const dataSourceListComponent = wrapper.findWhere((node) => node.is(DataSourceList));
         const loadingMessageComponent = wrapper.findWhere(
-          (node) => node.is(InfoBox) && node.prop('title') === 'Loading...'
+          (node) => node.is(Alert) && node.prop('title') === 'Loading...'
         );
         expect(loadingMessageComponent.exists()).not.toBeTruthy();
         expect(dataSourceListComponent.exists()).toBeTruthy();
@@ -248,7 +248,7 @@ describe('RootPage', () => {
 
       const dataSourceListComponent = wrapper.findWhere((node) => node.is(DataSourceList));
       const loadingMessageComponent = wrapper.findWhere(
-        (node) => node.is(InfoBox) && node.prop('title') === 'Loading...'
+        (node) => node.is(Alert) && node.prop('title') === 'Loading...'
       );
       expect(loadingMessageComponent.exists()).not.toBeTruthy();
       expect(dataSourceListComponent.exists()).toBeTruthy();
