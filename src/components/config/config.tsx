@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { AppPluginMeta, PluginConfigPageProps } from '@grafana/data';
-import { BackendSrv, config, getBackendSrv, getLocationSrv } from '@grafana/runtime';
-import { Button, InfoBox } from '@grafana/ui';
-import { ApplicationRoot, DataSourceType } from '../../constants';
+import { BackendSrv, getBackendSrv, getLocationSrv } from '@grafana/runtime';
+import { Button } from '@grafana/ui';
+import { ApplicationRoot } from '../../constants';
 import { GlobalSettings } from '../../types';
 
 /**
@@ -14,7 +14,6 @@ interface Props extends PluginConfigPageProps<AppPluginMeta<GlobalSettings>> {}
  * State
  */
 interface State {
-  isConfigured: boolean;
   isEnabled: boolean;
 }
 
@@ -43,7 +42,6 @@ export class Config extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      isConfigured: false,
       isEnabled: false,
     };
   }
@@ -52,31 +50,13 @@ export class Config extends PureComponent<Props, State> {
    * Mount
    */
   componentDidMount(): void {
-    if (this.props.plugin.meta?.enabled) {
-      const datasources = Object.values(config.datasources).filter((ds) => {
-        return ds.type === DataSourceType.SOFTWARE;
-      });
-
-      /**
-       * Datasources found
-       */
-      this.setState({
-        isConfigured: datasources.length > 0,
-        isEnabled: true,
-      });
-    }
+    /**
+     * Datasources found
+     */
+    this.setState({
+      isEnabled: this.props.plugin.meta?.enabled ? this.props.plugin.meta?.enabled : false,
+    });
   }
-
-  /**
-   * Update
-   */
-  onUpdate = () => {
-    if (!this.state.isEnabled) {
-      return;
-    }
-
-    this.goHome();
-  };
 
   /**
    * Home
@@ -119,29 +99,22 @@ export class Config extends PureComponent<Props, State> {
    * Page Render
    */
   render() {
-    const { isConfigured, isEnabled } = this.state;
+    const { isEnabled } = this.state;
 
     return (
       <>
-        <InfoBox>
-          <h2>Redis Explorer</h2>
+        <h2>Redis Explorer</h2>
+        <p>
+          The Redis Explorer, is a plug-in for Grafana that allows users to connect to Redis Enterprise software REST
+          API and build dashboards to easily monitor Redis Enterprise software clusters. It provides data source and
+          predefined dashboards.
+        </p>
+        {!isEnabled && (
           <p>
-            The Redis Explorer, is a plug-in for Grafana that allows users to connect to Redis Enterprise software REST
-            API and build dashboards to easily monitor Redis Enterprise software clusters. It provides data source and
-            predefined dashboards.
+            Click below to <b>Enable</b> the Application and start monitoring your Redis Enterprise clusters today.
           </p>
-          {isConfigured ? (
-            <p>
-              Click <b>Update</b> to reload the Application configuration.
-            </p>
-          ) : (
-            <p>
-              Click below to <b>Enable</b> the Application and start monitoring your Redis Enterprise clusters today.
-            </p>
-          )}
-        </InfoBox>
+        )}
         <div className="gf-form gf-form-button-row">
-          {isConfigured && <Button onClick={this.onUpdate}>Update</Button>}
           {isEnabled ? (
             <Button variant="destructive" onClick={this.onDisable}>
               Disable

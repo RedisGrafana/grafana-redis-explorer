@@ -25,8 +25,8 @@ The Redis Explorer is a plug-in for Grafana that connects to Redis Enterprise so
 
 ### Requirements
 
-- **Grafana 8.0** is required for version 1.2.0+.
-- **Grafana 7.1+** is required for version 1.1.0.
+- **Grafana 8.0** is required for Redis Explorer 2.X.
+- **Grafana 7.1+** is required for Redis Explorer 1.X.
 
 ### Does this Application require anything special configured on the Redis Enterprise?
 

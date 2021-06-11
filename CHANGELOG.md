@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.2.0 (IN PROGRESS)
+## 2.0.0 (IN PROGRESS)
 
 ### Features / Enhancements
 

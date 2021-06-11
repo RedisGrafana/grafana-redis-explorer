@@ -1,8 +1,8 @@
 import { RedisEnterpriseSoftware } from 'icons';
 import React, { FC, useCallback } from 'react';
 import { EnterpriseDataSourceInstanceSettings } from 'types';
-import { getBackendSrv, getLocationSrv } from '@grafana/runtime';
-import { Button, Container, HorizontalGroup, InfoBox, LinkButton, VerticalGroup } from '@grafana/ui';
+import { getBackendSrv, locationService } from '@grafana/runtime';
+import { Alert, Button, Container, HorizontalGroup, LinkButton, VerticalGroup } from '@grafana/ui';
 import { ApplicationRoot, DataSourceName, DataSourceType } from '../../constants';
 import { ClusterDatabases } from '../cluster-databases';
 
@@ -59,10 +59,8 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
         type: DataSourceType.SOFTWARE,
         access: 'proxy',
       })
-      .then(({ id }) => {
-        getLocationSrv().update({
-          path: `datasources/edit/${id}`,
-        });
+      .then(({ datasource }) => {
+        locationService.push(`/datasources/edit/${datasource.uid}`);
       });
   }, [dataSources]);
 
@@ -78,9 +76,9 @@ export const DataSourceList: FC<Props> = ({ dataSources, query }) => {
             Add Redis Enterprise Software
           </Button>
         </div>
-        <InfoBox title="Please add Redis Enterprise Data Sources.">
+        <Alert title="Please add Redis Enterprise Data Sources." severity="info">
           <p>You can add as many data sources as you want to support multiple Redis Enterprise clusters.</p>
-        </InfoBox>
+        </Alert>
       </div>
     );
   }
