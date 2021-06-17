@@ -27,35 +27,64 @@
       "type": "datasource"
     },
     {
-      "addToNav": true,
+      "addToNav": false,
       "name": "Enterprise Clusters",
-      "icon": "monitor",
       "path": "dashboards/redis-explorer.json",
       "role": "Admin",
       "type": "dashboard"
     },
     {
-      "addToNav": true,
+      "addToNav": false,
       "name": "Cluster Overview",
       "path": "dashboards/cluster-overview.json",
       "role": "Admin",
       "type": "dashboard"
     },
     {
-      "addToNav": true,
+      "addToNav": false,
       "name": "Cluster Nodes",
-      "icon": "sitemap",
       "path": "dashboards/cluster-nodes.json",
       "role": "Admin",
       "type": "dashboard"
     },
     {
-      "addToNav": true,
+      "addToNav": false,
       "name": "Cluster Databases",
-      "icon": "database",
       "path": "dashboards/cluster-dbs.json",
       "role": "Admin",
       "type": "dashboard"
+    },
+    {
+      "addToNav": true,
+      "name": "Enterprise Clusters",
+      "icon": "apps",
+      "path": "/d/1dKhTjtGk",
+      "role": "Admin",
+      "type": "page"
+    },
+    {
+      "addToNav": true,
+      "name": "Cluster Overview",
+      "icon": "monitor",
+      "path": "/d/viroIzSGz",
+      "role": "Admin",
+      "type": "page"
+    },
+    {
+      "addToNav": true,
+      "name": "Cluster Nodes",
+      "icon": "sitemap",
+      "path": "/d/hqze6rtGz",
+      "role": "Admin",
+      "type": "page"
+    },
+    {
+      "addToNav": true,
+      "name": "Cluster Databases",
+      "icon": "database",
+      "path": "/d/k_A8MjtMk",
+      "role": "Admin",
+      "type": "page"
     }
   ],
   "info": {

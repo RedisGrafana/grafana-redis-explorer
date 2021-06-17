@@ -11,7 +11,7 @@ import {
 } from '@grafana/data';
 import { config, getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
 import { Alert } from '@grafana/ui';
-import { DataSourceType } from '../../constants';
+import { ApplicationName, DataSourceType } from '../../constants';
 import { QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
 import { RedisEnterpriseQuery } from '../../redis-enterprise-software-datasource/types';
 import { EnterpriseDataSourceInstanceSettings, GlobalSettings } from '../../types';
@@ -161,7 +161,7 @@ export class RootPage extends PureComponent<Props, State> {
      * Header
      */
     const node = {
-      text: 'Redis Explorer',
+      text: ApplicationName,
       img: meta.info.logos.large,
       subTitle: 'Redis Enterprise clusters',
       url: path,

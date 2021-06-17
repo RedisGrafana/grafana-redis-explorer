@@ -13,6 +13,11 @@ export enum DataSourceName {
 }
 
 /**
- * Application root page
+ * Application's root page
  */
 export const ApplicationRoot = '/a/redis-explorer-app';
+
+/**
+ * Application's name
+ */
+export const ApplicationName = 'Redis Explorer';
