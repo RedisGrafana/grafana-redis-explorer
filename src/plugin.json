@@ -5,9 +5,9 @@
     "plugins": [
       {
         "id": "redis-app",
-        "name": "Redis Application plug-in",
+        "name": "Redis Application plugin",
         "type": "app",
-        "version": "^1.0.1"
+        "version": "^2.0.0"
       }
     ]
   },
@@ -89,7 +89,7 @@
         "path": "img/datasource.png"
       },
       {
-        "name": "Enable Redis Explorer plug-in",
+        "name": "Enable Redis Explorer plugin",
         "path": "img/enable.png"
       }
     ],

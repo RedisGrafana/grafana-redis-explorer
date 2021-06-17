@@ -69,7 +69,7 @@ export class Config extends PureComponent<Props, State> {
   };
 
   /**
-   * Plug-in Settings
+   * Plugin Settings
    *
    * @param settings Plugin Settings
    */
@@ -78,7 +78,7 @@ export class Config extends PureComponent<Props, State> {
   };
 
   /**
-   * Plug-in disable
+   * Plugin disable
    */
   onDisable = () => {
     this.updatePluginSettings({ enabled: false, jsonData: {}, pinned: false }).then(() => {
@@ -87,7 +87,7 @@ export class Config extends PureComponent<Props, State> {
   };
 
   /**
-   * Plug-in enable
+   * Plugin enable
    */
   onEnable = () => {
     this.updatePluginSettings({ enabled: true, jsonData: {}, pinned: true }).then(() => {
@@ -105,8 +105,8 @@ export class Config extends PureComponent<Props, State> {
       <>
         <h2>Redis Explorer</h2>
         <p>
-          The Redis Explorer, is a plug-in for Grafana that allows users to connect to Redis Enterprise software REST
-          API and build dashboards to easily monitor Redis Enterprise software clusters. It provides data source and
+          The Redis Explorer, is a plugin for Grafana that allows users to connect to Redis Enterprise software REST API
+          and build dashboards to easily monitor Redis Enterprise software clusters. It provides data source and
           predefined dashboards.
         </p>
         {!isEnabled && (

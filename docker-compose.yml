@@ -13,7 +13,7 @@ services:
 
   grafana:
     container_name: grafana
-    image: ghcr.io/redisgrafana/redis-explorer:latest
+    image: grafana/grafana:latest
     ports:
       - 3000:3000/tcp
     environment:
@@ -22,6 +22,9 @@ services:
       - GF_AUTH_BASIC_ENABLED=false
       - GF_ENABLE_GZIP=true
       - GF_USERS_DEFAULT_THEME=light
+      - GF_INSTALL_PLUGINS=redis-explorer
+      - GF_FEATURE_TOGGLES_ENABLE=ngalert
+      - GF_PLUGINS_PLUGIN_ADMIN_ENABLED=true
     volumes:
       - ./provisioning:/etc/grafana/provisioning
       # Uncomment to preserve Grafana configuration
