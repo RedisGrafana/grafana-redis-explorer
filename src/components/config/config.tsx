@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { AppPluginMeta, PluginConfigPageProps } from '@grafana/data';
 import { BackendSrv, getBackendSrv, getLocationSrv } from '@grafana/runtime';
 import { Button } from '@grafana/ui';
-import { ApplicationRoot } from '../../constants';
+import { ApplicationName, ApplicationRoot } from '../../constants';
 import { GlobalSettings } from '../../types';
 
 /**
@@ -103,7 +103,7 @@ export class Config extends PureComponent<Props, State> {
 
     return (
       <>
-        <h2>Redis Explorer</h2>
+        <h2>{ApplicationName}</h2>
         <p>
           The Redis Explorer, is a plugin for Grafana that allows users to connect to Redis Enterprise software REST API
           and build dashboards to easily monitor Redis Enterprise software clusters. It provides data source and

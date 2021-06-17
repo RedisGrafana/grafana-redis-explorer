@@ -3,7 +3,7 @@ import React from 'react';
 import { AppPluginMeta, FieldType, PluginType, toDataFrame } from '@grafana/data';
 import { config } from '@grafana/runtime';
 import { Alert } from '@grafana/ui';
-import { DataSourceType } from '../../constants';
+import { ApplicationName, DataSourceType } from '../../constants';
 import { QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
 import { DataSourceList } from '../data-source-list';
 import { RootPage } from './root-page';
@@ -186,7 +186,7 @@ describe('RootPage', () => {
       );
       wrapper.instance().updateNav();
       const node = {
-        text: 'Redis Explorer',
+        text: ApplicationName,
         img: meta.info.logos.large,
         subTitle: 'Redis Enterprise clusters',
         url: path,
