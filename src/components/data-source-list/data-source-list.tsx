@@ -1,9 +1,9 @@
-import { RedisEnterpriseSoftware } from 'icons';
 import React, { FC, useCallback } from 'react';
-import { EnterpriseDataSourceInstanceSettings } from 'types';
 import { getBackendSrv, locationService } from '@grafana/runtime';
 import { Alert, Button, Container, HorizontalGroup, LinkButton, VerticalGroup } from '@grafana/ui';
 import { ApplicationRoot, DataSourceName, DataSourceType } from '../../constants';
+import { RedisEnterpriseSoftware } from '../../icons';
+import { EnterpriseDataSourceInstanceSettings } from '../../types';
 import { ClusterDatabases } from '../cluster-databases';
 
 /**

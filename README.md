@@ -2,7 +2,7 @@
 
 ![Dashboard](https://raw.githubusercontent.com/RedisGrafana/grafana-redis-explorer/master/src/img/overview.png)
 
-[![Grafana 7](https://img.shields.io/badge/Grafana-7-orange)](https://www.grafana.com)
+[![Grafana 8](https://img.shields.io/badge/Grafana-8-orange)](https://www.grafana.com)
 [![Redis Explorer plugin](https://img.shields.io/badge/dynamic/json?color=blue&label=Redis%20Explorer%20plugin&query=%24.version&url=https%3A%2F%2Fgrafana.com%2Fapi%2Fplugins%2Fredis-explorer-app)](https://grafana.com/grafana/plugins/redis-explorer-app)
 ![CI](https://github.com/RedisGrafana/grafana-redis-explorer/workflows/CI/badge.svg)
 ![Docker](https://github.com/RedisGrafana/grafana-redis-explorer/workflows/Docker/badge.svg)
@@ -25,7 +25,7 @@ The Redis Explorer is a plugin for Grafana that connects to Redis Enterprise sof
 
 ### Requirements
 
-- **Grafana 8.0** is required for Redis Explorer 2.X.
+- **Grafana 8.0+** is required for Redis Explorer 2.X.
 - **Grafana 7.1+** is required for Redis Explorer 1.X.
 
 ### Does this Application require anything special configured on the Redis Enterprise?

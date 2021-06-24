@@ -1,10 +1,18 @@
 # Change Log
 
-## 2.0.0 (IN PROGRESS)
+## 2.0.0 (2021-06-24)
+
+### Breaking changes
+
+Supports Grafana 8.0+, for Grafana 7.X use version 1.1.0
 
 ### Features / Enhancements
 
+- Update Readme to add official Grafana repository (#52)
 - Upgrade to Grafana 8.0.1 (#53)
+- Update dashboards and screenshots for Grafana 8 (#55)
+- Add NgAlert and Plugin Catalog to Docker image with minor doc updates (#58)
+- Update dashboards in the application's menu as pages (#59)
 
 ## 1.1.0 (2021-04-29)
 

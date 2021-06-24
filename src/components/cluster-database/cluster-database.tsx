@@ -1,3 +1,6 @@
+import React, { PureComponent } from 'react';
+import { SelectableValue } from '@grafana/data';
+import { Button, Container, HorizontalGroup, InlineFormLabel, Select } from '@grafana/ui';
 import {
   HighAvailability,
   MultiLayerSecurity,
@@ -9,11 +12,8 @@ import {
   RedisJSON,
   RedisSearch,
   RedisTimeSeries,
-} from 'icons';
-import React, { PureComponent } from 'react';
-import { Bdb, BdbEndpoint } from 'redis-enterprise-software-datasource/api';
-import { SelectableValue } from '@grafana/data';
-import { Button, Container, HorizontalGroup, InlineFormLabel, Select } from '@grafana/ui';
+} from '../../icons';
+import { Bdb, BdbEndpoint } from '../../redis-enterprise-software-datasource/api';
 import { NewDatasourceOptions } from '../../types';
 
 /**
