@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
-import { Bdb, QueryTypeValue } from 'redis-enterprise-software-datasource/api';
-import { EnterpriseDataSourceInstanceSettings } from 'types';
 import { css } from '@emotion/css';
 import { DataSourceInstanceSettings } from '@grafana/data';
 import { BackendSrv, DataSourceSrv, getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
-import { NewDatasourceOptions } from '../../types';
+import { Bdb, QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
+import { EnterpriseDataSourceInstanceSettings, NewDatasourceOptions } from '../../types';
 import { ClusterDatabase } from '../cluster-database';
 
 /**

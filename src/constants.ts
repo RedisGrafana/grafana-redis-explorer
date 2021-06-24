@@ -21,3 +21,8 @@ export const ApplicationRoot = '/a/redis-explorer-app';
  * Application's name
  */
 export const ApplicationName = 'Redis Explorer';
+
+/**
+ * Application's title
+ */
+export const ApplicationTitle = 'Redis Enterprise clusters';

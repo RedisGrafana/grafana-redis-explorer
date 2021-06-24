@@ -1,5 +1,5 @@
-import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
+import React from 'react';
 import {
   HighAvailability,
   MultiLayerSecurity,
@@ -10,8 +10,8 @@ import {
   RedisJSON,
   RedisSearch,
   RedisTimeSeries,
-} from 'icons';
-import { Bdb, BdbEndpoint } from 'redis-enterprise-software-datasource/api';
+} from '../../icons';
+import { Bdb, BdbEndpoint } from '../../redis-enterprise-software-datasource/api';
 import { ClusterDatabase } from './cluster-database';
 
 type ShallowComponent = ShallowWrapper<ClusterDatabase['props'], ClusterDatabase['state'], ClusterDatabase>;
