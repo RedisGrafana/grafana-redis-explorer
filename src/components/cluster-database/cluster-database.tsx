@@ -87,6 +87,20 @@ export class ClusterDatabase extends PureComponent<Props, State> {
     super(props);
 
     /**
+     * Endpoints not found, probably database is broken
+     */
+    if (!this.props.db.endpoints || !this.props.db.endpoints.length) {
+      /**
+       * Set State
+       */
+      this.state = {
+        endpointOptions: [],
+        selectedEndpointValue: undefined,
+      };
+      return;
+    }
+
+    /**
      * Convert Endpoints To SelectableValues
      */
     const endpointOptions = this.props.db.endpoints.map((endpoint) =>
@@ -167,7 +181,7 @@ export class ClusterDatabase extends PureComponent<Props, State> {
         </HorizontalGroup>
 
         <HorizontalGroup justify="flex-end">
-          {isCanAdd && (
+          {isCanAdd && endpointOptions.length && (
             <>
               {endpointOptions.length > 1 && (
                 <Container margin="xs">
@@ -192,6 +206,7 @@ export class ClusterDatabase extends PureComponent<Props, State> {
           )}
 
           {!isCanAdd && <Container>Already added</Container>}
+          {!endpointOptions.length && <Container>No endpoints available</Container>}
         </HorizontalGroup>
       </HorizontalGroup>
     );
