@@ -239,7 +239,12 @@ describe('ClusterDatabase', () => {
      */
     describe('Add Form', () => {
       it('Should be shown if isCanAdd=true', () => {
-        const db = getDb();
+        const db = getDb({
+          endpoints: [
+            getEndpoint({ dns_name: 'my-dns', port: 123, addr_type: 'internal' }),
+            getEndpoint({ dns_name: 'my-dns2', port: 111, addr_type: 'external' }),
+          ],
+        });
         const wrapper = shallow<ClusterDatabase>(<ClusterDatabase db={db} onAdd={onAdd} isCanAdd />);
         const testedComponent = wrapper.findWhere((node) => node.prop('onClick') === wrapper.instance().onAdd);
         expect(testedComponent.exists()).toBeTruthy();
@@ -248,6 +253,13 @@ describe('ClusterDatabase', () => {
       it('Should not be shown if isCanAdd=false', () => {
         const db = getDb();
         const wrapper = shallow<ClusterDatabase>(<ClusterDatabase db={db} onAdd={onAdd} isCanAdd={false} />);
+        const testedComponent = wrapper.findWhere((node) => node.prop('onClick') === wrapper.instance().onAdd);
+        expect(testedComponent.exists()).not.toBeTruthy();
+      });
+
+      it('Should not be shown if no endpoints', () => {
+        const db = getDb({ endpoints: [] });
+        const wrapper = shallow<ClusterDatabase>(<ClusterDatabase db={db} onAdd={onAdd} isCanAdd={true} />);
         const testedComponent = wrapper.findWhere((node) => node.prop('onClick') === wrapper.instance().onAdd);
         expect(testedComponent.exists()).not.toBeTruthy();
       });
