@@ -23,7 +23,7 @@
 
 The Redis Explorer is a plugin for Grafana that connects to Redis Enterprise software clusters using REST API. It provides application pages to add [Redis Data Sources](https://grafana.com/grafana/plugins/redis-datasource/) for managed databases and dashboards to see cluster configuration.
 
-## Demo
+### Demo
 
 Demo is available on [demo.volkovlabs.io](https://demo.volkovlabs.io):
 
