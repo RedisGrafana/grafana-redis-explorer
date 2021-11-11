@@ -9,16 +9,6 @@
 [![codecov](https://codecov.io/gh/RedisGrafana/grafana-redis-explorer/branch/master/graph/badge.svg?token=15SIRGU8SX)](https://codecov.io/gh/RedisGrafana/grafana-redis-explorer)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/RedisGrafana/grafana-redis-explorer.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/RedisGrafana/grafana-redis-explorer/context:javascript)
 
-## Summary
-
-- [**Introduction**](#introduction)
-- [**Getting Started**](#getting-started)
-- [**Documentation**](#documentation)
-- [**Development**](#development)
-- [**Feedback**](#feedback)
-- [**Contributing**](#contributing)
-- [**License**](#license)
-
 ## Introduction
 
 The Redis Explorer is a plugin for Grafana that connects to Redis Enterprise software clusters using REST API. It provides application pages to add [Redis Data Sources](https://grafana.com/grafana/plugins/redis-datasource/) for managed databases and dashboards to see cluster configuration.
@@ -35,9 +25,9 @@ Demo is available on [demo.volkovlabs.io](https://demo.volkovlabs.io):
 - **Grafana 8.0+** is required for Redis Explorer 2.X.
 - **Grafana 7.1+** is required for Redis Explorer 1.X.
 
-### Does this Application require anything special configured on the Redis Enterprise?
+### Does Redis Explorer require anything special configured on the Redis Enterprise?
 
-The Application can connect to any Redis Enterprise software cluster version 5.4 and later. No unique configuration is required.
+The Redis Explorer can connect to any Redis Enterprise software cluster version 5.4 and later. No unique configuration is required.
 
 ## Getting Started
 

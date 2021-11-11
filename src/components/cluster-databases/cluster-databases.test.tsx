@@ -107,7 +107,7 @@ describe('ClusterDatabases', () => {
    * loadBdbs
    */
   describe('loadBdbs', () => {
-    it('Should loadBdbs for current dataSource', async (done) => {
+    it('Should loadBdbs for current dataSource', async () => {
       const dataSource = getDataSource();
       const wrapper = shallow<ClusterDatabases>(<ClusterDatabases dataSource={dataSource as any} />, {
         disableLifecycleMethods: true,
@@ -127,10 +127,9 @@ describe('ClusterDatabases', () => {
       await Promise.resolve();
       expect(dataSourceMock.api.getBdbs).toHaveBeenCalled();
       expect(result).toEqual(bdbs);
-      done();
     });
 
-    it('Should return empty array if no dataSource', async (done) => {
+    it('Should return empty array if no dataSource', async () => {
       const dataSource = getDataSource();
       dataSourceSrvMock.get.mockImplementationOnce(() => Promise.resolve(null));
       const wrapper = shallow<ClusterDatabases>(<ClusterDatabases dataSource={dataSource as any} />, {
@@ -140,7 +139,6 @@ describe('ClusterDatabases', () => {
       expect(dataSourceSrvMock.get).toHaveBeenCalledWith(dataSource.name);
       expect(dataSourceMock.api.getBdbs).not.toHaveBeenCalled();
       expect(result).toEqual([]);
-      done();
     });
   });
 
