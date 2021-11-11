@@ -286,7 +286,10 @@ export class Api {
       params.append('etime', range.to.toISOString().split('.')[0] + 'Z');
     }
 
-    return getBackendSrv()
+    /**
+     * Get Events
+     */
+    const logs = await getBackendSrv()
       .fetch({
         method: 'GET',
         url: [url, params.toString()].join('?'),
@@ -303,6 +306,8 @@ export class Api {
         )
       )
       .toPromise();
+
+    return logs.length ? logs : ([{ content: 'No events found in the specified time range' }] as LogItem[]);
   }
 
   /**
