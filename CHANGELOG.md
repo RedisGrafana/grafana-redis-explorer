@@ -4,7 +4,10 @@
 
 ### Features / Enhancements
 
-- Upgrade to Grafana 8.0.6
+- Update to Grafana 8.0.6 (#61)
+- Upgrade to Grafana 8.1.4 (#62)
+- Update node version and add demo at https://demo.volkovlabs.io (#63)
+- Update to Grafana 8.2.3 (#64)
 
 ## 2.0.0 (2021-06-24)
 

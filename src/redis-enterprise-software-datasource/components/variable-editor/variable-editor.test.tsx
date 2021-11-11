@@ -1,5 +1,5 @@
-import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
+import React from 'react';
 import { QueryTypeValue } from '../../api';
 import { VariableQueryEditor } from './variable-editor';
 
@@ -20,7 +20,7 @@ describe('VariableQueryEditor', () => {
         return node.prop('onChange') === wrapper.instance().onChangeType;
       });
 
-    it('Should apply and change queryType', async (done) => {
+    it('Should apply and change queryType', async () => {
       const values = [{ text: '1' }, { text: '2' }];
       const datasource = {
         metricFindQuery: jest.fn().mockImplementation(() => Promise.resolve(values)),
@@ -44,7 +44,6 @@ describe('VariableQueryEditor', () => {
         },
         values.map(({ text }) => text).join(',')
       );
-      done();
     });
 
     it('Should set default definition if no values', async () => {

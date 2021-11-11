@@ -45,7 +45,7 @@ describe('Api', () => {
    * getCluster
    */
   describe('getCluster', () => {
-    it('Should make getCluster request', async (done) => {
+    it('Should make getCluster request', async () => {
       const data = [
         {
           name: 'myName',
@@ -59,7 +59,6 @@ describe('Api', () => {
         url: `${instanceSettings.url}/cluster`,
       });
       expect(result).toEqual(data);
-      done();
     });
   });
 
@@ -67,7 +66,7 @@ describe('Api', () => {
    * getLicense
    */
   describe('getLicense', () => {
-    it('Should make getLicense request', async (done) => {
+    it('Should make getLicense request', async () => {
       const data = [
         {
           name: 'my-name',
@@ -80,7 +79,6 @@ describe('Api', () => {
         url: `${instanceSettings.url}/license`,
       });
       expect(result).toEqual(data);
-      done();
     });
   });
 
@@ -88,7 +86,7 @@ describe('Api', () => {
    * getNodes
    */
   describe('getNodes', () => {
-    it('Should make getNodes request', async (done) => {
+    it('Should make getNodes request', async () => {
       const data = [
         {
           uid: 123,
@@ -108,8 +106,6 @@ describe('Api', () => {
         method: 'GET',
         url: `${instanceSettings.url}/nodes`,
       });
-
-      done();
     });
   });
 
@@ -117,7 +113,7 @@ describe('Api', () => {
    * getBdbs
    */
   describe('getBdbs', () => {
-    it('Should make getBdbs request', async (done) => {
+    it('Should make getBdbs request', async () => {
       const data = [
         {
           uid: 123,
@@ -139,10 +135,9 @@ describe('Api', () => {
         method: 'GET',
         url: `${instanceSettings.url}/bdbs`,
       });
-      done();
     });
 
-    it('Should filter different types of value', async (done) => {
+    it('Should filter different types of value', async () => {
       const data = [
         {
           uid: 123,
@@ -168,7 +163,6 @@ describe('Api', () => {
         url: `${instanceSettings.url}/bdbs/my-bdb`,
       });
       expect(result2).toEqual({ uid: 123 });
-      done();
     });
   });
 
@@ -176,7 +170,7 @@ describe('Api', () => {
    * getModules
    */
   describe('getModules', () => {
-    it('Should make getModules request', async (done) => {
+    it('Should make getModules request', async () => {
       const data = [
         {
           uid: 123,
@@ -194,7 +188,6 @@ describe('Api', () => {
         method: 'GET',
         url: `${instanceSettings.url}/modules`,
       });
-      done();
     });
   });
 
@@ -202,7 +195,7 @@ describe('Api', () => {
    * getUsers
    */
   describe('getUsers', () => {
-    it('Should make getUsers request', async (done) => {
+    it('Should make getUsers request', async () => {
       const data = [
         {
           uid: 123,
@@ -220,7 +213,6 @@ describe('Api', () => {
         method: 'GET',
         url: `${instanceSettings.url}/users/my-user`,
       });
-      done();
     });
   });
 
@@ -228,7 +220,7 @@ describe('Api', () => {
    * getStats
    */
   describe('getStats', () => {
-    it('Should make getStats request', async (done) => {
+    it('Should make getStats request', async () => {
       fetchRequestMock.mockImplementation(() =>
         getResponse({
           data: {
@@ -263,10 +255,9 @@ describe('Api', () => {
         url: `${instanceSettings.url}/${QueryTypeValue.NODES}/stats?`,
       });
       fetchRequestMock.mockReset();
-      done();
     });
 
-    it('Should apply all query parameters for getStats request', async (done) => {
+    it('Should apply all query parameters for getStats request', async () => {
       fetchRequestMock.mockImplementationOnce(() =>
         getResponse({
           data: {
@@ -316,7 +307,6 @@ describe('Api', () => {
         url: requestUrl,
       });
       expect(result).toEqual([{ etime: 1 }, { etime: 2 }]);
-      done();
     });
   });
 
@@ -324,7 +314,7 @@ describe('Api', () => {
    * getAlerts
    */
   describe('getAlerts', () => {
-    it('Should make getAlerts request', async (done) => {
+    it('Should make getAlerts request', async () => {
       fetchRequestMock.mockImplementation(() =>
         getResponse({
           data: {
@@ -359,10 +349,9 @@ describe('Api', () => {
         url: `${instanceSettings.url}/${QueryTypeValue.NODES}/alerts`,
       });
       fetchRequestMock.mockReset();
-      done();
     });
 
-    it('Should make getAlerts request for no array response', async (done) => {
+    it('Should make getAlerts request for no array response', async () => {
       fetchRequestMock.mockImplementationOnce(() =>
         getResponse({
           data: {
@@ -383,7 +372,6 @@ describe('Api', () => {
       });
       expect(result.length).toEqual(1);
       expect(result[0].content).toEqual('key1:myKey=id1 key2:myKey=id2');
-      done();
     });
   });
 
@@ -391,7 +379,7 @@ describe('Api', () => {
    * getLogs
    */
   describe('getLogs', () => {
-    it('Should make getLogs request', async (done) => {
+    it('Should make getLogs request', async () => {
       fetchRequestMock.mockImplementationOnce(() =>
         getResponse({
           data: [
@@ -430,10 +418,9 @@ describe('Api', () => {
           content: '123 severity=high',
         },
       ]);
-      done();
     });
 
-    it('Should make getLogs request without range', async (done) => {
+    it('Should make getLogs request without range', async () => {
       fetchRequestMock.mockImplementationOnce(() =>
         getResponse({
           data: [
@@ -459,7 +446,6 @@ describe('Api', () => {
           content: '123 severity=high',
         },
       ]);
-      done();
     });
   });
 });
