@@ -447,5 +447,26 @@ describe('Api', () => {
         },
       ]);
     });
+
+    it('Should return no events found', async () => {
+      fetchRequestMock.mockImplementationOnce(() =>
+        getResponse({
+          data: [],
+        })
+      );
+
+      const result = await api.getLogs({ refId: 'A', queryType: QueryTypeValue.LOGS }, {} as any);
+      const params = new URLSearchParams();
+
+      expect(fetchRequestMock).toHaveBeenCalledWith({
+        method: 'GET',
+        url: `${instanceSettings.url}/logs?${params.toString()}`,
+      });
+      expect(result).toEqual([
+        {
+          content: 'No events found in the specified time range',
+        },
+      ]);
+    });
   });
 });
