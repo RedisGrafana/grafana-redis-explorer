@@ -8,6 +8,7 @@
 - Upgrade to Grafana 8.1.4 (#62)
 - Update node version and add demo at https://demo.volkovlabs.io (#63)
 - Update to Grafana 8.2.3 (#64)
+- Return no events found message if no events returned (#65)
 
 ## 2.0.0 (2021-06-24)
 
