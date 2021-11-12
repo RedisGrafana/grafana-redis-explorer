@@ -376,7 +376,7 @@ describe('Api', () => {
       fetchRequestMock.mockReset();
     });
 
-    it('Should make getAlerts request with array', async () => {
+    it('Should make getAlerts request with array for databases', async () => {
       fetchRequestMock.mockImplementation(() =>
         getResponse({
           data: {
@@ -423,6 +423,50 @@ describe('Api', () => {
       expect(result.length).toEqual(2);
       expect(result[0].content).toEqual(
         '2021-10-15T22:20:00Z id=cluster_certs_about_to_expire database=1 change_value:global_threshold=45 change_value:state=false enabled=true severity=INFO state=false'
+      );
+      expect(result[0].level).toEqual('INFO');
+      expect(result[0].time).toEqual('2021-10-15T22:20:00Z');
+      fetchRequestMock.mockClear();
+    });
+
+    it('Should make getAlerts request with array for nodes', async () => {
+      fetchRequestMock.mockImplementation(() =>
+        getResponse({
+          data: {
+            1: {
+              cluster_certs_about_to_expire: {
+                change_time: '2021-10-15T22:20:00Z',
+                change_value: {
+                  certs_about_to_expire: [],
+                  global_threshold: '45',
+                  state: false,
+                },
+                enabled: true,
+                severity: 'INFO',
+                state: false,
+              },
+              no_change_time: {
+                change_value: {
+                  state: true,
+                },
+                enabled: false,
+                severity: 'WARNING',
+                state: true,
+              },
+            },
+          },
+        })
+      );
+
+      const query = { refId: 'A', queryType: QueryTypeValue.ALERTS, alertType: QueryTypeValue.NODES };
+      const result = await api.getAlerts(query);
+      expect(fetchRequestMock).toHaveBeenCalledWith({
+        method: 'GET',
+        url: `${instanceSettings.url}/nodes/alerts`,
+      });
+      expect(result.length).toEqual(1);
+      expect(result[0].content).toEqual(
+        '2021-10-15T22:20:00Z id=cluster_certs_about_to_expire node=1 change_value:global_threshold=45 change_value:state=false enabled=true severity=INFO state=false'
       );
       expect(result[0].level).toEqual('INFO');
       expect(result[0].time).toEqual('2021-10-15T22:20:00Z');
