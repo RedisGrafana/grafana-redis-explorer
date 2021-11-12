@@ -318,40 +318,118 @@ describe('Api', () => {
       fetchRequestMock.mockImplementation(() =>
         getResponse({
           data: {
-            1: {
-              myKey: 'id1',
+            cluster_certs_about_to_expire: {
+              change_time: '2021-10-15T22:20:00Z',
+              change_value: {
+                certs_about_to_expire: [],
+                global_threshold: '45',
+                state: false,
+              },
+              enabled: true,
+              severity: 'INFO',
+              state: false,
             },
-            2: {
-              myKey: 'id2',
+            cluster_too_few_nodes_for_replication: {
+              change_time: '2021-10-15T22:20:00Z',
+              change_value: {
+                state: true,
+              },
+              enabled: false,
+              severity: 'WARNING',
+              state: true,
             },
           },
         })
       );
-      const query = { refId: 'A', queryType: QueryTypeValue.ALERTS, alertType: QueryTypeValue.BDBS, bdb: 'my-bdb' };
+
+      const query = { refId: 'A', queryType: QueryTypeValue.ALERTS, alertType: QueryTypeValue.CLUSTER };
       const result = await api.getAlerts(query);
       expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
-        url: `${instanceSettings.url}/${QueryTypeValue.BDBS}/alerts/my-bdb`,
+        url: `${instanceSettings.url}/cluster/alerts`,
       });
       expect(result.length).toEqual(2);
-      expect(result[0].content).toEqual('id=1 myKey=id1');
-      expect(result[1].content).toEqual('id=2 myKey=id2');
+      expect(result[0].content).toEqual(
+        '2021-10-15T22:20:00Z id=cluster_certs_about_to_expire change_value:global_threshold=45 change_value:state=false enabled=true severity=INFO state=false'
+      );
       fetchRequestMock.mockClear();
+
       await api.getAlerts({ refId: 'A', queryType: QueryTypeValue.ALERTS, alertType: QueryTypeValue.BDBS });
       expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/${QueryTypeValue.BDBS}/alerts`,
       });
       fetchRequestMock.mockClear();
+
       await api.getAlerts({ refId: 'A', queryType: QueryTypeValue.ALERTS, alertType: QueryTypeValue.NODES });
       expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
         url: `${instanceSettings.url}/${QueryTypeValue.NODES}/alerts`,
       });
+      fetchRequestMock.mockClear();
+
+      await api.getAlerts({ refId: 'A', queryType: QueryTypeValue.ALERTS, alertType: QueryTypeValue.BDBS, bdb: '2' });
+      expect(fetchRequestMock).toHaveBeenCalledWith({
+        method: 'GET',
+        url: `${instanceSettings.url}/${QueryTypeValue.BDBS}/alerts/2`,
+      });
       fetchRequestMock.mockReset();
     });
 
-    it('Should make getAlerts request for no array response', async () => {
+    it('Should make getAlerts request with array', async () => {
+      fetchRequestMock.mockImplementation(() =>
+        getResponse({
+          data: {
+            1: {
+              cluster_certs_about_to_expire: {
+                change_time: '2021-10-15T22:20:00Z',
+                change_value: {
+                  certs_about_to_expire: [],
+                  global_threshold: '45',
+                  state: false,
+                },
+                enabled: true,
+                severity: 'INFO',
+                state: false,
+              },
+              cluster_too_few_nodes_for_replication: {
+                change_time: '2021-10-15T22:20:00Z',
+                change_value: {
+                  state: true,
+                },
+                enabled: false,
+                severity: 'WARNING',
+                state: true,
+              },
+              no_change_time: {
+                change_value: {
+                  state: true,
+                },
+                enabled: false,
+                severity: 'WARNING',
+                state: true,
+              },
+            },
+          },
+        })
+      );
+
+      const query = { refId: 'A', queryType: QueryTypeValue.ALERTS, alertType: QueryTypeValue.BDBS };
+      const result = await api.getAlerts(query);
+      expect(fetchRequestMock).toHaveBeenCalledWith({
+        method: 'GET',
+        url: `${instanceSettings.url}/bdbs/alerts`,
+      });
+      expect(result.length).toEqual(2);
+      expect(result[0].content).toEqual(
+        '2021-10-15T22:20:00Z id=cluster_certs_about_to_expire database=1 change_value:global_threshold=45 change_value:state=false enabled=true severity=INFO state=false'
+      );
+      expect(result[0].level).toEqual('INFO');
+      expect(result[0].time).toEqual('2021-10-15T22:20:00Z');
+      fetchRequestMock.mockClear();
+    });
+
+    it('Should make getAlerts request for no alerts response', async () => {
       fetchRequestMock.mockImplementationOnce(() =>
         getResponse({
           data: {
@@ -364,14 +442,14 @@ describe('Api', () => {
           },
         })
       );
-      const query = { refId: 'A', queryType: QueryTypeValue.ALERTS, alertType: QueryTypeValue.NODES, node: 'my-node' };
+      const query = { refId: 'A', queryType: QueryTypeValue.ALERTS, alertType: QueryTypeValue.NODES, node: '3' };
       const result = await api.getAlerts(query);
       expect(fetchRequestMock).toHaveBeenCalledWith({
         method: 'GET',
-        url: `${instanceSettings.url}/${QueryTypeValue.NODES}/alerts/my-node`,
+        url: `${instanceSettings.url}/${QueryTypeValue.NODES}/alerts/3`,
       });
       expect(result.length).toEqual(1);
-      expect(result[0].content).toEqual('key1:myKey=id1 key2:myKey=id2');
+      expect(result[0].content).toEqual('No alerts found');
     });
   });
 

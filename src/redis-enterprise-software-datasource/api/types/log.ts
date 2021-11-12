@@ -2,7 +2,7 @@
  * Log item
  */
 export interface LogItem {
-  time: string;
+  time?: string;
   content: string;
   level?: string;
 }

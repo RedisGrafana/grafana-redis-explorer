@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.0.6"
+      "version": "8.2.3"
     },
     {
       "type": "datasource",
@@ -41,15 +41,22 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "editable": true,
+  "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1626557079376,
+  "iteration": 1636662278237,
   "links": [
     {
       "icon": "external link",
@@ -59,6 +66,7 @@
       "type": "dashboards"
     }
   ],
+  "liveNow": false,
   "panels": [
     {
       "datasource": "$cluster",
@@ -263,7 +271,7 @@
           }
         ]
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "queryType": "bdbs",
@@ -386,7 +394,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "bdb": "$db",
@@ -826,7 +834,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "bdb": "$db",
@@ -876,7 +884,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 30,
+  "schemaVersion": 31,
   "style": "dark",
   "tags": ["explorer"],
   "templating": {
@@ -933,12 +941,12 @@
             "value": "5min"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "15min",
             "value": "15min"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "1hour",
             "value": "1hour"
           },

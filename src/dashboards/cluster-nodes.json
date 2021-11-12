@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.0.6"
+      "version": "8.2.3"
     },
     {
       "type": "datasource",
@@ -35,15 +35,22 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "editable": true,
+  "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1626557030902,
+  "iteration": 1636662254592,
   "links": [
     {
       "icon": "external link",
@@ -53,6 +60,7 @@
       "type": "dashboards"
     }
   ],
+  "liveNow": false,
   "panels": [
     {
       "datasource": "$cluster",
@@ -252,7 +260,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "node": "",
@@ -697,7 +705,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 30,
+  "schemaVersion": 31,
   "style": "dark",
   "tags": ["explorer"],
   "templating": {

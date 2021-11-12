@@ -55,6 +55,13 @@
       "type": "dashboard"
     },
     {
+      "addToNav": false,
+      "name": "Cluster Alerts",
+      "path": "dashboards/cluster-alerts.json",
+      "role": "Admin",
+      "type": "dashboard"
+    },
+    {
       "addToNav": true,
       "icon": "apps",
       "name": "Enterprise Clusters",
@@ -83,6 +90,14 @@
       "icon": "database",
       "name": "Cluster Databases",
       "path": "/d/k_A8MjtMk",
+      "role": "Admin",
+      "type": "page"
+    },
+    {
+      "addToNav": true,
+      "icon": "info-circle",
+      "name": "Cluster Alerts",
+      "path": "/d/xESAiFcnk",
       "role": "Admin",
       "type": "page"
     }

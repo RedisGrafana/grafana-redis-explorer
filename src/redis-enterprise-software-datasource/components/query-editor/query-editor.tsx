@@ -162,8 +162,10 @@ export class QueryEditor extends PureComponent<Props> {
               />
             </>
           )}
+        </div>
 
-          {query.alertType && (
+        <div className="gf-form">
+          {query.queryType === QueryTypeValue.ALERTS && query.alertType && (
             <div className="gf-form">
               {query.alertType === QueryTypeValue.BDBS && (
                 <FormField
