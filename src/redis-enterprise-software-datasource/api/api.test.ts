@@ -350,7 +350,7 @@ describe('Api', () => {
       });
       expect(result.length).toEqual(2);
       expect(result[0].content).toEqual(
-        '2021-10-15T22:20:00Z id=cluster_certs_about_to_expire change_value:global_threshold=45 change_value:state=false enabled=true severity=INFO state=false'
+        'id=cluster_certs_about_to_expire change_value:global_threshold=45 change_value:state=false enabled=true severity=INFO state=false'
       );
       fetchRequestMock.mockClear();
 
@@ -422,7 +422,7 @@ describe('Api', () => {
       });
       expect(result.length).toEqual(2);
       expect(result[0].content).toEqual(
-        '2021-10-15T22:20:00Z id=cluster_certs_about_to_expire database=1 change_value:global_threshold=45 change_value:state=false enabled=true severity=INFO state=false'
+        'id=cluster_certs_about_to_expire database=1 change_value:global_threshold=45 change_value:state=false enabled=true severity=INFO state=false'
       );
       expect(result[0].level).toEqual('INFO');
       expect(result[0].time).toEqual('2021-10-15T22:20:00Z');
@@ -466,7 +466,7 @@ describe('Api', () => {
       });
       expect(result.length).toEqual(1);
       expect(result[0].content).toEqual(
-        '2021-10-15T22:20:00Z id=cluster_certs_about_to_expire node=1 change_value:global_threshold=45 change_value:state=false enabled=true severity=INFO state=false'
+        'id=cluster_certs_about_to_expire node=1 change_value:global_threshold=45 change_value:state=false enabled=true severity=INFO state=false'
       );
       expect(result[0].level).toEqual('INFO');
       expect(result[0].time).toEqual('2021-10-15T22:20:00Z');
@@ -537,7 +537,7 @@ describe('Api', () => {
         {
           time: 123,
           level: 'high',
-          content: '123 severity=high',
+          content: 'severity=high',
         },
       ]);
     });
@@ -565,7 +565,7 @@ describe('Api', () => {
         {
           time: 123,
           level: 'high',
-          content: '123 severity=high',
+          content: 'severity=high',
         },
       ]);
     });

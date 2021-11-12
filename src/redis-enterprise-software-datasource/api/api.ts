@@ -1,4 +1,4 @@
-import { assign, defaultTo, get, isArray, isNaN, isNil, isObject, keys, omit, sortBy, toPairs } from 'lodash';
+import { assign, defaultTo, isArray, isNaN, isNil, isObject, keys, omit, sortBy, toPairs } from 'lodash';
 import { map } from 'rxjs/operators';
 import { DataSourceInstanceSettings, TimeRange } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
@@ -373,7 +373,7 @@ export class Api {
    * @param {string} timestampField Timestamp field
    * @returns {string} Log item content
    */
-  private getLogContent(item: Record<string, any>, timestampField = ''): string {
+  private getLogContent(item: Record<string, any>, timestampField: string): string {
     /**
      * Flatten item
      */
@@ -392,14 +392,15 @@ export class Api {
     /**
      * Join property and values
      */
-    const timestamp = get(item, timestampField);
     const contentData = toPairs(omit(item, ['id', timestampField]));
 
+    /**
+     * Add Id as first item if exists
+     */
     if (item.id) {
       contentData.unshift(['id', item.id]);
     }
 
-    const content = contentData.map((value) => value.join('=')).join(' ');
-    return timestamp ? [timestamp, content].join(' ') : content;
+    return contentData.map((value) => value.join('=')).join(' ');
   }
 }

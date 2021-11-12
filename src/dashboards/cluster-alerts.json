@@ -50,7 +50,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1636664178577,
+  "iteration": 1636757242705,
   "links": [
     {
       "icon": "external link",
@@ -479,7 +479,7 @@
         "prettifyLogMessage": false,
         "showCommonLabels": false,
         "showLabels": false,
-        "showTime": false,
+        "showTime": true,
         "sortOrder": "Descending",
         "wrapLogMessage": true
       },
@@ -510,7 +510,7 @@
         "prettifyLogMessage": false,
         "showCommonLabels": false,
         "showLabels": false,
-        "showTime": false,
+        "showTime": true,
         "sortOrder": "Descending",
         "wrapLogMessage": true
       },
@@ -541,7 +541,7 @@
         "prettifyLogMessage": false,
         "showCommonLabels": false,
         "showLabels": false,
-        "showTime": false,
+        "showTime": true,
         "sortOrder": "Descending",
         "wrapLogMessage": true
       },
@@ -588,7 +588,7 @@
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-30d",
     "to": "now"
   },
   "timepicker": {
@@ -597,5 +597,5 @@
   "timezone": "",
   "title": "Cluster Alerts",
   "uid": "xESAiFcnk",
-  "version": 4
+  "version": 1
 }
