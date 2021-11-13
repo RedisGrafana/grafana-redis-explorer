@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.0.6"
+      "version": "8.2.3"
     },
     {
       "type": "panel",
@@ -47,15 +47,22 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "editable": true,
+  "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1626556765368,
+  "iteration": 1636665265959,
   "links": [
     {
       "icon": "external link",
@@ -65,6 +72,7 @@
       "type": "dashboards"
     }
   ],
+  "liveNow": false,
   "panels": [
     {
       "datasource": "$cluster",
@@ -103,7 +111,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "queryType": "cluster",
@@ -176,7 +184,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "panelId": 6,
@@ -252,7 +260,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "panelId": 6,
@@ -313,7 +321,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "queryType": "license",
@@ -386,7 +394,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "panelId": 56,
@@ -446,7 +454,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "panelId": 56,
@@ -1049,7 +1057,7 @@
     {
       "datasource": "$cluster",
       "gridPos": {
-        "h": 10,
+        "h": 8,
         "w": 24,
         "x": 0,
         "y": 19
@@ -1058,8 +1066,10 @@
       "options": {
         "dedupStrategy": "none",
         "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
         "showLabels": false,
-        "showTime": false,
+        "showTime": true,
         "sortOrder": "Descending",
         "wrapLogMessage": false
       },
@@ -1081,7 +1091,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 27
       },
       "id": 74,
       "panels": [],
@@ -1167,7 +1177,7 @@
         "h": 4,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 28
       },
       "id": 64,
       "options": {
@@ -1179,7 +1189,7 @@
           }
         ]
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "queryType": "users",
@@ -1340,7 +1350,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 32
       },
       "id": 62,
       "options": {
@@ -1352,7 +1362,7 @@
           }
         ]
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "queryType": "modules",
@@ -1393,82 +1403,10 @@
         }
       ],
       "type": "table"
-    },
-    {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 42
-      },
-      "id": 66,
-      "panels": [],
-      "title": "Alerts",
-      "type": "row"
-    },
-    {
-      "datasource": "$cluster",
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 43
-      },
-      "id": 68,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "showLabels": false,
-        "showTime": true,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
-        {
-          "alertType": "bdbs",
-          "queryType": "alerts",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Databases",
-      "type": "logs"
-    },
-    {
-      "datasource": "$cluster",
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 51
-      },
-      "id": 70,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "showLabels": false,
-        "showTime": true,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
-        {
-          "alertType": "nodes",
-          "queryType": "alerts",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Nodes",
-      "type": "logs"
     }
   ],
   "refresh": false,
-  "schemaVersion": 30,
+  "schemaVersion": 31,
   "style": "dark",
   "tags": ["explorer"],
   "templating": {
@@ -1563,5 +1501,5 @@
   "timezone": "",
   "title": "Cluster Overview",
   "uid": "viroIzSGz",
-  "version": 1
+  "version": 4
 }

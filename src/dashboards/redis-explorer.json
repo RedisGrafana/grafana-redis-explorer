@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.0.6"
+      "version": "8.2.3"
     },
     {
       "type": "datasource",
@@ -35,16 +35,37 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "editable": true,
+  "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1626557119138,
-  "links": [],
+  "iteration": 1636664457126,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": ["explorer"],
+      "targetBlank": false,
+      "title": "Explorer",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
+  "liveNow": false,
   "panels": [
     {
       "datasource": "$cluster",
@@ -109,7 +130,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "queryType": "cluster",
@@ -535,7 +556,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "queryType": "license",
@@ -559,7 +580,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 30,
+  "schemaVersion": 31,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -651,5 +672,5 @@
   "timezone": "",
   "title": "Enterprise Clusters",
   "uid": "1dKhTjtGk",
-  "version": 1
+  "version": 3
 }

@@ -8,6 +8,10 @@ import { QueryTypeValue } from './query';
  */
 export const ALERT_TYPE: SelectableValue[] = [
   {
+    label: 'Cluster',
+    value: QueryTypeValue.CLUSTER,
+  },
+  {
     label: 'Database',
     description: 'Specific database',
     value: QueryTypeValue.BDBS,

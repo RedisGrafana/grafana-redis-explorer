@@ -1,4 +1,4 @@
-import { assign, defaultTo, get, isArray, isNaN, isNil, isObject, keys, omit, sortBy, toPairs } from 'lodash';
+import { assign, defaultTo, isArray, isNaN, isNil, isObject, keys, omit, sortBy, toPairs } from 'lodash';
 import { map } from 'rxjs/operators';
 import { DataSourceInstanceSettings, TimeRange } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
@@ -230,7 +230,10 @@ export class Api {
         break;
     }
 
-    return getBackendSrv()
+    /**
+     * Get Alerts
+     */
+    const alerts = await getBackendSrv()
       .fetch({
         method: 'GET',
         url,
@@ -240,26 +243,58 @@ export class Api {
           const logItems: LogItem[] = [];
           const resKeys = keys(res.data);
           const isArrayRequest = !Boolean(resKeys.filter((key) => isNaN(parseInt(key, 10))).length);
-          const time = new Date().toISOString();
 
           if (isArrayRequest) {
-            resKeys.forEach((key) =>
-              logItems.push({
-                time,
-                content: this.getLogContent({ ...this.filterData(res.data[key], query), id: key }),
-              })
-            );
-          } else {
-            logItems.push({
-              time,
-              content: this.getLogContent(this.filterData(res.data, query)),
+            resKeys.forEach((i: any) => {
+              const instance = res.data[i] as any;
+
+              Object.keys(instance).forEach((key: any) => {
+                /**
+                 * Skip alerts without time
+                 */
+                if (!instance[key].change_time) {
+                  return;
+                }
+
+                logItems.push({
+                  time: instance[key].change_time,
+                  level: instance[key].severity,
+                  content: this.getLogContent(
+                    {
+                      [query.alertType === QueryTypeValue.NODES ? 'node' : 'database']: i,
+                      id: key,
+                      ...this.filterData(instance[key], query),
+                    },
+                    'change_time'
+                  ),
+                });
+              });
             });
+
+            return logItems;
           }
+
+          resKeys.forEach((key) => {
+            /**
+             * Skip alerts without time
+             */
+            if (!res.data[key].change_time) {
+              return;
+            }
+
+            logItems.push({
+              time: res.data[key].change_time,
+              level: res.data[key].severity,
+              content: this.getLogContent({ id: key, ...this.filterData(res.data[key], query) }, 'change_time'),
+            });
+          });
 
           return logItems;
         })
       )
       .toPromise();
+
+    return alerts.length ? alerts : ([{ content: 'No alerts found' }] as LogItem[]);
   }
 
   /**
@@ -338,7 +373,7 @@ export class Api {
    * @param {string} timestampField Timestamp field
    * @returns {string} Log item content
    */
-  private getLogContent(item: Record<string, any>, timestampField = ''): string {
+  private getLogContent(item: Record<string, any>, timestampField: string): string {
     /**
      * Flatten item
      */
@@ -357,14 +392,15 @@ export class Api {
     /**
      * Join property and values
      */
-    const timestamp = get(item, timestampField);
     const contentData = toPairs(omit(item, ['id', timestampField]));
 
+    /**
+     * Add Id as first item if exists
+     */
     if (item.id) {
       contentData.unshift(['id', item.id]);
     }
 
-    const content = contentData.map((value) => value.join('=')).join(' ');
-    return timestamp ? [timestamp, content].join(' ') : content;
+    return contentData.map((value) => value.join('=')).join(' ');
   }
 }
