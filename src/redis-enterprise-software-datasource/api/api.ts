@@ -294,7 +294,7 @@ export class Api {
       )
       .toPromise();
 
-    return alerts.length ? alerts : ([{ content: 'No alerts found' }] as LogItem[]);
+    return alerts && alerts.length ? alerts : ([{ content: 'No alerts found' }] as LogItem[]);
   }
 
   /**

@@ -9,6 +9,8 @@
 - Update node version and add demo at https://demo.volkovlabs.io (#63)
 - Update to Grafana 8.2.3 (#64)
 - Return no events found message if no events returned (#65)
+- Add Cluster Alerts and separate them from Overview (#66)
+- Upgrade to Grafana 8.3.0
 
 ## 2.0.0 (2021-06-24)
 
