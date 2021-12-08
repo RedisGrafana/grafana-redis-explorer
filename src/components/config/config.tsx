@@ -53,9 +53,9 @@ export class Config extends PureComponent<Props, State> {
     /**
      * Datasources found
      */
-    this.setState({
+    this.setState(() => ({
       isEnabled: this.props.plugin.meta?.enabled ? true : false,
-    });
+    }));
   }
 
   /**
