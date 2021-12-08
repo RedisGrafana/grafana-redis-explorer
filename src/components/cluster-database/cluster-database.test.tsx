@@ -20,7 +20,7 @@ type ShallowComponent = ShallowWrapper<ClusterDatabase['props'], ClusterDatabase
  * getEndpoint
  * @param endpointOptions
  */
-const getEndpoint = (endpointOptions: { [key: keyof BdbEndpoint]: any } = {}): BdbEndpoint => ({
+const getEndpoint = (endpointOptions: { [key: string]: any } = {}): BdbEndpoint => ({
   dns_name: 'my-dns',
   port: 1234,
   addr_type: 'internal',
