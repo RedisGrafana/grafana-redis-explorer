@@ -12,7 +12,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.2
         with:
-          node-version: "14.x"
+          node-version: "16.x"
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -46,9 +46,8 @@ jobs:
         run: yarn build
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v2
         with:
           directory: ./coverage/
           env_vars: OS,PYTHON
           fail_ci_if_error: true
-          path_to_write_report: ./coverage/codecov_report.txt

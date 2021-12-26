@@ -31,11 +31,13 @@ The Redis Explorer can connect to any Redis Enterprise software cluster version 
 
 ## Getting Started
 
-Use the `grafana-cli` tool to install from the command line:
+Redis Expolorer can be installed from the Grafana Marketplace or use the `grafana-cli` tool to install from the command line:
 
 ```bash
 grafana-cli plugins install redis-explorer-app
 ```
+
+![Marketplace](https://raw.githubusercontent.com/RedisGrafana/grafana-redis-explorer/master/src/img/grafana-marketplace.png)
 
 For Docker instructions and installation without Internet access, follow the [Quickstart](https://redisgrafana.github.io/quickstart/) page.
 
