@@ -1,8 +1,8 @@
-import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { QueryEditor } from './query-editor';
+import React from 'react';
+import { ALERT_TYPE, QUERY_TYPE, QueryTypeValue, STATS_INTERVAL, STATS_TYPE } from '../../api';
 import { RedisEnterpriseQuery } from '../../types';
-import { QueryTypeValue, QUERY_TYPE, ALERT_TYPE, STATS_TYPE, STATS_INTERVAL } from '../../api';
+import { QueryEditor } from './QueryEditor';
 
 type ShallowComponent = ShallowWrapper<QueryEditor['props'], QueryEditor['state'], QueryEditor>;
 

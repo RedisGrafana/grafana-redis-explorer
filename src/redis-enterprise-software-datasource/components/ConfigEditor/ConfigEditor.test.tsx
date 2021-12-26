@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { DataSourceSettings } from '@grafana/data';
 import { DataSourceOptions } from '../../types';
-import { ConfigEditor } from './config-editor';
+import { ConfigEditor } from './ConfigEditor';
 
 /**
  * Override Options

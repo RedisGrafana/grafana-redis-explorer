@@ -2,7 +2,7 @@ import { DataQueryRequest, DataQueryResponse, DateTime, dateTime, MutableDataFra
 import { LogItem, QueryTypeValue } from '../api';
 import { DataSourceTestStatus } from '../constants';
 import { RedisEnterpriseQuery } from '../types';
-import { DataSource } from './data-source';
+import { DataSource } from './datasource';
 
 /**
  * Override Request

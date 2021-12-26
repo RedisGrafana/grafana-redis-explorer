@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { SelectableValue } from '@grafana/data';
 import { InlineFormLabel, Select } from '@grafana/ui';
 import { QueryTypeValue, VARIABLE_QUERY_TYPE } from '../../api';
-import { DataSource } from '../../data-source';
+import { DataSource } from '../../datasource';
 import { VariableQuery } from '../../types';
 
 /**

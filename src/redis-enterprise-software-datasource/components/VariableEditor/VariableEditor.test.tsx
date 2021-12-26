@@ -1,7 +1,7 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import React from 'react';
 import { QueryTypeValue } from '../../api';
-import { VariableQueryEditor } from './variable-editor';
+import { VariableQueryEditor } from './VariableEditor';
 
 type ShallowComponent = ShallowWrapper<VariableQueryEditor['props'], VariableQueryEditor['state'], VariableQueryEditor>;
 

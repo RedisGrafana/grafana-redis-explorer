@@ -3,7 +3,7 @@ import { css } from '@emotion/css';
 import { QueryEditorProps, SelectableValue } from '@grafana/data';
 import { Button, InlineFormLabel, LegacyForms, Select } from '@grafana/ui';
 import { ALERT_TYPE, QUERY_TYPE, QueryTypeValue, STATS_INTERVAL, STATS_TYPE } from '../../api';
-import { DataSource } from '../../data-source';
+import { DataSource } from '../../datasource';
 import { DataSourceOptions, RedisEnterpriseQuery } from '../../types';
 
 /**
