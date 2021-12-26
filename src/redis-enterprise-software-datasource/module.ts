@@ -1,6 +1,6 @@
 import { DataSourcePlugin } from '@grafana/data';
 import { ConfigEditor, QueryEditor, VariableQueryEditor } from './components';
-import { DataSource } from './data-source';
+import { DataSource } from './datasource';
 import { DataSourceOptions, RedisEnterpriseQuery } from './types';
 
 /**
