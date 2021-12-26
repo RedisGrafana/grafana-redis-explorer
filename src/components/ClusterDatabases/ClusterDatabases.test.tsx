@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { Bdb, QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
-import { ClusterDatabase } from '../cluster-database';
-import { ClusterDatabases } from './cluster-databases';
+import { ClusterDatabase } from '../ClusterDatabase';
+import { ClusterDatabases } from './ClusterDatabases';
 
 /**
  * Backend Service

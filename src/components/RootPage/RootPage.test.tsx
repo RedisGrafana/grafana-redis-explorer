@@ -5,8 +5,8 @@ import { config } from '@grafana/runtime';
 import { Alert } from '@grafana/ui';
 import { ApplicationName, ApplicationTitle, DataSourceType } from '../../constants';
 import { QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
-import { DataSourceList } from '../data-source-list';
-import { RootPage } from './root-page';
+import { DataSourceList } from '../DataSourceList';
+import { RootPage } from './RootPage';
 
 /**
  * Meta

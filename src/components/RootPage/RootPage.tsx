@@ -15,7 +15,7 @@ import { ApplicationName, ApplicationTitle, DataSourceType } from '../../constan
 import { QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
 import { RedisEnterpriseQuery } from '../../redis-enterprise-software-datasource/types';
 import { EnterpriseDataSourceInstanceSettings, GlobalSettings } from '../../types';
-import { DataSourceList } from '../data-source-list';
+import { DataSourceList } from '../DataSourceList';
 
 /**
  * Properties

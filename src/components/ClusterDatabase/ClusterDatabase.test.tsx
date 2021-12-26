@@ -12,7 +12,7 @@ import {
   RedisTimeSeries,
 } from '../../icons';
 import { Bdb, BdbEndpoint } from '../../redis-enterprise-software-datasource/api';
-import { ClusterDatabase } from './cluster-database';
+import { ClusterDatabase } from './ClusterDatabase';
 
 type ShallowComponent = ShallowWrapper<ClusterDatabase['props'], ClusterDatabase['state'], ClusterDatabase>;
 

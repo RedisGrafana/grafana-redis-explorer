@@ -3,8 +3,8 @@ import { RedisEnterpriseSoftware } from 'icons';
 import React from 'react';
 import { Alert } from '@grafana/ui';
 import { DataSourceName, DataSourceType } from '../../constants';
-import { ClusterDatabases } from '../cluster-databases';
-import { DataSourceList } from './data-source-list';
+import { ClusterDatabases } from '../ClusterDatabases';
+import { DataSourceList } from './DataSourceList';
 
 type ShallowComponent = ShallowWrapper<typeof DataSourceList>;
 

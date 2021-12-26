@@ -4,7 +4,7 @@ import { DataSourceInstanceSettings } from '@grafana/data';
 import { BackendSrv, DataSourceSrv, getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
 import { Bdb, QueryTypeValue } from '../../redis-enterprise-software-datasource/api';
 import { EnterpriseDataSourceInstanceSettings, NewDatasourceOptions } from '../../types';
-import { ClusterDatabase } from '../cluster-database';
+import { ClusterDatabase } from '../ClusterDatabase';
 
 /**
  * Properties

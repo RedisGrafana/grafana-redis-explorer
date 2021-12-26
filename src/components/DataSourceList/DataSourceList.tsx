@@ -4,7 +4,7 @@ import { Alert, Button, Container, HorizontalGroup, LinkButton, VerticalGroup } 
 import { ApplicationRoot, DataSourceName, DataSourceType } from '../../constants';
 import { RedisEnterpriseSoftware } from '../../icons';
 import { EnterpriseDataSourceInstanceSettings } from '../../types';
-import { ClusterDatabases } from '../cluster-databases';
+import { ClusterDatabases } from '../ClusterDatabases';
 
 /**
  * Properties
