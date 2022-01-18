@@ -8,9 +8,9 @@
     "@grafana/ui": "8.3.0",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "^12.1.2",
-    "@types/enzyme": "^3.10.10",
+    "@types/enzyme": "^3.10.11",
     "@types/enzyme-adapter-react-16": "^1.0.6",
-    "@types/lodash": "4.14.177",
+    "@types/lodash": "4.14.178",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "tslib": "^2.3.1"
