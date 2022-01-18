@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.1.0 (IN PROGRESS)
+## 2.1.0 (2022-01-17)
 
 ### Features / Enhancements
 
@@ -10,7 +10,10 @@
 - Update to Grafana 8.2.3 (#64)
 - Return no events found message if no events returned (#65)
 - Add Cluster Alerts and separate them from Overview (#66)
-- Upgrade to Grafana 8.3.0
+- Upgrade to Grafana 8.3.0 (#68)
+- Update workflow and add Grafana Marketplace (#69)
+- Update Components naming (#70)
+- Update follow-redirects package and minor updates
 
 ## 2.0.0 (2021-06-24)
 
